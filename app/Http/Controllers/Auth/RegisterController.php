@@ -40,6 +40,15 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function register()
+    {
+        if(Auth::user()) {
+            return redirect()->route("home");
+        }
+        else {
+            return view('auth/login');
+        }
+    }
     /**
      * Get a validator for an incoming registration request.
      *

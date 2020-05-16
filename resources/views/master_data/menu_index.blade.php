@@ -5,15 +5,15 @@
 <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-          <h3 class="content-header-title mb-0 d-inline-block">Menu </h3>
+          <h3 class="content-header-title mb-0 d-inline-block">Master Users </h3>
           <div class="row breadcrumbs-top d-inline-block">
             <div class="breadcrumb-wrapper col-12">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                <li class="breadcrumb-item"><a href="index.html">Seuramoe</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Master Data</a>
+                <li class="breadcrumb-item"><a href="#">Administrator</a>
                 </li>
-                <li class="breadcrumb-item active"> Master Menu
+                <li class="breadcrumb-item active"> Master User
                 </li>
               </ol>
             </div>
@@ -24,8 +24,8 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button class="dropdown-item" name="create_record" id="create_record"><i class="la la-plus-circle"></i> Add Menu</button>  
-              <button class="dropdown-item" name="create_record_2" id="create_record_2"><i class="la la-plus-circle"></i> Add Category</button>  
+              <button class="dropdown-item" name="create_record" id="create_record"><i class="la la-plus-circle"></i> Add User</button>  
+              <button class="dropdown-item" name="create_record_2" id="create_record_2"><i class="la la-plus-circle"></i> Add User Category</button>  
             </div>
           </div>
         </div>
@@ -49,9 +49,7 @@
                     </ul>
                   </div>
                 </div>
-                <div class="card">
                 <div class="card-content">
-                  <div class="card-body">
                     <ul class="nav nav-tabs nav-linetriangle">
                       <li class="nav-item">
                         <a class="nav-link active" id="baseIcon-tab31" data-toggle="tab" aria-controls="tabIcon31"
@@ -123,8 +121,6 @@
                       </div>
 
                     </div>
-                  </div>
-                </div>
               </div>
 
               </div>
@@ -151,13 +147,27 @@
               @csrf
               <div class="modal-body">
                 <div class="form-group">
-                  <label for="companyName">Menu Name</label>
-                    <input type="text" class="form-control" placeholder="Menu Name" id="name" name="name">
+                  <label for="companyName">Email</label>
+                    <input type="text" class="form-control" placeholder="Menu Name" id="email" name="email">
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-7">
                     <div class="form-group">
-                      <label for="projectinput5">Category</label>
+                      <label for="companyName">Full Name</label>
+                      <input type="text" class="form-control" placeholder="Full Name" id="email" name="email">
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="companyName">Pers Number</label>
+                      <input type="text" class="form-control" placeholder="Pers Number / NIP" id="email" name="email">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="projectinput5">Unit</label>
                       <select id="catcd" name="catcd" class="form-control">
                         <option value="none" selected="" disabled="">Select Category</option>
                         @foreach($categoryData as $c)
@@ -166,28 +176,16 @@
                       </select>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="companyName">Cost Of Sales</label>
-                    <input type="text" class="rupiah form-control" id="cost_of_sales" name="cost_of_sales" style="text-align: right" placeholder="Harga Pokok">
-                  </div>
-                  </div>
                   <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="companyName">Price</label>
-                    <input type="text" class="rupiah form-control" id="price" name="price" style="text-align: right" placeholder="Price">
-                  </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Picture</label>
-                  <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="image" id="image">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose Picture</label>
-                        <span id="store_image"></span>
+                    <div class="form-group">
+                      <label for="projectinput5">User Group</label>
+                      <select id="catcd" name="catcd" class="form-control">
+                        <option value="none" selected="" disabled="">Select Category</option>
+                        @foreach($categoryData as $c)
+                          <option value="{{ $c->cat_cd }}">{{ $c->cat_text }}</option>
+                        @endforeach
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -209,7 +207,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Add Product Category</h4>
+                <h4 class="modal-title white" id="myModalLabel11">Add User Category</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -450,7 +448,7 @@ $(document).ready(function() {
  });
       
     $('#create_record').click(function(){
-      $('.modal-title').text("Add New Menu");
+      $('.modal-title').text("Add New User");
       $('#store_image').html("");
       $('#action_button').val("Add");
       $('#action').val("Add");

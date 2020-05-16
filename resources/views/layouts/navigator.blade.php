@@ -31,7 +31,7 @@
         <li class=" nav-item"><a href="#"><i class="la la-globe"></i><span class="menu-title" data-i18n="nav.chartist.main">Administrator</span></a>
           <ul class="menu-content">
             <li><a class="menu-item" href="#" data-i18n="nav.chartist.chartist_line_charts">Master Unit</a></li>
-            <li><a class="menu-item" href="#" data-i18n="nav.chartist.chartist_bar_charts">Master User</a></li>
+            <li><a class="menu-item" href="/master/user" data-i18n="nav.chartist.chartist_bar_charts">Master User</a></li>
             <li><a class="menu-item" href="#" data-i18n="nav.chartist.chartist_bar_charts">Setting Group</a></li>
           </ul>
         </li> 
