@@ -32,7 +32,7 @@ class MenuController extends BaseController
      // Fetch unit
      $unitData  = MenuCategory::getUnit(); 
      //return $unitData;   
-     return view('master_data/menu_index',['listunit' => $unitData]);
+     return view('master_data/menu_index',['unitData' => $unitData]);
     }
     
     public function test(Request $request)
