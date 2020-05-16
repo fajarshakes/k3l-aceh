@@ -29,9 +29,17 @@ class MenuController extends BaseController
 
     public function menu(Request $request)
     {
-     // Fetch category
-     $categoryData  = MenuCategory::getCategory();    
-     return view('master_data/menu_index',['categoryData' => $categoryData]);
+     // Fetch unit
+     $unitData  = MenuCategory::getUnit(); 
+     //return $unitData;   
+     return view('master_data/menu_index',['listunit' => $unitData]);
+    }
+    
+    public function test(Request $request)
+    {
+        $unitData  = MenuCategory::getUnit(); 
+        
+        return response()->json([$unitData]);
     }
     
     public function menu_datatables(Request $request)

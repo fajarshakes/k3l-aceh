@@ -56,6 +56,7 @@ Route::prefix('master')->group(function() {
     Route::get('menu_edit2', 'Master\MenuController@menu_edit2')->name('menu_edit2');;
     Route::get('menu_edit_c', 'Master\MenuController@menu_edit_c')->name('menu_edit_c');;
     Route::post('menu_destroy', 'Master\MenuController@menu_destroy')->name('menu_destroy');;
-    Route::post('c_menu_destroy', 'Master\MenuController@c_menu_destroy')->name('c_menu_destroy');;
-    //Route::resource('category','MasterController');
+    Route::post('c_menu_destroy', 'Master\MenuController@c_menu_destroy')->name('c_menu_destroy');
+    Route::get('test', 'Master\MenuController@test')->name('test');
+
 });

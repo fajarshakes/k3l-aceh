@@ -16,8 +16,18 @@ class MenuCategory extends Model
     protected $fillable = ['name', 'group_id', 'updated_at', 'expired_at', 'status'];
     
 
-    // Fetch departments
-   public static function getCategory(){
+  // Fetch unit
+  public function getUnit(){
+
+    $value=DB::table('master_unit')
+    ->orderBy('BUSS_AREA', 'asc')
+    ->where('STATUS', '=', '1')
+    ->get(); 
+
+    return $value;
+  }
+  
+  public static function getCategory(){
 
     $value=DB::table('menu_category')
     ->orderBy('id', 'asc')

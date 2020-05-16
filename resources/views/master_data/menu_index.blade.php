@@ -170,8 +170,8 @@
                       <label for="projectinput5">Unit</label>
                       <select id="catcd" name="catcd" class="form-control">
                         <option value="none" selected="" disabled="">Select Category</option>
-                        @foreach($categoryData as $c)
-                          <option value="{{ $c->cat_cd }}">{{ $c->cat_text }}</option>
+                        @foreach($unitData as $unit)
+                          <option value="{{ $unit->BUSS_AREA }}">{{ $unit->UNIT_NAME }}</option>
                         @endforeach
                       </select>
                     </div>
@@ -181,8 +181,8 @@
                       <label for="projectinput5">User Group</label>
                       <select id="catcd" name="catcd" class="form-control">
                         <option value="none" selected="" disabled="">Select Category</option>
-                        @foreach($categoryData as $c)
-                          <option value="{{ $c->cat_cd }}">{{ $c->cat_text }}</option>
+                        @foreach($unitData as $unit)
+                          <option value="{{ $unit->BUSS_AREA }}">{{ $unit->UNIT_NAME }}</option>
                         @endforeach
                       </select>
                     </div>
