@@ -9,57 +9,61 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Master\Menu;
-use App\Models\Master\MenuCategory;
+use App\Models\Master\User;
+use App\Models\Master\UserCategory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
 
-class MenuController extends BaseController
+class UserController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function __construct()
     {
         $this->middleware('auth');
-        $this->menu        = new Menu();
-        $this->menuCat     = new MenuCategory();
+        $this->menu        = new User();
+        $this->menuCat     = new UserCategory();
     }
 
-    public function menu(Request $request)
+    public function user(Request $request)
     {
-     // Fetch unit
-     $unitData  = MenuCategory::getUnit(); 
-     //return $unitData;   
-     return view('master_data/menu_index',['unitData' => $unitData]);
+        $unitData  = $this->menuCat->getUnit();
+        return view('master_data/user_index',
+            ['unitData' => $unitData]);
     }
     
     public function test(Request $request)
-    {
-        $unitData  = MenuCategory::getUnit(); 
+    {   
+        
+        $unitData  = $this->menuCat->getUnit(); 
         
         return response()->json([$unitData]);
     }
+
+    public function getGroupUser(Request $request, $buss_area)
+    {   
+        $unitGroup  = $this->menuCat->getGroupUnit($buss_area)->pluck("GROUP_NAME", "ID");; 
+        return json_encode($unitGroup);
+    }
     
-    public function menu_datatables(Request $request)
+    public function user_datatables(Request $request)
     {
-        //if(request()->ajax())
-        //{
-            $unit = Auth::user()->unit;
-            $sql = "SELECT
-                    mn.*,
-                    mc.cat_text 
+        //$unit = Auth::user()->unit;
+        $sql = "SELECT
+                    us.id, us.email, us.name, us.pers_no,
+                    mu.UNIT_NAME,
+                    ug.GROUP_NAME 
                 FROM
-                    menu mn
-                    LEFT JOIN menu_category mc ON mn.cat_cd = mc.cat_cd
-                WHERE mn.menu_status != '0'
-                AND mn.menu_unit = '$unit'
-                GROUP BY
-                    mn.id";
-            $v = DB::select($sql);
+                    users us
+                    LEFT JOIN master_unit mu ON us.unit = mu.BUSS_AREA
+                    LEFT JOIN users_group ug ON us.group_id = ug.ID
+                WHERE
+                    us.STATUS = 'ACTIVE'";
+        $v = DB::select($sql);
             
-            return Datatables::of($v)
+        return Datatables::of($v)
 
             //return datatables()->of(($v)->get())
             //return datatables()->of(Master::latest()->get())
@@ -101,12 +105,14 @@ class MenuController extends BaseController
 
     }
 
-    public function menu_store(Request $request)
+    public function user_store(Request $request)
     {
         $rules = array(
+            'email'         =>  'required|email',
             'name'          =>  'required',
-            'catcd'         =>  'required',
-            'image'         =>  'required|image|max:2048'
+            'pers_no'       =>  'required',
+            'unit_id'       =>  'required',
+            'user_group'    =>  'required',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -116,27 +122,23 @@ class MenuController extends BaseController
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        $image = $request->file('image');
-
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-
-        $image->move(public_path('images/pic_menu'), $new_name);
-
-        $store = DB::table('menu')->insert([
+        $username = explode("@", $request->email);
+        $store = DB::table('users')->insert([
         //$form_data = array(
-            'menu_unit'         => Auth::user()->unit,
-            'menu_status'       => '1',
-            'cost_of_sales'     => str_replace(".", "", $request->cost_of_sales),
-            'menu_price'        => str_replace(".", "", $request->price),
-            'update_date'       => date('Y-m-d'),
-            'update_by'         => Auth::user()->email,
-            'image'             => $new_name,
-            'menu_name'         => $request->name,
-            'cat_cd'            => $request->catcd,
+            //'unit'              => Auth::user()->unit,
+            'unit'              => $request->unit_id,
+            'username'          => $username[0],
+            'name'              => $request->fullname,
+            'pers_no'           => $request->pers_no,
+            'email'             => $request->email,
+            'group_id'          => $request->user_group,
+            'password'          => Hash::make('Qwerty@4321'),
+            'name'              => $request->name,
+            'created_at'        => date('Y-m-d'),
+            'status'            =>'ACTIVE',
         ]);
 
         //AjaxCrud::create($form_data);
-
         return response()->json(['success' => 'Data Added successfully.']);
     }
 
@@ -166,7 +168,7 @@ class MenuController extends BaseController
         return response()->json(['success' => 'Data Added successfully.']);
     }
 
-    public function menu_update(Request $request)
+    public function user_update(Request $request)
     {
         $image_name = $request->hidden_image;
         $image = $request->file('image');
@@ -218,31 +220,6 @@ class MenuController extends BaseController
         return response()->json(['success' => 'Data is successfully updated']);
     }
 
-    public function c_menu_update(Request $request)
-    {
-        $rules = array(
-            'cname'         =>  'required',
-            'cstatus'       =>  'required',
-        );
-        
-        $error = Validator::make($request->all(), $rules);
-        
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-        
-        $update = DB::table('menu_category')
-        ->where('id', $request->chidden_id)
-        ->update([
-            'cat_text'         => $request->cname,
-            'cat_status'       => $request->cstatus,
-            'update_date'      => date('Y-m-d'),
-            'update_by'        => Auth::user()->email,
-        ]);
-
-        return response()->json(['success' => 'Data is successfully updated']);
-    }
     
     /**
      * Show the form for editing the specified resource.
@@ -251,43 +228,15 @@ class MenuController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
-    public function menu_edit($id)
-      
-    {
-        if(request()->ajax())
-        {
-            //$data = Master::get_manual($id);
-            //$data = Master::findOrFail($request->id);
-            //$data = Master::findOrFail($id);
-            $data = DB::table('menu')
-                    //->leftJoin('menu_category', 'menu.cat_cd', '=', 'menu_category.cat_cd')
-                    ->where('id','=',$id)
-                    //->first()
-                    ->get();
 
-        //return view('master_data/user_index', ['user' => $user]);
-            return response()->json(['data' => $data]);
-            //return response()'master_data/user_index', ['user' => $user]);
-
-        }
-    }
-
-    public function menu_edit2()
+    public function get_userdata()
     {
         $id = $_GET['id'];
-        $data = DB::table('menu')
-        ->where('id','=',$id)
-        ->get();
-        
-        return response()->json(['data' => $data]);
-    }
-
-
-    public function menu_edit_c()
-    {
-        $id = $_GET['id'];
-        $data = DB::table('menu_category')
-        ->where('id','=',$id)
+        $data = DB::table('users')
+        ->join('master_unit', 'users.unit', '=', 'master_unit.BUSS_AREA')
+        ->join('users_group', 'users.group_id', '=', 'users_group.ID')
+        ->select('users.unit', 'users.email', 'users.name', 'users.pers_no', 'users.group_id', 'users_group.GROUP_NAME')
+        ->where('users.id','=',$id)
         ->get();
         
         return response()->json(['data' => $data]);
@@ -303,20 +252,6 @@ class MenuController extends BaseController
             'update_date'       => date('Y-m-d'),
             'update_by'         => Auth::user()->email,
             'menu_status'       => '0',
-        ]);
-        return response()->json(['success' => 'Data is successfully deleted']);
-    }
-
-    public function c_menu_destroy(Request $request)
-    {
-        $data = DB::table('menu_category')
-        ->where('id', $request->del_hidden_id)
-        //->leftJoin('menu_category', 'menu.cat_cd', '=', 'menu_category.cat_cd')
-        //->where('id','=',$id)
-        ->update([
-            'update_date'       => date('Y-m-d'),
-            'update_by'         => Auth::user()->email,
-            'cat_status'        => '0',
         ]);
         return response()->json(['success' => 'Data is successfully deleted']);
     }

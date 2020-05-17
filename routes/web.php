@@ -26,7 +26,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 
  //WORKING PERMIT
  Route::prefix('wp')->group(function() {
-    Route::get('dashboard', 'Wp\WorkingpermitController@dashboard')->name('dashboard');
+    Route::get('dashboard', 'Wp\WpController@dashboard')->name('dashboard');
     Route::get('d_usulan/{id}', 'Planning\PlanningController@d_usulan')->name('d_usulan');
 });
 
@@ -38,25 +38,24 @@ Route::prefix('report')->group(function() {
 
 //MASTER DATA
 Route::prefix('master')->group(function() {
-    Route::get('profile', 'Master\MasterController@profile')->name('profile');
-    Route::get('user', 'Master\MasterController@user')->name('user');
-    Route::post('user_store', 'Master\MasterController@user_store')->name('user_store');
-    Route::post('user_update', 'Master\MasterController@user_update')->name('user_update');
-    Route::post('user_delete', 'Master\MasterController@user_delete')->name('user_delete');
-    Route::post('update', 'Master\MasterController@update')->name('update');
-    Route::get('account', 'Master\MasterController@account')->name('account');
-    Route::get('menu', 'Master\MenuController@menu')->name('menu');
-    Route::get('menu_datatables', 'Master\MenuController@menu_datatables')->name('menu_datatables');
-    Route::get('c_menu_datatables', 'Master\MenuController@c_menu_datatables')->name('c_menu_datatables');
-    Route::post('menu_store', 'Master\MenuController@menu_store')->name('menu_store');
-    Route::post('c_menu_store', 'Master\MenuController@c_menu_store')->name('c_menu_store');
-    Route::post('menu_update', 'Master\MenuController@menu_update')->name('menu_update');
-    Route::post('c_menu_update', 'Master\MenuController@c_menu_update')->name('c_menu_update');
-    Route::get('menu_edit/{id}', 'Master\MenuController@menu_edit')->name('menu_edit');;
-    Route::get('menu_edit2', 'Master\MenuController@menu_edit2')->name('menu_edit2');;
-    Route::get('menu_edit_c', 'Master\MenuController@menu_edit_c')->name('menu_edit_c');;
-    Route::post('menu_destroy', 'Master\MenuController@menu_destroy')->name('menu_destroy');;
-    Route::post('c_menu_destroy', 'Master\MenuController@c_menu_destroy')->name('c_menu_destroy');
-    Route::get('test', 'Master\MenuController@test')->name('test');
+    Route::get('user', 'Master\UserController@user')->name('user');
+    Route::get('user_datatables', 'Master\UserController@user_datatables')->name('user_datatables');
+    Route::get('get_userdata', 'Master\UserController@get_userdata')->name('get_userdata');;
+
+
+    Route::get('c_menu_datatables', 'Master\UserController@c_menu_datatables')->name('c_menu_datatables');
+    Route::post('user_store', 'Master\UserController@user_store')->name('user_store');
+    Route::post('c_menu_store', 'Master\UserController@c_menu_store')->name('c_menu_store');
+    Route::post('menu_update', 'Master\UserController@menu_update')->name('menu_update');
+    Route::post('c_menu_update', 'Master\UserController@c_menu_update')->name('c_menu_update');
+    Route::get('menu_edit/{id}', 'Master\UserController@menu_edit')->name('menu_edit');;
+    Route::get('menu_edit2', 'Master\UserController@menu_edit2')->name('menu_edit2');;
+    Route::get('menu_edit_c', 'Master\UserController@menu_edit_c')->name('menu_edit_c');;
+    Route::post('menu_destroy', 'Master\UserController@menu_destroy')->name('menu_destroy');;
+    Route::post('c_menu_destroy', 'Master\UserController@c_menu_destroy')->name('c_menu_destroy');
+    Route::get('test', 'Master\UserController@test')->name('test');
+
+    Route::get('get_group/{id}', 'Master\UserController@getGroupUser')->name('get_group');;
+
 
 });

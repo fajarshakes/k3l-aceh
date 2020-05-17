@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 
-class MenuCategory extends Model
+class UserCategory extends Model
 {
     protected $table = 'menu_category';
     //public $timestamps = false;
@@ -24,6 +24,18 @@ class MenuCategory extends Model
     ->where('STATUS', '=', '1')
     ->get(); 
 
+    return $value;
+  }
+
+  public function getGroupUnit(string $buss_area){
+
+    $value=DB::table('users_group')
+    ->join('master_unit', 'users_group.UNIT_LEVEL', '=', 'master_unit.UNIT_LEVEL')
+    ->select('users_group.*')
+    ->where('users_group.STATUS', '=', '1')
+    ->where('master_unit.BUSS_AREA', '=', $buss_area)
+    ->get();
+    
     return $value;
   }
   

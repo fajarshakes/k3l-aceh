@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 
-class Menu extends Model
+class User extends Model
 {
     protected $table = 'menu';
     //public $timestamps = false;
