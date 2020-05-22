@@ -5,15 +5,15 @@
 <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-          <h3 class="content-header-title mb-0 d-inline-block">Daftar Rencana Kegiatan Anggaran (RKA) </h3>
+          <h3 class="content-header-title mb-0 d-inline-block">Working Permit </h3>
           <div class="row breadcrumbs-top d-inline-block">
             <div class="breadcrumb-wrapper col-12">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Perencanaan</a>
+                <li class="breadcrumb-item"><a href="#">Working Permit</a>
                 </li>
-                <li class="breadcrumb-item active"> Upload Rencana
+                <li class="breadcrumb-item active"> List Permit
                 </li>
               </ol>
             </div>
@@ -24,6 +24,7 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
+              <button onclick="location.href='create'" class="dropdown-item"><i class="la la-check-circle-o"></i> Submit Permit</button>
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
@@ -49,6 +50,44 @@
                       <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                       <li><a data-action="close"><i class="ft-x"></i></a></li>
                     </ul>
+                  </div>
+                </div>
+                <div class="card-content">
+                  <div class="card-body">
+                    <ul class="nav nav-tabs nav-underline">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="baseIcon-tab21" data-toggle="tab" aria-controls="tabIcon21"
+                        href="#tabIcon21" aria-expanded="true">
+                        <i class="la la-clock-o"></i> Dalam Permohonan
+                        <span class="badge badge-pill badge-glow badge-default badge-info">2</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="baseIcon-tab22" data-toggle="tab" aria-controls="tabIcon22"
+                        href="#tabIcon22" aria-expanded="false"><i class="la la-dashboard"></i> Dalam Pengerjaan
+                        <span class="badge badge-pill badge-glow badge-default badge-success">2</span></a>
+                      </li>
+                    </ul>
+                    <div class="tab-content px-1 pt-1">
+                      <div role="tabpanel" class="tab-pane active" id="tabIcon21" aria-expanded="true"
+                      aria-labelledby="baseIcon-tab21">
+                        <p>Oat cake marzipan cake lollipop caramels wafer pie jelly
+                          beans. Icing halvah chocolate cake carrot cake. Jelly beans
+                          carrot cake marshmallow gingerbread chocolate cake. Gummies
+                          cupcake croissant.</p>
+                      </div>
+                      <div class="tab-pane" id="tabIcon22" aria-labelledby="baseIcon-tab22">
+                        <p>Sugar plum tootsie roll biscuit caramels. Liquorice brownie
+                          pastry cotton candy oat cake fruitcake jelly chupa chups.
+                          Pudding caramels pastry powder cake soufflé wafer caramels.
+                          Jelly-o pie cupcake.</p>
+                      </div>
+                      <div class="tab-pane" id="tabIcon23" aria-labelledby="baseIcon-tab23">
+                        <p>Biscuit ice cream halvah candy canes bear claw ice cream
+                          cake chocolate bar donut. Toffee cotton candy liquorice.
+                          Oat cake lemon drops gingerbread dessert caramels. Sweet
+                          dessert jujubes powder sweet sesame snaps.</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-xl-12 col-lg-12">
@@ -346,7 +385,7 @@
                 </button>
               </div>
               
-              <form method="POST" action="{{ route('user_update') }}">
+              <form method="POST" action="">
               @csrf
               <div class="modal-body">
                 <div class="form-group">
@@ -396,7 +435,7 @@
                 </button>
               </div>
               
-              <form method="POST" action="{{ route('user_delete') }}">
+              <form method="POST" action="">
               @csrf
               <div class="modal-body">
               <div class="bs-callout-danger callout-border-left mt-1 p-1">

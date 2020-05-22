@@ -29,5 +29,23 @@ class WpController extends BaseController
         
     
     }
+
+    public function list(Request $request)
+    {
+        return view('wp/list');
+        
+    }
+
+    public function create(Request $request)
+    {
+        return view('wp/create');
+        
+    }
+    
+    public function template(Request $request)
+    {
+        return view('wp/create');
+        
+    }
    
 }
