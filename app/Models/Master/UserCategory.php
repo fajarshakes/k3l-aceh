@@ -27,6 +27,16 @@ class UserCategory extends Model
     return $value;
   }
 
+  public function getUnitType(){
+
+    $value=DB::table('master_unit_type')
+    ->orderBy('UNIT_TYPE', 'asc')
+    ->where('STATUS', '=', '1')
+    ->get(); 
+
+    return $value;
+  }
+
   public function getGroupUnit(string $buss_area){
 
     $value=DB::table('users_group')
