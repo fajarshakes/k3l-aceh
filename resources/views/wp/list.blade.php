@@ -95,12 +95,10 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Unit Kerja</th>
-                          <th>Indikator</th>
-                          <th>Pos Anggaran</th>
-                          <th>No RKA</th>
-                          <th>Deskripsi Kegiatan</th>
-                          <th>Nilai</th>
+                          <th>Tanggal</th>
+                          <th>Nama Pekerjaan</th>
+                          <th>Unit</th>
+                          <th>Instansi / Perusahaan</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -109,14 +107,10 @@
                        
                         <tr>
                           <td>1</td>
-                          <td>T. SIPIL</td>
-                          <td>
-                          <button type="button" class="btn btn-sm btn-outline-success round">IKK</button>
-                           </td>
-                          <td>Pos Kegiatan</td>
-                          <td><code>001.IKU.00000.2020</code></td>
-                          <td>Rehab Gedung Utama Jurusan T Sipil</td>
-                          <td>500.000.000</td>
+                          <td>29-10-2019</td>
+                          <td>PEMASANGAN DAN PENGGANTIAN KUBIKEL 20 KV</td>
+                          <td><button type="button" class="btn btn-sm btn-outline-success round">UP3 SIGLI</button></td>
+                          <td>PT. TEKNIK ANDALAS</td>
                           <td>
                             <button type="button" class="btn btn-icon btn-info btn-xs"
                              data-myid="" data-myunit="" data-myemail="" data-myname=""
@@ -127,14 +121,10 @@
 
                         <tr>
                           <td>2</td>
-                          <td>SATKER ULP</td>
-                          <td>
-                          <button type="button" class="btn btn-sm btn-outline-danger round">IKU</button>
-                          </td>
-                          <td>Pos Peralatan</td>
-                          <td><code>002.IKK.00000.2020</code></td>
-                          <td>Pengadaan 000000000</td>
-                          <td>500.000.000</td>
+                          <td>29-10-2019</td>
+                          <td>PEMASANGAN DAN PENGGANTIAN KUBIKEL 20 KV</td>
+                          <td><button type="button" class="btn btn-sm btn-outline-success round">UP3 MEULABOH</button></td>
+                          <td>PT. TEKNIK ANDALAS</td>
                           <td>
                             <button type="button" class="btn btn-icon btn-info btn-xs"
                              data-myid="" data-myunit="" data-myemail="" data-myname=""
@@ -145,14 +135,10 @@
 
                         <tr>
                           <td>3</td>
-                          <td>UPT Perpustakaan</td>
-                          <td>
-                          <button type="button" class="btn btn-sm btn-outline-danger round">IKU</button>
-                        </td>
-                          <td>Pos Peralatan</td>
-                          <td><code>003.IKK.00000.2020</code></td>
-                          <td>Pengadaan 000000000</td>
-                          <td>500.000.000</td>
+                          <td>29-10-2019</td>
+                          <td>PEMASANGAN SOCKET PLUG HARDWIRE RTU SCADA</td>
+                          <td><button type="button" class="btn btn-sm btn-outline-success round">UP3 BANDA ACEH</button></td>
+                          <td>PT. TEKNIK ANDALAS</td>
                           <td>
                             <button type="button" class="btn btn-icon btn-info btn-xs"
                              data-myid="" data-myunit="" data-myemail="" data-myname=""
@@ -160,17 +146,16 @@
                              data-toggle="modal" data-backdrop="false" data-target="#user_view"><i class="la la-search-plus"></i> | View Data</button>
                           </td>
                         </tr>
+
                         
                       </tbody>
                       <tfoot>
                         <tr>
-                        <th>#</th>
-                          <th>Unit Kerja</th>
-                          <th>Indikator</th>
-                          <th>Pos Anggaran</th>
-                          <th>No RKA</th>
-                          <th>Deskripsi Kegiatan</th>
-                          <th>Nilai</th>
+                          <th>#</th>
+                          <th>Tanggal</th>
+                          <th>Nama Pekerjaan</th>
+                          <th>Unit</th>
+                          <th>Instansi / Perusahaan</th>
                           <th>Action</th>
                         </tr>
                       </tfoot>

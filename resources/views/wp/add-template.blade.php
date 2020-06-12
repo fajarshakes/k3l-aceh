@@ -180,22 +180,11 @@
                       to do color changes using JS.</p>
                     <div class="row skin skin-line">
                       <div class="col-md-6 col-sm-12">
-                        <fieldset>
-                          <input type="checkbox" id="input-1">
-                          <label for="input-1">Checkbox</label>
-                        </fieldset>
-                        <fieldset>
-                          <input type="checkbox" id="input-2" checked>
-                          <label for="input-2">Checkbox Checked</label>
-                        </fieldset>
-                        <fieldset>
-                          <input type="checkbox" id="input-3" disabled>
-                          <label for="input-3">Checkbox Disabled</label>
-                        </fieldset>
-                        <fieldset>
-                          <input type="checkbox" id="input-4" checked disabled>
-                          <label for="input-4">Checkbox Checked &amp; Disabled</label>
-                        </fieldset>
+                      <fieldset>
+                          <input type="checkbox" id="input-13" disabled>
+                          <label for="input-13">Checkbox Disabled</label>
+                        </fieldset> 
+                      
                       </div>
                       <div class="col-md-6 col-sm-12">
                         <div class="skin-states">
@@ -212,7 +201,7 @@
                             </div>
                           </fieldset>
                           <fieldset>
-                            <div class="state icheckbox_line-blue checked mr-1">
+                            <div class="state icheckbox_line-blue mr-1">
                               <div class="icheck_line-icon"></div>
                               Checked State
                             </div>
