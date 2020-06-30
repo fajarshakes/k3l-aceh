@@ -1,5 +1,5 @@
 @extends('layouts' . config('view.theme') . '.backend')
-@section('pagetitle', 'CAREER PAGE')
+@section('pagetitle', 'CAREER')
 @section('content')
 
 <style>
