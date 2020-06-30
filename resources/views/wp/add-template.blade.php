@@ -166,93 +166,160 @@
                       <fieldset>
                       <h4><i class="step-icon la la-fire-extinguisher"></i> JSA - JOB SAFETY ANALYSIS (JSA)</h4>
                       <hr>
-                      <h5>PERALATAN KESELAMATAN</h5>
+                      <h5>B. PERALATAN KESELAMATAN</h5>
 
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-12">
                             <div class="form-group">
                               <label for="proposalTitle2">Alat Pelindung Diri (APD)</label>  
                             </div>
 
-                            <div class="card-content">
-                  <div class="card-body">
-                    <p>Wrap with <code>.skin.skin-line</code> for line checkbox. Have
-                      to do color changes using JS.</p>
-                    <div class="row skin skin-line">
-                      <div class="col-md-6 col-sm-12">
-                      <fieldset>
-                          <input type="checkbox" id="input-13" disabled>
-                          <label for="input-13">Checkbox Disabled</label>
-                        </fieldset> 
-                      
-                      </div>
-                      <div class="col-md-6 col-sm-12">
-                        <div class="skin-states">
-                          <fieldset>
-                            <div class="state icheckbox_line-blue mr-1">
-                              <div class="icheck_line-icon"></div>
-                              Normal State
+                            <div class="row skin skin-flat">
+                            <div class="col-md-4 col-sm-12">
+                              <fieldset>
+                                  <input type="checkbox" id="input-11">
+                                  <label for="input-11">Helm</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-12">
+                                  <label for="input-12">Sepatu Keselamatan</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-13">
+                                  <label for="input-13">Kacamata</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-14">
+                                  <label for="input-14">Earplug</label>
+                                </fieldset>
                             </div>
-                          </fieldset>
-                          <fieldset>
-                            <div class="state icheckbox_line-blue hover mr-1">
-                              <div class="icheck_line-icon"></div>
-                              Hover State
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                  <input type="checkbox" id="input-21">
+                                  <label for="input-15">Earmuff</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-22">
+                                  <label for="input-22">Sarung Tangan Katun</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-23">
+                                  <label for="input-23">Sarung Tangan Karet</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-24">
+                                  <label for="input-24">Sarung Tangan 20KV</label>
+                                </fieldset>
                             </div>
-                          </fieldset>
-                          <fieldset>
-                            <div class="state icheckbox_line-blue mr-1">
-                              <div class="icheck_line-icon"></div>
-                              Checked State
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                  <input type="checkbox" id="input-31">
+                                  <label for="input-31">Pelampung / Life Vest</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-32">
+                                  <label for="input-32">Tabung Pernafasan</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-33">
+                                  <label for="input-33">Full Body Harness</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-24">
+                                  <label for="input-24">Lain - Lain</label></br>
+                                  <textarea placeholder="isi"></textarea>
+                                </fieldset>
                             </div>
-                          </fieldset>
-                          <fieldset>
-                            <div class="state icheckbox_line-blue disabled mr-1">
-                              <div class="icheck_line-icon"></div>
-                              Disabled State
                             </div>
-                          </fieldset>
-                          <fieldset>
-                            <div class="state icheckbox_line-blue checked disabled mr-1">
-                              <div class="icheck_line-icon"></div>
-                              Checked &amp; Disabled State
-                            </div>
-                          </fieldset>
                         </div>
-                      </div>
-                      <div class="col-sm-12">
-                        <fieldset class="colors clear">
-                          <strong>Color schemes</strong>
-                          <ul>
-                            <li title="Black"></li>
-                            <li class="red" title="Red"></li>
-                            <li class="green" title="Green"></li>
-                            <li class="blue active" title="Blue"></li>
-                            <li class="aero" title="Aero"></li>
-                            <li class="grey" title="Grey"></li>
-                            <li class="orange" title="Orange"></li>
-                            <li class="yellow" title="Yellow"></li>
-                            <li class="pink" title="Pink"></li>
-                            <li class="purple" title="Purple"></li>
-                          </ul>
-                        </fieldset>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                            
-                            
+
+                        <div class="col-md-12">
                             <div class="form-group">
-                              <label for="emailAddress4">Email Address :</label>
-                              <input type="email" class="form-control" id="emailAddress4">
+                              <label for="proposalTitle2">Perlengkapan Keselamatan & Darurat</label>  
                             </div>
-                            <div class="form-group">
-                              <label for="videoUrl2">Video URL :</label>
-                              <input type="url" class="form-control" id="videoUrl2">
+
+                            <div class="row skin skin-flat">
+                            <div class="col-md-4 col-sm-12">
+                              <fieldset>
+                                  <input type="checkbox" id="input-101">
+                                  <label for="input-101">Pemadam Api (APAR dll)</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-102">
+                                  <label for="input-102">LOTO (lock out tag out)</label>
+                                </fieldset>
                             </div>
-                          </div>
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                  <input type="checkbox" id="input-201">
+                                  <label for="input-201">Kotak P3K</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-202">
+                                  <label for="input-202">Radio Telekomunikasi</label>
+                                </fieldset>
+
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <fieldset>
+                                  <input type="checkbox" id="input-301">
+                                  <label for="input-301">Rambu Keselamatan</label>
+                                </fieldset>
+
+                                <fieldset>
+                                  <input type="checkbox" id="input-304">
+                                  <label for="input-304">Lain - Lain</label></br>
+                                  <textarea placeholder="isi"></textarea>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <h5>C. ANALISIS KESELAMATAN KERJA</h5>
+                        <div class="row">
+                        <div class="form-group">
+															<div class="col-sm-12">
+																<button type="button" class="tambah_jsa btn btn-primary">
+																	<i class="fa fa-plus"></i> Tambah
+																</button>
+
+																<table style="width:100%" class="table table-striped table-bordered table-hover">
+								                                    <thead>
+								                                      <tr>
+								                                      	<th width="1%" style="text-align:center;"><i class="fa fa-trash-o"></i></th>	
+								                                        <th style="font-size: 11px;" width="25%">LANGKAH PEKERJAAN</th>
+								                                        <th style="font-size: 11px;" width="25%">POTENSI BAHAYA</th>
+								                                        <th style="font-size: 11px;" width="25%">RESIKO</th>
+								                                        <th style="font-size: 11px;" width="25%">TINDAKAN PENGENDALIAN</th>
+								                                        
+								                                      </tr>
+								                                    </thead>
+								                                    <tbody id="konten_jsa">
+								                                    	<tr>
+								                                    		<td></td>
+								                                    		<td><input type="text" class="form-control" name="langkah_pekerjaan_jsa[]"></td>
+								                                    		<td><input type="text" class="form-control" name="potensi_bahaya_jsa[]"></td>
+								                                    		<td><input type="text" class="form-control" name="resiko_jsa[]"></td>
+								                                    		<td><input type="text" class="form-control" name="tindakan_pengendalian_jsa[]"></td>
+								                                    	</tr>
+								                                    </tbody>
+								                                </table>
+															</div>
+														</div>
+                        </div>
                           
-                        </div>
                       </fieldset>
                       <!-- Step 3 -->
                       <h6><i class="step-icon la la-recycle"></i>WORKING PERMIT</h6>
@@ -702,6 +769,33 @@ $(document).ready(function() {
     $("#hapus").live('click', function () {
       $(this).parents(".baris_hirarc").hide("fast", function(){ $(this).remove(); });
     });
+    });
+
+	$(document).ready(function() {
+
+    var nomor1 = 0;
+		var status="";
+		
+        $(".tambah_jsa").click(function(){
+            nomor1 ++;
+                                                                                                                                                                  
+          $('#konten_jsa').append(
+          '<tr class="baris_jsa">'
+            +'<td align="center" style="vertical-align:middle;"><button type="button" id="hapus" class="btn hapus_in btn-xs red"><i class="fa fa-trash-o"></i></button></td>'
+            +'<td><input type="input" name="langkah_pekerjaan_jsa[]" class="form-control"></td>'
+            +'<td><input type="input" name="potensi_bahaya_jsa[]" class="form-control"></td>'
+            +'<td><input type="input" name="resiko_jsa[]" class="form-control"></td>'
+            +'<td><input type="input" name="tindakan_pengendalian_jsa[]" class="form-control"></td>'
+          +'</tr>'
+          );
+          
+          $('select.select2me').select2();
+        });
+				
+        $("#hapus").live('click', function () {
+			  $(this).parents(".baris_jsa").hide("fast", function(){ $(this).remove(); });
+        });		
+
     });
 </script>
 @endsection
