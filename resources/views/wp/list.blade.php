@@ -24,8 +24,9 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button onclick="location.href='create'" class="dropdown-item"><i class="la la-check-circle-o"></i> Submit Permit</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
+              <!--button onclick="location.href='create'" class="dropdown-item"><i class="la la-check-circle-o"></i> Submit Permit</button!-->
+              <button class="dropdown-item" name="open_modal" id="open_modal"><i class="la la-check-circle-o"></i> Submit Permit</button>
+              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
@@ -177,44 +178,52 @@
 
 
         <!-- Modal -->
-        <div class="modal fade text-left" id="user_view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        <div class="modal fade text-left" id="submit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Detail Data</h4>
+                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               
-              <form method="POST" action="{{ route('user_store') }}">
+              <form id="form_menu" method="post" enctype="multipart/form-data">
+
               @csrf
               <div class="modal-body">
-                <div class="form-group">
-                  <label for="companyName">Unit</label>
-                    <input type="text" class="form-control" id="u_email" name="email" readonly>
+              <div class="form-group">
+                  <label for="companyName">PILIH TYPE UNIT</label>
+                  <select name="type" class="custom-select form-control" name="jenis_template">
+                    @foreach($unitType as $type)
+                      <option value="{{ $type->UNIT_TYPE }}">{{ $type->UNIT_TYPE .' - '. $type->TYPE_NAME }}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="companyName">No RKA</label>
-                    <input type="text" class="form-control" value="001.IKU.00000.2020" readonly>
+                  <label for="companyName">PILIH TEMPLATE PEKERJAAN</label>
+                    <select name="template" class="form-control" id="eventStatus2" name="eventStatus">
+                      <option value="Planning">Planning</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Finished">Finished</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                  <label for="companyName">Deskripsi Kegiatan</label>
-                    <input type="text" class="form-control" value="Pengadaan 000000000" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Nilai Usulan</label>
-                    <input type="text" class="form-control" value="500.000.000" readonly>
+                  <label for="companyName">PILIH UP3</label>
+                    <select name="unit" class="form-control" id="eventStatus2" name="eventStatus">
+                    @foreach($unitList as $list)
+                      <option value="{{ $list->BUSS_AREA }}">{{ $list->BUSS_AREA .' - '. $list->UNIT_NAME }}</option>
+                    @endforeach
+                    </select>
                 </div>
                 
-
-                <input type="hidden" name="id" id="u_id">
-                <input type="hidden" name="unit" id="u_unit">
+                <input type="hidden" name="action" id="action" />
               </div>
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
               </div>
               </form>
             </div>
@@ -452,11 +461,72 @@
         <!-- Modal -->      
       </div>
 </div>
+
+
 <script type="text/javascript">
 $(document).ready(function() {
     $('#table1').DataTable( {
         "scrollX": true
     } );
 } );
+
+$('#open_modal').click(function(){
+  $('.modal-title').text("SUBMIT FORM");
+  $('#action_button').val("Add");
+  $('#action').val("submit");
+  $('#submit_form').modal('show');
+});
+
+$('#form_menu').on('submit', function(event){
+      event.preventDefault();
+
+      if($('#action').val() == 'submit')
+      {
+        $.ajax({
+          url: "{{ url('wp/submit_form') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            //var result = JSON.parse(data);
+            //var redirect = 'sales/opentable/' + result + '';
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              
+              //html = '<div class="alert alert-success">' + data.success + '</div>';
+              html = data.success;
+              type_toast = 'success';
+              $('#form_menu')[0].reset();
+              $('#formModal').modal('hide');
+              $('#datamenu').DataTable().ajax.reload();
+              window.location.href = '/wp/create';
+              //window.location.href = 'wp/create/' + data.temp_id + '';
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            }
+          }
+        })
+      }
+
+    });
 </script>
 @endsection

@@ -9,8 +9,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use App\Models\Master;
-use App\Models\Master\UserCategory;
+use App\Models\Wp\WpModel;
 use Illuminate\Support\Facades\Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
@@ -22,7 +23,7 @@ class WpController extends BaseController
     public function __construct()
     {
         $this->middleware('auth');
-        $this->menuCat     = new UserCategory();
+        $this->wpModel     = new WpModel();
     }
     
     public function dashboard(Request $request)
@@ -34,16 +35,42 @@ class WpController extends BaseController
 
     public function list(Request $request)
     {
-        return view('wp/list');
+        $unitData  = $this->wpModel->getUnitType();
+        $unitList  = $this->wpModel->getUnit();
+        return view('wp/list',
+        ['unitType' => $unitData],
+        ['unitList' => $unitList],
+    );
         
     }
 
     public function create(Request $request)
     {
-        return view('wp/create');
+
+        $data = [
+            'unit' => $request->session()->get('unit'),
+            'type' => $request->session()->get('type'),
+        ];
+        return view('wp/create', $data);
         
     }
+
+    public function submit_form(Request $request)
+    {
+    $type    = $request->type;
+    $unit    = $request->unit;
+
+    $request->session()->put(['type' => $type],
+    ['unit' => $unit],
+    );
+    $session = $request->session()->all();
+
+    return response()->json(['success' => 'Data Insert successfully.',
+        'temp_id' => $session]);
+
+    }
     
+
     public function template(Request $request)
     {
         return view('wp/template_index');
@@ -52,7 +79,7 @@ class WpController extends BaseController
 
     public function add_template(Request $request)
     {
-        $unitData  = $this->menuCat->getUnitType();
+        $unitData  = $this->wpModel->getUnitType();
         return view('wp/add-template',
         ['unitType' => $unitData]);
         

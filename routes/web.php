@@ -32,6 +32,8 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('template', 'Wp\WpController@template')->name('template');
     Route::get('add_template', 'Wp\WpController@add_template')->name('add_template');
     Route::get('d_usulan/{id}', 'Planning\PlanningController@d_usulan')->name('d_usulan');
+    Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
+
 });
 
 //REPORT
