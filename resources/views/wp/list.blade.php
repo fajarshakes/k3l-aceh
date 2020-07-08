@@ -59,12 +59,19 @@
                         <a class="nav-link active" id="baseIcon-tab21" data-toggle="tab" aria-controls="tabIcon21"
                         href="#tabIcon21" aria-expanded="true">
                         <i class="la la-clock-o"></i> Dalam Permohonan
-                        <span class="badge badge-pill badge-glow badge-default badge-info">2</span></a>
+                        <span class="badge badge-pill badge-glow badge-default badge-warning">3</span></a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="baseIcon-tab22" data-toggle="tab" aria-controls="tabIcon22"
-                        href="#tabIcon22" aria-expanded="false"><i class="la la-dashboard"></i> Dalam Pengerjaan
-                        <span class="badge badge-pill badge-glow badge-default badge-success">2</span></a>
+                        href="#tabIcon22" aria-expanded="false">
+                        <i class="la la-dashboard"></i> Dalam Pengerjaan
+                        <span class="badge badge-pill badge-glow badge-default badge-info">3</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="baseIcon-tab23" data-toggle="tab" aria-controls="tabIcon23"
+                        href="#tabIcon23" aria-expanded="false">
+                        <i class="la la-check-circle"></i> Pekerjaan Selesai
+                        <span class="badge badge-pill badge-glow badge-default badge-success">3</span></a>
                       </li>
                     </ul>
                     <div class="tab-content px-1 pt-1">
@@ -91,7 +98,7 @@
                   </div>
                 </div>
                 <div class="col-xl-12 col-lg-12">
-                <table id="table1" class="table display nowrap table-striped table-bordered zero-configuration">
+                  <table id="table1" class="table display nowrap table-striped table-bordered zero-configuration">
                       <thead>
                         <tr>
                           <th>#</th>
@@ -103,8 +110,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                       
-                       
+
+
                         <tr>
                           <td>1</td>
                           <td>29-10-2019</td>
@@ -159,8 +166,8 @@
                           <th>Action</th>
                         </tr>
                       </tfoot>
-                    </table>
-            </div>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
