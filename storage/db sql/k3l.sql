@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 12, 2020 at 10:17 AM
+-- Generation Time: Jul 09, 2020 at 08:47 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -309,6 +309,7 @@ CREATE TABLE `users` (
   `email` varchar(30) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL,
+  `position_desc` varchar(50) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `expired_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
@@ -322,11 +323,16 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `unit`, `group_id`, `pers_no`, `username`, `email`, `password`, `name`, `created_at`, `expired_at`, `updated_at`, `provider`, `provider_id`, `socialite_photo`, `status`) VALUES
-(4, '1002', NULL, NULL, 'fachrul', 'fachrulrazi.ach@gmail.com', '$2y$10$IeoTtLQO4DF5.nAOX9cRr.5llQsf0dej8eYf5pU8waYXzmg1Gdf6G', 'Fachrul Razi', '2019-10-09', NULL, '2019-10-09', NULL, NULL, NULL, NULL),
-(14, '6101', '2', '9313022NY', 'fachrul', 'fachrul@bereeh.id', '$2y$10$LmGMmOVw9xN6qcLBhbAF9uE5ms3QJ.BXqEgaCGNJGciLW5Pa486eG', NULL, '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
-(15, '6111', '5', '9999999', 'rizki', 'rizki@smk3.net', '$2y$10$1G4Pp7qC1zjG8a/AcvjUK.O4689KbuEOVsjMoPtlHuw2m6uSfPPri', '99999', '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
-(16, '6111', '5', 'sasass', 'qwqqw', 'qwqqw@waswas.id', '$2y$10$c2jmMz3Uv9aU3EsdlLwdYuWwN39t3arqqNhVusaQMGQN6aUiij2gm', 'sas', '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE');
+INSERT INTO `users` (`id`, `unit`, `group_id`, `pers_no`, `username`, `email`, `password`, `name`, `position_desc`, `created_at`, `expired_at`, `updated_at`, `provider`, `provider_id`, `socialite_photo`, `status`) VALUES
+(4, '1002', NULL, NULL, 'fachrul', 'fachrulrazi.ach@gmail.com', '$2y$10$IeoTtLQO4DF5.nAOX9cRr.5llQsf0dej8eYf5pU8waYXzmg1Gdf6G', 'Fachrul Razi', NULL, '2019-10-09', NULL, '2019-10-09', NULL, NULL, NULL, NULL),
+(14, '6101', '2', '9313022NY', 'fachrul', 'fachrul@bereeh.id', '$2y$10$LmGMmOVw9xN6qcLBhbAF9uE5ms3QJ.BXqEgaCGNJGciLW5Pa486eG', NULL, NULL, '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
+(15, '6111', '5', '9999999', 'rizki', 'rizki@smk3.net', '$2y$10$1G4Pp7qC1zjG8a/AcvjUK.O4689KbuEOVsjMoPtlHuw2m6uSfPPri', '99999', NULL, '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
+(16, '6111', '5', 'sasass', 'qwqqw', 'qwqqw@waswas.id', '$2y$10$c2jmMz3Uv9aU3EsdlLwdYuWwN39t3arqqNhVusaQMGQN6aUiij2gm', 'sas', NULL, '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
+(17, '6101', '2', 'mia', 'mia', 'mia@mia.com', '$2y$10$zNQkQbR8LNlgD0zr/A12S.uyuqLLxmshEQEdhqRhkZrNbi33DHlbe', 'miamia', NULL, '2020-06-18', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
+(18, '6118', '6', '90090', 'test', 'test@gagas.com', '$2y$10$kq7mhluvqT0A5VWTeHWCAu.TKqxIuupmkPvMmouPEM8kfIvnSVv.q', 'gagas', NULL, '2020-07-09', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
+(19, '6116', '6', 'gg', 'fachru', 'fachru@ggggg', '$2y$10$0DfG5FXp.913dAo995mO7OMWQ/WilMMp0GI9eKCZOCTDiZe9mjb9u', 'GAGAS', 'PJ', '2020-07-09', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
+(20, '6116', '4', 'indra', 'indra', 'indra@pln.co.id', '$2y$10$JOoGa0AOsC9ctNsE5.eBturO9AMoUX9vYwi0Se/poOcfwt6BbAYSi', 'INDRA SUHERI', 'MANAGER KSA', '2020-07-09', NULL, NULL, NULL, NULL, NULL, 'ACTIVE'),
+(21, '6116', '5', 'i', 'fauzi', 'fauzi@ddd.comn', '$2y$10$1kfojzELcmulVlUHM3i4p.Pci/7aFBav9bTLF9voD0VJelmr.ufTW', 'FAUZI', 'SPV', '2020-07-09', NULL, NULL, NULL, NULL, NULL, 'ACTIVE');
 
 -- --------------------------------------------------------
 
@@ -349,9 +355,45 @@ INSERT INTO `users_group` (`ID`, `GROUP_NAME`, `UNIT_LEVEL`, `STATUS`) VALUES
 (1, 'SUPER ADMIN', '0', '1'),
 (2, 'CHAMPIONS UI', '1', '1'),
 (3, 'PEJABAT UI', '1', '1'),
-(4, 'PEJABAT UP', '2', '1'),
-(5, 'CHAMPIONS UP', '2', '1'),
-(6, 'CHAMPIONS UL', '3', '1');
+(4, 'MANAGER UP/UL', '2', '1'),
+(5, 'SUPERVISOR UP/UL', '2', '1'),
+(6, 'PEJABAT UP/UL', '2', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `working_permit`
+--
+
+CREATE TABLE `working_permit` (
+  `id_wp` varchar(10) NOT NULL,
+  `unit` varchar(4) DEFAULT NULL,
+  `tgl_pengajuan` date DEFAULT NULL,
+  `jenis_pekerjaan` varchar(200) NOT NULL,
+  `detail_pekerjaan` varchar(200) DEFAULT NULL,
+  `lokasi_pekerjaan` varchar(200) DEFAULT NULL,
+  `pengawas_pekerjaan` varchar(50) DEFAULT NULL,
+  `no_pengawas_pekerjaan` varchar(20) DEFAULT NULL,
+  `pengawas_k3l` varchar(200) DEFAULT NULL,
+  `no_pengawas_k3` varchar(20) DEFAULT NULL,
+  `tgl_mulai` date DEFAULT NULL,
+  `tgl_selesai` date DEFAULT NULL,
+  `jam_mulai` text,
+  `jam_selesai` text,
+  `manager` varchar(30) DEFAULT NULL,
+  `supervisor` varchar(30) DEFAULT NULL,
+  `pejabat_k3l` varchar(30) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `working_permit`
+--
+
+INSERT INTO `working_permit` (`id_wp`, `unit`, `tgl_pengajuan`, `jenis_pekerjaan`, `detail_pekerjaan`, `lokasi_pekerjaan`, `pengawas_pekerjaan`, `no_pengawas_pekerjaan`, `pengawas_k3l`, `no_pengawas_k3`, `tgl_mulai`, `tgl_selesai`, `jam_mulai`, `jam_selesai`, `manager`, `supervisor`, `pejabat_k3l`, `status`) VALUES
+('6116200001', '6116', '2020-07-09', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW'),
+('6116200002', '6116', '2020-07-09', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW'),
+('6116200003', '6116', '2020-07-09', '', 'test nama pekerjaan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW');
 
 --
 -- Indexes for dumped tables
@@ -436,6 +478,12 @@ ALTER TABLE `users_group`
   ADD PRIMARY KEY (`ID`) USING BTREE;
 
 --
+-- Indexes for table `working_permit`
+--
+ALTER TABLE `working_permit`
+  ADD PRIMARY KEY (`id_wp`) USING BTREE;
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -509,7 +557,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users_group`
