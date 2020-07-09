@@ -15,7 +15,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">List Permit</a>
                 </li>
-                <li class="breadcrumb-item active"> Submit Permit {{ request()->session()->get('unit') }}
+                <li class="breadcrumb-item active"> Submit Permit
                 </li>
               </ol>
             </div>
@@ -26,7 +26,7 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-check-circle-o"></i> Submit Permit</button>
+              <button onclick="location.href='/wp/list-permit'" class="dropdown-item"><i class="la la-arrow-circle-left"></i> Kembali</button>
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
@@ -56,39 +56,37 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="card-body">
-                    <form action="#" class="icons-tab-steps wizard-circle">
+                    <form id="form_menu" method="post" enctype="multipart/form-data" class="icons-tab-steps-1 wizard-circle">
+                    @csrf
                       <!-- Step 1 -->
                       <h6><i class="step-icon la la-exclamation-triangle"></i> HIRARC </h6>
                       <fieldset>
                         <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
-                              <label for="location2">Manager Bagian :</label>
-                              <select class="form-control" id="location2" name="location">
-                                <option value="">Pilih Manager Bagian</option>
-                                <option value="Amsterdam">Amsterdam</option>
-                                <option value="Berlin">Berlin</option>
-                                <option value="Frankfurt">Frankfurt</option>
+                              <label for="location2">MANAGER BAGIAN / UL :</label>
+                              <select class="form-control" id="manager" name="manager">
+                              @foreach($getManager as $manager)
+                                <option value="{{ $manager->name }}">{{ $manager->name .' - '. $manager->position_desc }}</option>
+                              @endforeach
                               </select>
                             </div>
                          
                             <div class="form-group">
-                              <label for="location2">Supervisor :</label>
-                              <select class="form-control" id="location2" name="location">
-                                <option value="">Pilih Supervisor</option>
-                                <option value="Amsterdam">Amsterdam</option>
-                                <option value="Berlin">Berlin</option>
-                                <option value="Frankfurt">Frankfurt</option>
+                              <label for="location2">SUPERVISOR UP / UL :</label>
+                              <select class="form-control" id="supervisor" name="supervisor">
+                              @foreach($getSpv as $spv)
+                                <option value="{{ $spv->name }}">{{ $spv->name .' - '. $spv->position_desc }}</option>
+                              @endforeach
                               </select>
                             </div>
                          
                             <div class="form-group">
-                              <label for="location2">PJ Pelaksana K3L :</label>
-                              <select class="form-control" id="location2" name="location">
-                                <option value="">Pilih PJ Pelaksana K3L</option>
-                                <option value="Amsterdam">Amsterdam</option>
-                                <option value="Berlin">Berlin</option>
-                                <option value="Frankfurt">Frankfurt</option>
+                              <label for="location2">PEJABAT PELAKSANA K3L :</label>
+                              <select class="form-control" id="pejabat" name="pejabat">
+                              @foreach($getPj as $pj)
+                                <option value="{{ $pj->name }}">{{ $pj->name .' - '. $pj->position_desc }}</option>
+                              @endforeach
                               </select>
                             </div>
                           </div>
@@ -131,15 +129,15 @@
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for="proposalTitle2">Proposal Title :</label>
-                              <input type="text" class="form-control" id="proposalTitle2">
+                              <label for="proposalTitle2">NAMA PELAKSANA PEKERJAAN :</label>
+                              <input type="text" class="form-control" id="nama_pelaksana">
                               <input type="file" class="form-control" id="">
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for="jobTitle3">Job Title :</label>
-                              <input type="text" class="form-control" id="jobTitle3">
+                              <label for="jobTitle3">JABATAN :</label>
+                              <input type="text" class="form-control" id="jabatan_pelaksana">
                               <input type="file" class="form-control" id="">
                             </div>
                           </div>
@@ -300,7 +298,7 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Nama Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <input type="text" class="form-control" name="nama_pekerjaan">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Dilakukan Oleh <span style="color:red">*</span></label>
@@ -666,6 +664,9 @@
                           </div>
                           <b><span style="color:red">*</span> WAJIB DI ISI</b>
                         </div>
+                        
+                        <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+
                       </fieldset>
                     </form>
                   </div>
@@ -675,54 +676,10 @@
           </div>
         </section>
         <!-- Form wizard with icon tabs section end -->
-        </div>
-      
-  
+        
+        <div id="loading"></div>
+        
         <!-- Modal -->
-        <div class="modal fade text-left" id="user_view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Detail Data</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form method="POST" action="{{ route('user_store') }}">
-              @csrf
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="companyName">Unit</label>
-                    <input type="text" class="form-control" id="u_email" name="email" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">No RKA</label>
-                    <input type="text" class="form-control" value="001.IKU.00000.2020" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Deskripsi Kegiatan</label>
-                    <input type="text" class="form-control" value="Pengadaan 000000000" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Nilai Usulan</label>
-                    <input type="text" class="form-control" value="500.000.000" readonly>
-                </div>
-                
-
-                <input type="hidden" name="id" id="u_id">
-                <input type="hidden" name="unit" id="u_unit">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
         <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
@@ -801,156 +758,7 @@
             </div>
           </div>
         </div>
-        
-        <div class="modal fade text-left" id="add_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Upload File</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form action="#">
-              @csrf
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="projectinput5">Tahun Anggaran</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Group</option>
-                        <option value="9">2020</option>
-                        <option value="10">2021</option>
-                        <option value="11">2022</option>
-                        <option value="12">2023</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <fieldset class="form-group">
-                    <label for="projectinput5">File Upload</label>
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                      </div>
-                    </fieldset>
-                  </div>
-                </div>
-
-                <div class="row">
-                <div class="col-md-12">
-                  <fieldset class="form-group">
-                  <div class="form-group mt-1">
-                      <input type="checkbox" id="switcherySize3" class="switchery" checked/>
-                      <label for="switcherySize3" class="font-medium-2 text-bold-600 ml-1">Data sudah sesuai !
-                        <p class="text-muted"><code>Centang untuk melanjutkan</code></p></label>
-                    </div>
-                    </fieldset>
-                  </div>
-                  
-                </div>
-                
-                <input type="hidden" name="unit" value="1000">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-info">Upload Data</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade text-left" id="user_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Update User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form method="POST" action="">
-              @csrf
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="companyName">Email</label>
-                    <input type="text" class="form-control" id="u_email" name="email" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Full Name</label>
-                    <input type="text" class="form-control" id="u_name" name="name">
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="projectinput5">Group Level</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Group</option>
-                        <option value="9">Manager</option>
-                        <option value="10">Sekretaris</option>
-                        <option value="11">Bendahara</option>
-                        <option value="12">Pengawas</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <input type="hidden" name="id" id="u_id">
-                <input type="hidden" name="unit" id="u_unit">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-info">Submit</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade text-left" id="user_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form method="POST" action="">
-              @csrf
-              <div class="modal-body">
-              <div class="bs-callout-danger callout-border-left mt-1 p-1">
-                      <strong>Delete User !</strong>
-                      <p>Anda yakin akan menghapus user  ?</p>
-                      <input type="text" class="form-control" id="u_email" readonly>
-              </div>
-
-                <input type="hidden" name="id" id="u_id">
-                <input type="hidden" name="unit" id="u_unit">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-info">Submit</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->      
+        <!-- Modal -->   
 
 </div>
 
@@ -963,5 +771,53 @@ $(document).ready(function() {
         "paging": false,
     } );
 } );
+</script>
+
+<script type="text/javascript">
+$('#form_menu').on('submit', function(event){
+      event.preventDefault();
+      
+      $.ajax({
+          url:"{{ route('wp_store') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          beforeSend: function(){
+            $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+          },
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              type_toast = 'success';
+              $('#form_menu')[0].reset();
+              setTimeout(function() {
+                window.location.href = '/wp/list-permit/';
+              }, 1000);
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            }
+          }
+    });
+})
 </script>
 @endsection

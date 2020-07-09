@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WpModel extends Model
 {
-    protected $table = 'menu_category';
+    protected $table = 'working_permit';
     //public $timestamps = false;
     protected $fillable = ['name', 'group_id', 'updated_at', 'expired_at', 'status'];
     
@@ -59,20 +59,19 @@ class WpModel extends Model
     return $value;
   }
 
-  public function getMaxCatId(string $prefixJenis)
+  public function getMaxWpId(string $prefixJenis)
     {
-      
       return $this
-      ->selectRaw("max(cat_cd) as maxId")
-      ->where("cat_cd", "like", "$prefixJenis%")
+      ->selectRaw("max(id_wp) as maxId")
+      ->where("id_wp", "like", "$prefixJenis%")
       ->first();
             
     }
 
-  public function generateCatId(string $prefixJenis)
+  public function generateWpId(string $prefixJenis)
     {
-        $max = $this->getMaxCatId($prefixJenis)->maxId;
-        $noUrut = (int) substr($max, 4, 3);
+        $max = $this->getMaxWpId($prefixJenis)->maxId;
+        $noUrut = (int) substr($max, 6, 4);
 
         return Common::generateIdbyUnit($prefixJenis, $noUrut);
     }

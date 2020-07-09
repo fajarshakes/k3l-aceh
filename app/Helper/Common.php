@@ -28,13 +28,10 @@ class Common {
     }
 
     static function generateIdbyUnit($prefixJenis, $noUrut){
-        //$prefixJenis = '1001';
-        //$noUrut = '001';
-        $newNoUrut = $noUrut + 1; // TODO : be careful for collision
-        $newId = $prefixJenis . sprintf("%03s", $newNoUrut);
+        $newNoUrut = $noUrut + 1;
+        $newId = $prefixJenis . sprintf("%04s", $newNoUrut);
         //$newId = $noUrut;
         //$random = rand(1,99);
-
         return $newId;
     }
 

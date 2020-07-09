@@ -23,6 +23,23 @@ $(".number-tab-steps").steps({
 });
 
 // Wizard tabs with icons setup
+$(".icons-tab-steps-1").steps({
+    headerTag: "h6",
+    bodyTag: "fieldset",
+    transitionEffect: "fade",
+    titleTemplate: '<span class="step">#index#</span> #title#',
+    labels: {
+        finish: 'Submit'
+    },
+    onFinished: function (event, currentIndex) {
+        var form = $(this);
+    // Submit form input
+    form.submit();
+    alert("Form submitted.");
+    }
+});
+
+// Wizard tabs with icons setup
 $(".icons-tab-steps").steps({
     headerTag: "h6",
     bodyTag: "fieldset",

@@ -52,7 +52,7 @@ class UserController extends BaseController
     {
         //$unit = Auth::user()->unit;
         $sql = "SELECT
-                    us.id, us.email, us.name, us.pers_no,
+                    us.id, us.email, us.name, us.pers_no, us.position_desc,
                     mu.UNIT_NAME,
                     ug.GROUP_NAME 
                 FROM
@@ -113,6 +113,7 @@ class UserController extends BaseController
             'pers_no'       =>  'required',
             'unit_id'       =>  'required',
             'user_group'    =>  'required',
+            'jabatan'    =>  'required',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -132,6 +133,7 @@ class UserController extends BaseController
             'pers_no'           => $request->pers_no,
             'email'             => $request->email,
             'group_id'          => $request->user_group,
+            'position_desc'     => $request->jabatan,
             'password'          => Hash::make('Qwerty@4321'),
             'name'              => $request->name,
             'created_at'        => date('Y-m-d'),
@@ -235,7 +237,7 @@ class UserController extends BaseController
         $data = DB::table('users')
         ->join('master_unit', 'users.unit', '=', 'master_unit.BUSS_AREA')
         ->join('users_group', 'users.group_id', '=', 'users_group.ID')
-        ->select('users.unit', 'users.email', 'users.name', 'users.pers_no', 'users.group_id', 'users_group.GROUP_NAME')
+        ->select('users.unit', 'users.email', 'users.name', 'users.pers_no', 'users.position_desc', 'users.group_id', 'users_group.GROUP_NAME')
         ->where('users.id','=',$id)
         ->get();
         

@@ -38,6 +38,17 @@ class User extends Model
       return $q;
     
     }
+
+  public function getUser($unit, $group){
+
+    $value=DB::table('users')
+    ->orderBy('name', 'asc')
+    ->where('unit', '=', $unit)
+    ->where('group_id', '=', $group)
+    ->get(); 
+
+    return $value;
+  }
     
 }
 

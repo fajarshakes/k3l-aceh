@@ -121,6 +121,10 @@
                     </div>
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="companyName">Sebutan Jabatan</label>
+                    <input type="text" class="form-control" placeholder="Jabatan" id="jabatan" name="jabatan">
+                </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -257,7 +261,7 @@ $(document).ready(function() {
       },
       {
       data: 'name',
-      className: "text-center"
+      className: "text-left"
       },
       {
       data: 'GROUP_NAME',
@@ -437,6 +441,7 @@ $(document).ready(function() {
           //$('#cost_of_sales').val(html.data[0].cost_of_sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "." ));
           $("#unit_id").val(html.data[0].unit).attr('selected','selected');
           $('#group_id').val(html.data[0].group_id);
+          $('#jabatan').val(html.data[0].position_desc);
           $('#group_name').val(html.data[0].GROUP_NAME);
           $("#user_group").val(html.data[0].group_id).attr('selected','selected');
           //$('#store_image').html("<img src={{ URL::to('/') }}/images/pic_menu/" + html.data[0].image + " width='70' class='img-thumbnail' />");
