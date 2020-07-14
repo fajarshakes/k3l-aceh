@@ -86,6 +86,7 @@
                               <th>Nama Pekerjaan</th>
                               <th>Unit</th>
                               <th>Instansi / Perusahaan</th>
+                              <th>Status</th>
                               <th>Action</th>
                             </tr>
                           </thead>
@@ -280,7 +281,7 @@ var vtable = $('#table-permohonan').DataTable({
      className: "text-left"
      },
      {
-     data: 'supervisor',
+     data: 'unit',
      className: "text-center"
      },
      {
@@ -288,11 +289,10 @@ var vtable = $('#table-permohonan').DataTable({
      className: "text-left"
      },
      {
-     data: 'action',
-     className: "text-center",
-     //name: 'action',
-     orderable: false
+     data: 'pejabat_k3l',
+     className: "text-left"
      }
+     
    ]
   });
   vtable.on('draw.dt', function () {

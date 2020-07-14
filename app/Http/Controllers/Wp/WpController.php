@@ -58,9 +58,9 @@ class WpController extends BaseController
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id_wp.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i> Edit</button>';
+                        $button = '<button type="button" name="edit" id="'.$data->id_wp.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
                 $button .= '&nbsp;&nbsp;';
-                $button .= '<button type="button" name="delete" id="'.$data->id_wp.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> Delete</button>';
+                $button .= '<button type="button" name="delete" id="'.$data->id_wp.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -119,7 +119,7 @@ class WpController extends BaseController
         if($error->fails())
         {
             return response()->json(['errors' => $error->errors()->all()]);
-        }
+        }xw
         */
 
         $store = DB::table('working_permit')->insert([
@@ -127,11 +127,21 @@ class WpController extends BaseController
             'unit'          => $unit,
             'status'        => 'NEW',
             'tgl_pengajuan' => date('Y-m-d'),
-            'detail_pekerjaan' => $request->nama_pekerjaan,
+            'detail_pekerjaan' => $request->nama_pekerjaan ,
             'manager'       => $request->manager,
             'supervisor'    => $request->supervisor,
             'pejabat_k3l'   => $request->pejabat
         ]);
+
+        // $periode = explode(' ', $request['periode']);
+        for($i = 0; $i < count($request['nama_pelaksana']); $i++){
+            $store = DB::table('pelaksana_pekerjaan')->insert([
+                'id_wp' => $new_id,
+                'nama_pelaksana' => $request['nama_pelaksana'][$i],
+                'personal_no' => $request['nip_pelaksana'][$i],
+                'jabatan_pelaksana' => $request['jabatan_pelaksana'][$i],
+            ]);
+        }
         return response()->json(['success' => 'Data Added successfully.']);
     }
 

@@ -51,6 +51,10 @@ Route::prefix('master')->group(function() {
     Route::get('user', 'Master\UserController@user')->name('user');
     Route::get('user_datatables', 'Master\UserController@user_datatables')->name('user_datatables');
     Route::get('get_userdata', 'Master\UserController@get_userdata')->name('get_userdata');;
+    Route::get('unit', 'Master\UnitController@unit')->name('unit');
+    Route::get('unit_datatables', 'Master\UnitController@unit_datatables')->name('unit_datatables');
+
+
 
 
     Route::get('c_menu_datatables', 'Master\UserController@c_menu_datatables')->name('c_menu_datatables');
