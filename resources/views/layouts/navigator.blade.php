@@ -14,6 +14,7 @@
             <li><a class="menu-item" href="/wp/template" data-i18n="nav.chartist.chartist_line_charts">Template WP</a></li>
           </ul>
         </li>
+       <li class=" nav-item"><a href="/sosialisasi"><i class="la la-map-pin"></i><span class="menu-title" data-i18n="nav.changelog.main">PETA SOSIALISASI</span></a></li>
        <li class=" nav-item"><a href="/dropping"><i class="la la-clipboard"></i><span class="menu-title" data-i18n="nav.changelog.main">MENU XXXXXX</span></a></li>
         <li class=" nav-item"><a href="#"><i class="la la-folder-open"></i><span class="menu-title" data-i18n="nav.chartist.main">Report</span></a>
           <ul class="menu-content">

@@ -24,7 +24,7 @@ Route::get('postLogout', 'Auth\LoginController@postLogout');
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
- //WORKING PERMIT
+//WORKING PERMIT
  Route::prefix('wp')->group(function() {
     Route::get('test', 'Wp\WpController@test')->name('test');
     
@@ -37,6 +37,17 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
     Route::get('list_permohonan', 'Wp\WpController@list_permohonan')->name('list_permohonan');
+
+});
+
+//SOSIALISASI
+Route::prefix('sosialisasi')->group(function() {
+    Route::get('test', 'Sosialisasi\SosialisasiController@test')->name('test');
+    
+    Route::get('', 'Sosialisasi\SosialisasiController@index')->name('index');
+    Route::get('add', 'Sosialisasi\SosialisasiController@add')->name('add');
+    Route::post('sosialisasi_store', 'Sosialisasi\SosialisasiController@sosialisasi_store')->name('sosialisasi_store');
+    Route::get('list_index', 'Sosialisasi\SosialisasiController@list_index')->name('list_index');
 
 });
 
@@ -53,9 +64,6 @@ Route::prefix('master')->group(function() {
     Route::get('get_userdata', 'Master\UserController@get_userdata')->name('get_userdata');;
     Route::get('unit', 'Master\UnitController@unit')->name('unit');
     Route::get('unit_datatables', 'Master\UnitController@unit_datatables')->name('unit_datatables');
-
-
-
 
     Route::get('c_menu_datatables', 'Master\UserController@c_menu_datatables')->name('c_menu_datatables');
     Route::post('user_store', 'Master\UserController@user_store')->name('user_store');
