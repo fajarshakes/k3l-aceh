@@ -32,25 +32,12 @@ class SosialisasiController extends BaseController
     
     public function index(Request $request)
     {
-        return view('sosialisasi/index');
-        
+        return view('sosialisasi/index');     
     }
 
     public function add(Request $request)
     {
         return view('sosialisasi/add');
-        
-    }
-
-    public function list(Request $request)
-    {
-        $unitData  = $this->wpModel->getUnitType();
-        $unitList  = $this->wpModel->getUnit();
-        return view('wp/list',
-        ['unitType' => $unitData],
-        ['unitList' => $unitList],
-        );
-        
     }
 
     public function list_index(Request $request)
@@ -81,19 +68,7 @@ class SosialisasiController extends BaseController
             ->rawColumns(['action'])
             ->make(true);
     }
-    
-    public function create(Request $request)
-    {
-        $unit = Session::get('sel_unit');
-        $data = [
-            'getManager'  => $this->UserModel->getUser($unit, 4),
-            'getSpv'      => $this->UserModel->getUser($unit, 5),
-            'getPj'       => $this->UserModel->getUser($unit, 6),
-        ];
-        
-        return view('wp/create', $data);
-        
-    }
+
 
     public function test(Request $request)
     {   
@@ -144,21 +119,6 @@ class SosialisasiController extends BaseController
         ]);
 
         return response()->json(['success' => 'Data Added successfully.']);
-    }
-
-
-    public function template(Request $request)
-    {
-        return view('wp/template_index');
-        
-    }
-
-    public function add_template(Request $request)
-    {
-        $unitData  = $this->wpModel->getUnitType();
-        return view('wp/add-template',
-        ['unitType' => $unitData]);
-        
-    }
+        }
    
 }
