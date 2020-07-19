@@ -11,7 +11,7 @@
  Target Server Version : 100137
  File Encoding         : 65001
 
- Date: 14/07/2020 21:31:06
+ Date: 19/07/2020 18:01:41
 */
 
 SET NAMES utf8mb4;
@@ -119,6 +119,29 @@ INSERT INTO `login_error` VALUES (6, 'ADMIN', 'kecilsemua');
 INSERT INTO `login_error` VALUES (7, 'ADMIN', 'kecilsemua');
 INSERT INTO `login_error` VALUES (8, 'FACHRULRAZI.ACH1@GMA', '123123123');
 INSERT INTO `login_error` VALUES (9, 'FACHRULRAZI.ACH1@GMA', '123123123');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for master_peralatan_keselamatan
+-- ----------------------------
+DROP TABLE IF EXISTS `master_peralatan_keselamatan`;
+CREATE TABLE `master_peralatan_keselamatan` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `description` varchar(50) DEFAULT NULL,
+  `category` varchar(2) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of master_peralatan_keselamatan
+-- ----------------------------
+BEGIN;
+INSERT INTO `master_peralatan_keselamatan` VALUES (1, 'Helm', '1', 1);
+INSERT INTO `master_peralatan_keselamatan` VALUES (2, 'Sepatu Keselamatan', '1', 1);
+INSERT INTO `master_peralatan_keselamatan` VALUES (3, 'Kacamata', '1', 1);
+INSERT INTO `master_peralatan_keselamatan` VALUES (4, 'Earplug', '1', 1);
+INSERT INTO `master_peralatan_keselamatan` VALUES (5, 'Pemadam Api (APAR dll)', '2', 1);
 COMMIT;
 
 -- ----------------------------
@@ -289,24 +312,58 @@ CREATE TABLE `pelaksana_pekerjaan` (
   `jabatan_pelaksana` varchar(50) DEFAULT NULL,
   `personal_no` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of pelaksana_pekerjaan
 -- ----------------------------
 BEGIN;
-INSERT INTO `pelaksana_pekerjaan` VALUES (1, NULL, 'SUPER ADMIN', '0', '1');
-INSERT INTO `pelaksana_pekerjaan` VALUES (2, NULL, 'CHAMPIONS UI', '1', '1');
-INSERT INTO `pelaksana_pekerjaan` VALUES (3, NULL, 'PEJABAT UI', '1', '1');
-INSERT INTO `pelaksana_pekerjaan` VALUES (4, NULL, 'MANAGER UP/UL', '2', '1');
-INSERT INTO `pelaksana_pekerjaan` VALUES (5, NULL, 'SUPERVISOR UP/UL', '2', '1');
-INSERT INTO `pelaksana_pekerjaan` VALUES (6, NULL, 'PEJABAT UP/UL', '2', '1');
-INSERT INTO `pelaksana_pekerjaan` VALUES (7, '6116200007', 'fachrul', '00', '000');
-INSERT INTO `pelaksana_pekerjaan` VALUES (8, '6116200008', 'fachruk', '900', '909');
-INSERT INTO `pelaksana_pekerjaan` VALUES (9, '6116200008', 'riza', '8989', 'ioi9');
-INSERT INTO `pelaksana_pekerjaan` VALUES (10, '6116200009', 'RIZAL', 'JBT01', 'NIK01');
-INSERT INTO `pelaksana_pekerjaan` VALUES (11, '6116200009', 'UMTI', 'JBT02', 'NIK02');
-INSERT INTO `pelaksana_pekerjaan` VALUES (12, '6116200009', 'UKTI', '03', 'NIK03');
+INSERT INTO `pelaksana_pekerjaan` VALUES (13, '6116200012', 'nama1', NULL, NULL);
+INSERT INTO `pelaksana_pekerjaan` VALUES (14, '6116200012', 'nama2', NULL, NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for peralatan_keselamatan
+-- ----------------------------
+DROP TABLE IF EXISTS `peralatan_keselamatan`;
+CREATE TABLE `peralatan_keselamatan` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `id_master` int(4) DEFAULT NULL,
+  `id_wp` varchar(20) DEFAULT NULL,
+  `description` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for peta_sosialisasi
+-- ----------------------------
+DROP TABLE IF EXISTS `peta_sosialisasi`;
+CREATE TABLE `peta_sosialisasi` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `unit` varchar(4) DEFAULT NULL,
+  `lokasi` varchar(200) DEFAULT NULL,
+  `judul` varchar(200) NOT NULL,
+  `deskripsi` varchar(200) DEFAULT NULL,
+  `jml_peserta` varchar(20) DEFAULT NULL,
+  `pic_sosialisasi` varchar(50) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `jam_mulai` text,
+  `jam_selesai` text,
+  `latitude` varchar(200) DEFAULT NULL,
+  `longitude` varchar(200) DEFAULT NULL,
+  `user_input` varchar(20) DEFAULT NULL,
+  `tgl_input` date DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of peta_sosialisasi
+-- ----------------------------
+BEGIN;
+INSERT INTO `peta_sosialisasi` VALUES (1, '6101', 'test', 'test', 'test', '11', 'saya', '2020-07-15', '08:59', '08:00', '1', '1', 'fachrul', '2020-07-18');
+INSERT INTO `peta_sosialisasi` VALUES (2, '6101', '2121', '2121', '2121', '2121', '21', '2020-08-07', '21:21', '21:02', '21', '21', 'fachrul', '2020-07-18');
+INSERT INTO `peta_sosialisasi` VALUES (3, '6101', 'lokasi 1', 'judul 1', 'desk', '12', 'saya', '2020-07-25', '05:02', '09:03', 'wq', 'wq', 'fachrul', '2020-07-18');
+INSERT INTO `peta_sosialisasi` VALUES (4, '6101', 'test2', 'judul 2', 'detaul', '89', 'Ibrahim Morning', '2020-07-21', '09:20', '03:21', '1', '1', 'fachrul', '2020-07-18');
 COMMIT;
 
 -- ----------------------------
@@ -337,7 +394,7 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES (4, '1002', NULL, NULL, 'fachrul', 'fachrulrazi.ach@gmail.com', '$2y$10$IeoTtLQO4DF5.nAOX9cRr.5llQsf0dej8eYf5pU8waYXzmg1Gdf6G', 'Fachrul Razi', NULL, '2019-10-09', NULL, '2019-10-09', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (4, '6101', NULL, NULL, 'fachrul', 'fachrulrazi.ach@gmail.com', '$2y$10$IeoTtLQO4DF5.nAOX9cRr.5llQsf0dej8eYf5pU8waYXzmg1Gdf6G', 'Fachrul Razi', NULL, '2019-10-09', NULL, '2019-10-09', NULL, NULL, NULL, NULL);
 INSERT INTO `users` VALUES (14, '6101', '2', '9313022NY', 'fachrul', 'fachrul@bereeh.id', '$2y$10$LmGMmOVw9xN6qcLBhbAF9uE5ms3QJ.BXqEgaCGNJGciLW5Pa486eG', NULL, NULL, '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE');
 INSERT INTO `users` VALUES (15, '6111', '5', '9999999', 'rizki', 'rizki@smk3.net', '$2y$10$1G4Pp7qC1zjG8a/AcvjUK.O4689KbuEOVsjMoPtlHuw2m6uSfPPri', '99999', NULL, '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE');
 INSERT INTO `users` VALUES (16, '6111', '5', 'sasass', 'qwqqw', 'qwqqw@waswas.id', '$2y$10$c2jmMz3Uv9aU3EsdlLwdYuWwN39t3arqqNhVusaQMGQN6aUiij2gm', 'sas', NULL, '2020-05-17', NULL, NULL, NULL, NULL, NULL, 'ACTIVE');
@@ -447,6 +504,9 @@ INSERT INTO `working_permit` VALUES ('6116200006', '6116', '2020-07-10', '', NUL
 INSERT INTO `working_permit` VALUES ('6116200007', '6116', '2020-07-10', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW');
 INSERT INTO `working_permit` VALUES ('6116200008', '6116', '2020-07-10', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW');
 INSERT INTO `working_permit` VALUES ('6116200009', '6116', '2020-07-10', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW');
+INSERT INTO `working_permit` VALUES ('6116200010', '6116', '2020-07-14', '', 'nama pekerjaan test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW');
+INSERT INTO `working_permit` VALUES ('6116200011', '6116', '2020-07-14', '', 'nama pekerjaan test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW');
+INSERT INTO `working_permit` VALUES ('6116200012', '6116', '2020-07-14', '', 'nama pekerjaan test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INDRA SUHERI', 'FAUZI', 'GAGAS', 'NEW');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
