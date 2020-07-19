@@ -33,10 +33,12 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('create', 'Wp\WpController@create')->name('create');
     Route::get('template', 'Wp\WpController@template')->name('template');
     Route::get('add_template', 'Wp\WpController@add_template')->name('add_template');
-    Route::get('d_usulan/{id}', 'Planning\PlanningController@d_usulan')->name('d_usulan');
+    Route::get('detail/{id}', 'Wp\WpController@detail')->name('detail');
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
     Route::get('list_permohonan', 'Wp\WpController@list_permohonan')->name('list_permohonan');
+    Route::get('get_detail_wp', 'Wp\WpController@get_detail_wp')->name('get_detail_wp');;
+
 
 });
 

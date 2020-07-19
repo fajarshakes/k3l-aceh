@@ -46,6 +46,29 @@ class WpController extends BaseController
         
     }
 
+    public function detail(Request $request)
+    {
+        $unitData  = $this->wpModel->getUnitType();
+        $unitList  = $this->wpModel->getUnit();
+        return view('wp/detail',
+        ['unitType' => $unitData],
+        ['unitList' => $unitList],
+        );
+        
+    }
+
+    public function get_detail_wp()
+    {
+        $id = $_GET['id'];
+        $data = DB::table('working_permit')
+        ->select('working_permit.*')
+        ->where('working_permit.id_wp','=',$id)
+        ->get();
+        
+        return response()->json(['data' => $data]);
+    }
+
+
     public function list_permohonan(Request $request)
     {
         $sql = "SELECT
@@ -133,6 +156,13 @@ class WpController extends BaseController
             'pejabat_k3l'   => $request->pejabat
         ]);
 
+        for($i = 0; $i < count($request['agenda2']); $i++){
+            $store = DB::table('peralatan_keselamatan')->insert([
+            'id_wp'         => $new_id,
+            'description'   => $request['agenda2'][$i],
+            ]);
+        }
+        
         // $periode = explode(' ', $request['periode']);
         for($i = 0; $i < count($request['nama_pelaksana']); $i++){
             $store = DB::table('pelaksana_pekerjaan')->insert([

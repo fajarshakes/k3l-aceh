@@ -168,6 +168,48 @@
           </div>
         </div>
 
+        <div class="modal fade text-left" id="approve_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-info white">
+                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_edit" method="post" enctype="multipart/form-data">
+
+              @csrf
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="companyName">ID WP</label>
+                  <input type="text" id="id_wp" class="form-control" readonly/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="companyName">NAMA PEKERJAAN</label>
+                    <textarea id="nama" class="form-control" readonly></textarea>
+                </div>
+              
+                <div class="form-group">
+                  <label for="companyName">PERUSAHAAN PELAKSANA</label>
+                  <input type="text" id="pelaksana" class="form-control" readonly/>
+                </div>
+                
+                <input type="hidden" name="action" id="action" />
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Approve</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
@@ -289,9 +331,21 @@ var vtable = $('#table-permohonan').DataTable({
      className: "text-left"
      },
      {
-     data: 'pejabat_k3l',
+     data: 'status',
      className: "text-left"
-     }
+     },
+     {
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        return `<button onclick="location.href='detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
+        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
+        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve"> <i class="la la-check-circle"></i></button>
+        <button id="${full.NOREG}" class="btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+      }
+      },
      
    ]
   });
@@ -363,6 +417,38 @@ $('#form_menu').on('submit', function(event){
         })
       }
 
+    });
+
+    $(document).on('click', '.edit', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('wp/get_detail_wp/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#nama').val(html.data[0].detail_pekerjaan);
+          $('#pelaksana').val(html.data[0].supervisor);
+          $('#id_wp').val(html.data[0].id_wp);
+          $('#pers_no').val(html.data[0].pers_no);
+          //$('#cost_of_sales').val(html.data[0].cost_of_sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "." ));
+          $("#unit_id").val(html.data[0].unit).attr('selected','selected');
+          $('#group_id').val(html.data[0].group_id);
+          $('#jabatan').val(html.data[0].position_desc);
+          $('#group_name').val(html.data[0].GROUP_NAME);
+          $("#user_group").val(html.data[0].group_id).attr('selected','selected');
+          //$('#store_image').html("<img src={{ URL::to('/') }}/images/pic_menu/" + html.data[0].image + " width='70' class='img-thumbnail' />");
+          //$('#store_image').append("<input type='hidden' name='hidden_image' value='"+html.data[0].image+"' />");
+          $('#hidden_id').val(html.data[0].id);
+          $('.modal-title').text("FORM APPROVAL");
+          $('#action_button').val("Edit");
+          $('#action').val("Edit");
+          $('#approve_form').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
     });
 </script>
 @endsection

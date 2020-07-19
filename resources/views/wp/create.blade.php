@@ -153,6 +153,7 @@
                           
                         </div>
                         <br><br>
+                        
                         <div class="row">
                           <div class="col-md-12">
                             <h5 style="padding-bottom:5px;">
@@ -164,67 +165,66 @@
                               <label>ALAT PELINDUNG DIRI <span style="color:red">*</span></label>
                             </div>
                             <div class="col-md-9">
-                              <div class="form-group">
+                            <div class="form-group">
                                 <div class="c-inputs-stacked">
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item21" value="helm">
                                         <label class="custom-control-label" for="item21">Helm</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item22">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item22" value="sepatu_keselamatan">
                                         <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item23">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item23" value="kacamata">
                                         <label class="custom-control-label" for="item23">Kacamata</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item24">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item24" value="earplug">
                                         <label class="custom-control-label" for="item24">Earplug</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item31">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item31" value="earmuff">
                                         <label class="custom-control-label" for="item31">Earmuff</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item32">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item32" value="sarung_tangan_katun">
                                         <label class="custom-control-label" for="item32">Sarung Tangan Katun</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item33">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item33" value="sarung_tangan_karet">
                                         <label class="custom-control-label" for="item33">Sarung Tangan Karet</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item34">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item34" value="sarung_tangan_20kv">
                                         <label class="custom-control-label" for="item34">Sarung Tangan 20KV</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item41">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item41" value="pelampung">
                                         <label class="custom-control-label" for="item41">Pelampung / Life Vest</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item42">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item42" value="tabung_pernafasan">
                                         <label class="custom-control-label" for="item42">Tabung Pernafasan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item43">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item43" value="full_body_harness">
                                         <label class="custom-control-label" for="item43">Full Body Harness</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item44">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item44" value="lain-lain">
                                         <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
                                         <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
                             </div>
                           </div>
                           <div class="row" style="padding-left:15px;">
@@ -232,43 +232,45 @@
                               <label>PERLENGKAPAN KESELAMATAN & DARURAT <span style="color:red">*</span></label>
                             </div>
                             <div class="col-md-9">
-                              <div class="form-group">
+                              
+                            <div class="form-group">
                                 <div class="c-inputs-stacked">
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item01">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item01" value="APAR">
                                         <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item02">
-                                        <label class="custom-control-label" for="item02">LOTO (lock out tag out)</label>
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item02" value="LOTO">
+                                        <label class="custom-control-label" for="item02">LOTO (Lock Out Tag Out)</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item11">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item11" value="Kotak_P3">
                                         <label class="custom-control-label" for="item11">Kotak P3K</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item12">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item12" value="Radio_Telekomunikasi">
                                         <label class="custom-control-label" for="item12">Radio Telekomunikasi</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item1">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item1" value="Rambu_Keselamatan">
                                         <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item4">
-                                        <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item4" value="Lain-lain">
+                                        <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label> 
                                         <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
+
                             </div>
                           </div>
                         </div>
