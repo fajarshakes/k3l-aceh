@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
+
 
 class WpController extends BaseController
 {
@@ -72,11 +74,11 @@ class WpController extends BaseController
     public function list_permohonan(Request $request)
     {
         $sql = "SELECT
-                    wp.* 
+                    wp.*, mu.UNIT_NAME
                 FROM
-                    working_permit wp
+                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
                 WHERE
-                    wp.status = 'NEW'";
+                    wp.status != 'TRASH'";
         $v = DB::select($sql);
             
         return Datatables::of($v)
@@ -173,6 +175,36 @@ class WpController extends BaseController
             ]);
         }
         return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function approve_form(Request $request)
+    {
+        $id_wp = $request->id_wp;
+
+        $update = DB::table('working_permit')
+        ->where('id_wp', $id_wp)
+        ->update([
+            'status'         => 'APPROVAL_3',
+            'tgl_approval3'  => date('Y-m-d'),
+            'user_approval3' =>  Auth::user()->email
+        ]);
+
+        return response()->json(['success' => 'Data Update successfully.']);
+    }
+
+    public function delete_form(Request $request)
+    {
+        $id_wp = $request->id_wp;
+
+        $update = DB::table('working_permit')
+        ->where('id_wp', $id_wp)
+        ->update([
+            'status'         => 'TRASH',
+            'tgl_delete'  => date('Y-m-d'),
+            'user_delete' =>  Auth::user()->email
+        ]);
+
+        return response()->json(['success' => 'Data Update successfully.']);
     }
 
 

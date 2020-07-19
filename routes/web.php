@@ -38,6 +38,8 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
     Route::get('list_permohonan', 'Wp\WpController@list_permohonan')->name('list_permohonan');
     Route::get('get_detail_wp', 'Wp\WpController@get_detail_wp')->name('get_detail_wp');;
+    Route::post('approve_form', 'Wp\WpController@approve_form')->name('approve_form');;
+    Route::post('delete_form', 'Wp\WpController@delete_form')->name('delete_form');;
 
 
 });

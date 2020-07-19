@@ -81,13 +81,13 @@
                       <table id="table-permohonan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
-                              <th>#</th>
-                              <th>Tanggal</th>
-                              <th>Nama Pekerjaan</th>
-                              <th>Unit</th>
-                              <th>Instansi / Perusahaan</th>
-                              <th>Status</th>
-                              <th>Action</th>
+                              <th class="text-center">#</th>
+                              <th class="text-center">TANGGAL</th>
+                              <th class="text-center">NAMA PEKERJAAN</th>
+                              <th class="text-center">UNIT</th>
+                              <th class="text-center">INSTANSI / PERUSAHAAN</th>
+                              <th class="text-center">STATUS</th>
+                              <th class="text-center">ACTION</th>
                             </tr>
                           </thead>
                       </table>
@@ -172,7 +172,7 @@
         aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header bg-info white">
+              <div class="modal-header bg-success white">
                 <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -185,7 +185,7 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label for="companyName">ID WP</label>
-                  <input type="text" id="id_wp" class="form-control" readonly/>
+                  <input type="text" name="id_wp" id="id_wp" class="form-control" readonly/>
                 </div>
                 
                 <div class="form-group">
@@ -197,13 +197,11 @@
                   <label for="companyName">PERUSAHAAN PELAKSANA</label>
                   <input type="text" id="pelaksana" class="form-control" readonly/>
                 </div>
-                
-                <input type="hidden" name="action" id="action" />
               </div>
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Approve</button>
+                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Approve</button>
               </div>
               </form>
             </div>
@@ -282,7 +280,37 @@
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Yes, Delete</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade text-left" id="del_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-danger white">
+                <h4 class="modal-title white" id="myModalLabel11">Confirmation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="form_delete" method="post">
+              @csrf
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="companyName">NAMA PEKERJAAN</label>
+                  <input type="text" id="nama_pekerjaan" class="form-control" readonly/>
+                </div>
+                <h5 class="text-center" style="margin:0;">Are you sure you want to remove this data?</h5>
+                <input type="hidden" name="id_wp" id="idwp" />
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger btn-icon"><i class="la la-check-circle-o"></i> Yes, Delete</button>
               </div>
               </form>
             </div>
@@ -323,7 +351,7 @@ var vtable = $('#table-permohonan').DataTable({
      className: "text-left"
      },
      {
-     data: 'unit',
+     data: 'UNIT_NAME',
      className: "text-center"
      },
      {
@@ -343,7 +371,7 @@ var vtable = $('#table-permohonan').DataTable({
         return `<button onclick="location.href='detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
         <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
         <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve"> <i class="la la-check-circle"></i></button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
       }
       },
      
@@ -419,6 +447,94 @@ $('#form_menu').on('submit', function(event){
 
     });
 
+    $('#form_edit').on('submit', function(event){
+      event.preventDefault();
+
+      $.ajax({
+          url: "{{ url('wp/approve_form') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              $('#form_edit')[0].reset();
+              $('#approve_form').modal('hide');
+              $('#table-permohonan').DataTable().ajax.reload();
+              type_toast = 'success';
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              //toastr.options.onShown = function() { console.log('hello')};
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
+            }
+          }
+        })
+
+    });
+
+    $('#form_delete').on('submit', function(event){
+      event.preventDefault();
+
+      $.ajax({
+          url: "{{ url('wp/delete_form') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              $('#form_delete')[0].reset();
+              $('#del_modal').modal('hide');
+              $('#table-permohonan').DataTable().ajax.reload();
+              type_toast = 'success';
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              //toastr.options.onShown = function() { console.log('hello')};
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
+            }
+          }
+        })
+
+    });
+
     $(document).on('click', '.edit', function(){
       var id = $(this).attr('id');
       $('#form_result').html('');
@@ -431,20 +547,29 @@ $('#form_menu').on('submit', function(event){
           $('#nama').val(html.data[0].detail_pekerjaan);
           $('#pelaksana').val(html.data[0].supervisor);
           $('#id_wp').val(html.data[0].id_wp);
-          $('#pers_no').val(html.data[0].pers_no);
-          //$('#cost_of_sales').val(html.data[0].cost_of_sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "." ));
-          $("#unit_id").val(html.data[0].unit).attr('selected','selected');
-          $('#group_id').val(html.data[0].group_id);
-          $('#jabatan').val(html.data[0].position_desc);
-          $('#group_name').val(html.data[0].GROUP_NAME);
-          $("#user_group").val(html.data[0].group_id).attr('selected','selected');
-          //$('#store_image').html("<img src={{ URL::to('/') }}/images/pic_menu/" + html.data[0].image + " width='70' class='img-thumbnail' />");
-          //$('#store_image').append("<input type='hidden' name='hidden_image' value='"+html.data[0].image+"' />");
-          $('#hidden_id').val(html.data[0].id);
           $('.modal-title').text("FORM APPROVAL");
           $('#action_button').val("Edit");
           $('#action').val("Edit");
           $('#approve_form').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
+    });
+
+    $(document).on('click', '.delete', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('wp/get_detail_wp/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#nama_pekerjaan').val(html.data[0].detail_pekerjaan);
+          $('#idwp').val(html.data[0].id_wp);
+          $('.modal-title').text("DELETION CONFIRMATION");
+          $('#del_modal').modal('show');
         },error: function (jqXhr, textStatus, errorMessage) { // error callback 
 					$('p').append('Error: ' + errorMessage);
 				}
