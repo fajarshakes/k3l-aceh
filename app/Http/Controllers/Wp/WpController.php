@@ -152,7 +152,7 @@ class WpController extends BaseController
             'unit'          => $unit,
             'status'        => 'NEW',
             'tgl_pengajuan' => date('Y-m-d'),
-            //'nama_pekerjaan' => $request->nama_pekerjaan,
+            'nama_pekerjaan' => $request->nama_pekerjaan,
             'pelaksana' => $request->pelaksana,
             'alamat' => $request->alamat,
             'nama_pj' => $request->nama_pj,
@@ -163,7 +163,7 @@ class WpController extends BaseController
             'ul_code' => $request->ulp,
             'manager'       => $request->manager,
             'supervisor'    => $request->supervisor,
-            'pejabat_k3l'   => $request->pejabat
+            'pejabat_k3l'   => $request->pejabat,
         ]);
 
         for($i = 0; $i < count($request['agenda2']); $i++){

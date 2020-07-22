@@ -224,55 +224,55 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item21">
                                         <label class="custom-control-label" for="item21">Helm</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item22">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item22">
                                         <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item23">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item23">
                                         <label class="custom-control-label" for="item23">Kacamata</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item24">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item24">
                                         <label class="custom-control-label" for="item24">Earplug</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item31">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item31">
                                         <label class="custom-control-label" for="item31">Earmuff</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item32">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item32">
                                         <label class="custom-control-label" for="item32">Sarung Tangan Katun</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item33">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item33">
                                         <label class="custom-control-label" for="item33">Sarung Tangan Karet</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item34">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item34">
                                         <label class="custom-control-label" for="item34">Sarung Tangan 20KV</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item41">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item41">
                                         <label class="custom-control-label" for="item41">Pelampung / Life Vest</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item42">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item42">
                                         <label class="custom-control-label" for="item42">Tabung Pernafasan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item43">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item43">
                                         <label class="custom-control-label" for="item43">Full Body Harness</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item44">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item44">
                                         <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
                                         <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
@@ -292,31 +292,31 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item01">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item01">
                                         <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item02">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item02">
                                         <label class="custom-control-label" for="item02">LOTO (lock out tag out)</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item11">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item11">
                                         <label class="custom-control-label" for="item11">Kotak P3K</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item12">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item12">
                                         <label class="custom-control-label" for="item12">Radio Telekomunikasi</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item1">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item1">
                                         <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item4">
+                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item4">
                                         <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
                                         <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
@@ -575,61 +575,61 @@
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item51">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item51">
                               <label class="custom-control-label" for="item51">Pemasangan LBS/Recloser/FDI</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item52">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item52">
                               <label class="custom-control-label" for="item52">Pemasangan Kubikel 20 KV</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item53">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item53">
                               <label class="custom-control-label" for="item53">Pemeliharaan Kubikel</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item54">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item54">
                               <label class="custom-control-label" for="item54">Pengujian Relay Proteksi</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item61">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item61">
                               <label class="custom-control-label" for="item61">Penggantian Relay Proteksi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item62">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item62">
                               <label class="custom-control-label" for="item62">Pemasangan Power Meter</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item63">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item63">
                               <label class="custom-control-label" for="item63">Pemasangan KWH Meter</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item64">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item64">
                               <label class="custom-control-label" for="item64">Pemeliharaan RTU GH/GI</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item71">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item71">
                               <label class="custom-control-label" for="item71">Pemasangan Catu Daya</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item72">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item72">
                               <label class="custom-control-label" for="item72">Pemasangan Radio Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item73">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item73">
                               <label class="custom-control-label" for="item73">Pemeliharaan Radio Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item74">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item74">
                               <label class="custom-control-label" for="item74">Sipil</label>
                             </div>
                           </div>
                           <div class="col-md-12">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="item5">
+                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item5">
                               <label class="custom-control-label" for="item5">Lain-lain (Sebutkan)</label>
                               <textarea name="participants" id="participants3" rows="1" class="form-control"></textarea>
                             </div>
