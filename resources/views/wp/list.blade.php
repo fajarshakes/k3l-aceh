@@ -197,11 +197,27 @@
                   <label for="companyName">PERUSAHAAN PELAKSANA</label>
                   <input type="text" id="pelaksana" class="form-control" readonly/>
                 </div>
+              
+                @if(Auth::user()->group_id != '5')      
+                <div class="form-group">
+                  <label for="projectinput5">STATUS APPROVE </label>
+                  <select id="projectinput5" name="ket_approve" class="form-control">
+                    <option value="none" disabled="">[PILIH STATUS APPROVE]</option>
+                    <option value="APPROVE" selected>APPROVE</option>
+                    <option value="REJECT">REJECT</option>
+                  </select>
+                </div>
+                @else
+                <input type="hidden" name="ket_approve" value="APPROVE">
+                @endif
+
+                <input type="hidden" name="group_id" value="{{ Auth::user()->group_id }}">
+                <input type="hidden" name="user_proses" value="{{ Auth::user()->username }}">
               </div>
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Approve</button>
+                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
               </div>
               </form>
             </div>
@@ -358,11 +374,29 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'pejabat_k3l',
      className: "text-left"
      },
-     {
-     data: 'status',
-     className: "text-left"
-     },
-     {
+     { "data": null,
+        "render": function ( data, type, row ) {
+        var html = ""
+          if ( row.status === 'NEW') {
+            html = `<badge class="badge badge-pill badge-primary"> NEW WP </badge>`
+          } else if  ( row.status === 'APPROVE_2') {
+            html = `<badge class="badge badge-pill badge-primary"> ${full.status} </badge>`
+
+          }
+          return html; 
+                }
+                },
+                
+                {
+      "data": null,
+      "searchable": true,
+      "orderable": true,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        return `<badge class="badge-primary"> ${full.status} </badge>`;
+      }
+      },
+      {
       "data": null,
       "searchable": false,
       "orderable": false,

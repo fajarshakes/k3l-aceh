@@ -181,13 +181,41 @@ class WpController extends BaseController
     {
         $id_wp = $request->id_wp;
 
+        if ($request->group_id == 5){
+            $status = 'APPROVAL_2';
+            $field1 = 'user_approval3';
+            $field2 = 'tgl_approval3';
+        } else if ($request->group_id == 6){
+            $status = 'APPROVAL_1';
+            $field1 = 'user_approval2';
+            $field2 = 'tgl_approval2';
+        } else if ($request->group_id == 4){
+            $status = 'APPROVED';
+            $field1 = 'user_approval3';
+            $field2 = 'tgl_approval3';
+        }
+
+        if ($request->ket_approve == 'APPROVE'){
+
         $update = DB::table('working_permit')
         ->where('id_wp', $id_wp)
         ->update([
-            'status'         => 'APPROVAL_3',
-            'tgl_approval3'  => date('Y-m-d'),
-            'user_approval3' =>  Auth::user()->email
+            'status'   => $status,
+            $field1    => Auth::user()->email,
+            $field2    => date('Y-m-d'),
         ]);
+
+        } else {
+
+        $update = DB::table('working_permit')
+        ->where('id_wp', $id_wp)
+        ->update([
+            'status'        => 'NEW',
+            'user_reject'   => Auth::user()->email,
+            'tgl_reject'    => date('Y-m-d'),
+        ]);
+
+        }
 
         return response()->json(['success' => 'Data Update successfully.']);
     }
