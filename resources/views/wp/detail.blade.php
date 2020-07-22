@@ -5,7 +5,7 @@
 <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-          <h3 class="content-header-title mb-0 d-inline-block">WORKING PERMIT </h3>
+          <h3 class="content-header-title mb-0 d-inline-block">WORKING PERMIT</h3>
           <div class="row breadcrumbs-top d-inline-block">
             <div class="breadcrumb-wrapper col-12">
               <ol class="breadcrumb">
@@ -115,8 +115,14 @@
                   </div>
                 </div>
                 <div class="card-content collapse show">
+                  <div class="col-md-12">
+                      <button name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
+                  </div>
+
                   <div class="card-body">
                     <div class="row">
+                    
+
                     <div class="col-md-12" style="text-align:center;">
                       <h3 style="padding:25px 0 15px 0;">
                         <b>JOB SAFETY ANALYSIS (JSA)</b>

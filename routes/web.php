@@ -40,6 +40,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('get_detail_wp', 'Wp\WpController@get_detail_wp')->name('get_detail_wp');;
     Route::post('approve_form', 'Wp\WpController@approve_form')->name('approve_form');;
     Route::post('delete_form', 'Wp\WpController@delete_form')->name('delete_form');;
+    Route::get('print_jsa', 'Wp\WpController@print_jsa')->name('print_jsa');;
 
 
 });

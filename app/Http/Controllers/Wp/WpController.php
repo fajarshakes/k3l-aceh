@@ -33,8 +33,6 @@ class WpController extends BaseController
     public function dashboard(Request $request)
     {
         return view('wp/dashboard');
-        
-    
     }
 
     public function list(Request $request)
@@ -111,6 +109,7 @@ class WpController extends BaseController
             'getManager'  => $this->UserModel->getUser($unit, 4),
             'getSpv'      => $this->UserModel->getUser($unit, 5),
             'getPj'       => $this->UserModel->getUser($unit, 6),
+            'up_name'     => $this->wpModel->getUnitName($unit),
         ];
         
         return view('wp/create', $data);
@@ -119,7 +118,6 @@ class WpController extends BaseController
 
     public function test(Request $request)
     {   
-        
         $unit = Session::get('sel_unit');
         $year = date('y');
         $new_id = $this->wpModel->generateWpId($unit . $year);
@@ -166,10 +164,10 @@ class WpController extends BaseController
             'pejabat_k3l'   => $request->pejabat,
         ]);
 
-        for($i = 0; $i < count($request['agenda2']); $i++){
+        for($i = 0; $i < count($request['peralatan']); $i++){
             $store = DB::table('peralatan_keselamatan')->insert([
             'id_wp'         => $new_id,
-            'description'   => $request['agenda2'][$i],
+            'description'   => $request['peralatan'][$i],
             ]);
         }
         
@@ -188,7 +186,6 @@ class WpController extends BaseController
     public function approve_form(Request $request)
     {
         $id_wp = $request->id_wp;
-
         if ($request->group_id == 5){
             $status = 'APPROVAL_2';
             $field1 = 'user_approval3';
@@ -243,11 +240,9 @@ class WpController extends BaseController
         return response()->json(['success' => 'Data Update successfully.']);
     }
 
-
-    public function template(Request $request)
+    public function print_jsa(Request $request)
     {
-        return view('wp/template_index');
-        
+        return view('wp/print_jsa');
     }
 
     public function add_template(Request $request)
@@ -255,7 +250,6 @@ class WpController extends BaseController
         $unitData  = $this->wpModel->getUnitType();
         return view('wp/add-template',
         ['unitType' => $unitData]);
-        
     }
    
 }

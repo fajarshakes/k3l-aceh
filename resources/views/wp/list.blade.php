@@ -363,7 +363,7 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'tgl_pengajuan',
      },
      {
-     data: 'detail_pekerjaan',
+     data: 'nama_pekerjaan',
      className: "text-left"
      },
      {
@@ -371,30 +371,24 @@ var vtable = $('#table-permohonan').DataTable({
      className: "text-center"
      },
      {
-     data: 'pejabat_k3l',
+     data: 'pelaksana',
      className: "text-left"
      },
-     { "data": null,
+     { className: "text-center",
+        "data": null,
         "render": function ( data, type, row ) {
         var html = ""
           if ( row.status === 'NEW') {
-            html = `<badge class="badge badge-pill badge-primary"> NEW WP </badge>`
+            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
           } else if  ( row.status === 'APPROVE_2') {
-            html = `<badge class="badge badge-pill badge-primary"> ${full.status} </badge>`
-
+            html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
+          } else if  ( row.status === 'APPROVE_1') {
+            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
+          } else {
+            html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
           }
           return html; 
-                }
-                },
-                
-                {
-      "data": null,
-      "searchable": true,
-      "orderable": true,
-      className: "text-center",
-      "render": function (data, type, full, meta) {
-        return `<badge class="badge-primary"> ${full.status} </badge>`;
-      }
+        }
       },
       {
       "data": null,
@@ -402,9 +396,9 @@ var vtable = $('#table-permohonan').DataTable({
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
+        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
         <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve"> <i class="la la-check-circle"></i></button>
+        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
         <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
       }
       },
@@ -578,8 +572,8 @@ $('#form_menu').on('submit', function(event){
         dataType:"json",
         data:{id:id},
         success: function(html) {
-          $('#nama').val(html.data[0].detail_pekerjaan);
-          $('#pelaksana').val(html.data[0].supervisor);
+          $('#nama').val(html.data[0].nama_pekerjaan);
+          $('#pelaksana').val(html.data[0].pelaksana);
           $('#id_wp').val(html.data[0].id_wp);
           $('.modal-title').text("FORM APPROVAL");
           $('#action_button').val("Edit");
