@@ -94,7 +94,11 @@
                         <br>
                         <hr>
 
-                        <table id="tbl-hirac" style="width:100%" class="table table-striped table-bordered table-hover">
+                        <button type="button" class="tambah_hirarc btn btn-primary">
+												  <i class="fa fa-plus"></i> Tambah
+												</button>
+
+                        <table id="tbl-hirac" style="width:100%" class="table table-striped table-bordered table-hover add-rows">
 								          <thead>
                             <tr>
                               <th rowspan="2" width="1%" style="text-align:center;text-align: center;vertical-align: middle;"><i class="fa fa-trash-o"></i></th>	
@@ -115,6 +119,57 @@
                               <td align="center">Kemungkinan</td>
                             </tr>
                           </thead>
+                          <tbody id="konten_hirarc">
+                            <tr>
+                              <td></td>
+                              <td><input type="text" class="form-control" name="nama_template"></td>
+                              <td><input type="text" class="form-control" name="nama_template"></td>
+                              <td><input type="text" class="form-control" name="nama_template"></td>
+                              <td>
+                                <select class="form-control select2me" name="jenis_template">
+                                <option value="">PILIH</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                               </select>
+                              </td>
+                              <td>
+                                <select class="form-control" name="jenis_template">
+                                <option value="">PILIH</option>
+                                  <option value="A">A</option>
+                                  <option value="B">B</option>
+                                  <option value="C">C</option>
+                                  <option value="D">D</option>
+                                  <option value="E">E</option>
+                               </select>
+                              </td>
+                              <td><input type="text" class="form-control" name="nama_template"></td>
+                              <td>
+                                <select class="form-control" name="jenis_template">
+                                <option value="">PILIH</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                               </select>
+                              </td>
+                              <td>
+                                <select class="form-control" name="jenis_template">
+                                <option value="">PILIH</option>
+                                  <option value="A">A</option>
+                                  <option value="B">B</option>
+                                  <option value="C">C</option>
+                                  <option value="D">D</option>
+                                  <option value="E">E</option>
+                               </select>
+                              </td>
+                              <td><input type="text" class="form-control" name="nama_template"></td>
+                              <td><input type="text" class="form-control" name="nama_template"></td>
+                            </tr>
+                          </tbody>
                         </table>
                         
                       </fieldset>
@@ -153,127 +208,125 @@
                           
                         </div>
                         <br><br>
-                        
-                        <div class="row">
+                        <!-- <div class="row"> -->
                           <div class="col-md-12">
                             <h5 style="padding-bottom:5px;">
                               <b>B. PERALATAN KESELAMATAN</b>
                             </h5>
                           </div>
                           <div class="row" style="padding-left:15px;">
-                            <div class="col-md-3">
-                              <label>ALAT PELINDUNG DIRI <span style="color:red">*</span></label>
+                            <div class="col-md-12" style="padding-bottom:5px;">
+                              <label>ALAT PELINDUNG DIRI (APD) <span style="color:red">*</span></label>
                             </div>
-                            <div class="col-md-9">
-                            <div class="form-group">
+                            <div class="col-md-12">
+                              <div class="form-group">
                                 <div class="c-inputs-stacked">
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item21" value="helm">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
                                         <label class="custom-control-label" for="item21">Helm</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item22" value="sepatu_keselamatan">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item22">
                                         <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item23" value="kacamata">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item23">
                                         <label class="custom-control-label" for="item23">Kacamata</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item24" value="earplug">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item24">
                                         <label class="custom-control-label" for="item24">Earplug</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item31" value="earmuff">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item31">
                                         <label class="custom-control-label" for="item31">Earmuff</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item32" value="sarung_tangan_katun">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item32">
                                         <label class="custom-control-label" for="item32">Sarung Tangan Katun</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item33" value="sarung_tangan_karet">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item33">
                                         <label class="custom-control-label" for="item33">Sarung Tangan Karet</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item34" value="sarung_tangan_20kv">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item34">
                                         <label class="custom-control-label" for="item34">Sarung Tangan 20KV</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item41" value="pelampung">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item41">
                                         <label class="custom-control-label" for="item41">Pelampung / Life Vest</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item42" value="tabung_pernafasan">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item42">
                                         <label class="custom-control-label" for="item42">Tabung Pernafasan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item43" value="full_body_harness">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item43">
                                         <label class="custom-control-label" for="item43">Full Body Harness</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item44" value="lain-lain">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item44">
                                         <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
                                         <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                              </div>
                             </div>
                           </div>
                           <div class="row" style="padding-left:15px;">
-                            <div class="col-md-3">
+                            <div class="col-md-12" style="padding-bottom:5px;">
                               <label>PERLENGKAPAN KESELAMATAN & DARURAT <span style="color:red">*</span></label>
                             </div>
-                            <div class="col-md-9">
-                              
-                            <div class="form-group">
+                            <div class="col-md-12">
+                              <div class="form-group">
                                 <div class="c-inputs-stacked">
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item01" value="APAR">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item01">
                                         <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item02" value="LOTO">
-                                        <label class="custom-control-label" for="item02">LOTO (Lock Out Tag Out)</label>
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item02">
+                                        <label class="custom-control-label" for="item02">LOTO (lock out tag out)</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item11" value="Kotak_P3">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item11">
                                         <label class="custom-control-label" for="item11">Kotak P3K</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item12" value="Radio_Telekomunikasi">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item12">
                                         <label class="custom-control-label" for="item12">Radio Telekomunikasi</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item1" value="Rambu_Keselamatan">
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item1">
                                         <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="agenda2[]" class="custom-control-input" id="item4" value="Lain-lain">
-                                        <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label> 
+                                        <input type="checkbox" name="agenda2" class="custom-control-input" id="item4">
+                                        <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
                                         <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-
                             </div>
                           </div>
-                        </div>
+                        <!-- </div> -->
                         <br><br>
                         <div class="row">
                           <div class="col-md-12">
@@ -313,43 +366,43 @@
                               <input type="text" class="form-control" name="nama_pekerjaan">
                             </div>
                             <div class="form-group">
-                              <label for="eventName2">Dilakukan Oleh <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <label for="eventName2">Pelaksana / Perusahaan<span style="color:red">*</span></label>
+                              <input type="text" class="form-control" name="pelaksana">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Alamat</label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <input type="text" class="form-control" name="alamat">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Nama Penanggung Jawab <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <input type="text" class="form-control" name="nama_pj">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Jabatan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <input type="text" class="form-control" name="jabatan">
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">No Telepon / HP <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <input type="text" class="form-control" name="no_telepon">
                             </div>
                             <div class="form-group">
                               <label>Upload Tanda Tangan</label>
-                              <input type='file' class="form-control">
+                              <input type='file' class="form-control" name="tanda_tangan">
                             </div>
                             <div class="form-group">
                               <div class="c-inputs-stacked">
                                 <div class="row">
                                   <div class="col-md-6">
                                     <div class="d-inline-block custom-control custom-radio">
-                                      <input type="radio" name="status2" class="custom-control-input" id="staffing2">
+                                      <input type="radio" name="status_pegawai" value="eksternal" class="custom-control-input" id="staffing2">
                                       <label class="custom-control-label" for="staffing2">Eksternal</label>
                                     </div>
                                   </div>
                                   <div class="col-md-6">
                                     <div class="d-inline-block custom-control custom-radio">
-                                      <input type="radio" name="status2" class="custom-control-input" id="catering2">
+                                      <input type="radio" name="status_pegawai" value="internal" class="custom-control-input" id="catering2">
                                       <label class="custom-control-label" for="catering2">Internal</label>
                                     </div>
                                   </div>
@@ -362,7 +415,7 @@
                             </div>
                             <div class="form-group">
                               <label for="eventStatus2">UP3 <span style="color:red">*</span></label>
-                              <select class="form-control" id="eventStatus2" name="eventStatus">
+                              <select class="form-control" id="eventStatus2" name="up3">
                                 <option value="Planning">Planning</option>
                                 <option value="In Progress">In Progress</option>
                                 <option value="Finished">Finished</option>
@@ -370,7 +423,7 @@
                             </div>
                             <div class="form-group">
                               <label for="eventStatus2">ULP <span style="color:red">*</span></label>
-                              <select class="form-control" id="eventStatus2" name="eventStatus">
+                              <select class="form-control" id="eventStatus2" name="ulp">
                                 <option value="Planning">Planning</option>
                                 <option value="In Progress">In Progress</option>
                                 <option value="Finished">Finished</option>
@@ -834,6 +887,44 @@ $('#form_menu').on('submit', function(event){
 </script>
 
 <script type="text/javascript">
+$(document).ready(function() {
+
+var nomor = 0;
+var status="";
+
+$(".tambah_hirarc").click(function(){
+  nomor ++;
+  potensi_bahaya = '<select class="form-control select2me paket_harga required" id="id_potensi_bahaya_hirarc+nomor" name="potensi_bahaya_hirarc[]"><option value="" selected="selected">PILIH POTENSI BAHAYA</option><option value="1">Bahaya Fisik (Pencahayaan, Getaran, Kebisingan, Ketinggian dll)</option><option value="2">Bahaya Kimia (Gas, Asap, Uap, Bahan Kimia Berbahaya dll)</option><option value="3">Bahaya Biologi (Micro Biologi(Virus, Bakteri, Jamur, dll); Macro Biologi(Hewan, Serangga, Tumbuhan) dll)</option><option value="4">Bahaya Ergonomi (Stress Fisik (Gerakan Berulang, Ruang Sempit, Menfosir Tenaga) dll)</option><option value="5">Bahaya Mekanis (Titik Jepit, Putaran Pulley atau Roller dll)</option><option value="6">Bahaya Elektris (Kabel terkelupas, Kabel bertegangan tanpa pengaman dll)</option><option value="7">Bahaya Psikososial (Trauma, Intimidasi, Pola promosi jabatan yang salah, Stress Mental (Jenuh/Bosan, Overload) dll)</option><option value="8">Bahaya Tingkah Laku (Tidak patuh terhadap peraturan, overconfident, sok tahu, tidak peduli dll)</option><option value="9">Bahaya Lingkungan Sekitar (Kemiringan permukaan, cuaca yang tidak ramah, permukaan jalan kecil dll)</option></select>';  
+  nilai_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_konsekuensi_hirarc+nomor" name="nilai_konsekuensi_hirarc[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
+  nilai_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_kemungkinan_hirarc+nomor" name="nilai_kemungkinan_hirarc[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';   
+  
+  kendali_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_konsekuensi_hirarc[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
+  kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_kemungkinan_hirarc[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';
+  $('#konten_hirarc').append(
+    '<tr class="baris_hirarc">'
+        +'<td align="center" style="vertical-align:middle;"><button type="button" id="hapus" class="btn hapus_in btn-xs red"><i class="fa fa-trash-o"></i></button></td>'
+        +'<td><input type="input" name="kegiatan_hirarc[]" class="form-control"></td>'
+        +'<td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]" /></td>'
+        +'<td><input type="input" name="resiko_hirarc[]" class="form-control"></td>'
+        +'<td>'+nilai_konsekuensi_hirarc+'</td>'
+        +'<td>'+nilai_kemungkinan_hirarc+'</td>'
+        +'<td><input type="input" name="pengendalian_resiko_hirarc[]" class="form-control"></td>'
+        +'<td>'+kendali_konsekuensi_hirarc+'</td>'
+        +'<td>'+kendali_kemungkinan_hirarc+'</td>'
+        +'<td><input type="input" name="status_pengendalian_hirarc[]" class="form-control"></td>'
+        +'<td><input type="input" name="penanggung_jawab_hirarc[]" class="form-control"></td>'
+        +'</tr>'
+  );
+    
+    $('select.select2me').select2();
+  
+  });
+  
+  $("#hapus").live('click', function () {
+    $(this).parents(".baris_hirarc").hide("fast", function(){ $(this).remove(); });
+  });
+  });
+
 	$(document).ready(function() {
 
     var nomor1 = 0;
