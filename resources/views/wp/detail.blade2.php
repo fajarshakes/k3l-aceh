@@ -53,6 +53,9 @@
                   </div>
                 </div>
                 <div class="card-content collapse show">
+                <div class="col-md-12">
+                      <button onclick="ShowPopup('/wp/print_jsa')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print HIRARC" > <i class="la la-print"></i> PRINT</button>
+                  </div>
                 <form id="form_menu" method="post" enctype="multipart/form-data">
                 @csrf  
                   <div class="card-body">
@@ -122,7 +125,6 @@
                   <div class="card-body">
                     <div class="row">
                     
-
                     <div class="col-md-12" style="text-align:center;">
                       <h3 style="padding:25px 0 15px 0;">
                         <b>JOB SAFETY ANALYSIS (JSA)</b>

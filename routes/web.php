@@ -31,7 +31,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('dashboard', 'Wp\WpController@dashboard')->name('dashboard');
     Route::get('list-permit', 'Wp\WpController@list')->name('list');
     Route::get('create', 'Wp\WpController@create')->name('create');
-    Route::get('template', 'Wp\WpController@template')->name('template');
+    Route::get('template', 'Wp\TemplateController@template')->name('template');
     Route::get('add_template', 'Wp\WpController@add_template')->name('add_template');
     Route::get('detail/{id}', 'Wp\WpController@detail')->name('detail');
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
@@ -41,8 +41,6 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::post('approve_form', 'Wp\WpController@approve_form')->name('approve_form');;
     Route::post('delete_form', 'Wp\WpController@delete_form')->name('delete_form');;
     Route::get('print_jsa', 'Wp\WpController@print_jsa')->name('print_jsa');;
-
-
 });
 
 //SOSIALISASI

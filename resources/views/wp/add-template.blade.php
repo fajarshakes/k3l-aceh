@@ -13,9 +13,9 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">Working Permit</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">List Permit</a>
+                <li class="breadcrumb-item"><a href="#">Template</a>
                 </li>
-                <li class="breadcrumb-item active"> Create
+                <li class="breadcrumb-item active"> Add Template
                 </li>
               </ol>
             </div>
@@ -43,7 +43,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Form wizard with icon tabs</h4>
+                  <h4 class="card-title">TEMPLATE WORKING PERMIT</h4>
                   <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
                   <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -63,7 +63,7 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for="location2">Jenis Template :</label>
+                              <label for="location2">JENIS TEMPLATE :</label>
                               <select class="custom-select form-control" name="jenis_template">
                                 <option value="">Pilih Unit</option>
                                 @foreach($unitType as $type)
@@ -73,91 +73,96 @@
                             </div>
                          
                             <div class="form-group">
-                              <label for="location2">Nama Template :</label>
+                              <label for="location2">NAMA TEMPLATE :</label>
                               <input type="text" class="form-control" name="nama_template">
                             </div>
                         
-                          </div>
+                      
+                            <div class="form-group">
+                              <button type="button" class="tambah_hirarc btn-sm btn btn-primary">
+                                <i class="fa fa-plus"></i> TAMBAH POTENSI BAHAYA
+                              </button>
+                            </div>
+                            </div>
+
+                            <table id="tbl-hirac" style="width:100%" class="table table-striped table-bordered table-hover add-rows">
+                              <thead>
+                                <tr>
+                                  <th rowspan="2" width="1%" style="text-align:center;text-align: center;vertical-align: middle;"><i class="fa fa-trash-o"></i></th>	
+                                  <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="15%">KEGIATAN</th>
+                                  <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">POTENSI BAHAYA</th>
+                                  <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">RESIKO</th>
+                                  <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size: 11px;" width="10%">PENILAIAN RESIKO</th>
+                                  <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="20%">PENGENDALIAN RESIKO</th>
+                                  <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size: 11px;" width="10%">PENGENDALIAN RESIKO</th>
+                                  <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="7%">STATUS PENGENDALIAN</th>
+                                  <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">PENANGGUNG JAWAB</th>
+                                </tr>
+                                <tr>
+                                  <td align="center">Konsekuensi</td>
+                                  <td align="center">Kemungkinan</td>
+
+                                  <td align="center">Konsekuensi</td>
+                                  <td align="center">Kemungkinan</td>
+                                </tr>
+                              </thead>
+                              <tbody id="konten_hirarc">
+                                <tr>
+                                  <td></td>
+                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td>
+                                    <select class="form-control select2me" name="jenis_template">
+                                    <option value="">PILIH</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                  </select>
+                                  </td>
+                                  <td>
+                                    <select class="custom-select form-control" name="jenis_template">
+                                    <option value="">PILIH</option>
+                                      <option value="A">A</option>
+                                      <option value="B">B</option>
+                                      <option value="C">C</option>
+                                      <option value="D">D</option>
+                                      <option value="E">E</option>
+                                  </select>
+                                  </td>
+                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td>
+                                    <select class="custom-select form-control" name="jenis_template">
+                                    <option value="">PILIH</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                  </select>
+                                  </td>
+                                  <td>
+                                    <select class="custom-select form-control" name="jenis_template">
+                                    <option value="">PILIH</option>
+                                      <option value="A">A</option>
+                                      <option value="B">B</option>
+                                      <option value="C">C</option>
+                                      <option value="D">D</option>
+                                      <option value="E">E</option>
+                                  </select>
+                                  </td>
+                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                </tr>
+                              </tbody>
+                            </table>
                         </div>
                         <br>
-                        <hr>
-                        <button type="button" class="tambah_hirarc btn btn-primary">
-												<i class="fa fa-plus"></i> Tambah
-												</button>
+                        
 
-                        <table id="tbl-hirac" style="width:100%" class="table table-striped table-bordered table-hover add-rows">
-								          <thead>
-                            <tr>
-                              <th rowspan="2" width="1%" style="text-align:center;text-align: center;vertical-align: middle;"><i class="fa fa-trash-o"></i></th>	
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="15%">KEGIATAN</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">POTENSI BAHAYA</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">RESIKO</th>
-                              <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size: 11px;" width="10%">PENILAIAN RESIKO</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="20%">PENGENDALIAN RESIKO</th>
-                              <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size: 11px;" width="10%">PENGENDALIAN RESIKO</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="7%">STATUS PENGENDALIAN</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">PENANGGUNG JAWAB</th>
-                            </tr>
-                            <tr>
-                              <td align="center">Konsekuensi</td>
-                              <td align="center">Kemungkinan</td>
-
-                              <td align="center">Konsekuensi</td>
-                              <td align="center">Kemungkinan</td>
-                            </tr>
-                          </thead>
-                          <tbody id="konten_hirarc">
-                            <tr>
-                              <td></td>
-                              <td><input type="text" class="form-control" name="nama_template"></td>
-                              <td><input type="text" class="form-control" name="nama_template"></td>
-                              <td><input type="text" class="form-control" name="nama_template"></td>
-                              <td>
-                                <select class="form-control select2me" name="jenis_template">
-                                <option value="">PILIH</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                               </select>
-                              </td>
-                              <td>
-                                <select class="custom-select form-control" name="jenis_template">
-                                <option value="">PILIH</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                  <option value="D">D</option>
-                                  <option value="E">E</option>
-                               </select>
-                              </td>
-                              <td><input type="text" class="form-control" name="nama_template"></td>
-                              <td>
-                                <select class="custom-select form-control" name="jenis_template">
-                                <option value="">PILIH</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                               </select>
-                              </td>
-                              <td>
-                                <select class="custom-select form-control" name="jenis_template">
-                                <option value="">PILIH</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                  <option value="D">D</option>
-                                  <option value="E">E</option>
-                               </select>
-                              </td>
-                              <td><input type="text" class="form-control" name="nama_template"></td>
-                              <td><input type="text" class="form-control" name="nama_template"></td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        
                         <hr>
                         
                       </fieldset>
@@ -321,120 +326,7 @@
                         </div>
                           
                       </fieldset>
-                      <!-- Step 3 -->
-                      <h6><i class="step-icon la la-recycle"></i>WORKING PERMIT</h6>
-                      <fieldset>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="eventName2">Event Name :</label>
-                              <input type="text" class="form-control" id="eventName2">
-                            </div>
-                            <div class="form-group">
-                              <label for="eventType2">Event Type :</label>
-                              <select class="custom-select form-control" id="eventType2" data-placeholder="Type to search cities"
-                              name="eventType2">
-                                <option value="Banquet">Banquet</option>
-                                <option value="Fund Raiser">Fund Raiser</option>
-                                <option value="Dinner Party">Dinner Party</option>
-                                <option value="Wedding">Wedding</option>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                              <label for="eventLocation2">Event Location :</label>
-                              <select class="custom-select form-control" id="eventLocation2" name="location">
-                                <option value="">Select City</option>
-                                <option value="Amsterdam">Amsterdam</option>
-                                <option value="Berlin">Berlin</option>
-                                <option value="Frankfurt">Frankfurt</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Event Date - Time :</label>
-                              <div class='input-group'>
-                                <input type='text' class="form-control datetime" />
-                                <span class="input-group-addon">
-                                  <span class="ft-calendar"></span>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label for="eventStatus2">Event Status :</label>
-                              <select class="custom-select form-control" id="eventStatus2" name="eventStatus">
-                                <option value="Planning">Planning</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Finished">Finished</option>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                              <label>Requirements :</label>
-                              <div class="c-inputs-stacked">
-                                <div class="d-inline-block custom-control custom-checkbox">
-                                  <input type="checkbox" name="status2" class="custom-control-input" id="staffing2">
-                                  <label class="custom-control-label" for="staffing2">Staffing</label>
-                                </div>
-                                <div class="d-inline-block custom-control custom-checkbox">
-                                  <input type="checkbox" name="status2" class="custom-control-input" id="catering2">
-                                  <label class="custom-control-label" for="catering2">Catering</label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </fieldset>
-                      <!-- Step 4 -->
-                      <h6><i class="step-icon la la-image"></i>Step 4</h6>
-                      <fieldset>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="meetingName2">Name of Meeting :</label>
-                              <input type="text" class="form-control" id="meetingName2">
-                            </div>
-                            <div class="form-group">
-                              <label for="meetingLocation2">Location :</label>
-                              <input type="text" class="form-control" id="meetingLocation2">
-                            </div>
-                            <div class="form-group">
-                              <label for="participants2">Names of Participants</label>
-                              <textarea name="participants" id="participants2" rows="4" class="form-control"></textarea>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="decisions2">Decisions Reached</label>
-                              <textarea name="decisions" id="decisions2" rows="4" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                              <label>Agenda Items :</label>
-                              <div class="c-inputs-stacked">
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                                  <label class="custom-control-label" for="item21">1st item</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" name="agenda2" class="custom-control-input" id="item22">
-                                  <label class="custom-control-label" for="item22">2nd item</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" name="agenda2" class="custom-control-input" id="item23">
-                                  <label class="custom-control-label" for="item23">3rd item</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" name="agenda2" class="custom-control-input" id="item24">
-                                  <label class="custom-control-label" for="item24">4th item</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" name="agenda2" class="custom-control-input" id="item25">
-                                  <label class="custom-control-label" for="item25">5th item</label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </fieldset>
+     
                     </form>
                   </div>
                 </div>
