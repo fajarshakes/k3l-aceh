@@ -436,7 +436,7 @@
                             <div class="form-group">
                               <label>Tanggal pengajuan <span style="color:red">*</span></label>
                               <div class='input-group'>
-                                <input type='date' class="form-control datetime" />
+                                <input type='date' class="form-control datetime" name="tgl_pengajuan"/>
                                 <!-- <span class="input-group-addon">
                                   <span class="ft-calendar"></span>
                                 </span> -->
@@ -444,7 +444,7 @@
                             </div>
                             <div class="form-group">
                               <label for="eventStatus2">Jenis Pekerjaan <span style="color:red">*</span></label>
-                              <select class="form-control" id="eventStatus2" name="eventStatus">
+                              <select class="form-control" id="eventStatus2" name="jenis_pekerjaan">
                                 <option value="Planning">Planning</option>
                                 <option value="In Progress">In Progress</option>
                                 <option value="Finished">Finished</option>
@@ -457,13 +457,13 @@
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="status4" class="custom-control-input" id="staffing4">
+                                    <input type="radio" name="grounding" value="ya" class="custom-control-input" id="staffing4">
                                     <label class="custom-control-label" for="staffing4">Ya</label>
                                   </div>
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="status4" class="custom-control-input" id="catering4">
+                                    <input type="radio" name="grounding" value="tidak" class="custom-control-input" id="catering4">
                                     <label class="custom-control-label" for="catering4">Tidak</label>
                                   </div>
                                 </div>
@@ -473,11 +473,11 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Detail Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <input type="text" class="form-control" name="detail_pekerjaan">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Lokasi Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="eventName2">
+                              <input type="text" class="form-control" name="lokasi_pekerjaan">
                             </div>
                             <div class="form-group">
                               <div class="row">
@@ -486,13 +486,13 @@
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="status5" class="custom-control-input" id="staffing5">
+                                    <input type="radio" name="pemadaman" value="ya" class="custom-control-input" id="staffing5">
                                     <label class="custom-control-label" for="staffing5">Ya</label>
                                   </div>
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="status5" class="custom-control-input" id="catering5">
+                                    <input type="radio" name="pemadaman" value="tidak" class="custom-control-input" id="catering5">
                                     <label class="custom-control-label" for="catering5">Tidak</label>
                                   </div>
                                 </div>
@@ -502,7 +502,7 @@
                           <div class="col-md-12">
                             <div class="form-group">
                               <label>Peralatan Yang Perlu Dipadamkan <span style="color:red">*</span></label>
-                              <input type='text' class="form-control">
+                              <input type='text' class="form-control" name="peralatan_dipadamkan">
                             </div>
                           </div>
                           <div class="col-md-12">
@@ -510,10 +510,10 @@
                               <label>Pengawas Pekerjaan <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control">
+                                  <input type='text' class="form-control" name="pengawas_pekerjaan">
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control" placeholder="No. Telp">
+                                  <input type='text' class="form-control" name="no_pengawas_pekerjaan" placeholder="No. Telp">
                                 </div>
                               </div>
                             </div>
@@ -523,10 +523,10 @@
                               <label>Pengawas K3 <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control">
+                                  <input type='text' class="form-control" name="pengawas_k3l">
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control" placeholder="No. Telp">
+                                  <input type='text' class="form-control" name="no_pengawas_k3" placeholder="No. Telp">
                                 </div>
                               </div>
                             </div>
@@ -542,10 +542,10 @@
                               <label>Tanggal Mulai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' class="form-control datetime" />
+                                  <input type='date' class="form-control datetime" name="tgl_mulai"/>
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='time' class="form-control">
+                                  <input type='time' class="form-control" name="jam_mulai">
                                 </div>
                               </div>
                             </div>
@@ -555,10 +555,10 @@
                               <label>Tanggal Selesai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' class="form-control datetime" />
+                                  <input type='date' class="form-control datetime" name="tgl_selesai"/>
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='time' class="form-control">
+                                  <input type='time' class="form-control" name="jam_selesai">
                                 </div>
                               </div>
                             </div>
@@ -571,55 +571,55 @@
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item51">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan LBS/Recloser/FDI" class="custom-control-input" id="item51">
                               <label class="custom-control-label" for="item51">Pemasangan LBS/Recloser/FDI</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item52">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Kubikel 20 KV" class="custom-control-input" id="item52">
                               <label class="custom-control-label" for="item52">Pemasangan Kubikel 20 KV</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item53">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan Kubikel" class="custom-control-input" id="item53">
                               <label class="custom-control-label" for="item53">Pemeliharaan Kubikel</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item54">
+                              <input type="checkbox" name="klasifikasi[]" value="Pengujian Relay Proteksi" class="custom-control-input" id="item54">
                               <label class="custom-control-label" for="item54">Pengujian Relay Proteksi</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item61">
+                              <input type="checkbox" name="klasifikasi[]" value="Penggantian Relay Proteksi" class="custom-control-input" id="item61">
                               <label class="custom-control-label" for="item61">Penggantian Relay Proteksi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item62">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Power Meter" class="custom-control-input" id="item62">
                               <label class="custom-control-label" for="item62">Pemasangan Power Meter</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item63">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan KWH Meter" class="custom-control-input" id="item63">
                               <label class="custom-control-label" for="item63">Pemasangan KWH Meter</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item64">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan RTU GH/GI" class="custom-control-input" id="item64">
                               <label class="custom-control-label" for="item64">Pemeliharaan RTU GH/GI</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item71">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Catu Daya" class="custom-control-input" id="item71">
                               <label class="custom-control-label" for="item71">Pemasangan Catu Daya</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item72">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Radio Komunikasi" class="custom-control-input" id="item72">
                               <label class="custom-control-label" for="item72">Pemasangan Radio Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item73">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan Radio Komunikasi" class="custom-control-input" id="item73">
                               <label class="custom-control-label" for="item73">Pemeliharaan Radio Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item74">
+                              <input type="checkbox" name="klasifikasi[]" value="Sipil" class="custom-control-input" id="item74">
                               <label class="custom-control-label" for="item74">Sipil</label>
                             </div>
                           </div>
@@ -638,49 +638,49 @@
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm1">
+                              <input type="checkbox" name="prosedur[]" value="Pemasangan dan Penggantian Cubicle 20 KV" class="custom-control-input" id="itm1">
                               <label class="custom-control-label" for="itm1">Pemasangan dan Penggantian Cubicle 20 KV</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm2">
+                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan RTU dan Peripheral" class="custom-control-input" id="itm2">
                               <label class="custom-control-label" for="itm2">Pemeliharaan RTU dan Peripheral</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm3">
+                              <input type="checkbox" name="prosedur[]" value="Perluasan Gardu Hubung 20 KV" class="custom-control-input" id="itm3">
                               <label class="custom-control-label" for="itm3">Perluasan Gardu Hubung 20 KV</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm4">
+                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan Cubicle Gardu Hubung 20 KV" class="custom-control-input" id="itm4">
                               <label class="custom-control-label" for="itm4">Pemeliharaan Cubicle Gardu Hubung 20 KV</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm5">
+                              <input type="checkbox" name="prosedur[]" value="Pengujian Control Scada" class="custom-control-input" id="itm5">
                               <label class="custom-control-label" for="itm5">Pengujian Control Scada</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm6">
+                              <input type="checkbox" name="prosedur[]" value="Pengujian Alat" class="custom-control-input" id="itm6">
                               <label class="custom-control-label" for="itm6">Pengujian Alat</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm7">
+                              <input type="checkbox" name="prosedur[]" value="Pemasangan LBS dan Recloser" class="custom-control-input" id="itm7">
                               <label class="custom-control-label" for="itm7">Pemasangan LBS dan Recloser</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm8">
+                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan Repeater Komunikasi" class="custom-control-input" id="itm8">
                               <label class="custom-control-label" for="itm8">Pemeliharaan Repeater Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm9">
+                              <input type="checkbox" name="prosedur[]" value="Pemasangan Proteksi" class="custom-control-input" id="itm9">
                               <label class="custom-control-label" for="itm9">Pemasangan Proteksi</label>
                             </div>
                           </div>
                           <div class="col-md-12">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="agenda2" class="custom-control-input" id="itm10">
+                              <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm10">
                               <label class="custom-control-label" for="itm10">Lain-lain (Sebutkan)</label>
                               <textarea name="participants" id="participants4" rows="1" class="form-control"></textarea>
                             </div>
@@ -694,33 +694,33 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label>BPJS Kesehatan dan Tenaga Kerja</label>
-                              <input type='file' class="form-control">
+                              <input type='file' name="bpjs" class="form-control">
                             </div>
                             <div class="form-group">
                               <label>Sertifikat Kompetensi Pekerja <span style="color:red">*</span></label>
-                              <input type='file' class="form-control">
+                              <input type='file' name="sertifikat_kompetensi" class="form-control">
                             </div>
                             <div class="form-group">
                               <label>Tenaga Ahli K3 <span style="color:red">*</span></label>
-                              <input type='file' class="form-control">
+                              <input type='file' name="tenaga_ahli_k3" class="form-control">
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
                               <label>Single Line Diagram</label>
-                              <input type='file' class="form-control">
+                              <input type='file' name="single_line_diagram" class="form-control">
                             </div>
                             <div class="form-group">
                               <label>Surat Penunjukan Pengawas dan Pelaksana Pekerjaan <span style="color:red">*</span></label>
-                              <input type='file' class="form-control">
+                              <input type='file' name="surat_penunjukan" class="form-control">
                             </div>
                             <div class="form-group">
                               <label>Daftar Peralatan Kerja dan APD yang Digunakan <span style="color:red">*</span></label>
-                              <input type='file' class="form-control">
+                              <input type='file' name="daftar_peralatan" class="form-control">
                             </div>
                             <div class="form-group">
                               <label>Foto Lokasi Kerja</label>
-                              <input type='file' class="form-control">
+                              <input type='file' name="foto_lokasi_kerja" class="form-control">
                             </div>
                           </div>
                           <b><span style="color:red">*</span> WAJIB DI ISI</b>

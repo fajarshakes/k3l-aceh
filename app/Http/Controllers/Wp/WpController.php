@@ -146,28 +146,63 @@ class WpController extends BaseController
         */
 
         $store = DB::table('working_permit')->insert([
-            'id_wp'         => $new_id,
-            'unit'          => $unit,
-            'status'        => 'NEW',
-            'tgl_pengajuan' => date('Y-m-d'),
-            'nama_pekerjaan' => $request->nama_pekerjaan,
-            'pelaksana' => $request->pelaksana,
-            'alamat' => $request->alamat,
-            'nama_pj' => $request->nama_pj,
-            'jabatan' => $request->jabatan,
-            'no_telepon' => $request->no_telepon,
-            'tanda_tangan' => $request->tanda_tangan,
-            'status_pegawai' => $request->status_pegawai,
-            'ul_code' => $request->ulp,
-            'manager'       => $request->manager,
-            'supervisor'    => $request->supervisor,
-            'pejabat_k3l'   => $request->pejabat,
+            'id_wp'                 => $new_id,
+            'unit'                  => $unit,
+            'status'                => 'NEW',
+            'nama_pekerjaan'        => $request->nama_pekerjaan,
+            'pelaksana'             => $request->pelaksana,
+            'alamat'                => $request->alamat,
+            'nama_pj'               => $request->nama_pj,
+            'jabatan'               => $request->jabatan,
+            'no_telepon'            => $request->no_telepon,
+            'tanda_tangan'          => $request->tanda_tangan,
+            'status_pegawai'        => $request->status_pegawai,
+            'ul_code'               => $request->ulp,
+            'tgl_pengajuan'         => $request->tgl_pengajuan,
+            'jenis_pekerjaan'       => $request->jenis_pekerjaan,
+            'grounding'             => $request->grounding,
+            'detail_pekerjaan'      => $request->detail_pekerjaan,
+            'lokasi_pekerjaan'      => $request->lokasi_pekerjaan,
+            'pemadaman'             => $request->pemadaman,
+            'peralatan_dipadamkan'  => $request->peralatan_dipadamkan,
+            'pengawas_pekerjaan'    => $request->pengawas_pekerjaan,
+            'no_pengawas_pekerjaan' => $request->no_pengawas_pekerjaan,
+            'pengawas_k3l'          => $request->pengawas_k3l,
+            'no_pengawas_k3'        => $request->no_pengawas_k3l,
+            'tgl_mulai'             => $request->tgl_mulai,
+            'tgl_selesai'           => $request->tgl_selesai,
+            'jam_mulai'             => $request->jam_mulai,
+            'jam_selesai'           => $request->jam_selesai,
+            'bpjs'                  => $request->bpjs,
+            'sertifikat_kompetensi' => $request->sertifikat_kompetensi,
+            'tenaga_ahli_k3'        => $request->tenaga_ahli_k3,
+            'single_line_diagram'   => $request->single_line_diagram,
+            'surat_penunjukan'      => $request->surat_penunjukan,
+            'daftar_peralatan'      => $request->daftar_peralatan,
+            'foto_lokasi_kerja'     => $request->foto_lokasi_kerja,
+            'manager'               => $request->manager,
+            'supervisor'            => $request->supervisor,
+            'pejabat_k3l'           => $request->pejabat,
         ]);
 
         for($i = 0; $i < count($request['peralatan']); $i++){
             $store = DB::table('peralatan_keselamatan')->insert([
             'id_wp'         => $new_id,
             'description'   => $request['peralatan'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['klasifikasi']); $i++){
+            $store = DB::table('klasifikasi_pekerjaan')->insert([
+            'id_wp'         => $new_id,
+            'description'   => $request['klasifikasi'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['prosedur']); $i++){
+            $store = DB::table('prosedur_pekerjaan')->insert([
+            'id_wp'         => $new_id,
+            'description'   => $request['prosedur'][$i],
             ]);
         }
         
