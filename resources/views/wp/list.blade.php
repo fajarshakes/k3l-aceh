@@ -376,11 +376,12 @@ var vtable = $('#table-permohonan').DataTable({
      },
      { className: "text-center",
         "data": null,
+        /*
         "render": function ( data, type, row ) {
         var html = ""
           if ( row.status === 'NEW') {
             html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
-          } else if  ( row.status === 'APPROVE_2') {
+          } else if ( row.status === 'APPROVE_2') {
             html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
           } else if  ( row.status === 'APPROVE_1') {
             html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
@@ -389,6 +390,8 @@ var vtable = $('#table-permohonan').DataTable({
           }
           return html; 
         }
+        */
+        data: 'status',
       },
       {
       "data": null,
@@ -402,7 +405,6 @@ var vtable = $('#table-permohonan').DataTable({
         <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
       }
       },
-     
    ]
   });
   vtable.on('draw.dt', function () {

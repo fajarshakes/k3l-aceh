@@ -7,7 +7,7 @@
   <meta name="description" content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
   <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
   <meta name="author" content="Fachrul Razi">
-  <title>Login Page - SPAKAT</title>
+  <title>Login Page - K3L UIW ACEH</title>
   <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
   <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
@@ -53,7 +53,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
                     <!--img src="../../../app-assets/images/logo/logo-dark.png" alt="branding logo"-->
                     <a class="navbar-brand" href="#">
                       <img class="brand-logo" alt="modern admin logo" width="80" src="../../../app-assets/images/logo/logo_.png">
-                      <h3 class="brand-text">SPAKAT</h3>
+                      <h3 class="brand-text">K3L UIW ACEH</h3>
                     </a>
                   </div>
                   
@@ -66,7 +66,6 @@ data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
                   <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" class="form-horizontal" novalidate>
                     @csrf
-                    
                       <fieldset class="form-group position-relative has-icon-left">
                         <input type="text" name="email" class="form-control" id="user-name" placeholder="Your Username"
                         required autocomplete="email" autofocus>
@@ -108,20 +107,8 @@ data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
               })
                         </script>
                   @endif
-                  <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
-                    <span>New to Modern ?</span>
-                  </p>
-                  <div class="card-body">
-                    <a href="{{ route('register') }}" class="btn btn-outline-danger btn-block"><i class="ft-user"></i> Register</a>
-                    <a href="#" class="btn btn-danger">{{ __('Google Sign in') }}</a>
-                  </div>
-                  <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <a href="{{ url('/auth/google') }}" class="btn btn-github"><i class="fa fa-github"></i> Google</a>
-                                <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                                <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                            </div>
-                        </div>
+
+
                 </div>
               </div>
             </div>

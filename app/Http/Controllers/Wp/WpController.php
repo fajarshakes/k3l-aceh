@@ -183,8 +183,26 @@ class WpController extends BaseController
             'manager'               => $request->manager,
             'supervisor'            => $request->supervisor,
             'pejabat_k3l'           => $request->pejabat,
+            'tgl_input'             => $request->tgl_input,
+            'user_input'            => $request->user_input,
         ]);
 
+        for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
+            $store = DB::table('tbl_hirarc')->insert([
+            'id_wp'         => $new_id,
+            'kegiatan'      => $request['kegiatan_hirarc'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko_hirarc'][$i],
+            'penilaian_konsekuensi'   => $request['penilaian_konsekuensi'][$i],
+            'penilaian_kemungkinan'   => $request['penilaian_kemungkinan'][$i],
+            'pengendalian_resiko'       => $request['potensi_bahaya'][$i],
+            'pengendalian_konsekuensi'  => $request['pengendalian_konsekuensi'][$i],
+            'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
+            'status_pengendalian'       => $request['status_pengendalian'][$i],
+            'penanggung_jawab'          => $request['penanggung_jawab'][$i],
+            ]);
+        }
+        
         for($i = 0; $i < count($request['peralatan']); $i++){
             $store = DB::table('peralatan_keselamatan')->insert([
             'id_wp'         => $new_id,
@@ -215,6 +233,7 @@ class WpController extends BaseController
                 'jabatan_pelaksana' => $request['jabatan_pelaksana'][$i],
             ]);
         }
+        
         return response()->json(['success' => 'Data Added successfully.']);
     }
 
