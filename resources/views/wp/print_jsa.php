@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <HTML><HEAD>
-<TITLE>SIPAT PRINT</TITLE>
+<TITLE>PRINT HIRARC</TITLE>
 <style>
 	/* ==== HANYA TAMPIL DI LAYAR TIDAK SAAT DICETAK ==== */
 	@media screen
@@ -24,11 +24,13 @@
 	#header { padding:0px; width:100%; margin:1px auto 1px auto; }
 	#header td {font-size:12px; vertical-align:middle }
 	
-	.tbl1 {text-align:left; width:100%; border:0; border:1px solid black; ; border-bottom:2px solid black}
+	.tbl1 {text-align:left; width:100%; border:1px; border:1px solid black; ; border-bottom:2px solid black}
+	.tbl1_n {width:100%; border:0; border:1px solid black; ; border-bottom:2px solid black}
+	.tbl_sign {text-align:center; width:100%; border:0; border:1px solid black; ; border-bottom:2px solid black}
 	.tbl1 .c1 { border:0; padding:3px 3px 3px 8px; width:130px; border-top:1px solid black}
 	.tbl1 .c2 { border:0; padding:3px; width:20px; text-align:center; border-top:1px solid black }
 	.tbl1 .c3 { border:0; padding:3px 3px 3px 8px; border-top:1px solid black }
-	.tbl1 tr { height:25px }
+	.tbl1 tr { border:1px; height:25px }
 	
 	.tbl2 { width:100%; border:1px solid black }
 	.tbl2 tr { height:22px }
@@ -54,139 +56,109 @@
 		</tr>
 	</table>
 </div>
-<table id="header">
-	<tr>
-		<td width=50><img width="50" src="assets/images/Logo_pln.png" /></td>
-		<td>PT. PLN (PERSERO)<br/>NAMA</td>
-		<td align=right style="padding-right:5px">
-		</td>
-	</tr>
-</table>
-<h1>FORM PENGENDALIAN PROSES PEMBAYARAN</h1>
-<table class=tbl1 cellpadding=0 cellspacing=0 border=1>
+
+<table class=tbl1_n cellpadding=2 cellspacing=2 border=0>
 	<thead>
 		<tr>
-			<td align="center"><h4><strong>SSSS</strong></td>
-			<td align="center"><h4><strong>S</strong></td>
-			<td align="center"><h4><strong>S</strong></td>
-			<td> </td> 
+			<td rowspan="3" class="text-center" width="20%">
+				<img width="60" src="../../../images/app_images/logo_pln.png" />
+			</td>
+			<td rowspan="3" class="text-left" width="20%">
+				<h4>PT PLN (Persero) UNIT INDUK WILAYAH ACEH</h4>
+				<h4>UP3 XXXXXX</h4>
+				<p>JALAN XXXXX</p>
+			</td>
+			<td rowspan="3" class="text-center" width="20%"><h3>PROSEDUR SMK3</h3></td>
+			<td rowspan="2" class="text-center" width="20%">NO DOKUMEN :</td>
+			<td class="text-center" width="20%">HAL :</td>
       </tr>
+	  <tr>
+	  	<td class="text-center">FR.R.R.X.0.0 </td>
+	  </tr>
+	  <tr>
+	  	<td class="text-center">TGL :</td>
+	  	<td class="text-center">ED/REV : 00/00 </td>
+	  </tr>
 	</thead>
 </table>
-</BR>
-<h3>RINCIAN PROGRESS</h3>
-<table class=tbl1 cellpadding=3 cellspacing=0 border=1>
+</br>
+<table class=tbl1 cellpadding=3 cellspacing=0 border=1 style="width: 100%">
+	<tr>
+		<th colspan="12" style="text-align: center;">
+		<h3>
+			<b>HAZARD IDENTIFICATION, RISK ASSESSMENT AND RISK CONTROL (HIRARC)</b>
+		</h3>
+		IDENTIFIKASI BAHAYA, PENILAIAN, DAN PENGENDALIAN RESIKO (IBPPR)
+		</th>
+	</tr>
+	<tr>
+		<th rowspan="2" width="15%" style="text-align: center; vertical-align: middle;">Kegiatan</th>
+		<th rowspan="2" width="15%"  style="text-align: center; vertical-align: middle;">Potensi Bahaya</th>
+		<th rowspan="2" style="text-align: center; vertical-align: middle;">Resiko</th>
+		<th colspan="3" style="text-align: center;">Penilaian Resiko</th>
+		<th rowspan="2" style="text-align: center; vertical-align: middle;">Pengendalian Resiko</th>
+		<th colspan="3" style="text-align: center;">Pengendalian Resiko</th>
+		<th rowspan="2" style="text-align: center; vertical-align: middle;">Status Pengendalian</th>
+		<th rowspan="2" style="text-align: center; vertical-align: middle;">Penanggung Jawab</th>
+	</tr>
+	<tr>
+		<th style="text-align: center;">Konsekuensi</th>
+		<th style="text-align: center;">Kemungkinan</th>
+		<th style="text-align: center;">Tingkat Resiko</th>
+
+		<th style="text-align: center;">Konsekuensi</th>
+		<th style="text-align: center;">Kemungkinan</th>
+		<th style="text-align: center;">Tingkat Resiko</th>
+	</tr>
+	<tbody></tbody>
+</table>
+</br>
+<table class=tbl_sign cellpadding=2 cellspacing=2 border=0>
 	<thead>
 		<tr>
-			<td rowspan="2" align="center"><h4><strong>NO</strong></td>
-			<td rowspan="2" align="center"><h4><strong>PROSES</strong></td>
-			<td colspan="2" align="center"><h4><strong>TERIMA</strong></td>
-			<td colspan="2" align="center"><h4><strong>KIRIM</strong></td>
-		</tr>
-		<tr>
-			<td width="85" align="center"><strong>TANGGAL</strong></td>
-			<td width="85" align="center"><strong>PARAF</strong></td>
-			<td width="85" align="center"><strong>TANGGAL</strong></td>
-			<td width="85" align="center"><strong>PARAF</strong></td>
-		</tr>
+			<td class="text-center" width="20%">
+				<strong>DISETUJUI OLEH :</strong>
+			</td>
+			<td class="text-center" width="20%">
+				<strong>DIPERIKSA OLEH :</strong>
+			</td>
+			<td class="text-center" width="20%">
+				<strong>DISETUJUI OLEH :</strong>
+			</td>
+			<td class="text-center" width="20%">
+				<strong>DISUSUN OLEH :</strong>
+			</td>
+      </tr>
+	  <tr>
+	  	<td>
+			<img width="80" src="../../../images/app_images/qr_code.png" />
+		</td>
+		<td>
+			<img width="80" src="../../../images/app_images/qr_code.png" />
+		</td>
+		<td>
+			<img width="80" src="../../../images/app_images/qr_code.png" />
+		</td>
+		<td>
+			<img width="80" src="../../../images/app_images/qr_code.png" />
+		</td>
+	  </tr>
+	  <tr>
+	  	<td class="text-center"><strong>( NAMA 1 )</strong></td>
+	  	<td class="text-center"><strong>( NAMA 2 )</strong></td>
+	  	<td class="text-center"><strong>( NAMA 3 )</strong></td>
+	  	<td class="text-center"><strong>( NAMA 4 )</strong></td>
+	  </tr>
+	  <tr>
+	  	<td class="text-center"><small>SEBUTAN JABATAN 1</small></td>
+	  	<td class="text-center"><small>SEBUTAN JABATAN 2</small></td>
+	  	<td class="text-center"><small>SEBUTAN JABATAN 3</small></td>
+	  	<td class="text-center"><small>SEBUTAN JABATAN 4</small></td>
+	  </tr>
 	</thead>
-	<tbody>
-	
-	<tr>
-		<td align="center"><strong>1</strong></td>
-		<td align="left"><strong>TERIMA DI BAGIAN ANGGARAN (AGENDA SIPAT)</strong></td>
-		
-	</tr>
-	
-	
-	</tbody>
+</table>
+<P></P>
 
-</table>
-<p></p>
-<h3>RINCIAN PRK - PROGRAM RENCANA KERJA</h3>
-<table class=tbl2 cellpadding=0 cellspacing=0 border=1>
-	<thead>
-		<tr>
-			<td align="center"><h4><strong>NO</strong></td>
-			<td align="center"><h4><strong>PRK</strong></td>
-			<td align="center"><h4><strong>URAIAN</strong></td>
-			<td align="center"><h4><strong>JUMLAH</strong></td>
-		</tr>
-	</thead>
-	<tbody>	
-	<tr>
-		<td align="center">1</td>
-</tr>
-	</tbody>
-</table>
-
-<table class=tbl1 cellpadding=0 cellspacing=0 border=1>
-	<thead>
-		<tr>
-			<td align="center"><h4><strong>NO</strong></td>
-			<td align="center"><h4><strong>PRK</strong></td>
-			<td align="center"><h4><strong>URAIAN</strong></td>
-			<td align="center"><h4><strong>JUMLAH</strong></td>
-		</tr>
-	</thead>
-	<tbody>
-	
-
-	</tbody>
-</table>
-<BR/>
-<table class=tbl1 cellpadding=0 cellspacing=0>
-	<tr>
-		<td class="c1">NOREG / NODIN</td>
-		<td class="c2">:</td>
-	</tr>
-	<tr>
-		<td class="c1">VENDOR</td>
-		<td class="c2">:</td>
-	</tr>
-	<tr>
-		<td class="c1">DOC / MIRO</td>
-		<td class="c2">:</td>
-		<td class="c3"></td>
-	</tr>
-	<tr>
-		<td class="c1">DOC BAYAR</td>
-		<td class="c2">:</td>
-		<td class="c3"></td>
-	</tr>
-	<tr>
-		<td class="c1">FAKTUR PAJAK</td>
-		<td class="c2">:</td>
-		<td border="1" class="c3">ada / tidak ada </td>
-	</tr>
-	<tr>
-		<td class="c1">PPN</td>
-		<td class="c2">:</td>
-		<td border="1" class="c3">pungut / tidak pungut </td>
-	</tr>
-	<tr>
-		<td class="c1">DPP PPH</td>
-		<td class="c2">:</td>
-		<td class="c3"></td>
-	</tr>
-	<tr>
-		<td class="c1">TAX CODE</td>
-		<td class="c2">:</td>
-		<td class="c3"></td>
-	</tr>
-	
-	<tr>
-		<td class="c1">ACCOUNT CODE</td>
-		<td class="c2">:</td>
-		<td class="c3"></td>
-	</tr>
-	<tr>
-		<td class="c1">COST CENTER</td>
-		<td class="c2">:</td>
-		<td class="c3"></td>
-	</tr>
-	
-</table>
 <BR/>
 <div id="footer">
 	Tanggal cetak: <b><?php echo date("d F Y h:i:s"); ?></b> | 

@@ -116,7 +116,7 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="col-md-12">
-                      <button name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
+                      <button onclick="ShowPopup('/wp/print_jsa')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
                   </div>
 
                   <div class="card-body">
@@ -737,5 +737,12 @@ $('#form_menu').on('submit', function(event){
           }
     });
 })
+</script>
+<script type="text/javascript">
+    var popup;
+    function ShowPopup(url) {
+        popup = window.open(url, "Popup", "toolbar=no,scrollbars=yes,location=no,statusbar=no,menubar=no,resizable=0,width=900,height=500,left = 490,top = 262");
+        popup.focus();
+    }
 </script>
 @endsection
