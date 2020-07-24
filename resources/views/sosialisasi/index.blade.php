@@ -60,7 +60,6 @@
                               <th class="text-center">LOKASI</th>
                               <th class="text-center">JUDUL SOSIALISASI</th>
                               <th class="text-center">PIC</th>
-                              <th class="text-center">WAKTU PELAKSANAAN</th>
                               <th class="text-center">ACTION</th>
                             </tr>
                           </thead>
@@ -246,10 +245,6 @@ var vtable = $('#table-permohonan').DataTable({
      {
      data: 'pic_sosialisasi',
      className: "text-left"
-     },
-     {
-     data: 'jam_mulai',
-     className: "text-center"
      },
      {
       data: 'action',

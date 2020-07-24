@@ -375,8 +375,8 @@ var vtable = $('#table-permohonan').DataTable({
      className: "text-left"
      },
      { className: "text-center",
-        "data": null,
-        /*
+        //"data": null,
+        "orderable": false,
         "render": function ( data, type, row ) {
         var html = ""
           if ( row.status === 'NEW') {
@@ -390,8 +390,8 @@ var vtable = $('#table-permohonan').DataTable({
           }
           return html; 
         }
-        */
-        data: 'status',
+
+        //data: 'status',
       },
       {
       "data": null,
