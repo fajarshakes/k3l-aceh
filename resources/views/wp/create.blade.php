@@ -238,45 +238,45 @@
                                         <label class="custom-control-label" for="item23">Kacamata</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item24">
+                                        <input type="checkbox" name="peralatan[]" value="Earplug" class="custom-control-input" id="item24">
                                         <label class="custom-control-label" for="item24">Earplug</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item31">
+                                        <input type="checkbox" name="peralatan[]" value="Earmuff" class="custom-control-input" id="item31">
                                         <label class="custom-control-label" for="item31">Earmuff</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item32">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Katun" class="custom-control-input" id="item32">
                                         <label class="custom-control-label" for="item32">Sarung Tangan Katun</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item33">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Karet" class="custom-control-input" id="item33">
                                         <label class="custom-control-label" for="item33">Sarung Tangan Karet</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item34">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan 20KV" class="custom-control-input" id="item34">
                                         <label class="custom-control-label" for="item34">Sarung Tangan 20KV</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item41">
+                                        <input type="checkbox" name="peralatan[]" value="Pelampung / Life Vest" class="custom-control-input" id="item41">
                                         <label class="custom-control-label" for="item41">Pelampung / Life Vest</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item42">
+                                        <input type="checkbox" name="peralatan[]" value="Tabung Pernafasan" class="custom-control-input" id="item42">
                                         <label class="custom-control-label" for="item42">Tabung Pernafasan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item43">
+                                        <input type="checkbox" name="peralatan[]" value="Full Body Harness" class="custom-control-input" id="item43">
                                         <label class="custom-control-label" for="item43">Full Body Harness</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item44">
-                                        <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
-                                        <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
+                                        <input type="checkbox" class="custom-control-input" id="item44">
+                                        <label class="custom-control-label" name="peralatan[]" for="item44">Lain-lain (Sebutkan)</label>
+                                        <textarea name="participants" name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -294,33 +294,33 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item01">
+                                        <input type="checkbox" name="peralatan[]" value="Pemadam Api (APAR dll)" class="custom-control-input" id="item01">
                                         <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item02">
+                                        <input type="checkbox" name="peralatan[]" value="LOTO (lock out tag out)" class="custom-control-input" id="item02">
                                         <label class="custom-control-label" for="item02">LOTO (lock out tag out)</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item11">
+                                        <input type="checkbox" name="peralatan[]" value="Kotak P3K" class="custom-control-input" id="item11">
                                         <label class="custom-control-label" for="item11">Kotak P3K</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item12">
+                                        <input type="checkbox" name="peralatan[]" value="Radio Telekomunikasi" class="custom-control-input" id="item12">
                                         <label class="custom-control-label" for="item12">Radio Telekomunikasi</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item1">
+                                        <input type="checkbox" name="peralatan[]" value="Rambu Keselamatan" class="custom-control-input" id="item1">
                                         <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item4">
+                                        <input type="checkbox" class="custom-control-input" id="item4">
                                         <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
-                                        <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
+                                        <textarea name="participants" name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -383,21 +383,7 @@
                               <label for="eventName2">Alamat</label>
                               <textarea class="form-control" name="alamat"></textarea>
                             </div>
-                            <div class="form-group">
-                              <label for="eventName2">Nama Penanggung Jawab <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="nama_pj">
-                            </div>
-                            <div class="form-group">
-                              <label for="eventName2">Jabatan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="jabatan">
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="eventName2">No Telepon / HP <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="no_telepon">
-                            </div>
-
+                            
                             <div class="form-group">
                               <div class="c-inputs-stacked">
                                 <div class="row">
@@ -420,16 +406,34 @@
                                 <b>Eksternal</b> = Mitra Kerja dan Pegawai diluar PLN Aceh
                               </p>
                             </div>
+                            
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="eventName2">Nama Penanggung Jawab <span style="color:red">*</span></label>
+                              <input type="text" class="form-control" name="nama_pj">
+                            </div>
+                            <div class="form-group">
+                              <label for="eventName2">Jabatan <span style="color:red">*</span></label>
+                              <input type="text" class="form-control" name="jabatan">
+                            </div>
+                            <div class="form-group">
+                              <label for="eventName2">No Telepon / HP <span style="color:red">*</span></label>
+                              <input type="text" class="form-control" name="no_telepon">
+                            </div>
+
+                            
                             <div class="form-group">
                               <label for="eventStatus2">UP3 <span style="color:red">*</span></label>
                               <input type="text" class="form-control" value="{{ $up_name }}" readonly>
                             </div>
                             <div class="form-group">
                               <label for="eventStatus2">ULP <span style="color:red">*</span></label>
-                              <select class="form-control" id="eventStatus2" name="ulp">
-                                <option value="Planning">Planning</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Finished">Finished</option>
+                              <select class="form-control" id="eventStatus2" name="ulp" required>
+                              <option value=""> PILIH LOKASI PEKERJAAN </option>
+                              @foreach($unit_l3 as $list_l3)
+                                <option value="{{ $list_l3->UL_CODE }}">{{ $list_l3->UL_CODE .' - '. $list_l3->UNIT_NAME }}</option>
+                              @endforeach
                               </select>
                             </div>
                           </div>

@@ -14,7 +14,6 @@ class WpModel extends Model
     protected $table = 'working_permit';
     //public $timestamps = false;
     protected $fillable = ['name', 'group_id', 'updated_at', 'expired_at', 'status'];
-    
 
   // Fetch unit
   public function getUnit(){
@@ -27,13 +26,35 @@ class WpModel extends Model
     return $value;
   }
 
-  public function getUnitName(string $buss_area){
+  public function getUnit_l3(string $buss_area){
+
+    $value=DB::table('master_unit_l3')
+    ->orderBy('UL_CODE', 'asc')
+    ->where('STATUS', '=', '1')
+    ->where('BUSS_AREA', '=', $buss_area)
+    ->get(); 
+
+    return $value;
+  }
+
+  public function XgetUnitName(string $buss_area){
 
     $value=DB::table('master_unit')
     ->select('UNIT_NAME')
     ->where('BUSS_AREA', '=', $buss_area)
     ->where('STATUS', '=', '1')
     ->get(); 
+
+    return $value;
+  }
+
+  public function getUnitName(string $buss_area){
+
+    $value=DB::table('master_unit')
+    ->select('UNIT_NAME')
+    ->where('BUSS_AREA', '=', $buss_area)
+    ->where('STATUS', '=', '1')
+    ->first(); 
 
     return $value;
   }

@@ -68,7 +68,6 @@ class WpController extends BaseController
         return response()->json(['data' => $data]);
     }
 
-
     public function list_permohonan(Request $request)
     {
         $sql = "SELECT
@@ -92,13 +91,26 @@ class WpController extends BaseController
 
     public function submit_form(Request $request)
     {
-    $type    = $request->type;
+    
+    $status    = $request->status;
     $unit    = $request->unit;
 
+    $rules = array(
+        'status'     =>  'required',
+        'unit'       =>  'required',
+    );
+    
+    $error = Validator::make($request->all(), $rules);
+
+    if($error->fails())
+    {
+        return response()->json(['errors' => $error->errors()->all()]);
+    }
+
     Session::put('sel_unit', $unit);
-    Session::put('sel_type', $type);
-    return response()->json(['success' => 'Unit dipilih : '.$unit,
-        'temp_id' => $type]);
+    Session::put('sel_status', $status);
+
+    return response()->json(['success' => 'Unit dipilih : '.$unit.'</br> Status Pekerjaan : '.$status,]);
 
     }
     
@@ -109,7 +121,8 @@ class WpController extends BaseController
             'getManager'  => $this->UserModel->getUser($unit, 4),
             'getSpv'      => $this->UserModel->getUser($unit, 5),
             'getPj'       => $this->UserModel->getUser($unit, 6),
-            'up_name'     => $this->wpModel->getUnitName($unit),
+            'unit_l3'     => $this->wpModel->getUnit_l3($unit),
+            'up_name'     => $this->wpModel->getUnitName($unit)->UNIT_NAME,
         ];
         
         return view('wp/create', $data);
@@ -118,16 +131,20 @@ class WpController extends BaseController
 
     public function test(Request $request)
     {   
-        $unit = Session::get('sel_unit');
+        //$unit = Session::get('sel_unit');
+        $cd_unit = '6116';
         $year = date('y');
-        $new_id = $this->wpModel->generateWpId($unit . $year);
+        //$new_id = $this->wpModel->generateWpId($unit . $year);
+        $unit = $this->wpModel->getUnitName($cd_unit)->UNIT_NAME;
         
-        return response()->json([$new_id]);
+        //return response()->json([$unit->UNIT_NAME]);
+        return response()->json([$unit]);
     }
     
     public function wp_store(Request $request)
     {
         $unit = Session::get('sel_unit');
+        $status = Session::get('sel_status');
         $year = date('y');
         $new_id = $this->wpModel->generateWpId($unit . $year);
         
@@ -185,6 +202,7 @@ class WpController extends BaseController
             'pejabat_k3l'           => $request->pejabat,
             'tgl_input'             => $request->tgl_input,
             'user_input'            => $request->user_input,
+            'wp_desc'               => $status,
         ]);
 
         for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){

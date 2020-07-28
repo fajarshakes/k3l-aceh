@@ -131,31 +131,35 @@
 
               @csrf
               <div class="modal-body">
-              <div class="form-group">
-                  <label for="companyName">PILIH TYPE UNIT</label>
-                  <select name="type" class="custom-select form-control" name="jenis_template">
-                    @foreach($unitType as $type)
-                      <option value="{{ $type->UNIT_TYPE }}">{{ $type->UNIT_TYPE .' - '. $type->TYPE_NAME }}</option>
-                    @endforeach
-                  </select>
-                </div>
+
                 <div class="form-group">
-                  <label for="companyName">PILIH TEMPLATE PEKERJAAN</label>
+                  <label for="companyName">PILIH UNIT</label>
+                    <select name="unit" class="form-control" id="eventStatus2" name="eventStatus">
+                    <option value="" selected disabled>PILIH UNIT</option>
+                    @foreach($unitList as $list)
+                      <option value="{{ $list->BUSS_AREA }}">{{ $list->BUSS_AREA .' - '. $list->UNIT_NAME }}</option>
+                    @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="companyName">PILIH JENIS PEKERJAAN</label>
                     <select name="template" class="form-control" id="eventStatus2" name="eventStatus">
                       <option value="Planning">Planning</option>
                       <option value="In Progress">In Progress</option>
                       <option value="Finished">Finished</option>
                     </select>
                 </div>
+
                 <div class="form-group">
-                  <label for="companyName">PILIH UP3</label>
-                    <select name="unit" class="form-control" id="eventStatus2" name="eventStatus">
-                    @foreach($unitList as $list)
-                      <option value="{{ $list->BUSS_AREA }}">{{ $list->BUSS_AREA .' - '. $list->UNIT_NAME }}</option>
-                    @endforeach
+                  <label for="companyName">PILIH JENIS PEMELIHARAAN</label>
+                    <select name="status" class="form-control" id="eventStatus2" name="eventStatus">
+                      <option value="" selected disabled>PILIH JENIS PEMELIHARAAN</option>
+                      <option value="EMERGNORMALENCY">NORMAL</option>
+                      <option value="EMERGENCY">EMERGENCY</option>
                     </select>
                 </div>
-                
+              
                 <input type="hidden" name="action" id="action" />
               </div>
               
@@ -342,16 +346,11 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#table1').DataTable( {
-        "scrollX": true
-    } );
-} );
-
-$(document).ready(function() {
 
 var vtable = $('#table-permohonan').DataTable({
    processing: true,
    serverSide: true,
+   scrollX: true,
    paging: true,
    order: [[ 2, 'asc' ]],
    ajax:{
@@ -390,8 +389,6 @@ var vtable = $('#table-permohonan').DataTable({
           }
           return html; 
         }
-
-        //data: 'status',
       },
       {
       "data": null,
@@ -403,7 +400,7 @@ var vtable = $('#table-permohonan').DataTable({
         <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
         <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
         <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
-      }
+        }
       },
    ]
   });
@@ -411,7 +408,7 @@ var vtable = $('#table-permohonan').DataTable({
     vtable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
       cell.innerHTML = i + 1;
       });
-      }).draw();
+    }).draw();
  });
 
 
