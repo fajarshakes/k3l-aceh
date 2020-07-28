@@ -216,7 +216,7 @@
                               <b>B. PERALATAN KESELAMATAN</b>
                             </h5>
                           </div>
-                          <div class="row" style="padding-left:15px;">
+                          <!-- <div class="row" style="padding-left:15px;"> -->
                             <div class="col-md-12" style="padding-bottom:5px;">
                               <label>ALAT PELINDUNG DIRI (APD) <span style="color:red">*</span></label>
                             </div>
@@ -283,8 +283,8 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="row" style="padding-left:15px;">
+                          <!-- </div> -->
+                          <!-- <div class="row" style="padding-left:15px;"> -->
                             <div class="col-md-12" style="padding-bottom:5px;">
                               <label>PERLENGKAPAN KESELAMATAN & DARURAT <span style="color:red">*</span></label>
                             </div>
@@ -327,7 +327,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          <!-- </div> -->
                         </div>
                         <!-- </div> -->
                         
