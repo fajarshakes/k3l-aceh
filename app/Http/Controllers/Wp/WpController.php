@@ -155,7 +155,6 @@ class WpController extends BaseController
         );
         
         $error = Validator::make($request->all(), $rules);
-
         if($error->fails())
         {
             return response()->json(['errors' => $error->errors()->all()]);
@@ -218,6 +217,32 @@ class WpController extends BaseController
             'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
             'status_pengendalian'       => $request['status_pengendalian'][$i],
             'penanggung_jawab'          => $request['penanggung_jawab'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
+            $store = DB::table('tbl_hirarc')->insert([
+            'id_wp'         => $new_id,
+            'kegiatan'      => $request['kegiatan_hirarc'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko_hirarc'][$i],
+            'penilaian_konsekuensi'   => $request['penilaian_konsekuensi'][$i],
+            'penilaian_kemungkinan'   => $request['penilaian_kemungkinan'][$i],
+            'pengendalian_resiko'       => $request['potensi_bahaya'][$i],
+            'pengendalian_konsekuensi'  => $request['pengendalian_konsekuensi'][$i],
+            'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
+            'status_pengendalian'       => $request['status_pengendalian'][$i],
+            'penanggung_jawab'          => $request['penanggung_jawab'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['langkah_pekerjaan']); $i++){
+            $store = DB::table('tbl_jsa')->insert([
+            'id_wp'         => $new_id,
+            'langkah_pekerjaan'      => $request['langkah_pekerjaan'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko'][$i],
+            'tindakan'        => $request['tindakan'][$i],
             ]);
         }
         
