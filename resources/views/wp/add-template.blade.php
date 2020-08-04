@@ -56,7 +56,8 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="card-body">
-                    <form action="#" class="icons-tab-steps wizard-circle">
+                    <form id="form_menu" method="post" enctype="multipart/form-data" class="icons-tab-steps-1 wizard-circle">
+                    @csrf
                       <!-- Step 1 -->
                       <h6><i class="step-icon la la-exclamation-triangle"></i> HIRARC </h6>
                       <fieldset>
@@ -109,11 +110,11 @@
                               <tbody id="konten_hirarc">
                                 <tr>
                                   <td></td>
-                                  <td><input type="text" class="form-control" name="nama_template"></td>
-                                  <td><input type="text" class="form-control" name="nama_template"></td>
-                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td><input type="text" class="form-control" name="kegiatan_hirarc[]"></td>
+                                  <td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]"></td>
+                                  <td><input type="text" class="form-control" name="resiko_hirarc[]"></td>
                                   <td>
-                                    <select class="form-control select2me" name="jenis_template">
+                                    <select class="form-control select2me" name="nilai_konsekuensi_hirarc[]">
                                     <option value="">PILIH</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
@@ -123,7 +124,7 @@
                                   </select>
                                   </td>
                                   <td>
-                                    <select class="custom-select form-control" name="jenis_template">
+                                    <select class="custom-select form-control" name="nilai_kemungkinan_hirarc[]">
                                     <option value="">PILIH</option>
                                       <option value="A">A</option>
                                       <option value="B">B</option>
@@ -132,9 +133,9 @@
                                       <option value="E">E</option>
                                   </select>
                                   </td>
-                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td><input type="text" class="form-control" name="pengendalian_resiko_hirarc[]"></td>
                                   <td>
-                                    <select class="custom-select form-control" name="jenis_template">
+                                    <select class="custom-select form-control" name="kendali_konsekuensi_hirarc[]">
                                     <option value="">PILIH</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
@@ -144,7 +145,7 @@
                                   </select>
                                   </td>
                                   <td>
-                                    <select class="custom-select form-control" name="jenis_template">
+                                    <select class="custom-select form-control" name="kendali_kemungkinan_hirarc[]">
                                     <option value="">PILIH</option>
                                       <option value="A">A</option>
                                       <option value="B">B</option>
@@ -153,178 +154,174 @@
                                       <option value="E">E</option>
                                   </select>
                                   </td>
-                                  <td><input type="text" class="form-control" name="nama_template"></td>
-                                  <td><input type="text" class="form-control" name="nama_template"></td>
+                                  <td><input type="text" class="form-control" name="status_pengendalian_hirarc[]"></td>
+                                  <td><input type="text" class="form-control" name="penanggung_jawab_hirarc[]"></td>
                                 </tr>
                               </tbody>
                             </table>
                         </div>
                         <br>
-                        
-
-                        
                         <hr>
-                        
                       </fieldset>
                       <!-- Step 2 -->
                       <h6><i class="step-icon la la-fire-extinguisher"></i>JSA</h6>
                       <fieldset>
                       <h4><i class="step-icon la la-fire-extinguisher"></i> JSA - JOB SAFETY ANALYSIS (JSA)</h4>
                       <hr>
-                      <h5>B. PERALATAN KESELAMATAN</h5>
+                      <h5 style="padding-bottom:5px;">
+                        <b>B. PERALATAN KESELAMATAN</b>
+                      </h5>
+
+                        <div class="row">
+                          <!-- <div class="col-md-12"> -->
+                          <div class="col-md-12" style="padding-bottom:5px;">
+                              <label>ALAT PELINDUNG DIRI (APD) <span style="color:red">*</span></label>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <div class="c-inputs-stacked">
+                                  <div class="row">
+                                    <div class="col-md-4">
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" value="Helm" class="custom-control-input" id="item21">
+                                        <label class="custom-control-label" for="item21">Helm</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" value="Sepatu Keselamatan" class="custom-control-input" id="item22">
+                                        <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" value="Kacamata" class="custom-control-input" id="item23">
+                                        <label class="custom-control-label" for="item23">Kacamata</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item24">
+                                        <label class="custom-control-label" for="item24">Earplug</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item31">
+                                        <label class="custom-control-label" for="item31">Earmuff</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item32">
+                                        <label class="custom-control-label" for="item32">Sarung Tangan Katun</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item33">
+                                        <label class="custom-control-label" for="item33">Sarung Tangan Karet</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item34">
+                                        <label class="custom-control-label" for="item34">Sarung Tangan 20KV</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item41">
+                                        <label class="custom-control-label" for="item41">Pelampung / Life Vest</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item42">
+                                        <label class="custom-control-label" for="item42">Tabung Pernafasan</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item43">
+                                        <label class="custom-control-label" for="item43">Full Body Harness</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item44">
+                                        <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
+                                        <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        <!-- </div> -->
+
+                        <!-- <div class="col-md-12"> -->
+                        <div class="col-md-12" style="padding-bottom:5px;">
+                              <label>PERLENGKAPAN KESELAMATAN & DARURAT <span style="color:red">*</span></label>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <div class="c-inputs-stacked">
+                                  <div class="row">
+                                    <div class="col-md-4">
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item01">
+                                        <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item02">
+                                        <label class="custom-control-label" for="item02">LOTO (lock out tag out)</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item11">
+                                        <label class="custom-control-label" for="item11">Kotak P3K</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item12">
+                                        <label class="custom-control-label" for="item12">Radio Telekomunikasi</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item1">
+                                        <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
+                                      </div>
+                                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                                        <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item4">
+                                        <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
+                                        <textarea name="participants" id="participants2" rows="1" class="form-control"></textarea>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <!-- </div> -->
 
                         <div class="row">
                           <div class="col-md-12">
-                            <div class="form-group">
-                              <label for="proposalTitle2">Alat Pelindung Diri (APD)</label>  
-                            </div>
-
-                            <div class="row skin skin-flat">
-                            <div class="col-md-4 col-sm-12">
-                              <fieldset>
-                                  <input type="checkbox" id="input-11">
-                                  <label for="input-11">Helm</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-12">
-                                  <label for="input-12">Sepatu Keselamatan</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-13">
-                                  <label for="input-13">Kacamata</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-14">
-                                  <label for="input-14">Earplug</label>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <fieldset>
-                                  <input type="checkbox" id="input-21">
-                                  <label for="input-15">Earmuff</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-22">
-                                  <label for="input-22">Sarung Tangan Katun</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-23">
-                                  <label for="input-23">Sarung Tangan Karet</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-24">
-                                  <label for="input-24">Sarung Tangan 20KV</label>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <fieldset>
-                                  <input type="checkbox" id="input-31">
-                                  <label for="input-31">Pelampung / Life Vest</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-32">
-                                  <label for="input-32">Tabung Pernafasan</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-33">
-                                  <label for="input-33">Full Body Harness</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-24">
-                                  <label for="input-24">Lain - Lain</label></br>
-                                  <textarea placeholder="isi"></textarea>
-                                </fieldset>
-                            </div>
-                            </div>
+                            <h5 style="padding-bottom:5px;">
+                              <b>C. ANALISIS KESELAMATAN KERJA</b>
+                            </h5>
+                          </div>
+                          <div class="col-md-12">
+                            <button type="button" class="tambah_analisis btn btn-primary btn-icon">
+												      <i class="la la-plus-circle"></i> Tambah Data
+												    </button>
+                            <p></p>
+                          </div>
+                          <table id="tbl-analisa" class="table display nowrap table-striped table-bordered zero-configuration">
+                            <thead>
+                              <tr>
+                                <th>Langkah Pekerjaan</th>
+                                <th>Potensi Bahaya</th>
+                                <th>Resiko</th>
+                                <th>Tindakan Pengendalian</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody id="konten-analisis">
+                              <tr>
+                                <td><input type="text" class="form-control input-sm" name="langkah_pekerjaan[]"></td>
+                                <td><input type="text" class="form-control input-sm" name="potensi_bahaya[]"></td>
+                                <td><input type="text" class="form-control input-sm" name="resiko[]"></td>
+                                <td><input type="text" class="form-control input-sm" name="tindakan[]"></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                              <label for="proposalTitle2">Perlengkapan Keselamatan & Darurat</label>  
-                            </div>
-
-                            <div class="row skin skin-flat">
-                            <div class="col-md-4 col-sm-12">
-                              <fieldset>
-                                  <input type="checkbox" id="input-101">
-                                  <label for="input-101">Pemadam Api (APAR dll)</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-102">
-                                  <label for="input-102">LOTO (lock out tag out)</label>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <fieldset>
-                                  <input type="checkbox" id="input-201">
-                                  <label for="input-201">Kotak P3K</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-202">
-                                  <label for="input-202">Radio Telekomunikasi</label>
-                                </fieldset>
-
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <fieldset>
-                                  <input type="checkbox" id="input-301">
-                                  <label for="input-301">Rambu Keselamatan</label>
-                                </fieldset>
-
-                                <fieldset>
-                                  <input type="checkbox" id="input-304">
-                                  <label for="input-304">Lain - Lain</label></br>
-                                  <textarea placeholder="isi"></textarea>
-                                </fieldset>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-
-                        <h5>C. ANALISIS KESELAMATAN KERJA</h5>
-                        <div class="row">
-                        <div class="form-group">
-															<div class="col-sm-12">
-																<button type="button" class="tambah_jsa btn btn-primary">
-																	<i class="fa fa-plus"></i> Tambah
-																</button>
-
-																<table style="width:100%" class="table table-striped table-bordered table-hover">
-								                                    <thead>
-								                                      <tr>
-								                                      	<th width="1%" style="text-align:center;"><i class="fa fa-trash-o"></i></th>	
-								                                        <th style="font-size: 11px;" width="25%">LANGKAH PEKERJAAN</th>
-								                                        <th style="font-size: 11px;" width="25%">POTENSI BAHAYA</th>
-								                                        <th style="font-size: 11px;" width="25%">RESIKO</th>
-								                                        <th style="font-size: 11px;" width="25%">TINDAKAN PENGENDALIAN</th>
-								                                        
-								                                      </tr>
-								                                    </thead>
-								                                    <tbody id="konten_jsa">
-								                                    	<tr>
-								                                    		<td></td>
-								                                    		<td><input type="text" class="form-control" name="langkah_pekerjaan_jsa[]"></td>
-								                                    		<td><input type="text" class="form-control" name="potensi_bahaya_jsa[]"></td>
-								                                    		<td><input type="text" class="form-control" name="resiko_jsa[]"></td>
-								                                    		<td><input type="text" class="form-control" name="tindakan_pengendalian_jsa[]"></td>
-								                                    	</tr>
-								                                    </tbody>
-								                                </table>
-															</div>
-														</div>
-                        </div>
-                          
+                        <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
                       </fieldset>
      
                     </form>
@@ -623,7 +620,65 @@ $(document).ready(function() {
         "paging": false,
     } );
 } );
+
+$(document).ready(function() {
+    $('#tbl-analisa').DataTable( {
+        "scrollX": false,
+        "searching": false,
+        "info": false,
+        "paging": false,
+    } );
+} );
 </script>
+
+<script type="text/javascript">
+$('#form_menu').on('submit', function(event){
+      event.preventDefault();
+      
+      $.ajax({
+          url:"{{ route('template_store') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          beforeSend: function(){
+            $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+          },
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              type_toast = 'success';
+              $('#form_menu')[0].reset();
+              setTimeout(function() {
+                window.location.href = '/wp/template/';
+              }, 1000);
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            }
+          }
+    });
+})
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 

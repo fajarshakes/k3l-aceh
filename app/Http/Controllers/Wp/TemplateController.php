@@ -122,64 +122,6 @@ class TemplateController extends BaseController
         
         return response()->json([$new_id]);
     }
-    
-    public function wp_store(Request $request)
-    {
-        $unit = Session::get('sel_unit');
-        $year = date('y');
-        $new_id = $this->wpModel->generateWpId($unit . $year);
-        
-        /*
-        $rules = array(
-            'cname'         =>  'required',
-            'cstatus'       =>  'required',
-        );
-        
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }xw
-        */
-
-        $store = DB::table('working_permit')->insert([
-            'id_wp'         => $new_id,
-            'unit'          => $unit,
-            'status'        => 'NEW',
-            'tgl_pengajuan' => date('Y-m-d'),
-            'nama_pekerjaan' => $request->nama_pekerjaan,
-            'pelaksana' => $request->pelaksana,
-            'alamat' => $request->alamat,
-            'nama_pj' => $request->nama_pj,
-            'jabatan' => $request->jabatan,
-            'no_telepon' => $request->no_telepon,
-            'tanda_tangan' => $request->tanda_tangan,
-            'status_pegawai' => $request->status_pegawai,
-            'ul_code' => $request->ulp,
-            'manager'       => $request->manager,
-            'supervisor'    => $request->supervisor,
-            'pejabat_k3l'   => $request->pejabat,
-        ]);
-
-        for($i = 0; $i < count($request['peralatan']); $i++){
-            $store = DB::table('peralatan_keselamatan')->insert([
-            'id_wp'         => $new_id,
-            'description'   => $request['peralatan'][$i],
-            ]);
-        }
-        
-        // $periode = explode(' ', $request['periode']);
-        for($i = 0; $i < count($request['nama_pelaksana']); $i++){
-            $store = DB::table('pelaksana_pekerjaan')->insert([
-                'id_wp' => $new_id,
-                'nama_pelaksana' => $request['nama_pelaksana'][$i],
-                'personal_no' => $request['nip_pelaksana'][$i],
-                'jabatan_pelaksana' => $request['jabatan_pelaksana'][$i],
-            ]);
-        }
-        return response()->json(['success' => 'Data Added successfully.']);
-    }
 
     public function approve_form(Request $request)
     {
@@ -243,11 +185,58 @@ class TemplateController extends BaseController
         return view('wp/template_index');
     }
 
-    public function add_template(Request $request)
+    public function template_store(Request $request)
     {
-        $unitData  = $this->wpModel->getUnitType();
-        return view('wp/add-template',
-        ['unitType' => $unitData]);
+        $unit = Session::get('sel_unit');
+        $status = Session::get('sel_status');
+        $year = date('y');
+        $new_id = $this->wpModel->generateWpId($unit . $year);
+        
+        // $unitData  = $this->wpModel->getUnitType();
+        // return view('wp/add-template',
+        // ['unitType' => $unitData]);
+
+        $store = DB::table('work_permit_template')->insert([
+            'id_wp'         => $new_id,
+            'unit'          => $unit,
+            'jenis_template' => $request->jenis_template,
+            'nama_template' => $request->nama_template,
+        ]);
+
+        for($i = 0; $i < count($request['peralatan']); $i++){
+            $store = DB::table('peralatan_keselamatan')->insert([
+            'id_wp'         => $new_id,
+            'description'   => $request['peralatan'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
+            $store = DB::table('tbl_hirarc')->insert([
+            'id_wp'         => $new_id,
+            'kegiatan'      => $request['kegiatan_hirarc'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko_hirarc'][$i],
+            'penilaian_konsekuensi'   => $request['penilaian_konsekuensi'][$i],
+            'penilaian_kemungkinan'   => $request['penilaian_kemungkinan'][$i],
+            'pengendalian_resiko'       => $request['potensi_bahaya'][$i],
+            'pengendalian_konsekuensi'  => $request['pengendalian_konsekuensi'][$i],
+            'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
+            'status_pengendalian'       => $request['status_pengendalian'][$i],
+            'penanggung_jawab'          => $request['penanggung_jawab'][$i],
+            ]);
+        }
+        
+        for($i = 0; $i < count($request['langkah_pekerjaan']); $i++){
+            $store = DB::table('tbl_jsa')->insert([
+            'id_wp'         => $new_id,
+            'langkah_pekerjaan'      => $request['langkah_pekerjaan'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko'][$i],
+            'tindakan'        => $request['tindakan'][$i],
+            ]);
+        }
+        
+        return response()->json(['success' => 'Data Added successfully.']);
     }
    
 }

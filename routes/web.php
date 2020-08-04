@@ -33,6 +33,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('create', 'Wp\WpController@create')->name('create');
     Route::get('template', 'Wp\TemplateController@template')->name('template');
     Route::get('add_template', 'Wp\WpController@add_template')->name('add_template');
+    Route::post('template_store', 'Wp\TemplateController@template_store')->name('template_store');
     Route::get('detail/{id}', 'Wp\WpController@detail')->name('detail');
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
