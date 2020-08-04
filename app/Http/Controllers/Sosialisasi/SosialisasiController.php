@@ -114,9 +114,21 @@ class SosialisasiController extends BaseController
             'jam_selesai'   => $request->jam_selesai,
             'latitude'      => $request->latitude,
             'longitude'     => $request->longitude,
+            'photo'         => $request->photo,
             'user_input'    => Auth::user()->username,
             'tgl_input'     => date('Y-m-d'),
         ]);
+
+        $file = $request->file('photo');
+        
+        $nama_file = $file->getClientOriginalName();
+   
+        $extension = $file->getClientOriginalExtension();
+  
+        $ukuran_file = $file->getSize();
+   
+        $destinationPath = 'images';
+        $file->move($destinationPath,$file->getClientOriginalName());
 
         return response()->json(['success' => 'Data Added successfully.']);
         }
