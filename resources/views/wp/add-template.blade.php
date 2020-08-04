@@ -78,7 +78,6 @@
                               <input type="text" class="form-control" name="nama_template">
                             </div>
                         
-                      
                             <div class="form-group">
                               <button type="button" class="tambah_hirarc btn-sm btn btn-primary">
                                 <i class="fa fa-plus"></i> TAMBAH POTENSI BAHAYA
