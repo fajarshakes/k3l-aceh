@@ -102,6 +102,13 @@ class SosialisasiController extends BaseController
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
+        $destinationPath = 'images';
+        $photo = $request->file('photo');
+        $nama_photo = time()."_".$photo->getClientOriginalName();
+        $photo->move($destinationPath,$nama_photo);
+
+        $photo = $destinationPath."/".$nama_photo;
+   
         $store = DB::table('peta_sosialisasi')->insert([
             'unit'          => Auth::user()->unit,
             'lokasi'        => $request->lokasi,
@@ -118,17 +125,6 @@ class SosialisasiController extends BaseController
             'user_input'    => Auth::user()->username,
             'tgl_input'     => date('Y-m-d'),
         ]);
-
-        $file = $request->file('photo');
-        
-        $nama_file = $file->getClientOriginalName();
-   
-        $extension = $file->getClientOriginalExtension();
-  
-        $ukuran_file = $file->getSize();
-   
-        $destinationPath = 'images';
-        $file->move($destinationPath,$file->getClientOriginalName());
 
         return response()->json(['success' => 'Data Added successfully.']);
         }
