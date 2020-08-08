@@ -55,6 +55,22 @@ Route::prefix('sosialisasi')->group(function() {
 
 });
 
+//APAR
+Route::prefix('apar')->group(function() {
+    Route::get('test', 'Apar\AparController@test')->name('test');
+    
+    Route::get('', 'Apar\AparController@index')->name('index');
+    Route::get('add', 'Apar\AparController@add')->name('add');
+    Route::post('add_store', 'Apar\AparController@add_store')->name('add_store');
+    Route::get('master', 'Apar\AparController@master')->name('master');
+    Route::get('list_index_apar', 'Apar\AparController@list_index_apar')->name('list_index_apar');
+    Route::post('apar_add_gedung', 'Apar\AparController@apar_add_gedung')->name('apar_add_gedung');
+    Route::post('apar_add_lantai', 'Apar\AparController@apar_add_lantai')->name('apar_add_lantai');
+    Route::get('list_master_gedung', 'Apar\AparController@list_master_gedung')->name('list_master_gedung');
+    Route::get('list_master_lantai', 'Apar\AparController@list_master_lantai')->name('list_master_lantai');
+    Route::get('getLantaiByGedung/{id}', 'Apar\AparController@getLantaiByGedung')->name('getLantaiByGedung');;
+});
+
 //REPORT
 Route::prefix('report')->group(function() {
     Route::get('unit', 'Report\ReportController@unit')->name('unit');
@@ -84,4 +100,10 @@ Route::prefix('master')->group(function() {
     Route::get('get_group/{id}', 'Master\UserController@getGroupUser')->name('get_group');;
 
 
+});
+
+Route::get('qrcode', function () {
+    return QrCode::size(250)
+        ->backgroundColor(255, 255, 204)
+        ->generate('MyNotePaper');
 });

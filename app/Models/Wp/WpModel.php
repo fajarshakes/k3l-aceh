@@ -81,12 +81,38 @@ class WpModel extends Model
     return $value;
   }
   
-  public static function getCategory(){
+  public static function getDetailWp(string $id_wp){
 
-    $value=DB::table('menu_category')
-    ->orderBy('id', 'asc')
-    ->where('cat_status', '=', '1')
-    ->get(); 
+    $value=DB::table('working_permit')
+    ->where('id_wp', '=', $id_wp)
+    ->first();
+
+    return $value;
+  }
+
+  public static function getPelaksanaKerja(string $id_wp){
+
+    $value=DB::table('pelaksana_pekerjaan')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+
+    return $value;
+  }
+
+  public static function getHirarc(string $id_wp){
+
+    $value=DB::table('tbl_hirarc')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+
+    return $value;
+  }
+
+  public static function getJsa(string $id_wp){
+
+    $value=DB::table('tbl_jsa')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
 
     return $value;
   }

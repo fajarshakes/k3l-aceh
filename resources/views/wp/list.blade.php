@@ -155,7 +155,7 @@
                   <label for="companyName">PILIH JENIS PEMELIHARAAN</label>
                     <select name="status" class="form-control" id="eventStatus2" name="eventStatus">
                       <option value="" selected disabled>PILIH JENIS PEMELIHARAAN</option>
-                      <option value="EMERGNORMALENCY">NORMAL</option>
+                      <option value="NORMAL">NORMAL</option>
                       <option value="EMERGENCY">EMERGENCY</option>
                     </select>
                 </div>

@@ -62,7 +62,9 @@
                     <div class="row">
                       <div class="col-xl-12 col-lg-12">
                       
-                      <table id="tbl_hazard" class="table table-striped table-bordered table-hover add-rows" style="width: 80%">
+                      <!--table id="tbl_hazard" class="table table-striped table-bordered table-hover add-rows" style="width: 80%"-->
+                      <table id="tbl_hirarc" style="width:100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                        <thead>
                         <tr>
                           <th colspan="12" style="text-align: center;">
                             <h3>
@@ -72,8 +74,8 @@
                           </th>
                         </tr>
                         <tr>
-                          <th rowspan="2" width="15%" style="text-align: center; vertical-align: middle;">Kegiatan</th>
-                          <th rowspan="2" width="15%"  style="text-align: center; vertical-align: middle;">Potensi Bahaya</th>
+                          <th rowspan="2" style="text-align: center; vertical-align: middle;">Kegiatan</th>
+                          <th rowspan="2" style="text-align: center; vertical-align: middle;">Potensi Bahaya</th>
                           <th rowspan="2" style="text-align: center; vertical-align: middle;">Resiko</th>
                           <th colspan="3" style="text-align: center;">Penilaian Resiko</th>
                           <th rowspan="2" style="text-align: center; vertical-align: middle;">Pengendalian Resiko</th>
@@ -81,16 +83,34 @@
                           <th rowspan="2" style="text-align: center; vertical-align: middle;">Status Pengendalian</th>
                           <th rowspan="2" style="text-align: center; vertical-align: middle;">Penanggung Jawab</th>
                         </tr>
-                        <tr>
-                          <th style="text-align: center;">Konsekuensi</th>
-                          <th style="text-align: center;">Kemungkinan</th>
-                          <th style="text-align: center;">Tingkat Resiko</th>
-
-                          <th style="text-align: center;">Konsekuensi</th>
-                          <th style="text-align: center;">Kemungkinan</th>
-                          <th style="text-align: center;">Tingkat Resiko</th>
-                        </tr>
+                          <tr>
+                            <td class="text-center">Konsekuensi</td>
+                            <td class="text-center">Kemungkinan</td>
+                            <td class="text-center">Tingkat</td>
+                          
+                            <td class="text-center">Konsekuensi</td>
+                            <td class="text-center">Kemungkinan</td>
+                            <td class="text-center">Tingkat</td>
+                          </tr>
+                          </thead>
 										    <tbody>
+                        @foreach($tbl_hirarc as $row_data)
+                        <tr>
+                          <td>{{ $row_data->kegiatan }}</td>
+                          <td>{{ $row_data->potensi_bahaya }}</td>
+                          <td>{{ $row_data->resiko }}</td>
+                          <td>{{ $row_data->penilaian_konsekuensi }}</td>
+                          <td>{{ $row_data->penilaian_kemungkinan }}</td>
+                          <td></td>
+                          <td>{{ $row_data->pengendalian_resiko }}</td>
+                          <td>{{ $row_data->pengendalian_konsekuensi }}</td>
+                          <td>{{ $row_data->pengendalian_kemungkinan }}</td>
+                          <td></td>
+                          <td>{{ $row_data->status_pengendalian }}</td>
+                          <td>{{ $row_data->penanggung_jawab }}</td>
+
+                        </tr>
+                        @endforeach
                         </tbody>
 									    </table>
                       </div>
@@ -145,7 +165,7 @@
                         <td width="2%">1</td>
                         <td>Tanggal</td>
                         <td width="1%">:</td>
-                        <td colspan="3">20-20-2020</td>
+                        <td colspan="3">{{ $detailWp->tgl_mulai }}</td>
                       </tr>
                       <tr>
                         <td>2</td>
@@ -157,19 +177,19 @@
                         <td>3</td>
                         <td>Lokasi</td>
                         <td>:</td>
-                        <td colspan="3">LOKASI</td>
+                        <td colspan="3">{{ $detailWp->lokasi_pekerjaan }}</td>
                       </tr>
                       <tr>
                         <td>4</td>
                         <td>Perusahaan Pelaksana</td>
                         <td>:</td>
-                        <td colspan="3">LOKASI</td>
+                        <td colspan="3">{{ $detailWp->pelaksana }}</td>
                       </tr>
                       <tr>
                         <td>5</td>
                         <td>Pengawas Pekerjaan</td>
                         <td>:</td>
-                        <td colspan="3">LOKASI</td>
+                        <td colspan="3">{{ $detailWp->pengawas_pekerjaan }}</td>
                       </tr>
                       <tr>
                         <td>6</td>
@@ -179,16 +199,13 @@
                         <td>NIP / NIK</td>
                       </tr>
                       <tbody>
-                      <tr>
-                        <td colspan="3"></td>
-                        <td>Fachrul</td>
-                        <td>000000</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3"></td>
-                        <td>Fachrul</td>
-                        <td>000000</td>
-                      </tr>
+                      @foreach($pelaksana_kerja as $pelaksana)
+                        <tr>
+                          <td colspan="3"></td>
+                          <td>{{ $pelaksana->nama_pelaksana }}</td>
+                          <td>{{ $pelaksana->personal_no }}</td>
+                        </tr>
+                      @endforeach
                       </tbody>
                       </table>
                     </div>
@@ -337,7 +354,7 @@
                       </h5>
                     </div>
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                         <thead>
                           <tr>
                             <th>NO</th>
@@ -348,9 +365,16 @@
                           </tr>
                         </thead>
                         <tbody>
+                        @php $no = 1; @endphp
+                        @foreach($tbl_jsa as $row_jsa)
                           <tr>
-                            <td>s</td>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $row_jsa->langkah_pekerjaan }}</td>
+                            <td>{{ $row_jsa->potensi_bahaya }}</td>
+                            <td>{{ $row_jsa->resiko }}</td>
+                            <td>{{ $row_jsa->tindakan }}</td>
                           </tr>
+                        @endforeach
                         </tbody>
                       
                       </table>
@@ -395,43 +419,43 @@
                       </tr>
                       <tr>
                         <td>1. Tanggal Pengajuan</td>
-                        <td colspan="3">: 20-20-2020</td>
+                        <td colspan="3">: {{ $detailWp->tgl_pengajuan }}</td>
                       </tr>
                       <tr>
                         <td>2. Jenis Pekerjaan</td>
-                        <td colspan="3">: 20-20-2020</td>
+                        <td colspan="3">: {{ $detailWp->jenis_pekerjaan }}</td>
                       </tr>
                       <tr>
                         <td>3. Detail Pekerjaan</td>
-                        <td colspan="3">: 20-20-2020</td>
+                        <td colspan="3">: {{ $detailWp->detail_pekerjaan }}</td>
                       </tr>
                       <tr>
                         <td>4. Lokasi Pekerjaan</td>
-                        <td colspan="3">: 20-20-2020</td>
+                        <td colspan="3">: {{ $detailWp->lokasi_pekerjaan }}</td>
                       </tr>
                       <tr>
                         <td>5. Perlu Pemadaman</td>
-                        <td colspan="3">: 20-20-2020</td>
+                        <td colspan="3">: {{ $detailWp->pemadaman }}</td>
                       </tr>
                       <tr>
                         <td>6. Perlu Grounding</td>
-                        <td colspan="3">: 20-20-2020</td>
+                        <td colspan="3">: {{ $detailWp->grounding }}</td>
                       </tr>
                       <tr>
                         <td>7. Peralatan yang perlu dipadamkan</td>
-                        <td colspan="3">: 20-20-2020</td>
+                        <td colspan="3">: {{ $detailWp->peralatan_dipadamkan }}</td>
                       </tr>
                       <tr>
                         <td>8. Pengawas Pekerjaan</td>
-                        <td>: 20-20-2020</td>
+                        <td>: {{ $detailWp->pengawas_pekerjaan }}</td>
                         <td>No Telp</td>
-                        <td>_62</td>
+                        <td>{{ $detailWp->no_pengawas_pekerjaan }}</td>
                       </tr>
                       <tr>
                         <td>9. Pengawas K3L</td>
-                        <td>: 20-20-2020</td>
+                        <td>: {{ $detailWp->pengawas_k3l }}</td>
                         <td>No Telp</td>
-                        <td>_62</td>
+                        <td>{{ $detailWp->no_pengawas_k3 }}</td>
                       </tr>
                       </table>
                     </div>
@@ -444,15 +468,15 @@
                       <tr>
                         <td rowspan="2">Durasi Kerja</td>
                         <td>Tanggal Mulai : </td>
-                        <td>15-06-2020</td>
+                        <td>{{ $detailWp->tgl_mulai }}</td>
                         <td>Jam Mulai : </td>
-                        <td>08:00</td>
+                        <td>{{ $detailWp->jam_mulai }}</td>
                       </tr>
                       <tr>
-                        <td>Tanggal Mulai : </td>
-                        <td>15-06-2020</td>
-                        <td>Jam Mulai : </td>
-                        <td>08:00</td>
+                        <td>Tanggal Selesai : </td>
+                        <td>{{ $detailWp->tgl_selesai }}</td>
+                        <td>Jam Selesai : </td>
+                        <td>{{ $detailWp->jam_selesai }}</td>
                       </tr>
                       </table>
                     </div>
@@ -685,14 +709,15 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#tbl_hazard').DataTable( {
-        "scrollX": true,
+    $('#tbl_hirarc').DataTable( {
+        scrollX: true,"scrollX": true,
         "searching": false,
         "info": false,
         "paging": false,
     } );
 } );
 </script>
+
 <script type="text/javascript">
 $('#form_menu').on('submit', function(event){
       event.preventDefault();
@@ -747,4 +772,5 @@ $('#form_menu').on('submit', function(event){
         popup.focus();
     }
 </script>
+
 @endsection

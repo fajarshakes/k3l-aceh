@@ -51,4 +51,20 @@ class Common {
         return $newId;
     }
 
+    static function generateId2Digit($prefixJenis, $noUrut){
+
+        $newNoUrut = $noUrut + 1;
+        $newId = $prefixJenis . sprintf("%02s", $newNoUrut);
+
+        return $newId;
+    }
+
+    static function generateId4Digit($prefixJenis, $noUrut){
+
+        $newNoUrut = $noUrut + 1;
+        $newId = $prefixJenis . sprintf("%04s", $newNoUrut);
+
+        return $newId;
+    }
+
 }

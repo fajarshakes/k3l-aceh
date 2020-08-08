@@ -46,14 +46,21 @@ class WpController extends BaseController
         
     }
 
-    public function detail(Request $request)
+    public function detail(Request $request, $id_wp)
     {
         $unitData  = $this->wpModel->getUnitType();
         $unitList  = $this->wpModel->getUnit();
-        return view('wp/detail',
-        ['unitType' => $unitData],
-        ['unitList' => $unitList],
-        );
+
+        $data = [
+            'detailWp'          => $this->wpModel->getDetailWp($id_wp),
+            'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_wp),
+            'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
+            'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
+            //'tempStatus'      => $sales->CheckTempId($temp_id),
+            //'group'           => $v,
+         ];
+
+        return view('wp/detail', $data);
         
     }
 
@@ -134,8 +141,10 @@ class WpController extends BaseController
         //$unit = Session::get('sel_unit');
         $cd_unit = '6116';
         $year = date('y');
+        $id_wp = '6116200031';
         //$new_id = $this->wpModel->generateWpId($unit . $year);
-        $unit = $this->wpModel->getUnitName($cd_unit)->UNIT_NAME;
+        //$unit = $this->wpModel->getUnitName($cd_unit)->UNIT_NAME;
+        $unit = $this->wpModel->getDetailWp($id_wp);
         
         //return response()->json([$unit->UNIT_NAME]);
         return response()->json([$unit]);

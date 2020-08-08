@@ -44,7 +44,8 @@ class UserController extends BaseController
 
     public function getGroupUser(Request $request, $buss_area)
     {   
-        $unitGroup  = $this->menuCat->getGroupUnit($buss_area)->pluck("GROUP_NAME", "ID");; 
+        //$unitGroup  = $this->menuCat->getGroupUnit($buss_area);
+        $unitGroup  = $this->menuCat->getGroupUnit($buss_area)->pluck("GROUP_NAME", "ID");
         return json_encode($unitGroup);
     }
     
