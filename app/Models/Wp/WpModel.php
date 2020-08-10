@@ -134,11 +134,48 @@ class WpModel extends Model
         return Common::generateIdbyUnit($prefixJenis, $noUrut);
     }
 
-    public function getCatForMenu(){
+
+  public function getMaxWpTemplate(string $comp_code)
+    {
+      //return $this
+      $value=DB::table('working_permit_template')
+      ->selectRaw("max(id_template) as maxId")
+      ->where("id_template", "like", "$comp_code%")
+      ->first();
+
+      return $value;
+            
+    }
+
+  public function generateTemplateId(string $comp_code)
+  {
+      $max = $this->getMaxWpTemplate($comp_code)->maxId;
+      $noUrut = (int) substr($max, 4, 4);
+
+      return Common::generateId4Digit($comp_code, $noUrut);
+  }
+
+  public function getCatForMenu(){
       $unit = Auth::user()->unit;
       return DB::select("SELECT mc.cat_cd, mc.cat_text FROM menu_category mc
       WHERE mc.cat_unit = '$unit'");
   }
+
+  public function getTemplate(string $idunit)
+  {
+
+    $value=DB::table('working_permit_template')
+    ->join('master_unit', function ($join) {
+      $join->on('working_permit_template.comp_code', '=', 'master_unit.COMP_CODE'); //perlu perbaikan
+           //->where('working_permit_template.jenis_template', '=', 'master_unit.UNIT_TYPE');
+      })
+    ->select('working_permit_template.id_template', 'working_permit_template.nama_template', 'master_unit.UNIT_TYPE')
+    ->where('master_unit.BUSS_AREA', '=', $idunit)
+    ->get();
+    
+    return $value;
+  }
+
 }
 
 

@@ -77,18 +77,17 @@
                               <label for="location2">NAMA TEMPLATE :</label>
                               <input type="text" class="form-control" name="nama_template">
                             </div>
-                        
-                            <div class="form-group">
-                              <button type="button" class="tambah_hirarc btn-sm btn btn-primary">
-                                <i class="fa fa-plus"></i> TAMBAH POTENSI BAHAYA
+                            </div>
+                            <div class="col-md-12">
+                              <button type="button" class="tambah_hirarc btn btn-primary btn-sm btn-icon">
+                                <i class="la la-plus-circle"></i> Tambah Data
                               </button>
                             </div>
-                            </div>
 
-                            <table id="tbl-hirac" style="width:100%" class="table table-striped table-bordered table-hover add-rows">
+                            <table id="tbl-hirac" class="table table-striped table-bordered table-hover add-rows">
                               <thead>
                                 <tr>
-                                  <th rowspan="2" width="1%" style="text-align:center;text-align: center;vertical-align: middle;"><i class="fa fa-trash-o"></i></th>	
+                                  <th rowspan="2" style="text-align:center;text-align: center;vertical-align: middle;"><i class="fa fa-trash-o"></i></th>	
                                   <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="15%">KEGIATAN</th>
                                   <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">POTENSI BAHAYA</th>
                                   <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">RESIKO</th>
@@ -108,12 +107,12 @@
                               </thead>
                               <tbody id="konten_hirarc">
                                 <tr>
-                                  <td></td>
+                                  <td><button class="btn-danger btn-sm disabled"><i class="la la-trash-o"></i></button></td>
                                   <td><input type="text" class="form-control" name="kegiatan_hirarc[]"></td>
                                   <td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]"></td>
                                   <td><input type="text" class="form-control" name="resiko_hirarc[]"></td>
                                   <td>
-                                    <select class="form-control select2me" name="nilai_konsekuensi_hirarc[]">
+                                    <select class="form-control select2me paket_harga required" name="nilai_konsekuensi_hirarc[]">
                                     <option value="">PILIH</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
@@ -134,7 +133,7 @@
                                   </td>
                                   <td><input type="text" class="form-control" name="pengendalian_resiko_hirarc[]"></td>
                                   <td>
-                                    <select class="custom-select form-control" name="kendali_konsekuensi_hirarc[]">
+                                    <select class="custom-select form-control" name="kendali_konsekuensi[]">
                                     <option value="">PILIH</option>
                                       <option value="1">1</option>
                                       <option value="2">2</option>
@@ -144,7 +143,7 @@
                                   </select>
                                   </td>
                                   <td>
-                                    <select class="custom-select form-control" name="kendali_kemungkinan_hirarc[]">
+                                    <select class="custom-select form-control" name="kendali_kemungkinan[]">
                                     <option value="">PILIH</option>
                                       <option value="A">A</option>
                                       <option value="B">B</option>
@@ -153,8 +152,8 @@
                                       <option value="E">E</option>
                                   </select>
                                   </td>
-                                  <td><input type="text" class="form-control" name="status_pengendalian_hirarc[]"></td>
-                                  <td><input type="text" class="form-control" name="penanggung_jawab_hirarc[]"></td>
+                                  <td><input type="text" class="form-control" name="status_pengendalian[]"></td>
+                                  <td><input type="text" class="form-control" name="penanggung_jawab[]"></td>
                                 </tr>
                               </tbody>
                             </table>
@@ -294,32 +293,32 @@
                             </h5>
                           </div>
                           <div class="col-md-12">
-                            <button type="button" class="tambah_analisis btn btn-primary btn-icon">
+                            <button type="button" class="tambah_analisis btn btn-primary btn-icon btn-sm">
 												      <i class="la la-plus-circle"></i> Tambah Data
 												    </button>
-                            <p></p>
                           </div>
                           <table id="tbl-analisa" class="table display nowrap table-striped table-bordered zero-configuration">
                             <thead>
                               <tr>
-                                <th>Langkah Pekerjaan</th>
-                                <th>Potensi Bahaya</th>
-                                <th>Resiko</th>
-                                <th>Tindakan Pengendalian</th>
-                                <th>Action</th>
+                                <th class="text-center">LANGKAH PEKERJAAN</th>
+                                <th class="text-center">POTENSI BAHAYA</th>
+                                <th class="text-center">RESIKO</th>
+                                <th class="text-center">TINDAKAN PENGENDALIAN</th>
+                                <th class="text-center">ACTION</th>
                               </tr>
                             </thead>
                             <tbody id="konten-analisis">
                               <tr>
-                                <td><input type="text" class="form-control input-sm" name="langkah_pekerjaan[]"></td>
-                                <td><input type="text" class="form-control input-sm" name="potensi_bahaya[]"></td>
-                                <td><input type="text" class="form-control input-sm" name="resiko[]"></td>
-                                <td><input type="text" class="form-control input-sm" name="tindakan[]"></td>
+                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]"></td>
+                                <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
+                                <td><input type="text" class="form-control" name="resiko[]"></td>
+                                <td><input type="text" class="form-control" name="tindakan[]"></td>
                                 <td></td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
+                        <hr>
                         <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
                       </fieldset>
      
@@ -331,292 +330,29 @@
           </div>
         </section>
         <!-- Form wizard with icon tabs section end -->
-        </div>
-      
-  
-        <!-- Modal -->
-        <div class="modal fade text-left" id="user_view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Detail Data</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form method="POST" action="{{ route('user_store') }}">
-              @csrf
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="companyName">Unit</label>
-                    <input type="text" class="form-control" id="u_email" name="email" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">No RKA</label>
-                    <input type="text" class="form-control" value="001.IKU.00000.2020" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Deskripsi Kegiatan</label>
-                    <input type="text" class="form-control" value="Pengadaan 000000000" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Nilai Usulan</label>
-                    <input type="text" class="form-control" value="500.000.000" readonly>
-                </div>
-                
-
-                <input type="hidden" name="id" id="u_id">
-                <input type="hidden" name="unit" id="u_unit">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Filter Data</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form action="#">
-              @csrf
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="projectinput5">Tahun Anggaran</label>
-                      <select id="projectinput5" name="group_id" class="form-control select2me">
-                        <option value="none" selected="" disabled="">Select Year</option>
-                        <option value="9">2020</option>
-                        <option value="10">2021</option>
-                        <option value="11">2022</option>
-                        <option value="12">2023</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="projectinput5">Unit Kerja</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Unit</option>
-                        <option value="9">SEMUA UNIT</option>
-                        <option value="9">T. SIPIL</option>
-                        <option value="10">SATKER ULP</option>
-                        <option value="11">UPT PERPUS</option>
-                        <option value="12">..dst</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="projectinput5">Indikator</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Indikator</option>
-                        <option value="9">SEMUA INDIKATOR</option>
-                        <option value="10">IKU ULP</option>
-                        <option value="11">IKK</option>
-                        <option value="12">IKT</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="projectinput5">Pos Anggaran</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Pos Anggaran</option>
-                        <option value="9">SEMUA POS</option>
-                        <option value="10">PERALATAN</option>
-                        <option value="11">KEGIATAN</option>
-                        <option value="12">PELATIHAN</option>
-                      </select>
-                    </div>
-                  </div>
-                  
-                </div>
-
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        
-        <div class="modal fade text-left" id="add_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Upload File</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form action="#">
-              @csrf
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="projectinput5">Tahun Anggaran</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Group</option>
-                        <option value="9">2020</option>
-                        <option value="10">2021</option>
-                        <option value="11">2022</option>
-                        <option value="12">2023</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <fieldset class="form-group">
-                    <label for="projectinput5">File Upload</label>
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                      </div>
-                    </fieldset>
-                  </div>
-                </div>
-
-                <div class="row">
-                <div class="col-md-12">
-                  <fieldset class="form-group">
-                  <div class="form-group mt-1">
-                      <input type="checkbox" id="switcherySize3" class="switchery" checked/>
-                      <label for="switcherySize3" class="font-medium-2 text-bold-600 ml-1">Data sudah sesuai !
-                        <p class="text-muted"><code>Centang untuk melanjutkan</code></p></label>
-                    </div>
-                    </fieldset>
-                  </div>
-                  
-                </div>
-                
-                <input type="hidden" name="unit" value="1000">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-info">Upload Data</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade text-left" id="user_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Update User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form method="POST" action="">
-              @csrf
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="companyName">Email</label>
-                    <input type="text" class="form-control" id="u_email" name="email" readonly>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Full Name</label>
-                    <input type="text" class="form-control" id="u_name" name="name">
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="projectinput5">Group Level</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Group</option>
-                        <option value="9">Manager</option>
-                        <option value="10">Sekretaris</option>
-                        <option value="11">Bendahara</option>
-                        <option value="12">Pengawas</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <input type="hidden" name="id" id="u_id">
-                <input type="hidden" name="unit" id="u_unit">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-info">Submit</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal fade text-left" id="user_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form method="POST" action="">
-              @csrf
-              <div class="modal-body">
-              <div class="bs-callout-danger callout-border-left mt-1 p-1">
-                      <strong>Delete User !</strong>
-                      <p>Anda yakin akan menghapus user  ?</p>
-                      <input type="text" class="form-control" id="u_email" readonly>
-              </div>
-
-                <input type="hidden" name="id" id="u_id">
-                <input type="hidden" name="unit" id="u_unit">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-info">Submit</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->      
+        </div>     
 
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#tbl-hirac').DataTable( {
+  //var table = $('#example').removeAttr('width').DataTable( {
+  $('#tbl-hirac').removeAttr('width').DataTable( {
         "scrollX": true,
         "searching": false,
         "info": false,
         "paging": false,
+        "ordering": false,
+        "columnDefs": [
+          { "width": "12px", "targets": 0 },
+          { "width": "250px", "targets": 1 },
+          { "width": "250px", "targets": 2 },
+          { "width": "150px", "targets": 3 },
+          { "width": "150px", "targets": 6 },
+          { "width": "150px", "targets": 9 },
+          { "width": "150px", "targets": 10 },
+        ],
+
     } );
 } );
 
@@ -626,6 +362,10 @@ $(document).ready(function() {
         "searching": false,
         "info": false,
         "paging": false,
+        "ordering": false,
+        "columnDefs": [
+          { "width": "20%", "targets": 0 },
+        ],
     } );
 } );
 </script>
@@ -664,7 +404,7 @@ $('#form_menu').on('submit', function(event){
               type_toast = 'success';
               $('#form_menu')[0].reset();
               setTimeout(function() {
-                window.location.href = '/wp/template/';
+                window.location.href = '/wp/template';
               }, 1000);
             }
             //$('#form_result').html(html);
@@ -690,11 +430,11 @@ $('#form_menu').on('submit', function(event){
     nilai_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_konsekuensi_hirarc+nomor" name="nilai_konsekuensi_hirarc[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
     nilai_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_kemungkinan_hirarc+nomor" name="nilai_kemungkinan_hirarc[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';   
     
-    kendali_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_konsekuensi_hirarc[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
-    kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_kemungkinan_hirarc[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';
+    kendali_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_konsekuensi[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
+    kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';
     $('#konten_hirarc').append(
       '<tr class="baris_hirarc">'
-          +'<td align="center" style="vertical-align:middle;"><button type="button" id="hapus" class="btn hapus_in btn-xs red"><i class="fa fa-trash-o"></i></button></td>'
+          +'<td align="center" style="text-align:center;text-align: center;vertical-align: middle;"><button type="button" id="hapus" class="btn hapus_in btn-danger btn-sm"><i class="la la-trash-o"></i></button></td>'
 					+'<td><input type="input" name="kegiatan_hirarc[]" class="form-control"></td>'
 					+'<td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]" /></td>'
 					+'<td><input type="input" name="resiko_hirarc[]" class="form-control"></td>'
@@ -703,18 +443,19 @@ $('#form_menu').on('submit', function(event){
 					+'<td><input type="input" name="pengendalian_resiko_hirarc[]" class="form-control"></td>'
 					+'<td>'+kendali_konsekuensi_hirarc+'</td>'
 					+'<td>'+kendali_kemungkinan_hirarc+'</td>'
-					+'<td><input type="input" name="status_pengendalian_hirarc[]" class="form-control"></td>'
-					+'<td><input type="input" name="penanggung_jawab_hirarc[]" class="form-control"></td>'
+					+'<td><input type="input" name="status_pengendalian[]" class="form-control"></td>'
+					+'<td><input type="input" name="penanggung_jawab[]" class="form-control"></td>'
 				  +'</tr>'
     );
       
       $('select.select2me').select2();
     
     });
-    
+    /*
     $("#hapus").live('click', function () {
       $(this).parents(".baris_hirarc").hide("fast", function(){ $(this).remove(); });
     });
+    */
     });
 
 	$(document).ready(function() {
@@ -722,25 +463,27 @@ $('#form_menu').on('submit', function(event){
     var nomor1 = 0;
 		var status="";
 		
-        $(".tambah_jsa").click(function(){
+        $(".tambah_analisis").click(function(){
             nomor1 ++;
                                                                                                                                                                   
-          $('#konten_jsa').append(
-          '<tr class="baris_jsa">'
-            +'<td align="center" style="vertical-align:middle;"><button type="button" id="hapus" class="btn hapus_in btn-xs red"><i class="fa fa-trash-o"></i></button></td>'
-            +'<td><input type="input" name="langkah_pekerjaan_jsa[]" class="form-control"></td>'
-            +'<td><input type="input" name="potensi_bahaya_jsa[]" class="form-control"></td>'
-            +'<td><input type="input" name="resiko_jsa[]" class="form-control"></td>'
-            +'<td><input type="input" name="tindakan_pengendalian_jsa[]" class="form-control"></td>'
+          $('#konten-analisis').append(
+          '<tr class="baris_analisis">'
+            +'<td><input type="input" name="langkah_pekerjaan[]" class="form-control"></td>'
+            +'<td><input type="input" name="potensi_bahaya[]" class="form-control"></td>'
+            +'<td><input type="input" name="resiko[]" class="form-control"></td>'
+            +'<td><input type="input" name="tindakan[]" class="form-control"></td>'
+            +'<td align="center" style="vertical-align:middle;"><button type="button" id="hapus" class="btn hapus_in btn-sm btn-danger btn-icon"><i class="la la-trash-o"></i></button></td>'
           +'</tr>'
           );
           
           $('select.select2me').select2();
         });
-				
+
+				/*
         $("#hapus").live('click', function () {
 			  $(this).parents(".baris_jsa").hide("fast", function(){ $(this).remove(); });
         });		
+        */
 
     });
 </script>

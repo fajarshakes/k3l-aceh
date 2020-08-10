@@ -27,21 +27,25 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
 //WORKING PERMIT
  Route::prefix('wp')->group(function() {
     Route::get('test', 'Wp\WpController@test')->name('test');
+    Route::get('template/test', 'Wp\TemplateController@test')->name('test');
     
     Route::get('dashboard', 'Wp\WpController@dashboard')->name('dashboard');
     Route::get('list-permit', 'Wp\WpController@list')->name('list');
     Route::get('create', 'Wp\WpController@create')->name('create');
     Route::get('template', 'Wp\TemplateController@template')->name('template');
-    Route::get('add_template', 'Wp\WpController@add_template')->name('add_template');
+    Route::get('add_template', 'Wp\TemplateController@add_template')->name('add_template');
     Route::post('template_store', 'Wp\TemplateController@template_store')->name('template_store');
     Route::get('detail/{id}', 'Wp\WpController@detail')->name('detail');
+    Route::get('getTemplateByUnit/{id}', 'Wp\WpController@getTemplateByUnit')->name('getTemplateByUnit');;
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
     Route::get('list_permohonan', 'Wp\WpController@list_permohonan')->name('list_permohonan');
+    Route::get('list_template', 'Wp\TemplateController@list_template')->name('list_template');
     Route::get('get_detail_wp', 'Wp\WpController@get_detail_wp')->name('get_detail_wp');;
     Route::post('approve_form', 'Wp\WpController@approve_form')->name('approve_form');;
     Route::post('delete_form', 'Wp\WpController@delete_form')->name('delete_form');;
-    Route::get('print_jsa', 'Wp\WpController@print_jsa')->name('print_jsa');;
+    Route::get('print_jsa/{id}', 'Wp\WpController@print_jsa')->name('print_jsa');;
+    Route::get('print_hirarc/{id}', 'Wp\WpController@print_hirarc')->name('print_hirarc');;
 });
 
 //SOSIALISASI

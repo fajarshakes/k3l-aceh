@@ -96,14 +96,22 @@ class WpController extends BaseController
             ->make(true);
     }
 
+    public function getTemplateByUnit(Request $request, $idunit)
+    {   
+        $listTemplate = $this->wpModel->getTemplate($idunit)->pluck("nama_template", "id_template");
+        return json_encode($listTemplate);
+    }
+    
     public function submit_form(Request $request)
     {
     
-    $status    = $request->status;
-    $unit    = $request->unit;
+    $status      = $request->status;
+    $template    = $request->template;
+    $unit        = $request->unit;
 
     $rules = array(
         'status'     =>  'required',
+        'template'   =>  'required',
         'unit'       =>  'required',
     );
     
@@ -115,9 +123,10 @@ class WpController extends BaseController
     }
 
     Session::put('sel_unit', $unit);
+    Session::put('sel_template', $template);
     Session::put('sel_status', $status);
 
-    return response()->json(['success' => 'Unit dipilih : '.$unit.'</br> Status Pekerjaan : '.$status,]);
+    return response()->json(['success' => 'Unit dipilih : '.$unit.'</br> Template : '.$template.'</br> Status Pekerjaan : '.$status,]);
 
     }
     
@@ -351,11 +360,17 @@ class WpController extends BaseController
         return view('wp/print_jsa');
     }
 
-    public function add_template(Request $request)
+    public function print_hirarc(Request $request, $id_wp)
     {
-        $unitData  = $this->wpModel->getUnitType();
-        return view('wp/add-template',
-        ['unitType' => $unitData]);
+        $data = [
+            'detailWp'          => $this->wpModel->getDetailWp($id_wp),
+            'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_wp),
+            'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
+            'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
+            //'tempStatus'      => $sales->CheckTempId($temp_id),
+            //'group'           => $v,
+         ];
+         return view('wp/print_hirarc', $data);
     }
    
 }

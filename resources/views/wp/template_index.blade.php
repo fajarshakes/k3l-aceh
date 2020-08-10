@@ -24,7 +24,8 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button onclick="location.href='add_template'" class="dropdown-item" name="create_record" id="create_record"><i class="la la-plus-circle"></i> Add Template</button>  
+              <button onclick="location.href='/wp/add_template'" class="dropdown-item"><i class="la la-plus-circle"></i> Add Template</button>
+              <!--button onclick="location.href='/wp/add_template'" class="dropdown-item" name="create_record" id="create_record"><i class="la la-plus-circle"></i> Add Template</button-->  
               <button class="dropdown-item" name="create_record_2" id="create_record_2"><i class="la la-plus-circle"></i> Add User Category</button>  
             </div>
           </div>
@@ -38,7 +39,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">LIST USERS </h4>
+                  <h4 class="card-title">LIST TEMPLATE </h4>
                   <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                   <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -52,26 +53,22 @@
                 <div class="card-content">
                     
                     <div class="tab-content px-1 pt-1">
-                    <table id="datamenu" class="table table-striped table-bordered">
+                    <table id="list_template" width="100%" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>#</th>
-                          <th>BUSS AREA</th>
-                          <th>PERS NO</th>
-                          <th>EMAIL</th>
-                          <th>FULLNAME</th>
-                          <th>GROUP</th>
-                          <th>ACTION</th>
+                          <th width="5%">#</th>
+                          <th width="8%">COMP CODE</th>
+                          <th width="8%">TYPE UNIT</th>
+                          <th width="61%">NAMA TEMPLATE</th>
+                          <th width="18%">ACTION</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <th>#</th>
-                          <th>BUSS AREA</th>
-                          <th>PERS NO</th>
-                          <th>EMAIL</th>
-                          <th>FULLNAME</th>
-                          <th>GROUP</th>
+                        <th>#</th>
+                          <th>COMP CODE</th>
+                          <th>TYPE UNIT</th>
+                          <th>NAMA TEMPLATE</th>
                           <th>ACTION</th>
                         </tr>
                       </tfoot>
@@ -228,35 +225,28 @@
 
 $(document).ready(function() {
 
- var vtable = $('#datamenu').DataTable({
+ var vtable = $('#list_template').DataTable({
     processing: true,
     serverSide: true,
     paging: true,
     order: [[ 2, 'asc' ]],
     ajax:{
-     url: "{{ route('user_datatables') }}",
+     url: "{{ route('list_template') }}",
     },
     columns:[
       { data: null, searchable:false, orderable:false, className: "text-center"},
       {
-      data: 'UNIT_NAME',
-      name: 'UNIT_NAME'
+      data: 'comp_code',
+      name: 'comp_code',
+      className: "text-center"
       },
       {
-      data: 'pers_no',
+      data: 'jenis_template',
+      className: "text-center"
+      },
+      {
+      data: 'nama_template',
       className: "text-left"
-      },
-      {
-      data: 'email',
-      className: "text-center"
-      },
-      {
-      data: 'name',
-      className: "text-center"
-      },
-      {
-      data: 'GROUP_NAME',
-      className: "text-center"
       },
       {
       data: 'action',

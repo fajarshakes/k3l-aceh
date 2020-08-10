@@ -28,22 +28,6 @@ class TemplateController extends BaseController
         $this->wpModel     = new WpModel();
         $this->UserModel     = new User();
     }
-    
-    public function dashboard(Request $request)
-    {
-        return view('wp/dashboard');
-    }
-
-    public function list(Request $request)
-    {
-        $unitData  = $this->wpModel->getUnitType();
-        $unitList  = $this->wpModel->getUnit();
-        return view('wp/list',
-        ['unitType' => $unitData],
-        ['unitList' => $unitList],
-        );
-        
-    }
 
     public function detail(Request $request)
     {
@@ -56,33 +40,23 @@ class TemplateController extends BaseController
         
     }
 
-    public function get_detail_wp()
+    public function list_template(Request $request)
     {
-        $id = $_GET['id'];
-        $data = DB::table('working_permit')
-        ->select('working_permit.*')
-        ->where('working_permit.id_wp','=',$id)
-        ->get();
-        
-        return response()->json(['data' => $data]);
-    }
-
-
-    public function list_permohonan(Request $request)
-    {
+        $comp_code = Auth::user()->comp_code;
         $sql = "SELECT
-                    wp.*, mu.UNIT_NAME
+                    wpt.*
                 FROM
-                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
+                    working_permit_template wpt
                 WHERE
-                    wp.status != 'TRASH'";
+                    wpt.status = 1
+                    AND wpt.comp_code = '$comp_code'";
         $v = DB::select($sql);
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id_wp.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
+                $button = '<button type="button" name="edit" id="'.$data->id_template.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
                 $button .= '&nbsp;&nbsp;';
-                $button .= '<button type="button" name="delete" id="'.$data->id_wp.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
+                $button .= '<button type="button" name="delete" id="'.$data->id_template.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -99,70 +73,15 @@ class TemplateController extends BaseController
     return response()->json(['success' => 'Unit dipilih : '.$unit,
         'temp_id' => $type]);
     }
-    
-    public function create(Request $request)
-    {
-        $unit = Session::get('sel_unit');
-        $data = [
-            'getManager'  => $this->UserModel->getUser($unit, 4),
-            'getSpv'      => $this->UserModel->getUser($unit, 5),
-            'getPj'       => $this->UserModel->getUser($unit, 6),
-            'up_name'     => $this->wpModel->getUnitName($unit),
-        ];
-        
-        return view('wp/create', $data);
-        
-    }
 
     public function test(Request $request)
     {   
-        $unit = Session::get('sel_unit');
+        //$unit = Session::get('sel_unit');
+        $comp_code = Auth::user()->comp_code;
         $year = date('y');
-        $new_id = $this->wpModel->generateWpId($unit . $year);
+        $new_id = $this->wpModel->generateTemplateId($comp_code);
         
         return response()->json([$new_id]);
-    }
-
-    public function approve_form(Request $request)
-    {
-        $id_wp = $request->id_wp;
-        if ($request->group_id == 5){
-            $status = 'APPROVAL_2';
-            $field1 = 'user_approval3';
-            $field2 = 'tgl_approval3';
-        } else if ($request->group_id == 6){
-            $status = 'APPROVAL_1';
-            $field1 = 'user_approval2';
-            $field2 = 'tgl_approval2';
-        } else if ($request->group_id == 4){
-            $status = 'APPROVED';
-            $field1 = 'user_approval3';
-            $field2 = 'tgl_approval3';
-        }
-
-        if ($request->ket_approve == 'APPROVE'){
-
-        $update = DB::table('working_permit')
-        ->where('id_wp', $id_wp)
-        ->update([
-            'status'   => $status,
-            $field1    => Auth::user()->email,
-            $field2    => date('Y-m-d'),
-        ]);
-
-        } else {
-
-        $update = DB::table('working_permit')
-        ->where('id_wp', $id_wp)
-        ->update([
-            'status'        => 'NEW',
-            'user_reject'   => Auth::user()->email,
-            'tgl_reject'    => date('Y-m-d'),
-        ]);
-
-        }
-
-        return response()->json(['success' => 'Data Update successfully.']);
     }
 
     public function delete_form(Request $request)
@@ -185,22 +104,26 @@ class TemplateController extends BaseController
         return view('wp/template_index');
     }
 
+    public function add_template(Request $request)
+    {
+        $unitData  = $this->wpModel->getUnitType();
+        return view('wp/add-template',
+        ['unitType' => $unitData]);
+    }
+
     public function template_store(Request $request)
     {
-        $unit = Session::get('sel_unit');
-        $status = Session::get('sel_status');
+        $comp_code = Auth::user()->comp_code;
         $year = date('y');
-        $new_id = $this->wpModel->generateWpId($unit . $year);
-        
-        // $unitData  = $this->wpModel->getUnitType();
-        // return view('wp/add-template',
-        // ['unitType' => $unitData]);
+        $new_id = $this->wpModel->generateTemplateId($comp_code);
 
-        $store = DB::table('work_permit_template')->insert([
-            'id_wp'         => $new_id,
-            'unit'          => $unit,
+        $store = DB::table('working_permit_template')->insert([
+            'id_template'    => $new_id,
+            'comp_code'      => $comp_code,
+            'tahun'          => $year,
             'jenis_template' => $request->jenis_template,
-            'nama_template' => $request->nama_template,
+            'nama_template'  => $request->nama_template,
+            'status'         => 1,
         ]);
 
         for($i = 0; $i < count($request['peralatan']); $i++){
@@ -214,13 +137,13 @@ class TemplateController extends BaseController
             $store = DB::table('tbl_hirarc')->insert([
             'id_wp'         => $new_id,
             'kegiatan'      => $request['kegiatan_hirarc'][$i],
-            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya_hirarc'][$i],
             'resiko'        => $request['resiko_hirarc'][$i],
-            'penilaian_konsekuensi'   => $request['penilaian_konsekuensi'][$i],
-            'penilaian_kemungkinan'   => $request['penilaian_kemungkinan'][$i],
-            'pengendalian_resiko'       => $request['potensi_bahaya'][$i],
-            'pengendalian_konsekuensi'  => $request['pengendalian_konsekuensi'][$i],
-            'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
+            'penilaian_konsekuensi'   => $request['nilai_konsekuensi_hirarc'][$i],
+            'penilaian_kemungkinan'   => $request['nilai_kemungkinan_hirarc'][$i],
+            'pengendalian_resiko'       => $request['pengendalian_resiko_hirarc'][$i],
+            'pengendalian_konsekuensi'  => $request['kendali_konsekuensi'][$i],
+            'pengendalian_kemungkinan'  => $request['kendali_kemungkinan'][$i],
             'status_pengendalian'       => $request['status_pengendalian'][$i],
             'penanggung_jawab'          => $request['penanggung_jawab'][$i],
             ]);

@@ -54,7 +54,7 @@
                 </div>
                 <div class="card-content collapse show">
                 <div class="col-md-12">
-                      <button onclick="ShowPopup('/wp/print_jsa')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print HIRARC" > <i class="la la-print"></i> PRINT</button>
+                      <button onclick="ShowPopup('/wp/print_hirarc/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print HIRARC" > <i class="la la-print"></i> PRINT</button>
                   </div>
                 <form id="form_menu" method="post" enctype="multipart/form-data">
                 @csrf  

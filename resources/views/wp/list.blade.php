@@ -134,7 +134,7 @@
 
                 <div class="form-group">
                   <label for="companyName">PILIH UNIT</label>
-                    <select name="unit" class="form-control" id="eventStatus2" name="eventStatus">
+                    <select name="unit" class="form-control" id="id_unit">
                     <option value="" selected disabled>PILIH UNIT</option>
                     @foreach($unitList as $list)
                       <option value="{{ $list->BUSS_AREA }}">{{ $list->BUSS_AREA .' - '. $list->UNIT_NAME }}</option>
@@ -143,11 +143,12 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="companyName">PILIH JENIS PEKERJAAN</label>
-                    <select name="template" class="form-control" id="eventStatus2" name="eventStatus">
-                      <option value="Planning">Planning</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Finished">Finished</option>
+                  <label for="companyName">PILIH TEMPLATE (JENIS PEKERJAAN)</label>
+                    <select name="template" class="form-control" id="id_template">
+                    <option value="" selected>PILIH TEMPLATE</option>
+                    @if (!empty($group_id))
+                      <option value="{{ $group_id }}">{{ $group_name }}</option>
+                    @endif
                     </select>
                 </div>
 
@@ -345,6 +346,44 @@
 
 
 <script type="text/javascript">
+  $(document).ready(function() {
+    $('select[name="unit"]').on('change', function(){
+      var id_unit_ =   $(this).val();
+      var token = '{{ csrf_token() }}';
+
+        //var countryId = $(this).val();
+        if(id_unit_) {
+            $.ajax({
+                url: "{{ url('wp/getTemplateByUnit/') }}/"+id_unit_,
+                type:"GET",
+                dataType:"json",
+                data: {idunit: id_unit_, _token: token},
+
+                //beforeSend: function(){
+                    //$('#loader').css("visibility", "visible");
+                //},
+
+                success:function(data) {
+
+                    $('select[name="template"]').empty();
+
+                    $.each(data, function(key, value){
+
+                        $('select[name="template"]').append('<option value="'+ key +'">' + value + '</option>');
+
+                    });
+                },
+                //complete: function(){
+                    //$('#loader').css("visibility", "hidden");
+                //}
+            });
+        } else {
+            $('select[name="template"]').empty();
+        }
+
+    });
+  });
+
 $(document).ready(function() {
 
 var vtable = $('#table-permohonan').DataTable({
