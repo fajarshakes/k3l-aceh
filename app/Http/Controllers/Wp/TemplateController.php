@@ -54,9 +54,9 @@ class TemplateController extends BaseController
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id_template.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
+                $button = '<button type="button" name="edit" id="'.$data->id_template.'" class="edit btn btn-warning btn-sm"><i class="la la-pencil-square"></i></button>';
                 $button .= '&nbsp;&nbsp;';
-                $button .= '<button type="button" name="delete" id="'.$data->id_template.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
+                $button .= '<button type="button" name="delete" id="'.$data->id_template.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i></button>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -84,21 +84,6 @@ class TemplateController extends BaseController
         return response()->json([$new_id]);
     }
 
-    public function delete_form(Request $request)
-    {
-        $id_wp = $request->id_wp;
-
-        $update = DB::table('working_permit')
-        ->where('id_wp', $id_wp)
-        ->update([
-            'status'         => 'TRASH',
-            'tgl_delete'  => date('Y-m-d'),
-            'user_delete' =>  Auth::user()->email
-        ]);
-
-        return response()->json(['success' => 'Data Update successfully.']);
-    }
-
     public function template(Request $request)
     {
         return view('wp/template_index');
@@ -123,18 +108,20 @@ class TemplateController extends BaseController
             'tahun'          => $year,
             'jenis_template' => $request->jenis_template,
             'nama_template'  => $request->nama_template,
+            'created_at'     => date('Y-m-d'),
+            'created_by'     => Auth::user()->email,
             'status'         => 1,
         ]);
 
         for($i = 0; $i < count($request['peralatan']); $i++){
-            $store = DB::table('peralatan_keselamatan')->insert([
+            $store = DB::table('peralatan_keselamatan_template')->insert([
             'id_wp'         => $new_id,
             'description'   => $request['peralatan'][$i],
             ]);
         }
 
         for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
-            $store = DB::table('tbl_hirarc')->insert([
+            $store = DB::table('tbl_hirarc_template')->insert([
             'id_wp'         => $new_id,
             'kegiatan'      => $request['kegiatan_hirarc'][$i],
             'potensi_bahaya'   => $request['potensi_bahaya_hirarc'][$i],
@@ -150,7 +137,7 @@ class TemplateController extends BaseController
         }
         
         for($i = 0; $i < count($request['langkah_pekerjaan']); $i++){
-            $store = DB::table('tbl_jsa')->insert([
+            $store = DB::table('tbl_jsa_template')->insert([
             'id_wp'         => $new_id,
             'langkah_pekerjaan'      => $request['langkah_pekerjaan'][$i],
             'potensi_bahaya'   => $request['potensi_bahaya'][$i],
@@ -160,6 +147,47 @@ class TemplateController extends BaseController
         }
         
         return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function get_detail_template()
+    {
+        $id = $_GET['id'];
+        $data = DB::table('working_permit_template')
+        ->select('working_permit_template.*')
+        ->where('working_permit_template.id_template','=',$id)
+        ->get();
+        
+        return response()->json(['data' => $data]);
+    }
+
+    public function template_delete(Request $request)
+    {
+        $id_tpl = $request->del_hidden_id;
+
+        $update = DB::table('working_permit_template')
+        ->where('id_template', $id_tpl)
+        ->update([
+            'status'         => '0',
+            'deleted_at'  => date('Y-m-d'),
+            'deleted_by' =>  Auth::user()->email
+        ]);
+
+        return response()->json(['success' => 'Data Update successfully.']);
+    }
+
+    public function edit_template(Request $request, $id_template)
+    {
+        $data = [
+            'detail'            => $this->wpModel->getDetailTemplate($id_template),
+            //'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_template),
+            'tbl_hirarc'        => $this->wpModel->getHirarcTemplate($id_template),
+            //'tbl_jsa'           => $this->wpModel->getJsa($id_template),
+            //'peralatan'         => $this->wpModel->getPeralatan($id_template),
+            'unitType'          => $this->wpModel->getUnitType(),
+            'selectedID'        => $this->wpModel->getDetailTemplate($id_template)->jenis_template,
+         ];
+
+        return view('wp/edit-template', $data);
     }
    
 }
