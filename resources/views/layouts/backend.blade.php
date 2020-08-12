@@ -68,6 +68,15 @@
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ url('assets/css/style.css') }}">
   <!-- END Custom CSS-->
+
+  <!-- Map Leaflet CSS -->
+  <link rel="stylesheet" href="//unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
+  <link rel="stylesheet" href="{{ url('app-assets/css/leaflet-locationpicker.css') }}" />
+
+  <!-- Leaflet JS -->
+  <script src="//unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+  <script src="{{ url('app-assets/js/leaflet-locationpicker.js') }}"></script>
 </head>
 @php $RouteName = \Request::route()->getName() @endphp
 

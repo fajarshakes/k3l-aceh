@@ -143,22 +143,21 @@
                         </form>
                         </fieldset>
 
-                        <fieldset>
-                          <h5>MAPS</h5>
-                            <div class="card-body">
-                              <div id="world-map-gdp" class="height-400"></div>
-                            </div>
+                        <fieldset style="padding-bottom: 15px;">
+                          <h5 id="geoloc5">MAPS</h5>
+                            <!-- <div id="world-map-gdp" style="height: 423px;"></div> -->
+                            <div id="fixedMapCont" style="border: 1px solid #cacfe7; border-radius: 0.25rem; height: 423px"></div>
                         </fieldset>
                         <fieldset>
                           <h5>LAT / LONG</h5>
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                                <input name="latitude" type="text" class="form-control" />
+                                <input id="geolat" name="latitude" type="text" class="form-control" />
                                 <small class="text-muted">Latitude</small>
                             </div>
                             <div class="col-md-6">
-                                <input name="longitude" type="text" class="form-control">
+                                <input id="geolng" name="longitude" type="text" class="form-control">
                                 <small class="text-muted">Longitude</small>
                             </div>
                           </div>
@@ -183,6 +182,53 @@
       <div id="loading"></div>
       </div>
 </div>
+
+<script>
+
+$('#geoloc5').leafletLocationPicker({
+		alwaysOpen: true,
+		mapContainer: "#fixedMapCont"
+}).on('changeLocation', function(e) {
+	$(this)
+	.siblings('#geolat').val( e.latlng.lat )
+	.siblings('#geolng').val( e.latlng.lng )
+	.siblings('#address').text('"'+e.location+'"');
+});
+
+
+	// var mymap = L.map('world-map-gdp').setView([5.562287, 95.334882], 13);
+
+	// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+	// 	maxZoom: 18,
+	// 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+	// 		'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+	// 		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	// 	id: 'mapbox/streets-v11',
+	// 	tileSize: 512,
+	// 	zoomOffset: -1
+	// }).addTo(mymap);
+
+	// L.marker([5.562287, 95.334882]).addTo(mymap)
+	// 	.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+
+	// L.circle([5.562287, 95.334882], 500, {
+	// 	color: 'red',
+	// 	fillColor: '#f03',
+	// 	fillOpacity: 0.5
+	// }).addTo(mymap).bindPopup("I am a circle.");
+
+	// var popup = L.popup();
+
+	// function onMapClick(e) {
+	// 	popup
+	// 		.setLatLng(e.latlng)
+	// 		.setContent("You clicked the map at " + e.latlng.toString())
+	// 		.openOn(mymap);
+	// }
+
+	// mymap.on('click', onMapClick);
+
+</script>
 
 <script type="text/javascript">
 $('#form_menu').on('submit', function(event){
@@ -231,4 +277,5 @@ $('#form_menu').on('submit', function(event){
     });
 })
 </script>
+
 @endsection
