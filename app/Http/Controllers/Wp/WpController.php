@@ -18,6 +18,7 @@ use Response;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
+use App\PeralatanKeselamatan;
 
 
 class WpController extends BaseController
@@ -56,6 +57,7 @@ class WpController extends BaseController
             'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_wp),
             'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
             'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
+            'peralatan'         => $this->wpModel->getPeralatan($id_wp),
             //'tempStatus'      => $sales->CheckTempId($temp_id),
             //'group'           => $v,
          ];
@@ -154,9 +156,12 @@ class WpController extends BaseController
         //$new_id = $this->wpModel->generateWpId($unit . $year);
         //$unit = $this->wpModel->getUnitName($cd_unit)->UNIT_NAME;
         $unit = $this->wpModel->getDetailWp($id_wp);
+        $idwp = '6116200031';
+        $peralatan = $this->wpModel->getPeralatan($id_wp);
+        //PeralatanKeselamatan::where('id_wp', $idwp)->get();
         
         //return response()->json([$unit->UNIT_NAME]);
-        return response()->json([$unit]);
+        return response()->json([$peralatan]);
     }
     
     public function wp_store(Request $request)
@@ -370,7 +375,8 @@ class WpController extends BaseController
             //'tempStatus'      => $sales->CheckTempId($temp_id),
             //'group'           => $v,
          ];
-         return view('wp/print_hirarc', $data);
+         
+         return view('wp/print_hirarc', $data,);
     }
    
 }

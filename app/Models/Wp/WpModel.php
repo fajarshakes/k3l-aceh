@@ -161,6 +161,15 @@ class WpModel extends Model
       WHERE mc.cat_unit = '$unit'");
   }
 
+  public function getPeralatan(string $id_wp){
+    
+    $value=DB::table('peralatan_keselamatan')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+
+    return $value;
+}
+
   public function getTemplate(string $idunit)
   {
 

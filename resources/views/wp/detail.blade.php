@@ -221,83 +221,85 @@
                       <tr>
                         <td colspan="3" class="text-left">1. ALAT PELINDUNG DIRI</td>
                       </tr>
+                      @foreach($peralatan as $peralatans)
+                      
                       <tr>
                         <td>
+                          {{ $peralatans->id_wp }}
+                        </td>
+                      </tr>
+                      @endforeach
+                        <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Helm</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item22">
+                            <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Earmuff</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pelampung / Life Vest</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item23">
+                            <label class="custom-control-label" for="item23">Pelampung / Life Vest</label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sepatu keselamatan</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item24">
+                            <label class="custom-control-label" for="item24">Sepatu keselamatan</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sarung tangan Katun</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item25">
+                            <label class="custom-control-label" for="item25">Sarung tangan Katun</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Tabung pernafasan</label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Kacamata</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sarung tangan karet</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pelampung / Life Vest</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item26">
+                            <label class="custom-control-label" for="item26">Tabung pernafasan</label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Earplug</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item27">
+                            <label class="custom-control-label" for="item27">Kacamata</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sarung tangan 20kV</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item28">
+                            <label class="custom-control-label" for="item28">Sarung tangan karet</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Lain - lain :</label>
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item29">
+                            <label class="custom-control-label" for="item29">Pelampung / Life Vest</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item30">
+                            <label class="custom-control-label" for="item30">Earplug</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item31">
+                            <label class="custom-control-label" for="item31">Sarung tangan 20kV</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item32">
+                            <label class="custom-control-label" for="item32">Lain - lain :</label>
+                            <textarea name="participants" name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                           </div>
                         </td>
                       </tr>
@@ -307,40 +309,41 @@
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemadam Api (APAR dll)</label>
+                            <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item01">
+                            <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Kotak P3K</label>
+                            <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item02">
+                            <label class="custom-control-label" for="item02">Kotak P3K</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Rambu keselamatan</label>
+                            <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item03">
+                            <label class="custom-control-label" for="item03">Rambu keselamatan</label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">LOTO (lock out tag out)</label>
+                            <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item04">
+                            <label class="custom-control-label" for="item04">LOTO (lock out tag out)</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Radio Telekomunikasi</label>
+                            <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item05">
+                            <label class="custom-control-label" for="item05">Radio Telekomunikasi</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Lain - lain :</label>
+                            <input type="checkbox" name="peralatan[]" class="custom-control-input" id="item06">
+                            <label class="custom-control-label" for="item06">Lain - lain :</label>
+                            <textarea name="participants" name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                           </div>
                         </td>
                       </tr>
@@ -489,78 +492,78 @@
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan LBS/Recloser/FDI</label>
+                            <input type="checkbox" name="klasifikasi[]" value="Pemasangan LBS/Recloser/FDI" class="custom-control-input" id="item07">
+                            <label class="custom-control-label" for="item07">Pemasangan LBS/Recloser/FDI</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan kubikel 20KV</label>
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item08">
+                            <label class="custom-control-label" for="item08">Pemasangan kubikel 20KV</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemeliharaan Kubikel</label>
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item09">
+                            <label class="custom-control-label" for="item09">Pemeliharaan Kubikel</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pengujian Relay Proteksi</label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Penggantian Relay Proteksi</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan Power Meter</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan KWH Meter</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemeliharaan RTU GH/GI</label>
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item10">
+                            <label class="custom-control-label" for="item10">Pengujian Relay Proteksi</label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan Catu Daya</label>
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item11">
+                            <label class="custom-control-label" for="item11">Penggantian Relay Proteksi</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan Radio Komunikasi</label>
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item12">
+                            <label class="custom-control-label" for="item12">Pemasangan Power Meter</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemeliharaan Radio Komunikasi</label>
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item13">
+                            <label class="custom-control-label" for="item13">Pemasangan KWH Meter</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sipil</label>
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item14">
+                            <label class="custom-control-label" for="item14">Pemeliharaan RTU GH/GI</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item15">
+                            <label class="custom-control-label" for="item15">Pemasangan Catu Daya</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item16">
+                            <label class="custom-control-label" for="item16">Pemasangan Radio Komunikasi</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item17">
+                            <label class="custom-control-label" for="item17">Pemeliharaan Radio Komunikasi</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item18">
+                            <label class="custom-control-label" for="item18">Sipil</label>
                           </div>
                         </td>
                       </tr>
@@ -575,41 +578,41 @@
                       </tr>
                       <tr>
                         <td>
+                        <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="prosedur[]" value="Pemasangan dan Penggantian Cubicle 20 KV" class="custom-control-input" id="itm1">
+                            <label class="custom-control-label" for="itm1">Pemasangan dan Penggantian Cubicle 20 KV</label>
+                        </div>
+                        </td>
+                        <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan dan Penggantian Cubicle 20 KV</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm2">
+                            <label class="custom-control-label" for="itm2">Pemeliharaan Cubicle Gardu Hubung 20 KV</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemeliharaan Cubicle Gardu Hubung 20 KV</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemasangan LBS dan RECLOSER</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm3">
+                            <label class="custom-control-label" for="itm3">Pemasangan LBS dan RECLOSER</label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemeliharaan RTU dan Peripheral</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm4">
+                            <label class="custom-control-label" for="itm4">Pemeliharaan RTU dan Peripheral</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pengujian Control Scada</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm5">
+                            <label class="custom-control-label" for="itm5">Pengujian Control Scada</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pemeliharaan Repeater Komunikasi</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm6">
+                            <label class="custom-control-label" for="itm6">Pemeliharaan Repeater Komunikasi</label>
                           </div>
                         </td>
 
@@ -617,20 +620,20 @@
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Perluasan Gardu Hubung 20 KV</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm7">
+                            <label class="custom-control-label" for="itm7">Perluasan Gardu Hubung 20 KV</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pengujian Alat</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm8">
+                            <label class="custom-control-label" for="itm8">Pengujian Alat</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21"> Pemasangan Proteksi</label>
+                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm9">
+                            <label class="custom-control-label" for="itm9"> Pemasangan Proteksi</label>
                           </div>
                         </td>
                         
