@@ -51,6 +51,10 @@ class WpController extends BaseController
     {
         $unitData  = $this->wpModel->getUnitType();
         $unitList  = $this->wpModel->getUnit();
+        $masterPeralatan = ['Sarung Tangan Katun', 'Sarung Tangan Karet', 'Radio Telekomunikasi', 
+                            'Sepatu Keselamatan', 'Pelampung / Life Vest', 'Tabung pernafasan',
+                            'Kacamata', 'Sarung tangan karet', 'Earplug', 'Sarung tangan 20kV',
+                            'Lain - lain'];
 
         $data = [
             'detailWp'          => $this->wpModel->getDetailWp($id_wp),
@@ -58,10 +62,12 @@ class WpController extends BaseController
             'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
             'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
             'peralatan'         => $this->wpModel->getPeralatan($id_wp),
+            'mperalatan'        => $masterPeralatan,
             //'tempStatus'      => $sales->CheckTempId($temp_id),
             //'group'           => $v,
          ];
-
+         
+        
         return view('wp/detail', $data);
         
     }

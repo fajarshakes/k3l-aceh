@@ -221,23 +221,41 @@
                       <tr>
                         <td colspan="3" class="text-left">1. ALAT PELINDUNG DIRI</td>
                       </tr>
-                      @foreach($peralatan as $peralatans)
-                      
+                      @foreach($mperalatan as $mper)
+                      @php
+                        $i = 'true';
+                      @endphp
                       <tr>
                         <td>
-                          {{ $peralatans->id_wp }}
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                          @foreach($peralatan as $per)
+                          @if($mper == $per->description)
+                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mper }}" checked>
+                            {{ $mper }} 
+                            @php
+                              $i = 'false';
+                            @endphp
+                          @endif
+                          @endforeach
+
+                          @if($i == 'true')
+                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mper }}">
+                            {{ $mper }} 
+                          @endif
+                          </div>
                         </td>
                       </tr>
                       @endforeach
-                        <td>
+                      
+                        <!-- <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item22">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item22">
                             <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item23">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item23">
                             <label class="custom-control-label" for="item23">Pelampung / Life Vest</label>
                           </div>
                         </td>
@@ -245,19 +263,19 @@
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item24">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item24">
                             <label class="custom-control-label" for="item24">Sepatu keselamatan</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item25">
+                            <input type="checkbox" name="peralatan[]" value = "Sarung tangan Katun" class="custom-control-input" id="item25">
                             <label class="custom-control-label" for="item25">Sarung tangan Katun</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item26">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item26">
                             <label class="custom-control-label" for="item26">Tabung pernafasan</label>
                           </div>
                         </td>
@@ -265,19 +283,19 @@
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item27">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item27">
                             <label class="custom-control-label" for="item27">Kacamata</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item28">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item28">
                             <label class="custom-control-label" for="item28">Sarung tangan karet</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item29">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item29">
                             <label class="custom-control-label" for="item29">Pelampung / Life Vest</label>
                           </div>
                         </td>
@@ -285,23 +303,23 @@
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item30">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item30">
                             <label class="custom-control-label" for="item30">Earplug</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item31">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item31">
                             <label class="custom-control-label" for="item31">Sarung tangan 20kV</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="peralatan[]" value = "{{$peralatan->description}}" class="custom-control-input" id="item32">
+                            <input type="checkbox" name="peralatan[]" value = "" class="custom-control-input" id="item32">
                             <label class="custom-control-label" for="item32">Lain - lain :</label>
                             <textarea name="participants" name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                           </div>
-                        </td>
+                        </td> -->
                       </tr>
                       <tr>
                         <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
