@@ -91,22 +91,22 @@
                             </div>
                           </div>
                           <div class="col-md-12">
-                            <button type="button" class="tambah_hirarc btn btn-primary">
+                            <button type="button" class="tambah_hirarc btn btn-primary btn-sm">
 												      <i class="la la-plus-circle"></i> Tambah Data
 												    </button>
                           </div>
-                          <table id="tbl-hirac" style="width:100%" class="table table-striped table-bordered table-hover add-rows">
+                          <table id="tbl-hirac" class="table table-striped table-bordered table-hover add-rows">
 								          <thead>
                             <tr>
-                              <th rowspan="2" width="1%" style="text-align:center;text-align: center;vertical-align: middle;"><i class="fa fa-trash-o"></i></th>	
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="15%">KEGIATAN</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">POTENSI BAHAYA</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">RESIKO</th>
-                              <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size: 11px;" width="10%">PENILAIAN RESIKO</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="20%">PENGENDALIAN RESIKO</th>
-                              <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size: 11px;" width="10%">PENGENDALIAN RESIKO</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="7%">STATUS PENGENDALIAN</th>
-                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;" width="10%">PENANGGUNG JAWAB</th>
+                              <th rowspan="2" style="text-align:center;text-align: center;vertical-align: middle;"><i class="fa fa-trash-o"></i></th>	
+                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;">KEGIATAN</th>
+                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;">POTENSI BAHAYA</th>
+                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;">RESIKO</th>
+                              <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size:">PENILAIAN RESIKO</th>
+                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;">PENGENDALIAN RESIKO</th>
+                              <th colspan="2" style="text-align: center;border-bottom: 1px solid #ccc;font-size: 11px;">PENGENDALIAN RESIKO</th>
+                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;">STATUS PENGENDALIAN</th>
+                              <th rowspan="2" style="font-size: 11px;text-align: center;vertical-align: middle;">PENANGGUNG JAWAB</th>
                             </tr>
                             <tr>
                               <td align="center">Konsekuensi</td>
@@ -118,7 +118,7 @@
                           </thead>
                           <tbody id="konten_hirarc">
                             <tr>
-                              <td></td>
+                              <td><button class="btn-danger btn-sm disabled"><i class="la la-trash-o"></i></button></td>
                               <td><input type="text" class="form-control" name="kegiatan_hirarc[]"></td>
                               <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
                               <td><input type="text" class="form-control" name="resiko_hirarc[]"></td>
@@ -181,7 +181,7 @@
                             </h5>
                           </div>
                           <div class="col-md-12">
-                            <button type="button" class="tambah_pelaksana btn btn-primary btn-icon">
+                            <button type="button" class="tambah_pelaksana btn btn-primary btn-icon btn-sm">
 												      <i class="la la-user-plus"></i> Tambah Data
 												    </button>
                             <p></p>
@@ -338,7 +338,7 @@
                             </h5>
                           </div>
                           <div class="col-md-12">
-                            <button type="button" class="tambah_analisis btn btn-primary btn-icon">
+                            <button type="button" class="tambah_analisis btn btn-primary btn-icon btn-sm">
 												      <i class="la la-plus-circle"></i> Tambah Data
 												    </button>
                             <p></p>
@@ -355,10 +355,10 @@
                             </thead>
                             <tbody id="konten-analisis">
                               <tr>
-                                <td><input type="text" class="form-control input-sm" name="langkah_pekerjaan[]"></td>
-                                <td><input type="text" class="form-control input-sm" name="potensi_bahaya[]"></td>
-                                <td><input type="text" class="form-control input-sm" name="resiko[]"></td>
-                                <td><input type="text" class="form-control input-sm" name="tindakan[]"></td>
+                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]"></td>
+                                <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
+                                <td><input type="text" class="form-control" name="resiko[]"></td>
+                                <td><input type="text" class="form-control" name="tindakan[]"></td>
                                 <td></td>
                               </tr>
                             </tbody>
@@ -836,11 +836,21 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#tbl-hirac').DataTable( {
+    $('#tbl-hirac').removeAttr('width').DataTable( {
         "scrollX": true,
         "searching": false,
         "info": false,
         "paging": false,
+        "ordering": false,
+        "columnDefs": [
+          { "width": "12px", "targets": 0 },
+          { "width": "250px", "targets": 1 },
+          { "width": "250px", "targets": 2 },
+          { "width": "150px", "targets": 3 },
+          { "width": "150px", "targets": 6 },
+          { "width": "150px", "targets": 9 },
+          { "width": "150px", "targets": 10 },
+        ],
     } );
 } );
 
@@ -918,7 +928,7 @@ $(".tambah_hirarc").click(function(){
   kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="pengendalian_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';
   $('#konten_hirarc').append(
     '<tr class="baris_hirarc">'
-        +'<td align="center" style="vertical-align:middle;"><button type="button" id="hapus" class="btn hapus_in btn-xs red"><i class="fa fa-trash-o"></i></button></td>'
+        +'<td align="center" style="text-align:center;text-align: center;vertical-align: middle;"><button type="button" id="hapus" class="btn hapus_in btn-danger btn-sm"><i class="la la-trash-o"></i></button></td>'
         +'<td><input type="input" name="kegiatan_hirarc[]" class="form-control"></td>'
         +'<td><input type="text" class="form-control" name="potensi_bahaya[]" /></td>'
         +'<td><input type="input" name="resiko_hirarc[]" class="form-control"></td>'

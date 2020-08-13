@@ -79,9 +79,21 @@ class TemplateController extends BaseController
         //$unit = Session::get('sel_unit');
         $comp_code = Auth::user()->comp_code;
         $year = date('y');
+        $id_template = '61000007';
         $new_id = $this->wpModel->generateTemplateId($comp_code);
-        
-        return response()->json([$new_id]);
+        //$peralatan = collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray();
+        $peralatan = $this->wpModel->getPeralatanTemplate($id_template)->pluck('description')->toArray;
+
+        /*
+
+        if (in_array('Earpslug', $peralatan)) {
+            $ket = 'ada';
+        } else {
+            $ket = 'gada';
+        }
+        */
+        //return response()->json($ket);
+        return $peralatan;
     }
 
     public function template(Request $request)
@@ -92,8 +104,11 @@ class TemplateController extends BaseController
     public function add_template(Request $request)
     {
         $unitData  = $this->wpModel->getUnitType();
+        $mstCat1  = $this->wpModel->getMstPeralatan1();
         return view('wp/add-template',
-        ['unitType' => $unitData]);
+            ['unitType' => $unitData],
+            ['mstCat1' => $mstCat1]
+        );
     }
 
     public function template_store(Request $request)
@@ -179,12 +194,12 @@ class TemplateController extends BaseController
     {
         $data = [
             'detail'            => $this->wpModel->getDetailTemplate($id_template),
-            //'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_template),
             'tbl_hirarc'        => $this->wpModel->getHirarcTemplate($id_template),
             //'tbl_jsa'           => $this->wpModel->getJsa($id_template),
-            //'peralatan'         => $this->wpModel->getPeralatan($id_template),
+            'peralatan'         => collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray(),
             'unitType'          => $this->wpModel->getUnitType(),
             'selectedID'        => $this->wpModel->getDetailTemplate($id_template)->jenis_template,
+            'arraylist'        => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi"),
          ];
 
         return view('wp/edit-template', $data);

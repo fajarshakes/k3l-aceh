@@ -179,6 +179,16 @@ class WpModel extends Model
       WHERE mc.cat_unit = '$unit'");
   }
 
+  public function getMstPeralatan1(){
+    
+    $value=DB::table('master_peralatan_keselamatan')
+    ->where('category', '=', 1)
+    ->where('status', '=', 1)
+    ->get();
+
+    return $value;
+  }
+  
   public function getPeralatan(string $id_wp){
     
     $value=DB::table('peralatan_keselamatan')
@@ -186,7 +196,17 @@ class WpModel extends Model
     ->get();
 
     return $value;
-}
+  }
+
+  public function getPeralatanTemplate(string $id_wp){
+    
+    $value=DB::table('peralatan_keselamatan_template')
+    ->select('*')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+
+    return $value;
+  }
 
   public function getTemplate(string $idunit)
   {

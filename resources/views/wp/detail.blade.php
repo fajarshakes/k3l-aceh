@@ -699,16 +699,14 @@
                         <td colspan="4" class="text-left"><strong>FILE PDF</strong></td>
                       </tr>
                       <tr>
-                        <td><button class="btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> BPJS Kesehatan dan Tenaga Kerja</button></td>
-                        <td>BPJS Kesehatan dan Tenaga Kerja</td>
-                        <td>BPJS Kesehatan dan Tenaga Kerja</td>
-                        <td>BPJS Kesehatan dan Tenaga Kerja</td>
+                        <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Prosedur Kerja</button></td>
+                        <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> BPJS Kesehatan dan Tenaga Kerja</button></td>
+                        <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> SK Pengawas & Pelaksana Pekerjaan</button></td>
+                        <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Sertifikat Kompetensi TK</button></td>
                       </tr>
                       <tr>
-                        <td>BPJS Kesehatan dan Tenaga Kerja</td>
-                        <td>BPJS Kesehatan dan Tenaga Kerja</td>
-                        <td>BPJS Kesehatan dan Tenaga Kerja</td>
-                        <td>BPJS Kesehatan dan Tenaga Kerja</td>
+                        <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> List Peralatan & APD</button></td>
+                        <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Tenaga Ahli K3</button></td>
                       </tr>
                       
                       

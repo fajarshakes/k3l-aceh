@@ -14,8 +14,21 @@
 	h1,h2 { padding:0; margin:0; text-align:center } 
 	h3 { padding:0; margin:0;} 
 	h1 { font-size:20px; }
-	h2 { font-size:18px; }
+	h2 { font-size:18px;}
 	h3 { font-size:14px; }
+	.kecil2{font-size: 8px;}
+	.kecil3{font-size: 7px;}
+
+	.print {
+    border-collapse: collapse;
+    width: 100%
+	}
+	
+	.print td, th {
+    border: 1px solid #000000;
+    padding: 3px;
+    color: #000000;
+	}
 	
 	td { vertical-align:top }
 	
@@ -25,7 +38,7 @@
 	#header td {font-size:12px; vertical-align:middle }
 	
 	.tbl1 {text-align:left; width:100%; border:1px; border:1px solid black; ; border-bottom:2px solid black}
-	.tbl1_n {width:100%; border:0; border:1px solid black; ; border-bottom:2px solid black}
+	.tbl1_n {width:100%; border:1px border:1px solid black; ; border-bottom:2px solid black}
 	.tbl_sign {text-align:center; width:100%; border:0; border:1px solid black; ; border-bottom:2px solid black}
 	.tbl1 .c1 { border:0; padding:3px 3px 3px 8px; width:130px; border-top:1px solid black}
 	.tbl1 .c2 { border:0; padding:3px; width:20px; text-align:center; border-top:1px solid black }
@@ -50,27 +63,35 @@
 	<table width=100% bgcolor=#800000>
 		<tr>
 			<td>
-				dsdsds
+				<u>Untuk Mencetak dengan sempurna, setting pada page setup yaitu:</u> <br />
+				Margin --> Top : <b>0.1 inch</b>, Left/Right : <b>0.3 inch</b>, Bottom : <b>0.3 inch</b><br />
+				Kertas --> A4 / Folio
 			</td>
 			<td align=right><button onclick="window.print()">Cetak Halaman Ini</button></td>
 		</tr>
 	</table>
 </div>
 
-<table class=tbl1_n cellpadding=2 cellspacing=2 border=0>
+<table class=tbl1_n cellpadding=2 cellspacing=0 border=1 width="100%">
 	<thead>
 		<tr>
-			<td rowspan="3" class="text-center" width="20%">
+			<td style="border-right: 1px solid #fff !important;" align="center" rowspan="3" class="text-center" width="10%">
 				<img width="60" src="../../../images/app_images/logo_pln.png" />
 			</td>
-			<td rowspan="3" class="text-left" width="20%">
+			<td style="border-left: 1px solid #fff !important;" rowspan="3" class="text-center" width="20%">
 				<h4>PT PLN (Persero) UNIT INDUK WILAYAH ACEH</h4>
 				<h4>UP3 XXXXXX</h4>
 				<p>JALAN XXXXX</p>
 			</td>
-			<td rowspan="3" class="text-center" width="20%"><h3>PROSEDUR SMK3</h3></td>
-			<td rowspan="2" class="text-center" width="20%">NO DOKUMEN :</td>
-			<td class="text-center" width="20%">HAL :</td>
+			<td rowspan="3" width="40%">
+				<p></p>
+				</br>
+				<p></p>
+				<p></p>
+				<p></p>
+				<h2 vertical-align="middle">PROSEDUR SMK3</h2></td>
+			<td rowspan="2" class="text-center" width="15%">NO DOKUMEN :</td>
+			<td class="text-center" width="15%">HAL :</td>
       </tr>
 	  <tr>
 	  	<td class="text-center">FR.R.R.X.0.0 </td>
@@ -81,8 +102,9 @@
 	  </tr>
 	</thead>
 </table>
+
 </br>
-<table class=tbl1 cellpadding=3 cellspacing=0 border=1 style="width: 100%">
+<table class=print cellpadding=3 cellspacing=0 border=1 style="width: 100%">
 	<tr>
 		<th colspan="12" style="text-align: center;">
 		<h3>
@@ -101,7 +123,7 @@
 		<th rowspan="2" style="text-align: center; vertical-align: middle;">Status Pengendalian</th>
 		<th rowspan="2" style="text-align: center; vertical-align: middle;">Penanggung Jawab</th>
 	</tr>
-	<tr>
+	<tr class="kecil2">
 		<th style="text-align: center;">Konsekuensi</th>
 		<th style="text-align: center;">Kemungkinan</th>
 		<th style="text-align: center;">Tingkat Resiko</th>
@@ -112,7 +134,7 @@
 	</tr>
 	<tbody>
 	@foreach($tbl_hirarc as $row_data)
-		<tr>
+		<tr class="kecil2">
 			<td>{{ $row_data->kegiatan }}</td>
 			<td>{{ $row_data->potensi_bahaya }}</td>
 			<td>{{ $row_data->resiko }}</td>
@@ -131,7 +153,114 @@
 	</tbody>
 </table>
 </br>
-<table class=tbl_sign cellpadding=2 cellspacing=2 border=0>
+
+<table style="width:100%">
+	<tr>
+		<td align="left" width="50%">
+			<table style="width:99%" style="margin: 10px;"  class="print">
+				<thead>
+					<tr class="kecil2">
+						<th colspan="3" style="text-align: center;border-bottom: 1px solid #000;">PENJELASAN</th>
+					</tr>
+					<tr class="kecil3">
+						<th style="text-align: center;">TINGKAT RESIKO</th>
+						<th style="text-align: center;">KEMUNGKINAN</th>
+						<th style="text-align: center;">KONSEKUENSI</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="kecil3">
+						<td>E = Extreme Risk</td>
+						<td>A = Hampir pasti akan terjadi / Almost Certain</td>
+						<td>1 = Tidak ada cedera, Kerugian materi kecil</td>
+					</tr>
+					<tr class="kecil3">
+						<td>H = High Risk</td>
+						<td>B = Cenderung untuk terjadi / Likely</td>
+						<td>2 = Cedera ringan / P3K, Kerugian cukup materi sedang</td>
+					</tr>
+
+					<tr class="kecil2">
+						<td>M = Moderate Risk</td>
+						<td>C = Mungkin dapat terjadi / Moderate</td>
+						<td>3 = Hilang hari kerja, kerugian cukup besar</td>
+					</tr>
+
+					<tr class="kecil2">
+						<td>L = Low Risk</td>
+						<td>D = Kecil kemungkinan terjadi / Unlikely</td>
+						<td>4 = Cacat, Kerugian materi besar</td>
+					</tr>
+
+					<tr class="kecil2">
+						<td></td>
+						<td>E = Jarang Terjadi / Rare</td>
+						<td>5 = Kematian, Kerugian materia sangat besar</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</td>
+		<td align="right" width="50%">
+			<table style="width:99%" style="margin: 10px;" class="print">
+				<thead>
+					<tr class="kecil2">
+						<th colspan="2" style="text-align: center;">DAFTAR POTENSI BAHAYA</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="kecil3">
+						<td width="30%">Bahaya Fisik</td>
+						<td width="70%">Pencahayaan, Getaran, Kebisingan, Ketinggian</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Kimia</td>
+						<td width="70%">Gas, Asap, Uap, Bahan Kimia Berbahaya</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Biologi</td>
+						<td width="70%">Micro Biologi(Virus, Bakteri, Jamur, dll); Macro Biologi(Hewan, Serangga, Tumbuhan)</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Ergonomi</td>
+						<td width="70%">Stress Fisik (Gerakan Berulang, Ruang Sempit, Menfosir Tenaga)</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Mekanis</td>
+						<td width="70%">Titik Jepit, Putaran Pulley atau Roller</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Elektris</td>
+						<td width="70%">Kabel terkelupas, Kabel bertegangan tanpa pengaman dll</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Psikososial</td>
+						<td width="70%">Trauma, Intimidasi, Pola promosi jabatan yang salah, Stress Mental (Jenuh/Bosan, Overload)</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Tingkah Laku</td>
+						<td width="70%">Tidak patuh terhadap peraturan, overconfident, sok tahu, tidak peduli</td>
+					</tr>
+
+					<tr class="kecil3">
+						<td width="30%">Bahaya Lingkungan Sekitar</td>
+						<td width="70%">Kemiringan permukaan, cuaca yang tidak ramah, permukaan jalan kecil.</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</td>
+	</tr>
+</table>
+</br>
+<table class="tbl_sign" cellpadding=2 cellspacing=2 border=0>
 	<thead>
 		<tr>
 			<td class="text-center" width="20%">
@@ -141,7 +270,7 @@
 				<strong>DIPERIKSA OLEH :</strong>
 			</td>
 			<td class="text-center" width="20%">
-				<strong>DISETUJUI OLEH :</strong>
+				<strong>DIPERIKSA OLEH :</strong>
 			</td>
 			<td class="text-center" width="20%">
 				<strong>DISUSUN OLEH :</strong>
@@ -149,29 +278,29 @@
       </tr>
 	  <tr>
 	  	<td>
-			<img width="80" src="../../../images/app_images/qr_code.png" />
+			{!! QrCode::size(60)->generate('Manager :' . strtoupper($detailWp->manager) . '; Date :' . $detailWp->tgl_approval1 ) !!}
 		</td>
 		<td>
-			<img width="80" src="../../../images/app_images/qr_code.png" />
+			{!! QrCode::size(60)->generate('Pejabat K3L :' . strtoupper($detailWp->pejabat_k3l) . '; Date :' . $detailWp->tgl_approval2 ) !!}
 		</td>
 		<td>
-			<img width="80" src="../../../images/app_images/qr_code.png" />
+			{!! QrCode::size(60)->generate('Supervisor :' . strtoupper($detailWp->supervisor) . '; Date :' . $detailWp->tgl_approval3 ) !!}
 		</td>
 		<td>
-			<img width="80" src="../../../images/app_images/qr_code.png" />
+			{!! QrCode::size(60)->generate('Pengawas :' . strtoupper($detailWp->pengawas_pekerjaan) . '; Date :' . $detailWp->tgl_pengajuan ) !!}
 		</td>
 	  </tr>
 	  <tr>
-	  	<td class="text-center"><strong>( NAMA 1 )</strong></td>
-	  	<td class="text-center"><strong>( NAMA 2 )</strong></td>
-	  	<td class="text-center"><strong>( NAMA 3 )</strong></td>
-	  	<td class="text-center"><strong>( NAMA 4 )</strong></td>
+	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->manager) }} )</strong></td>
+	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->pejabat_k3l) }} )</strong></td>
+	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->supervisor) }} )</strong></td>
+	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->pengawas_pekerjaan) }} )</strong></td>
 	  </tr>
 	  <tr>
-	  	<td class="text-center"><small>SEBUTAN JABATAN 1</small></td>
-	  	<td class="text-center"><small>SEBUTAN JABATAN 2</small></td>
-	  	<td class="text-center"><small>SEBUTAN JABATAN 3</small></td>
-	  	<td class="text-center"><small>SEBUTAN JABATAN 4</small></td>
+	  	<td class="text-center"><small>MANAGER BAGIAN</small></td>
+	  	<td class="text-center"><small>PEJABAT K3</small></td>
+	  	<td class="text-center"><small>SUPERVISOR</small></td>
+	  	<td class="text-center"><small>PENGAWAS PEKERJAAN</small></td>
 	  </tr>
 	</thead>
 </table>

@@ -179,19 +179,35 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Helm" class="custom-control-input" id="item21">
+                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item21" >
                                         <label class="custom-control-label" for="item21">Helm</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sepatu Keselamatan" class="custom-control-input" id="item22">
+                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item22">
                                         <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                                       </div>
+                                      
+                                      
+                                      @foreach($peralatan as $type => $value)
+                                        {{ $value }}
+
+                                        @if(in_array('Earplug', $arraylist)) ada @else ga ada @endif
+                                      @endforeach
+
+                                      @foreach($arraylist as $type => $value1)
+                                        {{ $value1 }}
+
+                                      @endforeach
+
+                                      
+
+
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Kacamata" class="custom-control-input" id="item23">
+                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item23">
                                         <label class="custom-control-label" for="item23">Kacamata</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Earplug" class="custom-control-input" id="item24">
+                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item24">
                                         <label class="custom-control-label" for="item24">Earplug</label>
                                       </div>
                                     </div>
