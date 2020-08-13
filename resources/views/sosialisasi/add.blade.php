@@ -50,12 +50,24 @@
                     </ul>
                   </div>
                 </div>
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <div id="geoloc5"></div>
+                        <div id="fixedMapCont" class="height-450"></div>
+                        <input id="geolat" type="hidden" value="" size="20"  class="form-control"/>
+                        <input id="geolng" type="hidden" value="" size="20"  class="form-control"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="card-content collapse show">
                 <form id="form_menu" method="post" enctype="multipart/form-data" class="icons-tab-steps-1 wizard-circle">
                 @csrf  
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-xl-6 col-lg-12">
+                      <div class="col-xl-6">
                         <fieldset>
                           <h5>LOKASI SOSIALISASI
                           </h5>
@@ -143,21 +155,20 @@
                         </form>
                         </fieldset>
 
-                        <fieldset style="padding-bottom: 15px;">
+                        <!-- <fieldset style="padding-bottom: 15px;">
                           <h5 id="geoloc5">MAPS</h5>
-                            <!-- <div id="world-map-gdp" style="height: 423px;"></div> -->
-                            <div id="fixedMapCont" style="border: 1px solid #cacfe7; border-radius: 0.25rem; height: 423px"></div>
-                        </fieldset>
+                          <div id="fixedMapCont" style="border: 1px solid #cacfe7; border-radius: 0.25rem; height: 423px"></div>
+                        </fieldset> -->
                         <fieldset>
                           <h5>LAT / LONG</h5>
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                                <input id="geolat" name="latitude" type="text" class="form-control" />
+                                <input id="new-geolat" name="latitude" type="text" class="form-control" />
                                 <small class="text-muted">Latitude</small>
                             </div>
                             <div class="col-md-6">
-                                <input id="geolng" name="longitude" type="text" class="form-control">
+                                <input id="new-geolng" name="longitude" type="text" class="form-control">
                                 <small class="text-muted">Longitude</small>
                             </div>
                           </div>
@@ -192,7 +203,13 @@ $('#geoloc5').leafletLocationPicker({
 	$(this)
 	.siblings('#geolat').val( e.latlng.lat )
 	.siblings('#geolng').val( e.latlng.lng )
-	.siblings('#address').text('"'+e.location+'"');
+  .siblings('#address').text('"'+e.location+'"');
+  
+var geolat = document.getElementById("geolat").value;
+var geolng = document.getElementById("geolng").value;
+
+document.getElementById('new-geolat').value = geolat ;
+document.getElementById('new-geolng').value = geolng ;
 });
 
 

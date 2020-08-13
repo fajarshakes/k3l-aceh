@@ -51,6 +51,16 @@
                   </div>
                 </div>
                 <div class="card-content">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-xl-12">
+                        <div id="geoloc5"></div>
+                        <div id="fixedMapCont" class="height-450"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-content">
                   <table id="table-permohonan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
@@ -207,6 +217,17 @@
       </div>
 </div>
 
+<script>
+$('#geoloc5').leafletLocationPicker({
+		alwaysOpen: true,
+		mapContainer: "#fixedMapCont"
+}).on('changeLocation', function(e) {
+	$(this)
+	.siblings('#geolat').val( e.latlng.lat )
+	.siblings('#geolng').val( e.latlng.lng )
+	.siblings('#address').text('"'+e.location+'"');
+});
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {

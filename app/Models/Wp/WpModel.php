@@ -90,6 +90,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public static function getDetailTemplate(string $id_template){
+
+    $value=DB::table('working_permit_template')
+    ->where('id_template', '=', $id_template)
+    ->first();
+
+    return $value;
+  }
+
   public static function getPelaksanaKerja(string $id_wp){
 
     $value=DB::table('pelaksana_pekerjaan')
@@ -102,6 +111,15 @@ class WpModel extends Model
   public static function getHirarc(string $id_wp){
 
     $value=DB::table('tbl_hirarc')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+
+    return $value;
+  }
+
+  public static function getHirarcTemplate(string $id_wp){
+
+    $value=DB::table('tbl_hirarc_template')
     ->where('id_wp', '=', $id_wp)
     ->get();
 

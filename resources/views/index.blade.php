@@ -428,7 +428,11 @@
               <div class="card-content">
                 <div class="row">
                   <div class="col-md-9 col-12">
-                    <div id="world-map-markers" class="height-450"></div>
+                    <div id="geoloc5"></div>
+                    <div id="fixedMapCont" class="height-450"></div>
+                    <input id="geolat" type="text" value="" size="20"  class="form-control"/>
+                    <br>
+                    <input id="geolng" type="text" value="" size="20"  class="form-control"/>
                   </div>
                   <div class="col-md-3 col-12">
                     <div class="card-body text-center">
@@ -522,6 +526,20 @@
             </div>
           </div>
         </div>
+
+<script>
+
+$('#geoloc5').leafletLocationPicker({
+		alwaysOpen: true,
+		mapContainer: "#fixedMapCont"
+}).on('changeLocation', function(e) {
+	$(this)
+	.siblings('#geolat').val( e.latlng.lat )
+	.siblings('#geolng').val( e.latlng.lng )
+	.siblings('#address').text('"'+e.location+'"');
+console.log(e.location);
+});
+</script>
 
 <script type="text/javascript">
     $(window).on('load',function(){

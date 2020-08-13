@@ -67,15 +67,15 @@
                               <label for="location2">JENIS TEMPLATE :</label>
                               <select class="custom-select form-control" name="jenis_template">
                                 <option value="">Pilih Unit</option>
-                                @foreach($unitType as $type)
-                                    <option value="{{ $type->UNIT_TYPE }}">{{ $type->UNIT_TYPE .' - '. $type->TYPE_NAME }}</option>
+                                @foreach($unitType as $type => $value)
+                                    <option value="{{ $value->UNIT_TYPE }}" {{ $value->UNIT_TYPE == $selectedID ? 'selected' : '' }}> {{ $value->UNIT_TYPE .' - '. $value->TYPE_NAME }}</option>
                                 @endforeach
                               </select>
                             </div>
                          
                             <div class="form-group">
                               <label for="location2">NAMA TEMPLATE :</label>
-                              <input type="text" class="form-control" name="nama_template">
+                              <input type="text" class="form-control" name="nama_template" value="{{$detail ? $detail->nama_template : ''}}">
                             </div>
                             </div>
                             <div class="col-md-12">
@@ -106,55 +106,53 @@
                                 </tr>
                               </thead>
                               <tbody id="konten_hirarc">
+                              @foreach($tbl_hirarc as $data)
                                 <tr>
                                   <td><button class="btn-danger btn-sm disabled"><i class="la la-trash-o"></i></button></td>
-                                  <td><input type="text" class="form-control" name="kegiatan_hirarc[]"></td>
-                                  <td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]"></td>
-                                  <td><input type="text" class="form-control" name="resiko_hirarc[]"></td>
+                                  <td><input type="text" class="form-control" name="kegiatan_hirarc[]" value="{{$data ? $data->kegiatan : ''}}"></td>
+                                  <td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]" value="{{$data ? $data->potensi_bahaya : ''}}"></td>
+                                  <td><input type="text" class="form-control" name="resiko_hirarc[]" value="{{$data ? $data->resiko : ''}}"></td>
                                   <td>
                                     <select class="form-control select2me paket_harga required" name="nilai_konsekuensi_hirarc[]">
-                                    <option value="">PILIH</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
+                                      <option value="1" {{ $data->penilaian_konsekuensi == '1' ? 'selected' : '' }}>1</option>
+                                      <option value="2" {{ $data->penilaian_konsekuensi == '2' ? 'selected' : '' }}>2</option>
+                                      <option value="3" {{ $data->penilaian_konsekuensi == '3' ? 'selected' : '' }}>3</option>
+                                      <option value="4" {{ $data->penilaian_konsekuensi == '4' ? 'selected' : '' }}>4</option>
+                                      <option value="5" {{ $data->penilaian_konsekuensi == '5' ? 'selected' : '' }}>5</option>
                                   </select>
                                   </td>
                                   <td>
                                     <select class="custom-select form-control" name="nilai_kemungkinan_hirarc[]">
-                                    <option value="">PILIH</option>
-                                      <option value="A">A</option>
-                                      <option value="B">B</option>
-                                      <option value="C">C</option>
-                                      <option value="D">D</option>
-                                      <option value="E">E</option>
+                                      <option value="A" {{ $data->penilaian_kemungkinan == 'A' ? 'selected' : '' }}>A</option>
+                                      <option value="B" {{ $data->penilaian_kemungkinan == 'B' ? 'selected' : '' }}>B</option>
+                                      <option value="C" {{ $data->penilaian_kemungkinan == 'C' ? 'selected' : '' }}>C</option>
+                                      <option value="D" {{ $data->penilaian_kemungkinan == 'D' ? 'selected' : '' }}>D</option>
+                                      <option value="E" {{ $data->penilaian_kemungkinan == 'E' ? 'selected' : '' }}>E</option>
                                   </select>
                                   </td>
-                                  <td><input type="text" class="form-control" name="pengendalian_resiko_hirarc[]"></td>
+                                  <td><input type="text" class="form-control" name="pengendalian_resiko_hirarc[]" value="{{$data ? $data->pengendalian_resiko : ''}}"></td>
                                   <td>
                                     <select class="custom-select form-control" name="kendali_konsekuensi[]">
-                                    <option value="">PILIH</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
+                                      <option value="1" {{ $data->pengendalian_konsekuensi == '1' ? 'selected' : '' }}>1</option>
+                                      <option value="2" {{ $data->pengendalian_konsekuensi == '2' ? 'selected' : '' }}>2</option>
+                                      <option value="3" {{ $data->pengendalian_konsekuensi == '3' ? 'selected' : '' }}>3</option>
+                                      <option value="4" {{ $data->pengendalian_konsekuensi == '4' ? 'selected' : '' }}>4</option>
+                                      <option value="5" {{ $data->pengendalian_konsekuensi == '5' ? 'selected' : '' }}>5</option>
                                   </select>
                                   </td>
                                   <td>
                                     <select class="custom-select form-control" name="kendali_kemungkinan[]">
-                                    <option value="">PILIH</option>
-                                      <option value="A">A</option>
-                                      <option value="B">B</option>
-                                      <option value="C">C</option>
-                                      <option value="D">D</option>
-                                      <option value="E">E</option>
+                                      <option value="A" {{ $data->pengendalian_kemungkinan == 'A' ? 'selected' : '' }}>A</option>
+                                      <option value="B" {{ $data->pengendalian_kemungkinan == 'B' ? 'selected' : '' }}>B</option>
+                                      <option value="C" {{ $data->pengendalian_kemungkinan == 'C' ? 'selected' : '' }}>C</option>
+                                      <option value="D" {{ $data->pengendalian_kemungkinan == 'D' ? 'selected' : '' }}>D</option>
+                                      <option value="E" {{ $data->pengendalian_kemungkinan == 'E' ? 'selected' : '' }}>E</option>
                                   </select>
                                   </td>
-                                  <td><input type="text" class="form-control" name="status_pengendalian[]"></td>
-                                  <td><input type="text" class="form-control" name="penanggung_jawab[]"></td>
+                                  <td><input type="text" class="form-control" name="status_pengendalian[]" value="{{$data ? $data->status_pengendalian : ''}}"></td>
+                                  <td><input type="text" class="form-control" name="penanggung_jawab[]" value="{{$data ? $data->penanggung_jawab : ''}}"></td>
                                 </tr>
+                              @endforeach
                               </tbody>
                             </table>
                         </div>
