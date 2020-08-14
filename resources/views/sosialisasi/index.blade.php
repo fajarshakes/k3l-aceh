@@ -345,5 +345,10 @@ $('#form_menu').on('submit', function(event){
       }
 
     });
+
+    $(document).on('click', '.edit', function(){
+      var id = $(this).attr('id');
+      location.href='/sosialisasi/edit_sosialisasi/' + id + '';
+    });
 </script>
 @endsection

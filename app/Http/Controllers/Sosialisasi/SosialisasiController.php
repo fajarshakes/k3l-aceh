@@ -127,6 +127,46 @@ class SosialisasiController extends BaseController
         ]);
 
         return response()->json(['success' => 'Data Added successfully.']);
-        }
+    }
    
+    public function get_detail_sosialisasi()
+    {
+        $id = $_GET['id'];
+        $data = DB::table('peta_sosialisasi')
+        ->select('peta_sosialisasi.*')
+        ->where('peta_sosialisasi.id','=',$id)
+        ->get();
+        
+        return response()->json(['data' => $data]);
+    }
+
+    public function sosialisasi_delete(Request $request)
+    {
+        $id_tpl = $request->del_hidden_id;
+
+        $update = DB::table('working_permit_template')
+        ->where('id_template', $id_tpl)
+        ->update([
+            'status'         => '0',
+            'deleted_at'  => date('Y-m-d'),
+            'deleted_by' =>  Auth::user()->email
+        ]);
+
+        return response()->json(['success' => 'Data Update successfully.']);
+    }
+
+    public function edit_sosialisasi(Request $request, $id)
+    {
+        $data = [
+            'sosialisasi'            => $this->wpModel->getDetailSosialisasi($id),
+            // //'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_template),
+            // 'tbl_hirarc'        => $this->wpModel->getHirarcTemplate($id_template),
+            // //'tbl_jsa'           => $this->wpModel->getJsa($id_template),
+            // //'peralatan'         => $this->wpModel->getPeralatan($id_template),
+            // 'unitType'          => $this->wpModel->getUnitType(),
+            // 'selectedID'        => $this->wpModel->getDetailTemplate($id_template)->jenis_template,
+         ];
+
+        return view('sosialisasi/edit-sosialisasi', $data);
+    }
 }

@@ -99,6 +99,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public static function getDetailSosialisasi(string $id){
+
+    $value=DB::table('peta_sosialisasi')
+    ->where('id', '=', $id)
+    ->first();
+
+    return $value;
+  }
+
   public static function getPelaksanaKerja(string $id_wp){
 
     $value=DB::table('pelaksana_pekerjaan')
