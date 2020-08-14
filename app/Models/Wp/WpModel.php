@@ -217,6 +217,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getKlasifikasi(string $id_wp){
+    
+    $value=DB::table('klasifikasi_pekerjaan')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+  
+    return $value;
+  }
+
   public function getTemplate(string $idunit)
   {
 

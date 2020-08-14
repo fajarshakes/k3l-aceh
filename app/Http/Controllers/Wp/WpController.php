@@ -55,6 +55,21 @@ class WpController extends BaseController
                             'Sepatu Keselamatan', 'Pelampung / Life Vest', 'Tabung pernafasan',
                             'Kacamata', 'Sarung tangan karet', 'Earplug', 'Sarung tangan 20kV',
                             'Lain - lain'];
+        
+        $masterKeselamatan = ['Kotak P3K', 'Rambu Keselamatan', 'LOTO (lock out tag out)', 
+                            'Radio Telekomunikasi', 'Lain - lain'];
+
+        $masterKeselamatan = ['Kotak P3K', 'Rambu Keselamatan', 'LOTO (lock out tag out)', 
+                            'Radio Telekomunikasi', 'Lain - lain'];
+
+        // $Klasifikasi = ['Pemasangan LBS/Recloser/FDI', 'Pemasangan kubikel 20KV', 'Pemeliharaan Kubikel', 
+        //                 'Pengujian Relay Proteksi', 'Penggantian Relay Proteksi', 
+        //                 'Pemasangan Power Meter', 'Pemasangan KWH Meter', 'Pemeliharaan RTU GH/GI', 
+        //                 'Pemasangan Catu Daya', 'Pemasangan Radio Komunikasi', 'Pemeliharaan Radio Komunikasi', 'Sipil'];
+
+        // $Prosedur   =  ['Pemasangan dan Penggantian Cubicle 20 KV', 'Pemeliharaan Cubicle Gardu Hubung 20 KV', 'Pemasangan LBS dan RECLOSER', 
+        //                 'Pemeliharaan RTU dan Peripheral', 'Pengujian Control Scada', 'Pemeliharaan Repeater Komunikasi',
+        //                 'Perluasan Gardu Hubung 20 KV', 'Pengujian Alat', 'Pemasangan Proteksi'];                   
 
         $data = [
             'detailWp'          => $this->wpModel->getDetailWp($id_wp),
@@ -62,7 +77,11 @@ class WpController extends BaseController
             'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
             'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
             'peralatan'         => $this->wpModel->getPeralatan($id_wp),
+            'klasifikasi'       => $this->wpModel->getKlasifikasi($id_wp),
             'mperalatan'        => $masterPeralatan,
+            'mkesalamatan'      => $masterKeselamatan,
+            // 'mklasifikasi'       => $Klasifikasi,
+            // 'mprosedur'          => $Prosedur,
             //'tempStatus'      => $sales->CheckTempId($temp_id),
             //'group'           => $v,
          ];
@@ -163,11 +182,12 @@ class WpController extends BaseController
         //$unit = $this->wpModel->getUnitName($cd_unit)->UNIT_NAME;
         $unit = $this->wpModel->getDetailWp($id_wp);
         $idwp = '6116200031';
-        $peralatan = $this->wpModel->getPeralatan($id_wp);
+        // $peralatan = $this->wpModel->getPeralatan($id_wp);
+        $klasifikasi = $this->wpModel->getKlasifikasi($id_wp);
         //PeralatanKeselamatan::where('id_wp', $idwp)->get();
         
         //return response()->json([$unit->UNIT_NAME]);
-        return response()->json([$peralatan]);
+        return response()->json([$klasifikasi]);
     }
     
     public function wp_store(Request $request)
