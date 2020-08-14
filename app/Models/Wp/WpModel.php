@@ -226,6 +226,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getProsedur(string $id_wp){
+    
+    $value=DB::table('prosedur_pekerjaan')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+  
+    return $value;
+  }
+
   public function getTemplate(string $idunit)
   {
 

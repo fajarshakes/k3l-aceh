@@ -416,8 +416,34 @@
                       <tr>
                         <td colspan="5" class="text-left"><strong>C. KLASIFIKASI PEKERJAAN</strong></td>
                       </tr>
-                      
-                      
+                      <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
+                      </tr>
+                      @foreach($mklasifikasi as $mklas)
+                      @php
+                        $i = 'true';
+                      @endphp
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                          @foreach($klasifikasi as $klas)
+                          @if($mklas == $klas->description)
+                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mklas }}" checked>
+                            {{ $mklas }} 
+                            @php
+                              $i = 'false';
+                            @endphp
+                          @endif
+                          @endforeach
+
+                          @if($i == 'true')
+                          <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mklas }}">
+                          {{ $mklas }} 
+                          @endif
+                          </div>
+                        </td>
+                      </tr>
+                      @endforeach
+
                       </table>
                     </div>
 
@@ -426,68 +452,31 @@
                       <tr>
                         <td colspan="3" class="text-left"><strong>D. PROSEDUR PEKERJAAN YANG TELAH DIJELASKAN KEPADA PEKERJA</strong></td>
                       </tr>
-                      <tr>
-                        <td>
-                        <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" value="Pemasangan dan Penggantian Cubicle 20 KV" class="custom-control-input" id="itm1">
-                            <label class="custom-control-label" for="itm1">Pemasangan dan Penggantian Cubicle 20 KV</label>
-                        </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm2">
-                            <label class="custom-control-label" for="itm2">Pemeliharaan Cubicle Gardu Hubung 20 KV</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm3">
-                            <label class="custom-control-label" for="itm3">Pemasangan LBS dan RECLOSER</label>
-                          </div>
-                        </td>
-                      </tr>
+                      @foreach($mprosedur as $mpro)
+                      @php
+                        $i = 'true';
+                      @endphp
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm4">
-                            <label class="custom-control-label" for="itm4">Pemeliharaan RTU dan Peripheral</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm5">
-                            <label class="custom-control-label" for="itm5">Pengujian Control Scada</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm6">
-                            <label class="custom-control-label" for="itm6">Pemeliharaan Repeater Komunikasi</label>
-                          </div>
-                        </td>
+                          @foreach($prosedur as $pro)
+                          @if($mpro == $pro->description)
+                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mpro }}" checked>
+                            {{ $mpro }} 
+                            @php
+                              $i = 'false';
+                            @endphp
+                          @endif
+                          @endforeach
 
+                          @if($i == 'true')
+                          <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mpro }}">
+                          {{ $mpro }} 
+                          @endif
+                          </div>
+                        </td>
                       </tr>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm7">
-                            <label class="custom-control-label" for="itm7">Perluasan Gardu Hubung 20 KV</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm8">
-                            <label class="custom-control-label" for="itm8">Pengujian Alat</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm9">
-                            <label class="custom-control-label" for="itm9"> Pemasangan Proteksi</label>
-                          </div>
-                        </td>
-                        
-                      </tr>
+                      @endforeach
                       
                       </table>
                     </div>
