@@ -144,7 +144,7 @@ class SosialisasiController extends BaseController
     {
         $id_tpl = $request->del_hidden_id;
 
-        $update = DB::table('working_permit_template')
+        $update = DB::table('peta_sosialisasi')
         ->where('id_template', $id_tpl)
         ->update([
             'status'         => '0',
@@ -168,5 +168,24 @@ class SosialisasiController extends BaseController
          ];
 
         return view('sosialisasi/edit-sosialisasi', $data);
+    }
+
+    public function update_sosialisasi(Request $request)
+    {
+        $store = DB::table('peta_sosialisasi')
+        ->where('id', $request->update_id)
+        ->update([
+            'lokasi'        => $request->lokasi,
+            'judul'         => $request->judul,
+            'deskripsi'     => $request->deskripsi,
+            'jml_peserta'   => $request->jml_peserta,
+            'pic_sosialisasi'   => $request->pic_sosialisasi,
+            'tanggal'       => $request->tanggal,
+            'jam_mulai'     => $request->jam_mulai,
+            'jam_selesai'   => $request->jam_selesai,
+            'latitude'      => $request->latitude,
+            'longitude'     => $request->longitude,
+        ]);
+        return response()->json(['success' => 'Data Added successfully.']);
     }
 }

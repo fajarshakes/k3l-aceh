@@ -65,6 +65,7 @@
                 <div class="card-content collapse show">
                 <form id="form_menu" method="post" enctype="multipart/form-data" class="icons-tab-steps-1 wizard-circle">
                 @csrf  
+                  <input type="hidden" name="update_id" value="{{$sosialisasi ? $sosialisasi->id : ''}}" id="update_id" />
                   <div class="card-body">
                     <div class="row">
                       <div class="col-xl-6">
@@ -219,7 +220,7 @@ $('#form_menu').on('submit', function(event){
       event.preventDefault();
       
       $.ajax({
-          url:"{{ route('sosialisasi_store') }}",
+          url:"{{ route('update_sosialisasi') }}",
           method:"POST",
           data: new FormData(this),
           contentType: false,

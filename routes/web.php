@@ -63,6 +63,7 @@ Route::prefix('sosialisasi')->group(function() {
     Route::get('get_detail_sosialisasi', 'Sosialisasi\SosialisasiController@get_detail_sosialisasi')->name('get_detail_sosialisasi');
     Route::get('edit_sosialisasi/{id}', 'Sosialisasi\SosialisasiController@edit_sosialisasi')->name('edit_sosialisasi');
     Route::post('sosialisasi_delete', 'Sosialisasi\SosialisasiController@sosialisasi_delete')->name('sosialisasi_delete');
+    Route::post('update_sosialisasi', 'Sosialisasi\SosialisasiController@update_sosialisasi')->name('update_sosialisasi');
 
 });
 
