@@ -142,17 +142,12 @@ class SosialisasiController extends BaseController
 
     public function sosialisasi_delete(Request $request)
     {
-        $id_tpl = $request->del_hidden_id;
-
-        $update = DB::table('peta_sosialisasi')
-        ->where('id_template', $id_tpl)
-        ->update([
-            'status'         => '0',
-            'deleted_at'  => date('Y-m-d'),
-            'deleted_by' =>  Auth::user()->email
-        ]);
-
-        return response()->json(['success' => 'Data Update successfully.']);
+        $data = DB::table('peta_sosialisasi')
+        ->where('id', $request->del_hidden_id)
+        //->leftJoin('menu_category', 'menu.cat_cd', '=', 'menu_category.cat_cd')
+        //->where('id','=',$id)
+        ->delete();
+        return response()->json(['success' => 'Data is successfully deleted']);
     }
 
     public function edit_sosialisasi(Request $request, $id)

@@ -61,7 +61,7 @@
                   </div>
                 </div>
                 <div class="card-content">
-                  <table id="table-permohonan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                  <table id="table-sosialisasi" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
@@ -210,6 +210,34 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade text-left" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-info white">
+                <h4 class="modal-title white" id="myModalLabel11">Confirmation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="confirm_form" method="post">
+              @csrf
+              <div class="modal-body">
+                <h5 align="center" style="margin:0;">Are you sure you want to remove this data? <p id="menuname"></p></h5>
+              </div>
+              <input type="hidden" name="del_action" id="del_action" />
+              <input type="hidden" name="del_hidden_id" id="del_hidden_id" />
+
+              
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" name="ok_button" id="ok_button" value="Add" class="btn btn-outline-danger">Yes, Remove !</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
       
         <!-- Modal -->      
       
@@ -238,7 +266,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-var vtable = $('#table-permohonan').DataTable({
+var vtable = $('#table-sosialisasi').DataTable({
    processing: true,
    serverSide: true,
    paging: true,
@@ -325,7 +353,7 @@ $('#form_menu').on('submit', function(event){
               html = data.success;
               $('#form_menu')[0].reset();
               $('#submit_form').modal('hide');
-              $('#datamenu').DataTable().ajax.reload();
+              $('#table-sosialisasi').DataTable().ajax.reload();
              //window.location.href = '/wp/create';
               type_toast = 'success';
               //window.location.href = 'wp/create/' + data.temp_id + '';
@@ -350,5 +378,70 @@ $('#form_menu').on('submit', function(event){
       var id = $(this).attr('id');
       location.href='/sosialisasi/edit_sosialisasi/' + id + '';
     });
+
+    $('#confirm_form').on('submit', function(event){
+      event.preventDefault();
+
+      if($('#del_action').val() == "Delete"){
+        $.ajax({
+          url:"{{ route('sosialisasi_delete') }}",
+          method:"POST",
+          data:new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              type_toast = 'success';
+              $('#confirm_form')[0].reset();
+              //$('#formModal').html('');
+              $('#confirmModal').modal('hide');
+              $('#table-sosialisasi').DataTable().ajax.reload();
+            }
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            }    
+          }
+        });
+      }
+    });
+
+    $(document).on('click', '.delete', function(){
+      var id = $(this).attr('id');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('sosialisasi/get_detail_sosialisasi/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#del_hidden_id').val(html.data[0].id);
+          // $('#menuname').text(html.data[0].menu_name);
+          $('.modal-title').text("Delete Sosialisasi");
+          $('#ok_button').val("Delete");
+          $('#del_action').val("Delete");
+          $('#confirmModal').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+          $('p').append('Error: ' + errorMessage);
+        }
+      })
+    });
+
 </script>
 @endsection
