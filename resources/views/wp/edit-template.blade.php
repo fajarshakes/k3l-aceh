@@ -63,6 +63,7 @@
                       <fieldset>
                         <div class="row">
                           <div class="col-md-6">
+                          {{--
                             <div class="form-group">
                               <label for="location2">JENIS TEMPLATE :</label>
                               <select class="custom-select form-control" name="jenis_template">
@@ -72,6 +73,7 @@
                                 @endforeach
                               </select>
                             </div>
+                            --}}
                          
                             <div class="form-group">
                               <label for="location2">NAMA TEMPLATE :</label>
@@ -157,7 +159,7 @@
                             </table>
                         </div>
                         <br>
-                        <hr>
+                      <hr>
                       </fieldset>
                       <!-- Step 2 -->
                       <h6><i class="step-icon la la-fire-extinguisher"></i>JSA</h6>
@@ -179,74 +181,61 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item21" >
+                                        <input type="checkbox" name="peralatan[]" value="Helm" class="custom-control-input" id="item21" {{ in_array('Helm', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item21">Helm</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item22">
+                                        <input type="checkbox" name="peralatan[]" value="Sepatu Keselamatan" class="custom-control-input" id="item22" {{ in_array('Sepatu Keselamatan', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                                       </div>
-                                      
-                                      
-                                      @foreach($peralatan as $type => $value)
-                                        {{ $value }}
-
-                                        @if(in_array('Earplug', $arraylist)) ada @else ga ada @endif
-                                      @endforeach
-
-                                      @foreach($arraylist as $type => $value1)
-                                        {{ $value1 }}
-
-                                      @endforeach
-
-                                      
-
-
+                                    
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item23">
+                                        <input type="checkbox" name="peralatan[]" value="Kacamata" class="custom-control-input" id="item23" {{ in_array('Kacamata', $peralatan) ? "checked" : "" }} >
                                         <label class="custom-control-label" for="item23">Kacamata</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="" class="custom-control-input" id="item24">
+                                        <input type="checkbox" name="peralatan[]" value="Earplug" class="custom-control-input" id="item24" {{ in_array('Earplug', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item24">Earplug</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Earplug" class="custom-control-input" id="item31">
+                                        <input type="checkbox" name="peralatan[]" value="Earmuff" class="custom-control-input" id="item31" {{ in_array('Earmuff', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item31">Earmuff</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Katun" class="custom-control-input" id="item32">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Katun" class="custom-control-input" id="item32" {{ in_array('Sarung Tangan Katun', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item32">Sarung Tangan Katun</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Karet" class="custom-control-input" id="item33">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Karet" class="custom-control-input" id="item33" {{ in_array('Sarung Tangan Karet', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item33">Sarung Tangan Karet</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan 20KV" class="custom-control-input" id="item34">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan 20KV" class="custom-control-input" id="item34" {{ in_array('Sarung Tangan 20KV', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item34">Sarung Tangan 20KV</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Pelampung / Life Vest" class="custom-control-input" id="item41">
+                                        <input type="checkbox" name="peralatan[]" value="Pelampung / Life Vest" class="custom-control-input" id="item41" {{ in_array('Pelampung / Life Vest', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item41">Pelampung / Life Vest</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Tabung Pernafasan" class="custom-control-input" id="item42">
+                                        <input type="checkbox" name="peralatan[]" value="Tabung Pernafasan" class="custom-control-input" id="item42" {{ in_array('Tabung Pernafasan', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item42">Tabung Pernafasan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Full Body Harness" class="custom-control-input" id="item43">
+                                        <input type="checkbox" name="peralatan[]" value="Full Body Harness" class="custom-control-input" id="item43" {{ in_array('Full Body Harness', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item43">Full Body Harness</label>
                                       </div>
+                                      {{--
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="other" class="custom-control-input" id="item44">
+                                        <input type="checkbox" name="peralatan[]" value="Other1" class="custom-control-input" id="item44" {{ in_array('Other1', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
                                         <textarea name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
+                                      --}}
                                     </div>
                                   </div>
                                 </div>
@@ -264,34 +253,36 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Pemadam Api (APAR dll)" class="custom-control-input" id="item01">
+                                        <input type="checkbox" name="peralatan[]" value="Pemadam Api (APAR dll)" class="custom-control-input" id="item01" {{ in_array('Pemadam Api (APAR dll)', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="LOTO (lock out tag out)" class="custom-control-input" id="item02">
+                                        <input type="checkbox" name="peralatan[]" value="LOTO (lock out tag out)" class="custom-control-input" id="item02" {{ in_array('lock out tag out', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item02">LOTO (lock out tag out)</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Kotak P3K" class="custom-control-input" id="item11">
+                                        <input type="checkbox" name="peralatan[]" value="Kotak P3K" class="custom-control-input" id="item11" {{ in_array('Kotak P3K', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item11">Kotak P3K</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Radio Telekomunikasi" class="custom-control-input" id="item12">
+                                        <input type="checkbox" name="peralatan[]" value="Radio Telekomunikasi" class="custom-control-input" id="item12" {{ in_array('Radio Telekomunikasi', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item12">Radio Telekomunikasi</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Rambu Keselamatan" class="custom-control-input" id="item1">
+                                        <input type="checkbox" name="peralatan[]" value="Rambu Keselamatan" class="custom-control-input" id="item1" {{ in_array('Rambu Keselamatan', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
                                       </div>
+                                      {{--
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="other" class="custom-control-input" id="item4">
+                                        <input type="checkbox" name="peralatan[]" value="other" class="custom-control-input" id="item4" {{ in_array('other', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
                                         <textarea name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
+                                      --}}
                                     </div>
                                   </div>
                                 </div>
@@ -322,13 +313,15 @@
                               </tr>
                             </thead>
                             <tbody id="konten-analisis">
+                            @foreach($tbl_jsa as $jsa) 
                               <tr>
-                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]"></td>
-                                <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
-                                <td><input type="text" class="form-control" name="resiko[]"></td>
-                                <td><input type="text" class="form-control" name="tindakan[]"></td>
+                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]" value="{{$jsa ? $jsa->langkah_pekerjaan : ''}}"></td>
+                                <td><input type="text" class="form-control" name="potensi_bahaya[]" value="{{$jsa ? $jsa->potensi_bahaya : ''}}"></td>
+                                <td><input type="text" class="form-control" name="resiko[]" value="{{$jsa ? $jsa->resiko : ''}}"></td>
+                                <td><input type="text" class="form-control" name="tindakan[]" value="{{$jsa ? $jsa->tindakan : ''}}"></td>
                                 <td></td>
                               </tr>
+                            @endforeach
                             </tbody>
                           </table>
                         </div>

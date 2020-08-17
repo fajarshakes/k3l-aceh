@@ -81,19 +81,20 @@ class TemplateController extends BaseController
         $year = date('y');
         $id_template = '61000007';
         $new_id = $this->wpModel->generateTemplateId($comp_code);
-        //$peralatan = collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray();
-        $peralatan = $this->wpModel->getPeralatanTemplate($id_template)->pluck('description')->toArray;
+        $peralatan = collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray();
+        //$peralatan = $this->wpModel->getPeralatanTemplate($id_template)->pluck('description')->toArray();
 
-        /*
+        
 
-        if (in_array('Earpslug', $peralatan)) {
+        if (in_array('Earplug', $peralatan)) {
             $ket = 'ada';
         } else {
             $ket = 'gada';
         }
-        */
-        //return response()->json($ket);
-        return $peralatan;
+        
+        return response()->json($ket);
+        //return response()->json($peralatan);
+        //return $peralatan;
     }
 
     public function template(Request $request)
@@ -121,7 +122,7 @@ class TemplateController extends BaseController
             'id_template'    => $new_id,
             'comp_code'      => $comp_code,
             'tahun'          => $year,
-            'jenis_template' => $request->jenis_template,
+            //'jenis_template' => $request->jenis_template,
             'nama_template'  => $request->nama_template,
             'created_at'     => date('Y-m-d'),
             'created_by'     => Auth::user()->email,
@@ -195,8 +196,9 @@ class TemplateController extends BaseController
         $data = [
             'detail'            => $this->wpModel->getDetailTemplate($id_template),
             'tbl_hirarc'        => $this->wpModel->getHirarcTemplate($id_template),
-            //'tbl_jsa'           => $this->wpModel->getJsa($id_template),
+            'tbl_jsa'           => $this->wpModel->getJsaTemplate($id_template),
             'peralatan'         => collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray(),
+            'peralatan1'         => array($this->wpModel->getPeralatanTemplate($id_template)),
             'unitType'          => $this->wpModel->getUnitType(),
             'selectedID'        => $this->wpModel->getDetailTemplate($id_template)->jenis_template,
             'arraylist'        => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi"),
