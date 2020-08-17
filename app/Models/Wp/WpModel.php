@@ -144,6 +144,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public static function getJsaTemplate(string $id_wp){
+
+    $value=DB::table('tbl_jsa_template')
+    ->where('id_wp', '=', $id_wp)
+    ->get();
+
+    return $value;
+  }
+
   public function getMaxWpId(string $prefixJenis)
     {
       return $this
