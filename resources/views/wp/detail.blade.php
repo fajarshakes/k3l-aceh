@@ -221,6 +221,7 @@
                       <tr>
                         <td colspan="3" class="text-left">1. ALAT PELINDUNG DIRI</td>
                       </tr>
+                      {{--
                       <!-- <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                       @foreach($mperalatan as $mper)
                       @php
@@ -248,25 +249,25 @@
                         </td>
                       </tr>
                       @endforeach -->
-
+                        --}}
                       
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21" {{in_array('Earmuff', $peralatan) ? "checked" : ""}}>
-                            <label class="custom-control-label" for="item21">Earmuff</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item11" {{in_array('Earmuff', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item11">Earmuff</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21" {{in_array('Sarung Tangan Karet', $peralatan) ? "checked" : ""}}>
-                            <label class="custom-control-label" for="item21">Sarung Tangan Karet</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item12" {{in_array('Sarung Tangan Karet', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item12">Sarung Tangan Karet</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21" {{in_array('Kotak P3K', $peralatan) ? "checked" : ""}}>
-                            <label class="custom-control-label" for="item21">Kotak P3K</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item13" {{in_array('Kotak P3K', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item13">Kotak P3K</label>
                           </div>
                         </td>
                       </tr>
@@ -274,48 +275,48 @@
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sepatu keselamatan</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item14">
+                            <label class="custom-control-label" for="item14">Sepatu keselamatan</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sarung tangan Katun</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item15">
+                            <label class="custom-control-label" for="item15">Sarung tangan Katun</label>
                           </div>
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Tabung pernafasan</label>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Kacamata</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Sarung tangan karet</label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Pelampung / Life Vest</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item16">
+                            <label class="custom-control-label" for="item16">Tabung pernafasan</label>
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Earplug</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item17">
+                            <label class="custom-control-label" for="item17">Kacamata</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item18">
+                            <label class="custom-control-label" for="item18">Sarung tangan karet</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item19">
+                            <label class="custom-control-label" for="item19">Pelampung / Life Vest</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item20">
+                            <label class="custom-control-label" for="item20">Earplug</label>
                           </div>
                         </td>
                         <td>
@@ -326,8 +327,8 @@
                         </td>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
-                            <label class="custom-control-label" for="item21">Lain - lain :</label>
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item22">
+                            <label class="custom-control-label" for="item22">Lain - lain :</label>
                           </div>
                         </td>
                       </tr>
@@ -335,6 +336,8 @@
                       <tr>
                         <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
                       </tr>
+                      {{--
+                      <!--
                       @foreach($mkesalamatan as $mkes)
                       @php
                         $i = 'true';
@@ -360,6 +363,8 @@
                         </td>
                       </tr>
                       @endforeach
+                      -->
+                      --}}
                       
                       </table>
                     </div>
@@ -504,6 +509,8 @@
                       </tr>
                       <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
                       </tr>
+                      {{--
+                      <!--
                       @foreach($mklasifikasi as $mklas)
                       @php
                         $i = 'true';
@@ -529,7 +536,8 @@
                         </td>
                       </tr>
                       @endforeach
-
+                        --}}
+                        -->
                       </table>
                     </div>
 
@@ -538,6 +546,8 @@
                       <tr>
                         <td colspan="3" class="text-left"><strong>D. PROSEDUR PEKERJAAN YANG TELAH DIJELASKAN KEPADA PEKERJA</strong></td>
                       </tr>
+                      {{--
+                      <!--
                       @foreach($mprosedur as $mpro)
                       @php
                         $i = 'true';
@@ -563,6 +573,8 @@
                         </td>
                       </tr>
                       @endforeach
+                      --}}
+                      -->
                       
                       </table>
                     </div>
