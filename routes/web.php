@@ -49,6 +49,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('print_jsa/{id}', 'Wp\WpController@print_jsa')->name('print_jsa');
     Route::get('print_hirarc/{id}', 'Wp\WpController@print_hirarc')->name('print_hirarc');
     Route::post('template_delete', 'Wp\TemplateController@template_delete')->name('template_delete');
+    Route::post('template_update', 'Wp\TemplateController@template_update')->name('template_update');
 
 });
 
@@ -82,6 +83,7 @@ Route::prefix('apar')->group(function() {
     Route::get('list_master_gedung', 'Apar\AparController@list_master_gedung')->name('list_master_gedung');
     Route::get('list_master_lantai', 'Apar\AparController@list_master_lantai')->name('list_master_lantai');
     Route::get('getLantaiByGedung/{id}', 'Apar\AparController@getLantaiByGedung')->name('getLantaiByGedung');;
+    Route::get('input_har/{id}', 'Apar\AparController@input_har')->name('input_har');
 });
 
 //REPORT
@@ -97,6 +99,8 @@ Route::prefix('master')->group(function() {
     Route::get('get_userdata', 'Master\UserController@get_userdata')->name('get_userdata');;
     Route::get('unit', 'Master\UnitController@unit')->name('unit');
     Route::get('unit_datatables', 'Master\UnitController@unit_datatables')->name('unit_datatables');
+    Route::get('vendor', 'Master\VendorController@vendor')->name('vendor');
+    Route::get('vendor/test', 'Master\VendorController@test')->name('test');
 
     Route::get('c_menu_datatables', 'Master\UserController@c_menu_datatables')->name('c_menu_datatables');
     Route::post('user_store', 'Master\UserController@user_store')->name('user_store');

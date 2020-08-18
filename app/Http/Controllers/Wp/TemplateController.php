@@ -117,12 +117,17 @@ class TemplateController extends BaseController
         $comp_code = Auth::user()->comp_code;
         $year = date('y');
         $new_id = $this->wpModel->generateTemplateId($comp_code);
-
+        
+        $document = $request->file('prosedur_kerja');
+        $new_name = 'SOP_' . $new_id . '.' . $document->getClientOriginalExtension();
+        $document->move(public_path('files/prosedur_kerja'), $new_name);
+        
         $store = DB::table('working_permit_template')->insert([
             'id_template'    => $new_id,
             'comp_code'      => $comp_code,
             'tahun'          => $year,
             //'jenis_template' => $request->jenis_template,
+            'file_sop'       => $new_name,
             'nama_template'  => $request->nama_template,
             'created_at'     => date('Y-m-d'),
             'created_by'     => Auth::user()->email,
@@ -163,6 +168,66 @@ class TemplateController extends BaseController
         }
         
         return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function template_update(Request $request)
+    {
+        $id_template = $request->id_template;
+
+        $document = $request->file('prosedur_kerja');
+        if (!empty($document)) {
+            $new_name = 'SOP_' . $id_template . '.' . $document->getClientOriginalExtension();
+            $document->move(public_path('files/prosedur_kerja'), $new_name);
+            $update = "`file_sop`= $new_name";
+        } else {
+            $update = "";
+        }
+
+        $store = DB::table('working_permit_template')
+            ->where('id_template',$id_template)
+            ->update([
+            'nama_template'  => $request->nama_template,
+            'status'         => 1,$update,
+        ]);
+
+        $delete1 = DB::table('peralatan_keselamatan_template')->where('id_wp',$id_template)->delete();
+        $delete2 = DB::table('tbl_hirarc_template')->where('id_wp',$id_template)->delete();
+        $delete3 = DB::table('tbl_jsa_template')->where('id_wp',$id_template)->delete();
+
+        for($i = 0; $i < count($request['peralatan']); $i++){
+            $store = DB::table('peralatan_keselamatan_template')->insert([
+            'id_wp'         => $id_template,
+            'description'   => $request['peralatan'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
+            $store = DB::table('tbl_hirarc_template')->insert([
+            'id_wp'         => $id_template,
+            'kegiatan'      => $request['kegiatan_hirarc'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya_hirarc'][$i],
+            'resiko'        => $request['resiko_hirarc'][$i],
+            'penilaian_konsekuensi'   => $request['nilai_konsekuensi_hirarc'][$i],
+            'penilaian_kemungkinan'   => $request['nilai_kemungkinan_hirarc'][$i],
+            'pengendalian_resiko'       => $request['pengendalian_resiko_hirarc'][$i],
+            'pengendalian_konsekuensi'  => $request['kendali_konsekuensi'][$i],
+            'pengendalian_kemungkinan'  => $request['kendali_kemungkinan'][$i],
+            'status_pengendalian'       => $request['status_pengendalian'][$i],
+            'penanggung_jawab'          => $request['penanggung_jawab'][$i],
+            ]);
+        }
+        
+        for($i = 0; $i < count($request['langkah_pekerjaan']); $i++){
+            $store = DB::table('tbl_jsa_template')->insert([
+            'id_wp'         => $id_template,
+            'langkah_pekerjaan'      => $request['langkah_pekerjaan'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko'][$i],
+            'tindakan'        => $request['tindakan'][$i],
+            ]);
+        }
+        
+        return response()->json(['success' => 'Data Updated successfully.']);
     }
 
     public function get_detail_template()
