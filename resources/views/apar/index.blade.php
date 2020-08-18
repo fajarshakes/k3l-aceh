@@ -92,24 +92,23 @@
               @csrf
               <div class="modal-body">
               <div class="row">
-            <div class="col-xl-12 col-md-12">
-              <div class="card overflow-hidden">
-                <div class="card-content">
-                  <div class="media align-items-stretch bg-info text-white rounded">
-                    <div class="bg-info bg-darken-2 p-2 media-middle">
-                      <i class="icon-pencil font-large-2 text-white"></i>
-                    </div>
-                    <div class="media-body p-2">
-                      <h4 class="text-white">Total Posts</h4>
-                      <span>Monthly blog posts</span>
-                    </div>
-                    <div class="media-right p-2 media-middle">
-                      <h1 class="text-white">18,000</h1>
+              
+              <div class="col-xl-12 col-md-12">
+                <div class="card overflow-hidden">
+                  <a id="url1">
+                  <div class="card-content">
+                    <div class="media align-items-stretch bg-info text-white rounded">
+                      <div class="bg-info bg-darken-2 p-2 media-middle">
+                        <i class="icon-pencil font-large-2 text-white"></i>
+                      </div>
+                      <div class="media-body p-2">
+                        <h4 class="text-white">INPUT PEMELIHARAAN</h4>
+                      </div>
                     </div>
                   </div>
+                  </a>
                 </div>
               </div>
-            </div>
           </div>
           {!! 
           QrCode::generate('MyNotePaper'); !!}
@@ -268,9 +267,11 @@ var vtable = $('#table-permohonan').DataTable({
       }).draw();
  });
 
- $(document).on('click', '.action', function(){
+ $(document).on('click', '.button1', function(){
   var id = $(this).attr('id');
   $('.modal-title').text("DETAIL DATA");
+  $("#url1").attr('href', '/apar/input_har/' + id + '');
+  $('#id').text('/apar/input_har/' + id + '');
   $('#action_button').val("Add");
   $('#action').val("submit");
   $('#submit_form').modal('show');

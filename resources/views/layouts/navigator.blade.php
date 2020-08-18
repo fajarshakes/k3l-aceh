@@ -37,6 +37,7 @@
           <ul class="menu-content">
             <li><a class="menu-item" href="/master/unit" data-i18n="nav.chartist.chartist_bar_charts">Master Unit</a></li>
             <li><a class="menu-item" href="/master/user" data-i18n="nav.chartist.chartist_bar_charts">Master User</a></li>
+            <li><a class="menu-item" href="/master/vendor" data-i18n="nav.chartist.chartist_bar_charts">Master Vendor</a></li>
             <li><a class="menu-item" href="#" data-i18n="nav.chartist.chartist_bar_charts">Setting Group</a></li>
           </ul>
         </li> 

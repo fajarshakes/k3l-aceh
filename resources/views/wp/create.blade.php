@@ -117,55 +117,56 @@
                             </tr>
                           </thead>
                           <tbody id="konten_hirarc">
+                          @foreach($tbl_hirarc as $data)
                             <tr>
                               <td><button class="btn-danger btn-sm disabled"><i class="la la-trash-o"></i></button></td>
-                              <td><input type="text" class="form-control" name="kegiatan_hirarc[]"></td>
-                              <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
-                              <td><input type="text" class="form-control" name="resiko_hirarc[]"></td>
+                              <td><input type="text" class="form-control" name="kegiatan_hirarc[]" value="{{$data ? $data->kegiatan : ''}}"></td>
+                              <td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]" value="{{$data ? $data->potensi_bahaya : ''}}"></td>
+                              <td><input type="text" class="form-control" name="resiko_hirarc[]" value="{{$data ? $data->resiko : ''}}"></td>
                               <td>
                                 <select class="form-control select2me" name="penilaian_konsekuensi[]">
                                 <option value="">PILIH</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                               </select>
+                                <option value="1" {{ $data->penilaian_konsekuensi == '1' ? 'selected' : '' }}>1 : Tidak ada cedera, kerugian materi kecil</option>
+                                <option value="2" {{ $data->penilaian_konsekuensi == '2' ? 'selected' : '' }}>2 : Cedera ringan/P3K, kerugian cukup materi sedang</option>
+                                <option value="3" {{ $data->penilaian_konsekuensi == '3' ? 'selected' : '' }}>3 : Hilang hari kerja, kerugian cukup besar</option>
+                                <option value="4" {{ $data->penilaian_konsekuensi == '4' ? 'selected' : '' }}>4 : Cacat, kerugian materi besar</option>
+                                <option value="5" {{ $data->penilaian_konsekuensi == '5' ? 'selected' : '' }}>5 : Kematian, kerugian materi sangat besar</option>
+                            </select>
                               </td>
                               <td>
                                 <select class="form-control" name="penilaian_kemungkinan[]">
                                 <option value="">PILIH</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                  <option value="D">D</option>
-                                  <option value="E">E</option>
-                               </select>
+                                <option value="A" {{ $data->penilaian_kemungkinan == 'A' ? 'selected' : '' }}>A : Hampir pasti akan terjadi/almost certain</option>
+                                <option value="B" {{ $data->penilaian_kemungkinan == 'B' ? 'selected' : '' }}>B : Cenderung untuk terjadi/likely</option>
+                                <option value="C" {{ $data->penilaian_kemungkinan == 'C' ? 'selected' : '' }}>C : Mungkin dapat terjadi / moderate</option>
+                                <option value="D" {{ $data->penilaian_kemungkinan == 'D' ? 'selected' : '' }}>D : Kecil kemungkinan terjadi/unlikely</option>
+                                <option value="E" {{ $data->penilaian_kemungkinan == 'E' ? 'selected' : '' }}>E : Jarang terjadi/rare</option>
+                            </select>
                               </td>
-                              <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
+                              <td><input type="text" class="form-control" name="potensi_bahaya[]" value="{{$data ? $data->pengendalian_resiko : ''}}"></td>
                               <td>
                                 <select class="form-control" name="pengendalian_konsekuensi[]">
                                 <option value="">PILIH</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                               </select>
+                                <option value="1" {{ $data->pengendalian_konsekuensi == '1' ? 'selected' : '' }}>1 : Tidak ada cedera, kerugian materi kecil</option>
+                                <option value="2" {{ $data->pengendalian_konsekuensi == '2' ? 'selected' : '' }}>2 : Cedera ringan/P3K, kerugian cukup materi sedang</option>
+                                <option value="3" {{ $data->pengendalian_konsekuensi == '3' ? 'selected' : '' }}>3 : Hilang hari kerja, kerugian cukup besar</option>
+                                <option value="4" {{ $data->pengendalian_konsekuensi == '4' ? 'selected' : '' }}>4 : Cacat, kerugian materi besar</option>
+                                <option value="5" {{ $data->pengendalian_konsekuensi == '5' ? 'selected' : '' }}>5 : Kematian, kerugian materi sangat besar</option>
+                              </select>
                               </td>
                               <td>
                                 <select class="form-control" name="pengendalian_kemungkinan[]">
-                                <option value="">PILIH</option>
-                                  <option value="A">A</option>
-                                  <option value="B">B</option>
-                                  <option value="C">C</option>
-                                  <option value="D">D</option>
-                                  <option value="E">E</option>
-                               </select>
+                                <option value="A" {{ $data->pengendalian_kemungkinan == 'A' ? 'selected' : '' }}>A : Hampir pasti akan terjadi/almost certain</option>
+                                <option value="B" {{ $data->pengendalian_kemungkinan == 'B' ? 'selected' : '' }}>B : Cenderung untuk terjadi/likely</option>
+                                <option value="C" {{ $data->pengendalian_kemungkinan == 'C' ? 'selected' : '' }}>C : Mungkin dapat terjadi / moderate</option>
+                                <option value="D" {{ $data->pengendalian_kemungkinan == 'D' ? 'selected' : '' }}>D : Kecil kemungkinan terjadi/unlikely</option>
+                                <option value="E" {{ $data->pengendalian_kemungkinan == 'E' ? 'selected' : '' }}>E : Jarang terjadi/rare</option>
+                            </select>
                               </td>
-                              <td><input type="text" class="form-control" name="status_pengendalian[]"></td>
-                              <td><input type="text" class="form-control" name="penanggung_jawab[]"></td>
+                              <td><input type="text" class="form-control" name="status_pengendalian[]" value="{{$data ? $data->status_pengendalian : ''}}"></td>
+                              <td><input type="text" class="form-control" name="penanggung_jawab[]" value="{{$data ? $data->penanggung_jawab : ''}}"></td>
                             </tr>
+                            @endforeach
                           </tbody>
                         </table>
                         </div>
@@ -226,63 +227,67 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Helm" class="custom-control-input" id="item21">
+                                        <input type="checkbox" name="peralatan[]" value="Helm" class="custom-control-input" id="item21" {{ in_array('Helm', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item21">Helm</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sepatu Keselamatan" class="custom-control-input" id="item22">
+                                        <input type="checkbox" name="peralatan[]" value="Sepatu Keselamatan" class="custom-control-input" id="item22" {{ in_array('Sepatu Keselamatan', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item22">Sepatu Keselamatan</label>
                                       </div>
+                                    
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Kacamata" class="custom-control-input" id="item23">
+                                        <input type="checkbox" name="peralatan[]" value="Kacamata" class="custom-control-input" id="item23" {{ in_array('Kacamata', $peralatan) ? "checked" : "" }} >
                                         <label class="custom-control-label" for="item23">Kacamata</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Earplug" class="custom-control-input" id="item24">
+                                        <input type="checkbox" name="peralatan[]" value="Earplug" class="custom-control-input" id="item24" {{ in_array('Earplug', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item24">Earplug</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Earmuff" class="custom-control-input" id="item31">
+                                        <input type="checkbox" name="peralatan[]" value="Earmuff" class="custom-control-input" id="item31" {{ in_array('Earmuff', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item31">Earmuff</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Katun" class="custom-control-input" id="item32">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Katun" class="custom-control-input" id="item32" {{ in_array('Sarung Tangan Katun', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item32">Sarung Tangan Katun</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Karet" class="custom-control-input" id="item33">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan Karet" class="custom-control-input" id="item33" {{ in_array('Sarung Tangan Karet', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item33">Sarung Tangan Karet</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan 20KV" class="custom-control-input" id="item34">
+                                        <input type="checkbox" name="peralatan[]" value="Sarung Tangan 20KV" class="custom-control-input" id="item34" {{ in_array('Sarung Tangan 20KV', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item34">Sarung Tangan 20KV</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Pelampung / Life Vest" class="custom-control-input" id="item41">
+                                        <input type="checkbox" name="peralatan[]" value="Pelampung / Life Vest" class="custom-control-input" id="item41" {{ in_array('Pelampung / Life Vest', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item41">Pelampung / Life Vest</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Tabung Pernafasan" class="custom-control-input" id="item42">
+                                        <input type="checkbox" name="peralatan[]" value="Tabung Pernafasan" class="custom-control-input" id="item42" {{ in_array('Tabung Pernafasan', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item42">Tabung Pernafasan</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Full Body Harness" class="custom-control-input" id="item43">
+                                        <input type="checkbox" name="peralatan[]" value="Full Body Harness" class="custom-control-input" id="item43" {{ in_array('Full Body Harness', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item43">Full Body Harness</label>
                                       </div>
+                                      {{--
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" class="custom-control-input" id="item44">
-                                        <label class="custom-control-label" name="peralatan[]" for="item44">Lain-lain (Sebutkan)</label>
-                                        <textarea name="participants" name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
+                                        <input type="checkbox" name="peralatan[]" value="Other1" class="custom-control-input" id="item44" {{ in_array('Other1', $peralatan) ? "checked" : "" }}>
+                                        <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
+                                        <textarea name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
+                                      --}}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
+
                           <!-- </div> -->
                           <!-- <div class="row" style="padding-left:15px;"> -->
                             <div class="col-md-12" style="padding-bottom:5px;">
@@ -294,39 +299,42 @@
                                   <div class="row">
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Pemadam Api (APAR dll)" class="custom-control-input" id="item01">
+                                        <input type="checkbox" name="peralatan[]" value="Pemadam Api (APAR dll)" class="custom-control-input" id="item01" {{ in_array('Pemadam Api (APAR dll)', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item01">Pemadam Api (APAR dll)</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="LOTO (lock out tag out)" class="custom-control-input" id="item02">
+                                        <input type="checkbox" name="peralatan[]" value="LOTO (lock out tag out)" class="custom-control-input" id="item02" {{ in_array('lock out tag out', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item02">LOTO (lock out tag out)</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Kotak P3K" class="custom-control-input" id="item11">
+                                        <input type="checkbox" name="peralatan[]" value="Kotak P3K" class="custom-control-input" id="item11" {{ in_array('Kotak P3K', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item11">Kotak P3K</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Radio Telekomunikasi" class="custom-control-input" id="item12">
+                                        <input type="checkbox" name="peralatan[]" value="Radio Telekomunikasi" class="custom-control-input" id="item12" {{ in_array('Radio Telekomunikasi', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item12">Radio Telekomunikasi</label>
                                       </div>
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Rambu Keselamatan" class="custom-control-input" id="item1">
+                                        <input type="checkbox" name="peralatan[]" value="Rambu Keselamatan" class="custom-control-input" id="item1" {{ in_array('Rambu Keselamatan', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
                                       </div>
+                                      {{--
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" class="custom-control-input" id="item4">
+                                        <input type="checkbox" name="peralatan[]" value="other" class="custom-control-input" id="item4" {{ in_array('other', $peralatan) ? "checked" : "" }}>
                                         <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
-                                        <textarea name="participants" name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
+                                        <textarea name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
+                                      --}}
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
+                            
                           <!-- </div> -->
                         </div>
                         <!-- </div> -->
@@ -354,13 +362,15 @@
                               </tr>
                             </thead>
                             <tbody id="konten-analisis">
+                            @foreach($tbl_jsa as $jsa) 
                               <tr>
-                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]"></td>
-                                <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
-                                <td><input type="text" class="form-control" name="resiko[]"></td>
-                                <td><input type="text" class="form-control" name="tindakan[]"></td>
+                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]" value="{{$jsa ? $jsa->langkah_pekerjaan : ''}}"></td>
+                                <td><input type="text" class="form-control" name="potensi_bahaya[]" value="{{$jsa ? $jsa->potensi_bahaya : ''}}"></td>
+                                <td><input type="text" class="form-control" name="resiko[]" value="{{$jsa ? $jsa->resiko : ''}}"></td>
+                                <td><input type="text" class="form-control" name="tindakan[]" value="{{$jsa ? $jsa->tindakan : ''}}"></td>
                                 <td></td>
                               </tr>
+                            @endforeach
                             </tbody>
                           </table>
                         </div>
@@ -373,7 +383,7 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Nama Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="nama_pekerjaan">
+                              <input type="text" class="form-control" name="nama_pekerjaan" value="{{$detail ? $detail->nama_template : ''}}">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Pelaksana / Perusahaan<span style="color:red">*</span></label>
@@ -447,7 +457,7 @@
                             <div class="form-group">
                               <label>Tanggal pengajuan <span style="color:red">*</span></label>
                               <div class='input-group'>
-                                <input type='date' class="form-control datetime" name="tgl_pengajuan"/>
+                                <input type="date" min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control" name="tgl_pengajuan"/>
                                 <!-- <span class="input-group-addon">
                                   <span class="ft-calendar"></span>
                                 </span> -->
@@ -484,7 +494,7 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Detail Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="detail_pekerjaan">
+                              <input type="text" class="form-control" name="detail_pekerjaan" value="{{$detail ? $detail->nama_template : ''}}">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Lokasi Pekerjaan <span style="color:red">*</span></label>
@@ -553,7 +563,7 @@
                               <label>Tanggal Mulai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' class="form-control datetime" name="tgl_mulai"/>
+                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_mulai"/>
                                 </div>
                                 <div class="col-md-6">
                                   <input type='time' class="form-control" name="jam_mulai">
@@ -566,7 +576,7 @@
                               <label>Tanggal Selesai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' class="form-control datetime" name="tgl_selesai"/>
+                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_selesai"/>
                                 </div>
                                 <div class="col-md-6">
                                   <input type='time' class="form-control" name="jam_selesai">
@@ -634,6 +644,7 @@
                               <label class="custom-control-label" for="item74">Sipil</label>
                             </div>
                           </div>
+                          {{--
                           <div class="col-md-12">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                               <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item5">
@@ -641,6 +652,7 @@
                               <textarea name="participants" id="participants3" rows="1" class="form-control"></textarea>
                             </div>
                           </div>
+                          --}}
                           <!-- Form Prosedur Pekerjaan Yang Telah Dijelaskan Kepada Pekerja -->
                           <div class="col-md-12" style="text-align:center;">
                             <h4 style="padding:25px 0 15px 0;">
@@ -689,6 +701,7 @@
                               <label class="custom-control-label" for="itm9">Pemasangan Proteksi</label>
                             </div>
                           </div>
+                          {{--
                           <div class="col-md-12">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                               <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm10">
@@ -696,6 +709,7 @@
                               <textarea name="participants" id="participants4" rows="1" class="form-control"></textarea>
                             </div>
                           </div>
+                          --}}
                           <!-- Form Lampiran Izin Kerja -->
                           <div class="col-md-12" style="text-align:center;">
                             <h4 style="padding:25px 0 15px 0;">
@@ -709,11 +723,11 @@
                             </div>
                             <div class="form-group">
                               <label>Sertifikat Kompetensi Pekerja <span style="color:red">*</span></label>
-                              <input type='file' name="sertifikat_kompetensi" class="form-control">
+                              <input type='file' name="sertifikat_kompetensi" class="form-control" required>
                             </div>
                             <div class="form-group">
                               <label>Tenaga Ahli K3 <span style="color:red">*</span></label>
-                              <input type='file' name="tenaga_ahli_k3" class="form-control">
+                              <input type='file' name="tenaga_ahli_k3" class="form-control" required>
                             </div>
                           </div>
                           <div class="col-md-6">
@@ -723,11 +737,11 @@
                             </div>
                             <div class="form-group">
                               <label>Surat Penunjukan Pengawas dan Pelaksana Pekerjaan <span style="color:red">*</span></label>
-                              <input type='file' name="surat_penunjukan" class="form-control">
+                              <input type='file' name="surat_penunjukan" class="form-control" required>
                             </div>
                             <div class="form-group">
                               <label>Daftar Peralatan Kerja dan APD yang Digunakan <span style="color:red">*</span></label>
-                              <input type='file' name="daftar_peralatan" class="form-control">
+                              <input type='file' name="daftar_peralatan" class="form-control" required>
                             </div>
                             <div class="form-group">
                               <label>Foto Lokasi Kerja</label>
@@ -921,11 +935,11 @@ var status="";
 $(".tambah_hirarc").click(function(){
   nomor ++;
   potensi_bahaya = '<select class="form-control select2me paket_harga required" id="id_potensi_bahaya_hirarc+nomor" name="penilaian_konsekuensi[]"><option value="" selected="selected">PILIH POTENSI BAHAYA</option><option value="1">Bahaya Fisik (Pencahayaan, Getaran, Kebisingan, Ketinggian dll)</option><option value="2">Bahaya Kimia (Gas, Asap, Uap, Bahan Kimia Berbahaya dll)</option><option value="3">Bahaya Biologi (Micro Biologi(Virus, Bakteri, Jamur, dll); Macro Biologi(Hewan, Serangga, Tumbuhan) dll)</option><option value="4">Bahaya Ergonomi (Stress Fisik (Gerakan Berulang, Ruang Sempit, Menfosir Tenaga) dll)</option><option value="5">Bahaya Mekanis (Titik Jepit, Putaran Pulley atau Roller dll)</option><option value="6">Bahaya Elektris (Kabel terkelupas, Kabel bertegangan tanpa pengaman dll)</option><option value="7">Bahaya Psikososial (Trauma, Intimidasi, Pola promosi jabatan yang salah, Stress Mental (Jenuh/Bosan, Overload) dll)</option><option value="8">Bahaya Tingkah Laku (Tidak patuh terhadap peraturan, overconfident, sok tahu, tidak peduli dll)</option><option value="9">Bahaya Lingkungan Sekitar (Kemiringan permukaan, cuaca yang tidak ramah, permukaan jalan kecil dll)</option></select>';  
-  nilai_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_konsekuensi_hirarc+nomor" name="penilaian_konsekuensi[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
-  nilai_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_kemungkinan_hirarc+nomor" name="penilaian_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';   
-  
-  kendali_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="pengendalian_konsekuensi[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
-  kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="pengendalian_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';
+  nilai_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_konsekuensi_hirarc+nomor" name="penilaian_konsekuensi[]"><option value="" selected="selected">PILIH</option><option value="1">1 : Tidak ada cedera, kerugian materi kecil</option><option value="2">2 : Cedera ringan/P3K, kerugian cukup materi sedang</option><option value="3">3 : Hilang hari kerja, kerugian cukup besar</option><option value="4">4 : Cacat, kerugian materi besar</option><option value="5">5 : Kematian, kerugian materi sangat besar</option></select>';
+  nilai_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_kemungkinan_hirarc+nomor" name="penilaian_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A : Hampir pasti akan terjadi/almost certain</option><option value="B">B : Cenderung untuk terjadi/likely</option><option value="C">C : Mungkin dapat terjadi / moderate</option><option value="D">D : Kecil kemungkinan terjadi/unlikely</option><option value="E">E : Jarang terjadi/rare</option></select>';   
+    
+  kendali_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="pengendalian_konsekuensi[]"><option value="" selected="selected">PILIH</option><option value="1">1 : Tidak ada cedera, kerugian materi kecil</option><option value="2">2 : Cedera ringan/P3K, kerugian cukup materi sedang</option><option value="3">3 : Hilang hari kerja, kerugian cukup besar</option><option value="4">4 : Cacat, kerugian materi besar</option><option value="5">5 : Kematian, kerugian materi sangat besar</option></select>';
+  kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="pengendalian_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A : Hampir pasti akan terjadi/almost certain</option><option value="B">B : Cenderung untuk terjadi/likely</option><option value="C">C : Mungkin dapat terjadi / moderate</option><option value="D">D : Kecil kemungkinan terjadi/unlikely</option><option value="E">E : Jarang terjadi/rare</option></select>';   
   $('#konten_hirarc').append(
     '<tr class="baris_hirarc">'
         +'<td align="center" style="text-align:center;text-align: center;vertical-align: middle;"><button type="button" id="hapus" class="btn hapus_in btn-danger btn-sm"><i class="la la-trash-o"></i></button></td>'
@@ -994,5 +1008,7 @@ $(".tambah_hirarc").click(function(){
     });		
 
   });
+
+document.getElementById("myDate").min = new Date().getFullYear() + "-" +  parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate()
 </script>
 @endsection

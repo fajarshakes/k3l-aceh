@@ -77,23 +77,14 @@ class WpController extends BaseController
             'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
             'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
             'peralatan'         => collect($this->wpModel->getPeralatan($id_wp)->pluck('description'))->toArray(),
-            'peralatan1'        => array($this->wpModel->getPeralatan($id_wp)),
-            'klasifikasi'       => collect($this->wpModel->getKlasifikasi($id_wp)->pluck('description'))->toArray(),
-            'klasifikasi1'      => array($this->wpModel->getKlasifikasi($id_wp)),
-            // 'klasifikasi'       => $this->wpModel->getKlasifikasi($id_wp),
-            // 'prosedur'          => $this->wpModel->getProsedur($id_wp),
-            'prosedur'          => collect($this->wpModel->getProsedur($id_wp)->pluck('description'))->toArray(),
-            'prosedur1'         => array($this->wpModel->getProsedur($id_wp)),
+            'peralatan1'         => array($this->wpModel->getPeralatan($id_wp)),
+            'klasifikasi'       => $this->wpModel->getKlasifikasi($id_wp),
+            'prosedur'          => $this->wpModel->getProsedur($id_wp),
             'mperalatan'        => $masterPeralatan,
             'mkesalamatan'      => $masterKeselamatan,
-            'mklasifikasi'      => $Klasifikasi,
-            'mprosedur'         => $Prosedur,
-            'arraylist'         => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi", "Pelampung / Life Vest","Tabung Pernafasan", 
-                                        "Pemadam Api (APAR dll)", "LOTO (lock out tag out)",
-                                        "Pemasangan LBS/Recloser/FDI","on","Pemasangan kubikel 20KV","Pemeliharaan Kubikel","Pengujian Relay Proteksi","Pemasangan Power Meter","Pemasangan KWH Meter", "Pemeliharaan RTU GH/GI","Pemasangan Catu Daya", 
-                                        "Pemasangan Radio Komunikasi", "Pemeliharaan Radio Komunikasi","Sipil","Penggantian Relay Proteksi",
-                                        "Pemasangan dan Penggantian Cubicle 20 KV", "Pemeliharaan Cubicle Gardu Hub", "Pemasangan LBS dan Recloser", "Pemeliharaan RTU dan Peripheral",
-                                        "Pengujian Control Scada", "Pemeliharaan Repeater Komunikasi", "Perluasan Gardu Hubung 20 KV","Pengujian Alat","Pemasangan Proteksi"),
+            'mklasifikasi'       => $Klasifikasi,
+            'mprosedur'          => $Prosedur,
+            'arraylist'        => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi"),
             //'tempStatus'      => $sales->CheckTempId($temp_id),
             //'group'           => $v,
          ];
@@ -116,18 +107,11 @@ class WpController extends BaseController
 
     public function list_permohonan(Request $request)
     {
-        if (Auth::user()->unit == 6101) {
-            $unit_view = 61;
-        } else {
-            $unit_view = Auth::user()->unit;
-        }
-
         $sql = "SELECT
                     wp.*, mu.UNIT_NAME
                 FROM
                     working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
                 WHERE
-                    wp.unit like '$unit_view%' AND
                     wp.status != 'TRASH'";
         $v = DB::select($sql);
             
@@ -180,14 +164,12 @@ class WpController extends BaseController
     {
         $unit = Session::get('sel_unit');
         $id_template = Session::get('sel_template');
-        $status = Session::get('sel_status');
         $data = [
             'getManager'  => $this->UserModel->getUser($unit, 4),
             'getSpv'      => $this->UserModel->getUser($unit, 5),
             'getPj'       => $this->UserModel->getUser($unit, 6),
             'unit_l3'     => $this->wpModel->getUnit_l3($unit),
             'up_name'     => $this->wpModel->getUnitName($unit)->UNIT_NAME,
-            'status'      => $status,
             'detail'      => $this->wpModel->getDetailTemplate($id_template),
             'tbl_hirarc'  => $this->wpModel->getHirarcTemplate($id_template),
             'tbl_jsa'     => $this->wpModel->getJsaTemplate($id_template),
@@ -287,7 +269,7 @@ class WpController extends BaseController
             'pengawas_pekerjaan'    => $request->pengawas_pekerjaan,
             'no_pengawas_pekerjaan' => $request->no_pengawas_pekerjaan,
             'pengawas_k3l'          => $request->pengawas_k3l,
-            'no_pengawas_k3'        => $request->no_pengawas_k3,
+            'no_pengawas_k3'        => $request->no_pengawas_k3l,
             'tgl_mulai'             => $request->tgl_mulai,
             'tgl_selesai'           => $request->tgl_selesai,
             'jam_mulai'             => $request->jam_mulai,
@@ -302,9 +284,9 @@ class WpController extends BaseController
             'manager'               => $request->manager,
             'supervisor'            => $request->supervisor,
             'pejabat_k3l'           => $request->pejabat,
-            'tgl_input'             => date('Y-m-d'),
+            'tgl_input'             => $request->tgl_input,
+            'user_input'            => $request->user_input,
             'tahun'                 => date('Y'),
-            'user_input'            => Auth::user()->username,
             'wp_desc'               => $status,
         ]);
 
@@ -387,7 +369,6 @@ class WpController extends BaseController
     public function approve_form(Request $request)
     {
         $id_wp = $request->id_wp;
-        $wp_desc = $request->wp_desc;
         if ($request->group_id == 5){
             $status = 'APPROVAL_2';
             $field1 = 'user_approval3';
@@ -396,15 +377,7 @@ class WpController extends BaseController
             $status = 'APPROVAL_1';
             $field1 = 'user_approval2';
             $field2 = 'tgl_approval2';
-        } else if ($request->group_id == 4 && $wp_desc == 'EMERGENCY'){
-            $status = 'APPROVAL_INDUK';
-            $field1 = 'user_approval3';
-            $field2 = 'tgl_approval3'; 
-        } else if ($request->group_id == 3 && $wp_desc == 'EMERGENCY'){
-            $status = 'APPROVED';
-            $field1 = 'user_approve_induk';
-            $field2 = 'tgl_approve_induk'; 
-        } else if ($request->group_id == 4 && $wp_desc != 'EMERGENCY'){
+        } else if ($request->group_id == 4){
             $status = 'APPROVED';
             $field1 = 'user_approval3';
             $field2 = 'tgl_approval3';

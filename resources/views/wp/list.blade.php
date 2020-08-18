@@ -188,9 +188,19 @@
 
               @csrf
               <div class="modal-body">
-                <div class="form-group">
-                  <label for="companyName">ID WP</label>
-                  <input type="text" name="id_wp" id="id_wp" class="form-control" readonly/>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">ID WP</label>
+                      <input type="text" class="form-control" name="id_wp" id="id_wp" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">KETERANGAN PEKERJAAN</label>
+                      <input type="text" class="form-control" id="wp_desc" name="wp_desc" readonly>
+                    </div>
+                  </div>
                 </div>
                 
                 <div class="form-group">
@@ -613,6 +623,7 @@ $('#form_menu').on('submit', function(event){
           $('#nama').val(html.data[0].nama_pekerjaan);
           $('#pelaksana').val(html.data[0].pelaksana);
           $('#id_wp').val(html.data[0].id_wp);
+          $('#wp_desc').val(html.data[0].wp_desc);
           $('.modal-title').text("FORM APPROVAL");
           $('#action_button').val("Edit");
           $('#action').val("Edit");
