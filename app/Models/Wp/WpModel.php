@@ -126,6 +126,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public static function getMarkers(){
+
+    $value=DB::table('peta_sosialisasi')
+    // ->where('id_wp', '=', $id_wp)
+    ->get();
+
+    return $value;
+  }
+
   public static function getHirarcTemplate(string $id_wp){
 
     $value=DB::table('tbl_hirarc_template')
