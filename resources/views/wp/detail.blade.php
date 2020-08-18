@@ -139,7 +139,7 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="col-md-12">
-                      <button onclick="ShowPopup('/wp/print_jsa')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
+                      <button onclick="('/wp/print_jsa/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
                   </div>
 
                   <div class="card-body">
@@ -221,6 +221,7 @@
                       <tr>
                         <td colspan="3" class="text-left">1. ALAT PELINDUNG DIRI</td>
                       </tr>
+                      <!-- <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                       @foreach($mperalatan as $mper)
                       @php
                         $i = 'true';
@@ -243,9 +244,94 @@
                           {{ $mper }} 
                           @endif
                           </div>
+                          </div>
                         </td>
                       </tr>
-                      @endforeach
+                      @endforeach -->
+
+                      
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21" {{in_array('Earmuff', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item21">Earmuff</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21" {{in_array('Sarung Tangan Karet', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item21">Sarung Tangan Karet</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21" {{in_array('Kotak P3K', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item21">Kotak P3K</label>
+                          </div>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Sepatu keselamatan</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Sarung tangan Katun</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Tabung pernafasan</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Kacamata</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Sarung tangan karet</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Pelampung / Life Vest</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Earplug</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Sarung tangan 20kV</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item21">
+                            <label class="custom-control-label" for="item21">Lain - lain :</label>
+                          </div>
+                        </td>
+                      </tr>
+
                       <tr>
                         <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
                       </tr>
