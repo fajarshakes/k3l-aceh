@@ -183,4 +183,27 @@ class SosialisasiController extends BaseController
         ]);
         return response()->json(['success' => 'Data Added successfully.']);
     }
+
+    // public function get_markers_sosialisasi()
+    // {
+    //     $markers = $this->wpModel->getMarkers();
+        
+    //     return response()->json([$markers]);
+    // }
+
+    public function get_markers_sosialisasi(Request $request)
+    {
+        $data = [
+            // 'detail'            => $this->wpModel->getDetailTemplate($id_template),
+            // 'tbl_hirarc'        => $this->wpModel->getHirarcTemplate($id_template),
+            // 'tbl_jsa'           => $this->wpModel->getJsaTemplate($id_template),
+            'markers'         => collect($this->wpModel->getMarkers())->toArray(),
+            // 'peralatan1'         => array($this->wpModel->getPeralatanTemplate($id_template)),
+            // 'unitType'          => $this->wpModel->getUnitType(),
+            // 'selectedID'        => $this->wpModel->getDetailTemplate($id_template)->jenis_template,
+            // 'arraylist'        => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi"),
+         ];
+
+        return view('sosialisasi/index', $data);
+    }
 }

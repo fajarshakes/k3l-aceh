@@ -246,7 +246,7 @@
 </div>
 
 <script>
-$('#geoloc5').leafletLocationPicker({
+$('#geoloc5').leafletLoadLocation({
 		alwaysOpen: true,
 		mapContainer: "#fixedMapCont"
 }).on('changeLocation', function(e) {
