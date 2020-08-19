@@ -31,8 +31,11 @@ class SosialisasiController extends BaseController
     }
     
     public function index(Request $request)
-    {
-        return view('sosialisasi/index');     
+    {   $data = [
+            'markers'         => collect($this->wpModel->getMarkers())->toArray(),
+         ];
+         
+         return view('sosialisasi/index', $data);     
     }
 
     public function add(Request $request)
