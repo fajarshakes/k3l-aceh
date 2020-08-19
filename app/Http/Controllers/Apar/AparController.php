@@ -55,6 +55,17 @@ class AparController extends BaseController
         return view('apar/input-har', $data);
     }
 
+    public function update(Request $request, $id)
+    {
+        $data = [
+            'my_ccode'      => Auth::user()->comp_code,
+            'my_barea'      => Auth::user()->unit,
+            'detail'        => $this->AparModel->getDetailByID($id),
+            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unit),
+         ];
+        return view('apar/update', $data);
+    }
+
     public function getLantaiByGedung(Request $request, $idgedung)
     {   
         $listLantai  = $this->AparModel->getLantai($idgedung)->pluck("NAMA_LANTAI", "ID_LANTAI");
@@ -69,7 +80,8 @@ class AparController extends BaseController
                 FROM
                     peta_apar pa
                 WHERE
-                    pa.BUSS_AREA  = '$b_area'";
+                    pa.BUSS_AREA  = '$b_area' AND
+                    pa.STATUS = 'ACTIVE'";
         $v = DB::select($sql);
             
         return Datatables::of($v)
@@ -160,8 +172,53 @@ class AparController extends BaseController
             'MEDIA'         => $request->media,
             'TGL_EXPIRED'   => $request->exp_date,
             'TGL_REFILL'    => $request->refill_date,
+            'JADWAL_HAR'    => $request->har_date,
             'TGL_INPUT'     => date('Y-m-d'),
             'USER_INPUT'    => Auth::user()->username,
+        ]);
+
+        return view('apar/index');
+        //return response()->json(['success' => 'Data Added successfully.']);
+    }
+    
+    public function update_apar(Request $request)
+    {
+        /*
+        $rules = array(
+            'lokasi'        =>  'required',
+            'judul'         =>  'required',
+            'deskripsi'     =>  'required',
+            'jml_peserta'   =>  'required',
+            'pic_sosialisasi'   =>  'required',
+            'tanggal'       =>  'required',
+            'jam_mulai'     =>  'required',
+            'jam_selesai'   =>  'required',
+            'latitude'      =>  'required',
+            'longitude'     =>  'required',
+        );
+        
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        */
+
+        $store = DB::table('peta_apar')
+        ->where('ID_APAR', $request->id_apar)
+        ->update([
+            'ID_GEDUNG'     => $request->idgedung,
+            'ID_LANTAI'     => $request->idlantai,
+            'LOKASI_APAR'   => $request->lokasi,
+            'NO_URUT'       => $request->no_urut,
+            'MERK'          => $request->merk,
+            'TYPE'          => $request->type,
+            'KAPASITAS'     => $request->kapasitas,
+            'MEDIA'         => $request->media,
+            'TGL_EXPIRED'   => $request->exp_date,
+            'TGL_REFILL'    => $request->refill_date,
+            'JADWAL_HAR'    => $request->har_date,
         ]);
 
         return view('apar/index');
@@ -174,6 +231,7 @@ class AparController extends BaseController
         $store = DB::table('apar_history')->insert([
             'ID_APAR'       => $request->IDAPAR,
             'BUSS_AREA'     => Auth::user()->unit,
+            'CHECK_DEADLINE'=> $request->JADWAL_HAR,
             'CHECK_AT'      => date('Y-m-d'),
             'CHECK_BY'      => $request->CHECK_BY,
             'URAIAN_1'      => $request->URAIAN_1,
@@ -186,6 +244,12 @@ class AparController extends BaseController
             'URAIAN_8'      => $request->URAIAN_8,
             'STATUS_ALL'    => $request->STATUS_ALL,
             'NOTE'          => $request->NOTE
+        ]);
+
+        $update = DB::table('peta_apar')
+        ->where('ID_APAR', $request->IDAPAR)
+        ->update([
+            'JADWAL_HAR'   => $request->HAR_DATE,
         ]);
 
         //return view('apar/index');
@@ -304,6 +368,38 @@ class AparController extends BaseController
         ]);
 
         return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function get_detail_history()
+    {
+        $id = $_GET['id'];
+        $data = DB::table('apar_history')
+        ->select('apar_history.*')
+        ->where('apar_history.ID','=',$id)
+        ->get();
+        
+        return response()->json(['data' => $data]);
+    }
+
+    public function delete_apar(Request $request)
+    {
+        $id = $request->ID;
+        $delete = DB::table('peta_apar')
+        ->where('ID_APAR', $id)
+        ->update([
+            'STATUS'     =>  'TRASH',
+            ]);
+
+        return view('apar/index');
+        //return response()->json(['success' => 'Data Update successfully.']);
+    }
+    
+    public function delete_history(Request $request)
+    {
+        $id = $request->ID;
+        $delete = DB::table('apar_history')->where('ID', $id)->delete();
+
+        return response()->json(['success' => 'Data Update successfully.']);
     }
    
 }

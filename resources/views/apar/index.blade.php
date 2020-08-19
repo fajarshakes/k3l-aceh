@@ -99,7 +99,7 @@
                   <div class="card-content">
                     <div class="media align-items-stretch bg-info text-white rounded">
                       <div class="bg-info bg-darken-2 p-2 media-middle">
-                        <i class="icon-pencil font-large-2 text-white"></i>
+                        <i class="icon-flag font-large-2 text-white"></i>
                       </div>
                       <div class="media-body p-2">
                         <h4 class="text-white">INPUT PEMELIHARAAN</h4>
@@ -108,17 +108,27 @@
                   </div>
                   </a>
                 </div>
+                <div class="card overflow-hidden">
+                  <a id="url2">
+                  <div class="card-content">
+                    <div class="media align-items-stretch bg-info text-white rounded">
+                      <div class="bg-info bg-darken-2 p-2 media-middle">
+                        <i class="icon-grid font-large-2 text-white"></i>
+                      </div>
+                      <div class="media-body p-2">
+                        <h4 class="text-white">UPDATE INFO APAR</h4>
+                      </div>
+                    </div>
+                  </div>
+                  </a>
+                </div>
               </div>
+              
           </div>
-          {!! 
-          QrCode::generate('MyNotePaper'); !!}
-
-
-              </div>
+          </div>
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
               </div>
               </form>
             </div>
@@ -271,6 +281,7 @@ var vtable = $('#table-permohonan').DataTable({
   var id = $(this).attr('id');
   $('.modal-title').text("DETAIL DATA");
   $("#url1").attr('href', '/apar/input_har/' + id + '');
+  $("#url2").attr('href', '/apar/update/' + id + '');
   $('#id').text('/apar/input_har/' + id + '');
   $('#action_button').val("Add");
   $('#action').val("submit");
