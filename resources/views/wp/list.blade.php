@@ -422,6 +422,11 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'pelaksana',
      className: "text-left"
      },
+     {
+     data: 'status',
+     className: "text-left"
+     },
+     /*
      { className: "text-center",
         //"data": null,
         "orderable": false,
@@ -439,6 +444,7 @@ var vtable = $('#table-permohonan').DataTable({
           return html; 
         }
       },
+      */
       {
       "data": null,
       "searchable": false,

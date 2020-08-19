@@ -187,6 +187,7 @@
                       <p></p>
                     
                     </div>
+                    </div>
 
                     <div class="form-group">
                       <button class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</button>
@@ -207,7 +208,7 @@
 <!-- Modal -->
 <div class="modal fade text-left" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         data-backdrop="static" data-keyboard="false" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header bg-info white">
                 <h4 class="modal-title white" id="myModalLabel11">Add Menu</h4>
@@ -216,114 +217,118 @@
                 </button>
               </div>
               
-              <form id="form_menu" method="post" enctype="multipart/form-data">
+              <form id="form_history" method="post" enctype="multipart/form-data">
               @csrf
               <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <label for="companyName">CHECK AT</label>
-                      <input type="text" class="form-control" value="{{ date('d-m-Y') }}" name="check_at" readonly>
-                    </div>
-                  </div>
-                  <div class="col-md-7">
-                    <div class="form-group">
-                      <label for="companyName">CHECK BY</label>
-                      <input type="text" class="form-control" value="{{ Auth::user()->username }}" name="check_at" readonly>
-                    </div>
-                  </div>
-                </div>
-                <table width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                <table width="100%" class="table display nowrap table-striped table-bordered">
                   <theat>
                   <tr>
                     <td class="text-center">NO</td>
-                    <td class="text-center">URAIAN</td>
                     <td class="text-center">CHECKLIST</td>
                   </tr>
                   </theat>
                   <tbody>
                   <tr>
                     <td>1</td>
-                    <td class="text-left">ADA DITEMPAT SESUAI LAYOUT</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_1" value="Y" class="custom-control-input" id="item01">
+                        <label class="custom-control-label" for="item01">ADA DITEMPAT SESUAI LAYOUT</label>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>2</td>
-                    <td class="text-left">TERPASANG 120CM DARI LANTAI</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_2" value="Y" class="custom-control-input" id="item02">
+                        <label class="custom-control-label" for="item02">TERPASANG 120CM DARI LANTAI</label>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>3</td>
-                    <td class="text-left">MUDAH TERLIHAT / DIGUNAKAN</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_3" value="Y" class="custom-control-input" id="item03">
+                        <label class="custom-control-label" for="item03">MUDAH TERLIHAT / DIGUNAKAN</label>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>4</td>
-                    <td class="text-left">PETUNJUK PENGGUNAAN DAPAT DIBACA</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_4" value="Y" class="custom-control-input" id="item04">
+                        <label class="custom-control-label" for="item04">PETUNJUK PENGGUNAAN DAPAT DIBACA</label>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>5</td>
-                    <td class="text-left">SEGEL DALAM KONDISI BAIK</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_5" value="Y" class="custom-control-input" id="item05">
+                        <label class="custom-control-label" for="item05">SEGEL DALAM KONDISI BAIK</label>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>6</td>
-                    <td class="text-left">JARUM PETUNJUK BERADA PADA AREA HIJAU</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_6" value="Y" class="custom-control-input" id="item06">
+                        <label class="custom-control-label" for="item06">JARUM PETUNJUK BERADA PADA AREA HIJAU</label>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>7</td>
-                    <td class="text-left">SELANG MULUT PANCAR TIDAK TERSUMBAT</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_7" value="Y" class="custom-control-input" id="item07">
+                        <label class="custom-control-label" for="item07">SELANG MULUT PANCAR TIDAK TERSUMBAT</label>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>8</td>
-                    <td class="text-left">BOLAK-BALIK TABUNG AGAK SERBUK TIDAK BEKU</td>
-                    <td>s</td>
+                    <td>
+                      <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                        <input type="checkbox" name="URAIAN_8" value="Y" class="custom-control-input" id="item08">
+                        <label class="custom-control-label" for="item08">BOLAK-BALIK TABUNG AGAK SERBUK TIDAK BEKU</label>
+                      </div>
+                    </td>
                   </tr>
                   </tbody>
                 
                 </table>
                 <div class="row">
-                  <div class="col-md-7">
+                  <div class="col-md-12">
                     <div class="form-group">
-                      <label for="companyName">Full Name</label>
-                      <input type="text" class="form-control" placeholder="Full Name" id="name" name="name">
+                      <label for="companyName">CATATAN</label>
+                      <input type="text" class="form-control" placeholder="CATATAN TAMBAHAN" name="NOTE">
                     </div>
                   </div>
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <label for="companyName">Pers Number</label>
-                      <input type="text" class="form-control" placeholder="Pers Number / NIP" id="pers_no" name="pers_no">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Sebutan Jabatan</label>
-                    <input type="text" class="form-control" placeholder="Jabatan" id="jabatan" name="jabatan">
                 </div>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div class="form-group">
-                      <label for="projectinput5">Unit</label>
-                      <select id="unit_id" name="unit_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Category</option>
-                        
+                      <label for="projectinput5">KONDISI KESELURUHAN</label>
+                      <select name="STATUS_ALL" class="form-control">
+                          <option value="none" selected="" disabled="">PILIH  STATUS</option>
+                          <option value="BAIK">BAIK</option>
+                          <option value="TIDAK_BAIK">TIDAK BAIK</option>
                       </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="projectinput5">User Group</label>
-                      
                     </div>
                   </div>
                 </div>
               </div>
               
-              <input type="hidden" name="action" id="action" />
-              <input type="hidden" name="hidden_id" id="hidden_id" />
+              <input type="hidden" class="form-control" value="{{$detail ? $detail->ID_APAR : ''}}" name="IDAPAR" readonly>
+              <input type="hidden" class="form-control" value="{{ Auth::user()->username }}" name="CHECK_BY" readonly>
+              <input type="hidden" class="form-control" value="{{ date('d-m-Y') }}" name="CHECK_AT" readonly>
+
               
               <div class="modal-footer">
                 <button type="button" name="close" id="close" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
@@ -344,60 +349,11 @@
       $('#formModal').modal('show');
   });
 
-
-$(document).ready(function() {
-    $('#table-history').DataTable( {
-        "scrollX": true,
-        "paging": false,
-        "info": false,
-        "searching": false
-    } );
-});
-
-  $(document).ready(function() {
-    $('select[name="idgedung"]').on('change', function(){
-      var idgedung_ =   $(this).val();
-      var token = '{{ csrf_token() }}';
-   
-        //var countryId = $(this).val();
-        if(idgedung_) {
-            $.ajax({
-                url: "{{ url('apar/getLantaiByGedung/') }}/"+idgedung_,
-                type:"GET",
-                dataType:"json",
-                data: {idgedung: idgedung_, _token: token},
-
-                //beforeSend: function(){
-                    //$('#loader').css("visibility", "visible");
-                //},
-
-                success:function(data) {
-
-                    $('select[name="idlantai"]').empty();
-
-                    $.each(data, function(key, value){
-
-                        $('select[name="idlantai"]').append('<option value="'+ key +'">' + value + '</option>');
-
-                    });
-                },
-                //complete: function(){
-                    //$('#loader').css("visibility", "hidden");
-                //}
-            });
-        } else {
-            $('select[name="idlantai"]').empty();
-        }
-
-    });
-  });
-
-
-$('#form_menu').on('submit', function(event){
+$('#form_history').on('submit', function(event){
       event.preventDefault();
       
       $.ajax({
-          url:"{{ route('sosialisasi_store') }}",
+          url:"{{ route('add_history') }}",
           method:"POST",
           data: new FormData(this),
           contentType: false,
@@ -424,10 +380,13 @@ $('#form_menu').on('submit', function(event){
             {
               html = data.success;
               type_toast = 'success';
-              $('#form_menu')[0].reset();
-              setTimeout(function() {
-                window.location.href = '/sosialisasi/';
-              }, 1000);
+              $('#form_history')[0].reset();
+              $('#formModal').modal('hide');
+              $('#table-history').DataTable().ajax.reload();
+
+              //setTimeout(function() {
+                //window.location.href = '/sosialisasi/';
+              //}, 1000);
             }
             //$('#form_result').html(html);
             if(type_toast == 'error'){
@@ -438,5 +397,44 @@ $('#form_menu').on('submit', function(event){
           }
     });
 })
+$(document).ready(function() {
+var vtable = $('#table-history').DataTable({
+    processing: true,
+    serverSide: true,
+    paging: false,
+    scrollX: true,
+    info: false,
+    searching: false,
+    order: [[ 2, 'asc' ]],
+    ajax:{
+     url: "{{ url('apar/list_history_apar/'. $detail->ID_APAR . '') }}",
+          //url('master/get_userdata/') }}",
+    },
+    columns:[
+      { data: null, searchable:false, orderable:false, className: "text-center"},
+      {
+      data: 'CHECK_AT',
+      },
+      {
+      data: 'CHECK_BY',
+      className: "text-left"
+      },
+      {
+      data: 'STATUS_ALL',
+      className: "text-center"
+      },
+      {
+      data: 'STATUS_ALL',
+      className: "text-left"
+      }
+    ]
+   });
+   
+  vtable.on('draw.dt', function () {
+     vtable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+       cell.innerHTML = i + 1;
+       });
+  }).draw();
+});
 </script>
 @endsection

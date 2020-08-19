@@ -83,6 +83,29 @@ class AparController extends BaseController
             ->make(true);
     }
 
+    public function list_history_apar(Request $request, $idapar)
+    {
+        $b_area = Auth::user()->unit;
+        $sql = "SELECT
+                    ah.*
+                FROM
+                    apar_history ah JOIN peta_apar pa ON ah.ID_APAR = pa.ID_APAR
+                WHERE
+                    ah.BUSS_AREA = '$b_area' AND
+                    ah.ID_APAR  = '$idapar'";
+        $v = DB::select($sql);
+            
+        return Datatables::of($v)
+            ->addColumn('action', function($data){
+                        $button = '<button type="button" name="edit" id="'.$data->ID_APAR.'" class="button1 btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> ACTION</button>';
+                //$button .= '&nbsp;&nbsp;';
+                //$button .= '<button type="button" name="delete" id="'.$data->ID_APAR.'" class="delete btn btn-danger btn-sm btn-icon"><i class="la la-trash-o"></i> </button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
 
     public function test(Request $request)
     {   
@@ -143,6 +166,30 @@ class AparController extends BaseController
 
         return view('apar/index');
         //return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function add_history(Request $request)
+    {
+        
+        $store = DB::table('apar_history')->insert([
+            'ID_APAR'       => $request->IDAPAR,
+            'BUSS_AREA'     => Auth::user()->unit,
+            'CHECK_AT'      => date('Y-m-d'),
+            'CHECK_BY'      => $request->CHECK_BY,
+            'URAIAN_1'      => $request->URAIAN_1,
+            'URAIAN_2'      => $request->URAIAN_2,
+            'URAIAN_3'      => $request->URAIAN_3,
+            'URAIAN_4'      => $request->URAIAN_4,
+            'URAIAN_5'      => $request->URAIAN_5,
+            'URAIAN_6'      => $request->URAIAN_6,
+            'URAIAN_7'      => $request->URAIAN_7,
+            'URAIAN_8'      => $request->URAIAN_8,
+            'STATUS_ALL'    => $request->STATUS_ALL,
+            'NOTE'          => $request->NOTE
+        ]);
+
+        //return view('apar/index');
+        return response()->json(['success' => 'Data Added successfully.']);
     }
 
     public function master(Request $request)

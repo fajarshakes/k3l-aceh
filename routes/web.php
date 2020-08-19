@@ -85,6 +85,8 @@ Route::prefix('apar')->group(function() {
     Route::get('list_master_lantai', 'Apar\AparController@list_master_lantai')->name('list_master_lantai');
     Route::get('getLantaiByGedung/{id}', 'Apar\AparController@getLantaiByGedung')->name('getLantaiByGedung');;
     Route::get('input_har/{id}', 'Apar\AparController@input_har')->name('input_har');
+    Route::post('add_history', 'Apar\AparController@add_history')->name('add_history');
+    Route::get('list_history_apar/{id}', 'Apar\AparController@list_history_apar')->name('list_history_apar');
 });
 
 //REPORT
