@@ -139,7 +139,7 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="col-md-12">
-                      <button onclick="('/wp/print_jsa/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
+                  <button onclick="ShowPopup('/wp/print_jsa/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
                   </div>
 
                   <div class="card-body">
