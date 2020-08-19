@@ -186,6 +186,8 @@
                       <tr>
                         <td colspan="3" class="text-left">1. ALAT PELINDUNG DIRI</td>
                       </tr>
+                      {{--
+                      <!-- <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                       @foreach($mperalatan as $mper)
                       @php
                         $i = 'true';
@@ -208,12 +210,93 @@
                           {{ $mper }} 
                           @endif
                           </div>
+                          </div>
                         </td>
                       </tr>
-                      @endforeach
+                      @endforeach -->
+                        --}}
+                      
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item11" {{in_array('Helm', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item11">Helm</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item12" {{in_array('Sepatu Keselamatan', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item12">Sepatu Keselamatan</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item13" {{in_array('Kacamata', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item13">Kacamata</label>
+                          </div>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item14" {{in_array('Earmuff', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item14">Earmuff</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item15" {{in_array('Sarung Tangan Katun', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item15">Sarung Tangan Katun</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item16" {{in_array('Sarung Tangan Karet', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item16">Sarung Tangan Karet</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item17" {{in_array('Sarung Tangan 20KV', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item17">Sarung Tangan 20KV</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item18" {{in_array('Pelampung / Life Vest', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item18">Pelampung / Life Vest</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item19" {{in_array('Tabung Pernafasan', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item19">Tabung Pernafasan</label>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item20" {{in_array('Full Body Harness', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item20">Full Body Harness</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item22" {{in_array('on', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item22">Lain - lain :</label>
+                          </div>
+                        </td>
+                      </tr>
+
                       <tr>
                         <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
                       </tr>
+                      {{--
+                      <!--
                       @foreach($mkesalamatan as $mkes)
                       @php
                         $i = 'true';
@@ -239,7 +322,50 @@
                         </td>
                       </tr>
                       @endforeach
-                      
+                      -->
+                      --}}
+
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item11" {{in_array('Pemadam Api (APAR dll)', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item11">Pemadam Api (APAR dll)</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item12" {{in_array('LOTO (lock out tag out)', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item12">LOTO (lock out tag out)</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item12" {{in_array('Kotak P3K', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item12">Kotak P3K</label>
+                          </div>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item13" {{in_array('Radio Telekomunikasi', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item13">Radio Telekomunikasi</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item14" {{in_array('Rambu Keselamatan', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item14">Rambu Keselamatan</label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
+                            <input type="checkbox" name="agenda2" class="custom-control-input" id="item22" {{in_array('on', $peralatan) ? "checked" : ""}}>
+                            <label class="custom-control-label" for="item22">Lain - lain :</label>
+                          </div>
+                        </td>
+                        </tr>
+                        
                       </table>
                     </div>
 
