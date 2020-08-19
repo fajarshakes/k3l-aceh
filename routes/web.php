@@ -48,6 +48,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::post('delete_form', 'Wp\WpController@delete_form')->name('delete_form');
     Route::get('print_jsa/{id}', 'Wp\WpController@print_jsa')->name('print_jsa');
     Route::get('print_hirarc/{id}', 'Wp\WpController@print_hirarc')->name('print_hirarc');
+    Route::get('print_wp/{id}', 'Wp\WpController@print_wp')->name('print_wp');
     Route::post('template_delete', 'Wp\TemplateController@template_delete')->name('template_delete');
     Route::post('template_update', 'Wp\TemplateController@template_update')->name('template_update');
 

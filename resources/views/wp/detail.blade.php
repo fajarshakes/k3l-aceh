@@ -444,13 +444,14 @@
             </div>
           </div>
         </div>
-
+                  
         <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">WORKING PERMIT</h4>
                   <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                 
                   <div class="heading-elements">
                     <ul class="list-inline mb-0">
                       <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -460,6 +461,11 @@
                     </ul>
                   </div>
                 </div>
+
+                <div class="col-md-12">
+                      <button onclick="ShowPopup('/wp/print_wp/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print HIRARC" > <i class="la la-print"></i> PRINT</button>
+                </div>
+
                 <div class="card-content collapse show">
                   <div class="card-body">
                     <div class="row">
@@ -736,14 +742,18 @@
                       <td colspan="4" class="text-left"><strong>FILE PDF</strong></td>
                     </tr>
                     <tr>
-                      <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Prosedur Kerja</button></td>
-                      <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> BPJS Kesehatan dan Tenaga Kerja</button></td>
-                      <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> SK Pengawas & Pelaksana Pekerjaan</button></td>
-                      <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Sertifikat Kompetensi TK</button></td>
+                    
+                      <td>
+                      <button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Prosedur Kerja</button>
+                      </td>
+                      <td><a target="_blank" href="{{ URL::to('/') }}/files/working_permit/2020/{{ $detailWp->file_bpjs }}" }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> BPJS Kesehatan dan Tenaga Kerja</a></td>
+                      <td><a target="_blank" href="{{ URL::to('/') }}/files/working_permit/2020/{{ $detailWp->file_sk_pengawas }}" }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> SK Pengawas & Pelaksana Pekerjaan</a></td>
+                      <td><a target="_blank" href="{{ URL::to('/') }}/files/working_permit/2020/{{ $detailWp->file_sertifikat_kompetensi }}" }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Sertifikat Kompetensi TK</a></td>
+
                     </tr>
                     <tr>
-                      <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> List Peralatan & APD</button></td>
-                      <td><button class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Tenaga Ahli K3</button></td>
+                    <td><a target="_blank" href="{{ URL::to('/') }}/files/working_permit/2020/{{ $detailWp->file_list_peralatan }}" }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> List Peralatan & APD</a></td>
+                    <td><a target="_blank" href="{{ URL::to('/') }}/files/working_permit/2020/{{ $detailWp->file_ak3 }}" }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Tenaga Ahli K3</a></td>
                     </tr>
                     
                     

@@ -368,6 +368,7 @@
                         
                       </table>
                     </div>
+                    
 
 <div id="footer">
 	Tanggal cetak: <b><?php echo date("d F Y h:i:s"); ?></b> | 
