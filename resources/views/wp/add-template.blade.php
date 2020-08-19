@@ -63,7 +63,7 @@
                       <fieldset>
                         <div class="row">
                           <div class="col-md-6">
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                               <label for="location2">JENIS TEMPLATE :</label>
                               <select class="custom-select form-control" name="jenis_template">
                                 <option value="">Pilih Unit</option>
@@ -71,7 +71,7 @@
                                     <option value="{{ $type->UNIT_TYPE }}">{{ $type->UNIT_TYPE .' - '. $type->TYPE_NAME }}</option>
                                 @endforeach
                               </select>
-                            </div>
+                            </div> --}}
                          
                             <div class="form-group">
                               <label for="location2">NAMA TEMPLATE :</label>
@@ -114,42 +114,42 @@
                                   <td>
                                     <select class="form-control select2me paket_harga required" name="nilai_konsekuensi_hirarc[]">
                                     <option value="">PILIH</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
+                                      <option value="1">1 : Tidak ada cedera, kerugian materi kecil</option>
+                                      <option value="2">2 : Cedera ringan/P3K, kerugian cukup materi sedang</option>
+                                      <option value="3">3 : Hilang hari kerja, kerugian cukup besar</option>
+                                      <option value="4">4 : Cacat, kerugian materi besar</option>
+                                      <option value="5">5 : Kematian, kerugian materi sangat besar</option>
                                   </select>
                                   </td>
                                   <td>
                                     <select class="custom-select form-control" name="nilai_kemungkinan_hirarc[]">
                                     <option value="">PILIH</option>
-                                      <option value="A">A</option>
-                                      <option value="B">B</option>
-                                      <option value="C">C</option>
-                                      <option value="D">D</option>
-                                      <option value="E">E</option>
+                                      <option value="A">A : Hampir pasti akan terjadi/almost certain</option>
+                                      <option value="B">B : Cenderung untuk terjadi/likely</option>
+                                      <option value="C">C : Mungkin dapat terjadi / moderate</option>
+                                      <option value="D">D : Kecil kemungkinan terjadi/unlikely</option>
+                                      <option value="E">E : Jarang terjadi/rare</option>
                                   </select>
                                   </td>
                                   <td><input type="text" class="form-control" name="pengendalian_resiko_hirarc[]"></td>
                                   <td>
                                     <select class="custom-select form-control" name="kendali_konsekuensi[]">
                                     <option value="">PILIH</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
+                                      <option value="1">1 : Tidak ada cedera, kerugian materi kecil</option>
+                                      <option value="2">2 : Cedera ringan/P3K, kerugian cukup materi sedang</option>
+                                      <option value="3">3 : Hilang hari kerja, kerugian cukup besar</option>
+                                      <option value="4">4 : Cacat, kerugian materi besar</option>
+                                      <option value="5">5 : Kematian, kerugian materi sangat besar</option>
                                   </select>
                                   </td>
                                   <td>
                                     <select class="custom-select form-control" name="kendali_kemungkinan[]">
                                     <option value="">PILIH</option>
-                                      <option value="A">A</option>
-                                      <option value="B">B</option>
-                                      <option value="C">C</option>
-                                      <option value="D">D</option>
-                                      <option value="E">E</option>
+                                      <option value="A">A : Hampir pasti akan terjadi/almost certain</option>
+                                      <option value="B">B : Cenderung untuk terjadi/likely</option>
+                                      <option value="C">C : Mungkin dapat terjadi / moderate</option>
+                                      <option value="D">D : Kecil kemungkinan terjadi/unlikely</option>
+                                      <option value="E">E : Jarang terjadi/rare</option>
                                   </select>
                                   </td>
                                   <td><input type="text" class="form-control" name="status_pengendalian[]"></td>
@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="col-md-4">
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                                        <input type="checkbox" name="peralatan[]" value="Earplug" class="custom-control-input" id="item31">
+                                        <input type="checkbox" name="peralatan[]" value="Earmuff" class="custom-control-input" id="item31">
                                         <label class="custom-control-label" for="item31">Earmuff</label>
                                       </div>
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
@@ -228,11 +228,13 @@
                                         <input type="checkbox" name="peralatan[]" value="Full Body Harness" class="custom-control-input" id="item43">
                                         <label class="custom-control-label" for="item43">Full Body Harness</label>
                                       </div>
+                                      {{--
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                                         <input type="checkbox" name="peralatan[]" value="other" class="custom-control-input" id="item44">
                                         <label class="custom-control-label" for="item44">Lain-lain (Sebutkan)</label>
                                         <textarea name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
+                                      --}}
                                     </div>
                                   </div>
                                 </div>
@@ -273,11 +275,13 @@
                                         <input type="checkbox" name="peralatan[]" value="Rambu Keselamatan" class="custom-control-input" id="item1">
                                         <label class="custom-control-label" for="item1">Rambu Keselamatan</label>
                                       </div>
+                                      {{--
                                       <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                                         <input type="checkbox" name="peralatan[]" value="other" class="custom-control-input" id="item4">
                                         <label class="custom-control-label" for="item4">Lain-lain (Sebutkan)</label>
                                         <textarea name="peralatan[]" id="participants2" rows="1" class="form-control"></textarea>
                                       </div>
+                                      --}}
                                     </div>
                                   </div>
                                 </div>
@@ -319,6 +323,10 @@
                           </table>
                         </div>
                         <hr>
+                        <div class="form-group">
+                            <label>Upload Prosedur Kerja <span style="color:red">*</span></label>
+                            <input type='file' name="prosedur_kerja" class="form-control">
+                        </div>
                         <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
                       </fieldset>
      
@@ -427,11 +435,11 @@ $('#form_menu').on('submit', function(event){
   $(".tambah_hirarc").click(function(){
     nomor ++;
     potensi_bahaya = '<select class="form-control select2me paket_harga required" id="id_potensi_bahaya_hirarc+nomor" name="potensi_bahaya_hirarc[]"><option value="" selected="selected">PILIH POTENSI BAHAYA</option><option value="1">Bahaya Fisik (Pencahayaan, Getaran, Kebisingan, Ketinggian dll)</option><option value="2">Bahaya Kimia (Gas, Asap, Uap, Bahan Kimia Berbahaya dll)</option><option value="3">Bahaya Biologi (Micro Biologi(Virus, Bakteri, Jamur, dll); Macro Biologi(Hewan, Serangga, Tumbuhan) dll)</option><option value="4">Bahaya Ergonomi (Stress Fisik (Gerakan Berulang, Ruang Sempit, Menfosir Tenaga) dll)</option><option value="5">Bahaya Mekanis (Titik Jepit, Putaran Pulley atau Roller dll)</option><option value="6">Bahaya Elektris (Kabel terkelupas, Kabel bertegangan tanpa pengaman dll)</option><option value="7">Bahaya Psikososial (Trauma, Intimidasi, Pola promosi jabatan yang salah, Stress Mental (Jenuh/Bosan, Overload) dll)</option><option value="8">Bahaya Tingkah Laku (Tidak patuh terhadap peraturan, overconfident, sok tahu, tidak peduli dll)</option><option value="9">Bahaya Lingkungan Sekitar (Kemiringan permukaan, cuaca yang tidak ramah, permukaan jalan kecil dll)</option></select>';  
-    nilai_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_konsekuensi_hirarc+nomor" name="nilai_konsekuensi_hirarc[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
-    nilai_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_kemungkinan_hirarc+nomor" name="nilai_kemungkinan_hirarc[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';   
+    nilai_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_konsekuensi_hirarc+nomor" name="nilai_konsekuensi_hirarc[]"><option value="" selected="selected">PILIH</option><option value="1">1 : Tidak ada cedera, kerugian materi kecil</option><option value="2">2 : Cedera ringan/P3K, kerugian cukup materi sedang</option><option value="3">3 : Hilang hari kerja, kerugian cukup besar</option><option value="4">4 : Cacat, kerugian materi besar</option><option value="5">5 : Kematian, kerugian materi sangat besar</option></select>';
+    nilai_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_nilai_kemungkinan_hirarc+nomor" name="nilai_kemungkinan_hirarc[]"><option value="" selected="selected">PILIH</option><option value="A">A : Hampir pasti akan terjadi/almost certain</option><option value="B">B : Cenderung untuk terjadi/likely</option><option value="C">C : Mungkin dapat terjadi / moderate</option><option value="D">D : Kecil kemungkinan terjadi/unlikely</option><option value="E">E : Jarang terjadi/rare</option></select>';   
     
-    kendali_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_konsekuensi[]"><option value="" selected="selected">PILIH</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>';
-    kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option></select>';
+    kendali_konsekuensi_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_konsekuensi[]"><option value="" selected="selected">PILIH</option><option value="1">1 : Tidak ada cedera, kerugian materi kecil</option><option value="2">2 : Cedera ringan/P3K, kerugian cukup materi sedang</option><option value="3">3 : Hilang hari kerja, kerugian cukup besar</option><option value="4">4 : Cacat, kerugian materi besar</option><option value="5">5 : Kematian, kerugian materi sangat besar</option></select>';
+    kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A : Hampir pasti akan terjadi/almost certain</option><option value="B">B : Cenderung untuk terjadi/likely</option><option value="C">C : Mungkin dapat terjadi / moderate</option><option value="D">D : Kecil kemungkinan terjadi/unlikely</option><option value="E">E : Jarang terjadi/rare</option></select>';   
     $('#konten_hirarc').append(
       '<tr class="baris_hirarc">'
           +'<td align="center" style="text-align:center;text-align: center;vertical-align: middle;"><button type="button" id="hapus" class="btn hapus_in btn-danger btn-sm"><i class="la la-trash-o"></i></button></td>'

@@ -45,6 +45,16 @@ class AparController extends BaseController
         return view('apar/add', $data);
     }
 
+    public function input_har(Request $request, $id)
+    {
+        $data = [
+            'my_ccode'      => Auth::user()->comp_code,
+            'my_barea'      => Auth::user()->unit,
+            'detail'        => $this->AparModel->getDetailByID($id),
+         ];
+        return view('apar/input-har', $data);
+    }
+
     public function getLantaiByGedung(Request $request, $idgedung)
     {   
         $listLantai  = $this->AparModel->getLantai($idgedung)->pluck("NAMA_LANTAI", "ID_LANTAI");
@@ -64,7 +74,7 @@ class AparController extends BaseController
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->ID_APAR.'" class="action btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> ACTION</button>';
+                        $button = '<button type="button" name="edit" id="'.$data->ID_APAR.'" class="button1 btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> ACTION</button>';
                 //$button .= '&nbsp;&nbsp;';
                 //$button .= '<button type="button" name="delete" id="'.$data->ID_APAR.'" class="delete btn btn-danger btn-sm btn-icon"><i class="la la-trash-o"></i> </button>';
                 return $button;

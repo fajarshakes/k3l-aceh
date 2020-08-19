@@ -58,8 +58,7 @@
                         <tr>
                           <th width="5%">#</th>
                           <th width="8%">COMP CODE</th>
-                          <th width="8%">TYPE UNIT</th>
-                          <th width="61%">NAMA TEMPLATE</th>
+                          <th width="69%">NAMA TEMPLATE</th>
                           <th width="18%">ACTION</th>
                         </tr>
                       </thead>
@@ -67,7 +66,6 @@
                         <tr>
                         <th>#</th>
                           <th>COMP CODE</th>
-                          <th>TYPE UNIT</th>
                           <th>NAMA TEMPLATE</th>
                           <th>ACTION</th>
                         </tr>
@@ -172,10 +170,6 @@ $(document).ready(function() {
       {
       data: 'comp_code',
       name: 'comp_code',
-      className: "text-center"
-      },
-      {
-      data: 'jenis_template',
       className: "text-center"
       },
       {

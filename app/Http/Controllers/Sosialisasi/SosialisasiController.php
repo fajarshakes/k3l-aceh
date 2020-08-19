@@ -76,8 +76,11 @@ class SosialisasiController extends BaseController
         $unit = Session::get('sel_unit');
         $year = date('y');
         $new_id = $this->wpModel->generateWpId($unit . $year);
+
+        $markers = ($this->wpModel->getMarkers())->toArray();
+        //$markers = $this->wpModel->getMarkers()->pluck("longitude", "latitude");
         
-        return response()->json([$new_id]);
+        return response()->json([$markers]);
     }
     
     public function sosialisasi_store(Request $request)

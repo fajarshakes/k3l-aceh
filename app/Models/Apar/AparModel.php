@@ -103,6 +103,18 @@ class AparModel extends Model
         return Common::generateId4Digit($prefixJenis, $noUrut);
     }
   
+  public static function getDetailByID(string $id){
+
+      $value=DB::table('peta_apar')
+      ->join('master_gedung', 'peta_apar.ID_GEDUNG', '=', 'master_gedung.ID_GEDUNG')
+      ->join('master_gedung_detail', 'peta_apar.ID_LANTAI', '=', 'master_gedung_detail.ID_LANTAI')
+      ->select('peta_apar.*', 'master_gedung.NAMA_GEDUNG', 'master_gedung_detail.NAMA_LANTAI')
+      ->where('ID_APAR', '=', $id)
+      ->first();
+  
+      return $value;
+    }
+  
   
 
 }
