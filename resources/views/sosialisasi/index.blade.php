@@ -34,6 +34,9 @@
 
       <div class="content-body">
         <!-- Zero configuration table -->
+        @foreach($markers as $pin)
+        {{ $pin->longitude }}
+        @endforeach
         <section id="configuration">
           <div class="row">
             <div class="col-12">
