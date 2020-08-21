@@ -34,9 +34,9 @@
 
       <div class="content-body">
         <!-- Zero configuration table -->
-        @foreach($markers as $pin)
+        <!-- @foreach($markers as $pin)
         {{ $pin->longitude }}
-        @endforeach
+        @endforeach -->
         <section id="configuration">
           <div class="row">
             <div class="col-12">
@@ -252,12 +252,14 @@
 $('#geoloc5').leafletLoadLocation({
 		alwaysOpen: true,
 		mapContainer: "#fixedMapCont"
-}).on('changeLocation', function(e) {
-	$(this)
-	.siblings('#geolat').val( e.latlng.lat )
-	.siblings('#geolng').val( e.latlng.lng )
-	.siblings('#address').text('"'+e.location+'"');
 });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // console.log('{{ $markers[0]->latitude }}');
+  // console.log('{{ $markers[0]->longitude }}');
+} );
 </script>
 
 <script type="text/javascript">

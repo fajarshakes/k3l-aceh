@@ -83,7 +83,15 @@ class SosialisasiController extends BaseController
         $markers = ($this->wpModel->getMarkers())->toArray();
         //$markers = $this->wpModel->getMarkers()->pluck("longitude", "latitude");
         
-        return response()->json([$markers]);
+        return response()->json(['markers'.$markers]);
+    }
+
+    public function markers(Request $request)
+    {   
+        $markers = ($this->wpModel->getMarkers())->toArray();
+        //$markers = $this->wpModel->getMarkers()->pluck("longitude", "latitude");
+        
+        return response()->json(['markers' => $markers]);
     }
     
     public function sosialisasi_store(Request $request)

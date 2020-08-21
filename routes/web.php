@@ -67,7 +67,8 @@ Route::prefix('sosialisasi')->group(function() {
     Route::post('sosialisasi_delete', 'Sosialisasi\SosialisasiController@sosialisasi_delete')->name('sosialisasi_delete');
     Route::post('update_sosialisasi', 'Sosialisasi\SosialisasiController@update_sosialisasi')->name('update_sosialisasi');
     Route::get('get_markers_sosialisasi', 'Sosialisasi\SosialisasiController@get_markers_sosialisasi')->name('get_markers_sosialisasi');
-    
+    Route::get('markers', 'Sosialisasi\SosialisasiController@markers')->name('markers');
+
 });
 
 //APAR

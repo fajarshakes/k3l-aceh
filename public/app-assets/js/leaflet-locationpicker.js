@@ -363,7 +363,7 @@
         if ($.isPlainObject(opts)) opts = $.extend(defaults, opts);
         else if ($.isFunction(opts))
             opts = $.extend(defaults, {
-                onChangeLocation: opts,
+                // onChangeLocation: opts,
             });
         else opts = defaults;
 
@@ -479,20 +479,28 @@
                 //     ]).addTo(self.map);
                 // }
 
-                for (var i = 0; i < markers.length; ++i) {
-                    self.marker = new L.marker([
-                        markers[i].latitude,
-                        markers[i].longitude,
-                    ])
-                        // .bindPopup(
-                        //     '<a href="' +
-                        //         markers[i].url +
-                        //         '" target="_blank">' +
-                        //         markers[i].name +
-                        //         "</a>"
-                        // )
-                        .addTo(self.map);
-                }
+                fetch("sosialisasi/markers").then(function (data) {
+                    data.json().then(function (response) {
+                        console.log(response.markers[0].longitude);
+                        console.log(response.markers.length);
+
+                        for (var i = 0; i < response.markers.length; ++i) {
+                            self.marker = new L.marker([
+                                response.markers[i].latitude,
+                                response.markers[i].longitude,
+                            ])
+                                // .bindPopup(
+                                //     '<a href="' +
+                                //         markers[i].url +
+                                //         '" target="_blank">' +
+                                //         markers[i].name +
+                                //         "</a>"
+                                // )
+                                .addTo(self.map);
+                            console.log(response.markers[i].longitude);
+                        }
+                    });
+                });
 
             return self.$map;
         }
