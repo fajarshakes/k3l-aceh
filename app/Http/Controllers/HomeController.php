@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Config\Config;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,6 +16,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->Config     = new Config();
     }
 
     /**
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $auth = Auth::user()->group_id;
+        $data = [
+            'menu'      => ($this->Config->getMenu($auth))->toArray(),
+         ];
+        
+        return view('index', $data);     
     }
 }

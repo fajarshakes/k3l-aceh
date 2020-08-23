@@ -59,6 +59,33 @@ class Config extends Model
 
     return $value;
   }
+
+  public function getMenu(string $group_id){
+
+    $value=DB::table('menu_app')
+    ->join('menu_akses', 'menu_app.id', '=', 'menu_akses.menu_id')
+    ->select('menu_app.*')
+    ->where('menu_akses.group_id', '=', $group_id)
+    ->where('menu_app.status', '=', 1)
+    ->where('menu_app.parent_id', '=', 0)
+    ->get();
+    
+    return $value;
+  }
+
+  public function getMenu_l2(string $group_id){
+
+    $value=DB::table('menu_app')
+    ->join('menu_akses', 'menu_app.id', '=', 'menu_akses.menu_id')
+    ->select('menu_app.*')
+    ->where('menu_akses.group_id', '=', $group_id)
+    ->where('menu_app.status', '=', 1)
+    ->where('menu_app.parent_id', '!=', 0)
+    ->get();
+    
+    return $value;
+  }
+
 }
 
 
