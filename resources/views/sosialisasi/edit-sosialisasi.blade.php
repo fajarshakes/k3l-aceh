@@ -132,7 +132,7 @@
                           <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                  <label>Tampilkan File Photo</label>
+                                  <label>Tampilkan File Photo </label>
                                   <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->photo }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Photo</a>
                                 </div>
                                 <input name="photo" type='file' class="form-control"  accept="image/*"/>
