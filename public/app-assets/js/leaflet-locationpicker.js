@@ -326,8 +326,6 @@
         var baseClassName = "leaflet-locpicker",
             baseLayers = {
                 OSM: http + "//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                SAT:
-                    http + "//otile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
                 //TODO add more free base layers
             };
 
@@ -505,80 +503,80 @@
             return self.$map;
         }
 
-        function buildMarker(loc) {
-            var css =
-                "padding: 0px; margin: 0px; position: absolute; outline: 1px solid #fff; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);";
+        // function buildMarker(loc) {
+        //     var css =
+        //         "padding: 0px; margin: 0px; position: absolute; outline: 1px solid #fff; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);";
 
-            return L.marker(parseLocation(loc) || L.latLng(0, 0), {
-                icon: L.divIcon({
-                    className: opts.className + "-marker",
-                    iconAnchor: L.point(0, 0),
-                    html:
-                        '<div style="position: relative; top: -1px; left: -1px; padding: 0px; margin: 0px; cursor: crosshair;' +
-                        "width: " +
-                        opts.cursorSize +
-                        "; height: " +
-                        opts.cursorSize +
-                        ';">' +
-                        '<div style="width: 50%; height: 0px; left: -70%; border-top:  2px solid black;' +
-                        css +
-                        '"></div>' +
-                        '<div style="width: 50%; height: 0px; left:  30%; border-top:  2px solid black;' +
-                        css +
-                        '"></div>' +
-                        '<div style="width: 0px; height: 50%; top:   30%; border-left: 2px solid black;' +
-                        css +
-                        '"></div>' +
-                        '<div style="width: 0px; height: 50%; top:  -70%; border-left: 2px solid black;' +
-                        css +
-                        '"></div>' +
-                        "</div>",
-                }),
-            });
-        }
+        //     return L.marker(parseLocation(loc) || L.latLng(0, 0), {
+        //         icon: L.divIcon({
+        //             className: opts.className + "-marker",
+        //             iconAnchor: L.point(0, 0),
+        //             html:
+        //                 '<div style="position: relative; top: -1px; left: -1px; padding: 0px; margin: 0px; cursor: crosshair;' +
+        //                 "width: " +
+        //                 opts.cursorSize +
+        //                 "; height: " +
+        //                 opts.cursorSize +
+        //                 ';">' +
+        //                 '<div style="width: 50%; height: 0px; left: -70%; border-top:  2px solid black;' +
+        //                 css +
+        //                 '"></div>' +
+        //                 '<div style="width: 50%; height: 0px; left:  30%; border-top:  2px solid black;' +
+        //                 css +
+        //                 '"></div>' +
+        //                 '<div style="width: 0px; height: 50%; top:   30%; border-left: 2px solid black;' +
+        //                 css +
+        //                 '"></div>' +
+        //                 '<div style="width: 0px; height: 50%; top:  -70%; border-left: 2px solid black;' +
+        //                 css +
+        //                 '"></div>' +
+        //                 "</div>",
+        //         }),
+        //     });
+        // }
 
         $(this).each(function (index, input) {
             var self = this;
 
-            self.$input = $(this);
+            // self.$input = $(this);
 
-            self.locationOri = self.$input.val();
+            // self.locationOri = self.$input.val();
 
-            self.onChangeLocation = function () {
-                var edata = {
-                    latlng: self.location,
-                    location: self.getLocation(),
-                };
-                self.$input.trigger(
-                    $.extend(edata, {
-                        type: "changeLocation",
-                    })
-                );
-                opts.onChangeLocation.call(self, edata);
-            };
+            // self.onChangeLocation = function () {
+            //     var edata = {
+            //         latlng: self.location,
+            //         location: self.getLocation(),
+            //     };
+            //     self.$input.trigger(
+            //         $.extend(edata, {
+            //             type: "changeLocation",
+            //         })
+            //     );
+            //     opts.onChangeLocation.call(self, edata);
+            // };
 
-            self.setLocation = function (loc, noSet) {
-                loc = loc || defaults.location;
-                self.location = parseLocation(loc);
+            // self.setLocation = function (loc, noSet) {
+            //     loc = loc || defaults.location;
+            //     self.location = parseLocation(loc);
 
-                if (self.marker) self.marker.setLatLng(loc);
+            //     if (self.marker) self.marker.setLatLng(loc);
 
-                if (!noSet) {
-                    self.$input.data("location", self.location);
-                    self.$input.val(self.getLocation());
-                    self.onChangeLocation();
-                }
-            };
+            //     if (!noSet) {
+            //         self.$input.data("location", self.location);
+            //         self.$input.val(self.getLocation());
+            //         self.onChangeLocation();
+            //     }
+            // };
 
-            self.getLocation = function () {
-                return self.location
-                    ? L.Util.template(opts.locationFormat, {
-                          lat: self.location.lat,
-                          lng: self.location.lng,
-                          sep: opts.locationSep,
-                      })
-                    : self.location;
-            };
+            // self.getLocation = function () {
+            //     return self.location
+            //         ? L.Util.template(opts.locationFormat, {
+            //               lat: self.location.lat,
+            //               lng: self.location.lng,
+            //               sep: opts.locationSep,
+            //           })
+            //         : self.location;
+            // };
 
             self.updatePosition = function () {
                 switch (opts.position) {
@@ -615,33 +613,33 @@
                 self.$input.trigger("hide");
             };
 
-            self.setLocation(self.locationOri, true);
+            // self.setLocation(self.locationOri, true);
 
             self.$map = buildMap(self);
 
-            self.$input
-                .addClass(opts.className)
-                .on("focus." + opts.className, function (e) {
-                    e.preventDefault();
-                    self.openMap();
-                })
-                .on("blur." + opts.className, function (e) {
-                    e.preventDefault();
-                    var p = e.relatedTarget;
-                    var close = true;
-                    while (p) {
-                        if (p._leaflet) {
-                            close = false;
-                            break;
-                        }
-                        p = p.parentElement;
-                    }
-                    if (close) {
-                        setTimeout(function () {
-                            self.closeMap();
-                        }, 100);
-                    }
-                });
+            // self.$input
+            //     .addClass(opts.className)
+            //     .on("focus." + opts.className, function (e) {
+            //         e.preventDefault();
+            //         self.openMap();
+            //     })
+            //     .on("blur." + opts.className, function (e) {
+            //         e.preventDefault();
+            //         var p = e.relatedTarget;
+            //         var close = true;
+            //         while (p) {
+            //             if (p._leaflet) {
+            //                 close = false;
+            //                 break;
+            //             }
+            //             p = p.parentElement;
+            //         }
+            //         if (close) {
+            //             setTimeout(function () {
+            //                 self.closeMap();
+            //             }, 100);
+            //         }
+            //     });
 
             $(window).on("resize", function () {
                 if (self.$map.is(":visible")) self.updatePosition();

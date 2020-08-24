@@ -107,6 +107,8 @@ class SosialisasiController extends BaseController
             'jam_selesai'   =>  'required',
             'latitude'      =>  'required',
             'longitude'     =>  'required',
+            'photo'         =>  'required',
+            'presentasi'    =>  'required',
         );
         
         $error = Validator::make($request->all(), $rules);
@@ -116,12 +118,18 @@ class SosialisasiController extends BaseController
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        $destinationPath = 'images';
+        $destinationPath = 'files/sosialisasi';
         $photo = $request->file('photo');
-        $nama_photo = time()."_".$photo->getClientOriginalName();
+        $nama_photo = "EVIDENCE_".time().$photo->getClientOriginalExtension();
         $photo->move($destinationPath,$nama_photo);
 
         $photo = $destinationPath."/".$nama_photo;
+
+        $presentasi = $request->file('presentasi');
+        $nama_presentasi = "PRESENTASI_".time().$presentasi->getClientOriginalExtension();
+        $presentasi->move($destinationPath,$nama_presentasi);
+
+        $presentasi = $destinationPath."/".$nama_presentasi;
    
         $store = DB::table('peta_sosialisasi')->insert([
             'unit'          => Auth::user()->unit,
@@ -136,6 +144,7 @@ class SosialisasiController extends BaseController
             'latitude'      => $request->latitude,
             'longitude'     => $request->longitude,
             'photo'         => $request->photo,
+            'presentasi'    => $request->presentasi,
             'user_input'    => Auth::user()->username,
             'tgl_input'     => date('Y-m-d'),
         ]);
