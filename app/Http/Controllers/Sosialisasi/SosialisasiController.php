@@ -138,8 +138,8 @@ class SosialisasiController extends BaseController
             'jam_selesai'   => $request->jam_selesai,
             'latitude'      => $request->latitude,
             'longitude'     => $request->longitude,
-            'photo'         => $request->photo,
-            'presentasi'    => $request->presentasi,
+            'photo'         => $nama_photo,
+            'presentasi'    => $nama_presentasi,
             'user_input'    => Auth::user()->username,
             'tgl_input'     => date('Y-m-d'),
         ]);
