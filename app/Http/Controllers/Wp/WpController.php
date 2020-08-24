@@ -183,6 +183,7 @@ class WpController extends BaseController
         $status = Session::get('sel_status');
         $data = [
             'getManager'  => $this->UserModel->getUser($unit, 4),
+            'getVendor'   => $this->wpModel->getVendor(Auth::user()->comp_code),
             'getSpv'      => $this->UserModel->getUser($unit, 5),
             'getPj'       => $this->UserModel->getUser($unit, 6),
             'unit_l3'     => $this->wpModel->getUnit_l3($unit),
@@ -270,6 +271,7 @@ class WpController extends BaseController
             'status'                => 'NEW',
             'nama_pekerjaan'        => $request->nama_pekerjaan,
             'pelaksana'             => $request->pelaksana,
+            'id_pelaksana'          => $request->vendor_id,
             'alamat'                => $request->alamat,
             'nama_pj'               => $request->nama_pj,
             'jabatan'               => $request->jabatan,

@@ -387,11 +387,16 @@
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Pelaksana / Perusahaan<span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="pelaksana">
+                              <select id="vendor_id" name="vendor_id" class="form-control">
+                                <option value="none" selected="" disabled="">Select Vendor</option>
+                                @foreach($getVendor as $vendor)
+                                  <option value="{{ $vendor->ID }}">{{ $vendor->VENDOR_NAME }}</option>
+                                @endforeach
+                              </select>
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Alamat</label>
-                              <textarea class="form-control" name="alamat"></textarea>
+                              <textarea class="form-control" id="alamat" name="alamat"></textarea>
                             </div>
                             
                             <div class="form-group">
@@ -421,15 +426,16 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Nama Penanggung Jawab <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="nama_pj">
+                              <input type="text" class="form-control" id="pic_name" name="nama_pj" readonly>
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Jabatan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="jabatan">
+                              <input type="text" class="form-control" id="pic_position" name="jabatan" readonly>
                             </div>
                             <div class="form-group">
                               <label for="eventName2">No Telepon / HP <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="no_telepon">
+                              <input type="text" class="form-control" id="pic_contact" name="no_telepon" readonly>
+                              <input type="hidden" id="vendor" name="pelaksana" readonly>
                             </div>
 
                             
@@ -457,7 +463,7 @@
                             <div class="form-group">
                               <label>Tanggal pengajuan <span style="color:red">*</span></label>
                               <div class='input-group'>
-                                <input type="date" min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control" name="tgl_pengajuan"/>
+                                <input type="date" min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control" name="tgl_pengajuan" required />
                                 <!-- <span class="input-group-addon">
                                   <span class="ft-calendar"></span>
                                 </span> -->
@@ -563,10 +569,10 @@
                               <label>Tanggal Mulai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_mulai"/>
+                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_mulai" required/>
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='time' class="form-control" name="jam_mulai">
+                                  <input type='time' class="form-control" name="jam_mulai" required>
                                 </div>
                               </div>
                             </div>
@@ -576,10 +582,10 @@
                               <label>Tanggal Selesai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_selesai"/>
+                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_selesai" required/>
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='time' class="form-control" name="jam_selesai">
+                                  <input type='time' class="form-control" name="jam_selesai" required>
                                 </div>
                               </div>
                             </div>
@@ -850,6 +856,29 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    $('select[name="vendor_id"]').on('change', function(){
+      var b_area =   $(this).val();
+      var token = '{{ csrf_token() }}';
+   
+        if(b_area) {
+            $.ajax({
+                url: "{{ url('master/get_vendor_detail') }}/"+b_area,
+                type:"GET",
+                dataType:"json",
+                data: {buss_area: b_area, _token: token},
+                success:function(html) {
+                  $('#vendor').val(html.VENDOR_NAME);
+                  $('#alamat').val(html.ADDRESS);
+                  $('#pic_name').val(html.PIC_NAME);
+                  $('#pic_position').val(html.PIC_POSITION);
+                  $('#pic_contact').val(html.PIC_PHONE);
+                },
+            });
+        }
+      });
+  });
+
+$(document).ready(function() {
     $('#tbl-hirac').removeAttr('width').DataTable( {
         "scrollX": true,
         "searching": false,
@@ -1009,6 +1038,5 @@ $(".tambah_hirarc").click(function(){
 
   });
 
-document.getElementById("myDate").min = new Date().getFullYear() + "-" +  parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate()
-</script>
+  </script>
 @endsection

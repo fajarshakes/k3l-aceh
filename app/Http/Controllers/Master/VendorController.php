@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Master\User;
 use App\Models\Master\UserCategory;
+use App\Models\Master\MasterModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Response;
@@ -25,6 +26,7 @@ class VendorController extends BaseController
         $this->middleware('auth');
         $this->menu        = new User();
         $this->menuCat     = new UserCategory();
+        $this->Master      = new MasterModel();
     }
 
     public function vendor(Request $request)
@@ -32,19 +34,47 @@ class VendorController extends BaseController
         $unitData  = $this->menuCat->getUnit();
         $url = "http://localhost:1000/api/vendor_list.php";
         $json = json_decode(file_get_contents($url), true);
-        return view('master_data/vendor_index',
-            ['vendor_json' => $json]);
+    
+
+        $data = [
+            'vendor_json'  => $json['vendorData'],
+            'unitData'      => $unitData,
+        ];
+        
+        return view('master_data/vendor_index', $data);
     }
+    
+    public function api_vendor_detail(Request $request, $buss_area)
+    {   
+        $url = "http://localhost:1000/api/vendor_detail.php?id=$buss_area";
+        $json = json_decode(file_get_contents($url), true);
+
+        return $json;
+        
+    }
+
+    public function get_vendor_detail(Request $request, $id)
+    {   
+        $data  = $this->Master->getVendorDet($id);
+        return json_encode($data);
+        
+    }
+
     
     public function test(Request $request)
     {   
         
         $unitData  = $this->menuCat->getUnit(); 
         $url = "http://localhost:1000/api/vendor_list.php";
-        $json = array(json_decode(file_get_contents($url), true));
+        $json = json_decode(file_get_contents($url), true);
+
+        
         
         return response()->json([$json]);
-
+        //return json_encode($json);
+        //return $json;
+        //return json_encode($json);
+        
     }
 
     public function getGroupUser(Request $request, $buss_area)
@@ -54,35 +84,26 @@ class VendorController extends BaseController
         return json_encode($unitGroup);
     }
     
-    public function user_datatables(Request $request)
+    public function vendor_datatables(Request $request)
     {
-        //$unit = Auth::user()->unit;
+        $comp_code = Auth::user()->comp_code;
         $sql = "SELECT
-                    us.id, us.email, us.name, us.pers_no, us.position_desc,
-                    mu.UNIT_NAME,
-                    ug.GROUP_NAME 
+                    *
                 FROM
-                    users us
-                    LEFT JOIN master_unit mu ON us.unit = mu.BUSS_AREA
-                    LEFT JOIN users_group ug ON us.group_id = ug.ID
+                    master_vendor
                 WHERE
-                    us.STATUS = 'ACTIVE'";
+                    COMP_CODE = '$comp_code'";
         $v = DB::select($sql);
             
         return Datatables::of($v)
-
-            //return datatables()->of(($v)->get())
-            //return datatables()->of(Master::latest()->get())
-                    ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i> Edit</button>';
-                        $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> Delete</button>';
-                        return $button;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        //}
-        //return view('master_data/menu_index', ['menu' => $menu]);
+            ->addColumn('action', function($data){
+                $button = '<button type="button" name="edit" id="'.$data->ID.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i> Edit</button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button type="button" name="delete" id="'.$data->ID.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> Delete</button>';
+                return $button;
+                })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     public function c_menu_datatables(Request $request)
@@ -111,15 +132,14 @@ class VendorController extends BaseController
 
     }
 
-    public function user_store(Request $request)
+    public function vendor_store(Request $request)
     {
         $rules = array(
-            'email'         =>  'required|email',
-            'name'          =>  'required',
-            'pers_no'       =>  'required',
-            'unit_id'       =>  'required',
-            'user_group'    =>  'required',
-            'jabatan'    =>  'required',
+            'email'          =>  'required|email',
+            'alamat'         =>  'required',
+            'pic_name'       =>  'required',
+            'pic_position'   =>  'required',
+            'pic_contact'    =>  'required',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -130,21 +150,34 @@ class VendorController extends BaseController
         }
 
         $username = explode("@", $request->email);
-        $store = DB::table('users')->insert([
-        //$form_data = array(
-            //'unit'              => Auth::user()->unit,
-            'unit'              => $request->unit_id,
+        $store1 = DB::table('users')->insert([
+            'comp_code'         => Auth::user()->comp_code,
+            'unit'              => Auth::user()->unit,
             'username'          => $username[0],
-            'name'              => $request->fullname,
-            'pers_no'           => $request->pers_no,
+            'name'              => $request->nama_perusahaan,
+            'pers_no'           => '',
             'email'             => $request->email,
-            'group_id'          => $request->user_group,
-            'position_desc'     => $request->jabatan,
-            'password'          => Hash::make('Qwerty@4321'),
-            'name'              => $request->name,
+            'group_id'          => 7,
+            'position_desc'     => 'ADMIN PERUSAHAAN',
+            'password'          => Hash::make('Vendor@4321'),
             'created_at'        => date('Y-m-d'),
-            'status'            =>'ACTIVE',
+            'created_by'        => Auth::user()->username,
+            'status'            => 'ACTIVE',
         ]);
+
+        $store2 = DB::table('master_vendor')->insert([
+            'COMP_CODE'      => Auth::user()->comp_code,
+            'SAP_NO'         => $request->nosap,
+            'VENDOR_NAME'    => $request->nama_perusahaan,
+            'SIPAT_ID'       => $request->nosipat,
+            'ADDRESS'        => $request->alamat,
+            'PIC_NAME'       => $request->pic_name,
+            'PIC_POSITION'   => $request->pic_position,
+            'PIC_PHONE'      => $request->pic_contact,
+            'EMAIL'          => $request->email,
+            'CREATED_AT'     => date('Y-m-d'),
+            'CREATED_BY'     => Auth::user()->username,
+            ]);
 
         //AjaxCrud::create($form_data);
         return response()->json(['success' => 'Data Added successfully.']);

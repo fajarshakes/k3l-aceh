@@ -111,6 +111,11 @@ Route::prefix('master')->group(function() {
     Route::get('unit_datatables', 'Master\UnitController@unit_datatables')->name('unit_datatables');
     Route::get('vendor', 'Master\VendorController@vendor')->name('vendor');
     Route::get('vendor/test', 'Master\VendorController@test')->name('test');
+    Route::get('api_vendor_detail/{id}', 'Master\VendorController@api_vendor_detail')->name('api_vendor_detail');
+    Route::get('get_vendor_detail/{id}', 'Master\VendorController@get_vendor_detail')->name('get_vendor_detail');
+    Route::post('vendor_store', 'Master\VendorController@vendor_store')->name('vendor_store');
+    Route::get('vendor_datatables', 'Master\VendorController@vendor_datatables')->name('vendor_datatables');
+
 
     Route::get('c_menu_datatables', 'Master\UserController@c_menu_datatables')->name('c_menu_datatables');
     Route::post('user_store', 'Master\UserController@user_store')->name('user_store');

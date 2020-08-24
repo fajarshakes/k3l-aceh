@@ -69,6 +69,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getVendor(string $comp_code){
+
+    $value=DB::table('master_vendor')
+    ->where('COMP_CODE', '=', $comp_code)
+    ->get(); 
+
+    return $value;
+  }
+
   public function getGroupUnit(string $buss_area){
 
     $value=DB::table('users_group')

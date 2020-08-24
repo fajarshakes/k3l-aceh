@@ -51,27 +51,25 @@
                 <div class="card-content">
                     
                     <div class="tab-content px-1 pt-1">
-                    <table id="datamenu" class="table table-striped table-bordered">
+                    <table id="list-vendor" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>#</th>
-                          <th>BUSS AREA</th>
-                          <th>PERS NO</th>
-                          <th>EMAIL</th>
-                          <th>FULLNAME</th>
-                          <th>GROUP</th>
-                          <th>ACTION</th>
+                          <th class="text-center">#</th>
+                          <th class="text-center">VENDOR</th>
+                          <th class="text-center">EMAIL</th>
+                          <th class="text-center">PIC</th>
+                          <th class="text-center">CONTACT</th>
+                          <th class="text-center">ACTION</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <th>#</th>
-                          <th>BUSS AREA</th>
-                          <th>PERS NO</th>
-                          <th>EMAIL</th>
-                          <th>FULLNAME</th>
-                          <th>GROUP</th>
-                          <th>ACTION</th>
+                          <th class="text-center">#</th>
+                          <th class="text-center">VENDOR</th>
+                          <th class="text-center">EMAIL</th>
+                          <th class="text-center">PIC</th>
+                          <th class="text-center">CONTACT</th>
+                          <th class="text-center">ACTION</th>
                         </tr>
                       </tfoot>
                     </table>
@@ -108,63 +106,60 @@
                       <label for="projectinput5">PILIH VENDOR</label>
                       <select id="vendor_id" name="vendor_id" class="form-control">
                         <option value="none" selected="" disabled="">Select Category</option>
-                        @foreach($vendor_json->vendorData as $json)
-                          <option value="{{ $json->vendorData->id }}">{{ $json->vendorData->vendor }}</option>
+                        @foreach($vendor_json as $json)
+                          <option value="{{ $json['id'] }}">{{ $json['vendor'] }}</option>
                         @endforeach
                       </select>
                     </div>
                   </div>
               </div>
                 
-              <div class="form-group">
-                <label for="companyName">Email</label>
-                  <input type="text" class="form-control" placeholder="Email" id="email" name="email">
-              </div>
-                <div class="row">
+              <div class="row">
                   <div class="col-md-7">
                     <div class="form-group">
-                      <label for="companyName">Full Name</label>
-                      <input type="text" class="form-control" placeholder="Full Name" id="name" name="name">
+                      <label for="companyName">NO SAP</label>
+                      <input type="text" class="form-control" placeholder="Full Name" id="nosap" name="nosap" readonly>
                     </div>
                   </div>
                   <div class="col-md-5">
                     <div class="form-group">
-                      <label for="companyName">Pers Number</label>
-                      <input type="text" class="form-control" placeholder="Pers Number / NIP" id="pers_no" name="pers_no">
+                      <label for="companyName">SIPAT NO</label>
+                      <input type="text" class="form-control" placeholder="Pers Number / NIP" id="nosipat" name="nosipat" readonly>
                     </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Sebutan Jabatan</label>
-                    <input type="text" class="form-control" placeholder="Jabatan" id="jabatan" name="jabatan">
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
+              </div>
+
+              <div class="form-group">
+                  <label for="companyName">ALAMAT</label>
+                    <input type="text" class="form-control" placeholder="Alamat Perusahaan" id="alamat" name="alamat">
+              </div>
+              <div class="form-group">
+                  <label for="companyName">EMAIL PERUSAHAAN</label>
+                    <input type="text" class="form-control" placeholder="Alamat Perusahaan" name="email">
+              </div>
+              <div class="form-group">
+                  <label for="companyName">NAMA PIC</label>
+                    <input type="text" class="form-control" placeholder="Nama PIC" id="pic_name" name="pic_name" required>
+              </div>
+              <div class="row">
+                  <div class="col-md-7">
                     <div class="form-group">
-                      <label for="projectinput5">Unit</label>
-                      <select id="unit_id" name="unit_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Category</option>
-                        @foreach($unitData as $unit)
-                          <option value="{{ $unit->BUSS_AREA }}">{{ $unit->UNIT_NAME }}</option>
-                        @endforeach
-                      </select>
+                      <label for="companyName">JABATAN PIC</label>
+                      <input type="text" class="form-control" placeholder="Jabatan PIC" id="pic_position" name="pic_position" required>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-5">
                     <div class="form-group">
-                      <label for="projectinput5">User Group</label>
-                      <select id="user_group" name="user_group" class="form-control">
-                      @if (!empty($group_id))
-                          <option value="{{ $group_id }}">{{ $group_name }}</option>
-                      @endif
-                      </select>
+                      <label for="companyName">CONTACT PIC</label>
+                      <input type="text" class="form-control" placeholder="Contact PIC" id="pic_contact" name="pic_contact" required>
                     </div>
                   </div>
-                </div>
+              </div>
+
               </div>
               
+              <input type="hidden" name="nama_perusahaan" id="nama_perusahaan" />
               <input type="hidden" name="action" id="action" />
-              <input type="hidden" name="hidden_id" id="hidden_id" />
               
               <div class="modal-footer">
                 <button type="button" name="close" id="close" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
@@ -211,74 +206,55 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
-    $('select[name="unit_id"]').on('change', function(){
+    $('select[name="vendor_id"]').on('change', function(){
       var b_area =   $(this).val();
       var token = '{{ csrf_token() }}';
    
-        //var countryId = $(this).val();
         if(b_area) {
             $.ajax({
-                url: "{{ url('master/get_group/') }}/"+b_area,
+                url: "{{ url('master/api_vendor_detail') }}/"+b_area,
                 type:"GET",
                 dataType:"json",
                 data: {buss_area: b_area, _token: token},
-
-                //beforeSend: function(){
-                    //$('#loader').css("visibility", "visible");
-                //},
-
-                success:function(data) {
-
-                    $('select[name="user_group"]').empty();
-
-                    $.each(data, function(key, value){
-
-                        $('select[name="user_group"]').append('<option value="'+ key +'">' + value + '</option>');
-
-                    });
+                success:function(html) {
+                  $('#nosap').val(html.data[0].nosap);
+                  $('#nosipat').val(html.data[0].id);
+                  $('#alamat').val(html.data[0].alamat);
+                  $('#direktur').val(html.data[0].direktur);
+                  $('#nama_perusahaan').val(html.data[0].vendor);
                 },
-                //complete: function(){
-                    //$('#loader').css("visibility", "hidden");
-                //}
             });
-        } else {
-            $('select[name="user_group"]').empty();
         }
-
-    });
+      });
   });
 
 $(document).ready(function() {
 
- var vtable = $('#datamenu').DataTable({
+ var vtable = $('#list-vendor').DataTable({
     processing: true,
     serverSide: true,
     paging: true,
     order: [[ 2, 'asc' ]],
     ajax:{
-     url: "{{ route('user_datatables') }}",
+     url: "{{ route('vendor_datatables') }}",
     },
     columns:[
       { data: null, searchable:false, orderable:false, className: "text-center"},
       {
-      data: 'UNIT_NAME',
-      name: 'UNIT_NAME'
+      data: 'VENDOR_NAME',
+      name: 'VENDOR_NAME'
       },
       {
-      data: 'pers_no',
+      data: 'EMAIL',
       className: "text-left"
       },
       {
-      data: 'email',
-      className: "text-center"
-      },
-      {
-      data: 'name',
+      data: 'PIC_NAME',
       className: "text-left"
       },
       {
-      data: 'GROUP_NAME',
-      className: "text-center"
+      data: 'PIC_PHONE',
+      className: "text-left"
       },
       {
       data: 'action',
@@ -310,7 +286,7 @@ $(document).ready(function() {
       if($('#action').val() == 'Add')
       {
         $.ajax({
-          url:"{{ route('user_store') }}",
+          url:"{{ route('vendor_store') }}",
           method:"POST",
           data: new FormData(this),
           contentType: false,
@@ -337,7 +313,7 @@ $(document).ready(function() {
               type_toast = 'success';
               $('#form_menu')[0].reset();
               $('#formModal').modal('hide');
-              $('#datamenu').DataTable().ajax.reload();
+              $('#list-vendor').DataTable().ajax.reload();
             }
             //$('#form_result').html(html);
             if(type_toast == 'error'){
@@ -438,7 +414,7 @@ $(document).ready(function() {
       }
     });
 
-    $(document).on('click', '.edit', function(){
+    $(document).on('click', '.add', function(){
       var id = $(this).attr('id');
       $('#form_result').html('');
       $.ajax({
