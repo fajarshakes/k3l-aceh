@@ -160,7 +160,7 @@
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td width="2%">1</td>
                         <td>Tanggal</td>
@@ -217,40 +217,10 @@
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td colspan="3" class="text-left">1. ALAT PELINDUNG DIRI</td>
                       </tr>
-                      {{--
-                      <!-- <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                      @foreach($mperalatan as $mper)
-                      @php
-                        $i = 'true';
-                      @endphp
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                          @foreach($peralatan as $per)
-                          @if($mper == $per->description)
-                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mper }}" checked>
-                            {{ $mper }} 
-                            @php
-                              $i = 'false';
-                            @endphp
-                          @endif
-                          @endforeach
-
-                          @if($i == 'true')
-                          <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mper }}">
-                          {{ $mper }} 
-                          @endif
-                          </div>
-                          </div>
-                        </td>
-                      </tr>
-                      @endforeach -->
-                        --}}
-                      
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
@@ -330,36 +300,7 @@
                       <tr>
                         <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
                       </tr>
-                      {{--
-                      <!--
-                      @foreach($mkesalamatan as $mkes)
-                      @php
-                        $i = 'true';
-                      @endphp
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                          @foreach($peralatan as $per)
-                          @if($mkes == $per->description)
-                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mkes }}" checked>
-                            {{ $mkes }} 
-                            @php
-                              $i = 'false';
-                            @endphp
-                          @endif
-                          @endforeach
-
-                          @if($i == 'true')
-                          <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mkes }}">
-                          {{ $mkes }} 
-                          @endif
-                          </div>
-                        </td>
-                      </tr>
-                      @endforeach
-                      -->
-                      --}}
-
+                      
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
@@ -477,7 +418,7 @@
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td colspan="4" class="text-left"><strong>A. INFORMASI PEKERJAAN</strong></td>
                       </tr>
@@ -525,7 +466,7 @@
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td colspan="5" class="text-left"><strong>B. DURASI PEKERJAAN</strong></td>
                       </tr>

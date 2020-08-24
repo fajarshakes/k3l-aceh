@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Master;
 use App\Models\Wp\WpModel;
+use App\Models\Master\MasterModel;
 use App\Models\Master\User;
 use Illuminate\Support\Facades\Validator;
 use Response;
@@ -28,7 +29,8 @@ class WpController extends BaseController
     {
         $this->middleware('auth');
         $this->wpModel     = new WpModel();
-        $this->UserModel     = new User();
+        $this->UserModel   = new User();
+        $this->Master      = new MasterModel();
     }
     
     public function dashboard(Request $request)
@@ -43,8 +45,17 @@ class WpController extends BaseController
         return view('wp/list',
         ['unitType' => $unitData],
         ['unitList' => $unitList],
-        );
-        
+        ); 
+    }
+
+    public function vendor(Request $request)
+    {
+        $unitData  = $this->wpModel->getUnitType();
+        $unitList  = $this->wpModel->getUnit();
+        return view('wp/vendor',
+        ['unitType' => $unitData],
+        ['unitList' => $unitList],
+        ); 
     }
 
     public function detail(Request $request, $id_wp)
@@ -142,6 +153,35 @@ class WpController extends BaseController
             ->make(true);
     }
 
+    public function list_permohonan_vendor(Request $request)
+    {
+        if (Auth::user()->unit == 6101) {
+            $unit_view = 61;
+        } else {
+            $unit_view = Auth::user()->unit;
+        }
+
+        $sql = "SELECT
+                    wp.*, mu.UNIT_NAME
+                FROM
+                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
+                WHERE
+                    wp.unit like '$unit_view%' AND
+                    wp.status != 'TRASH'";
+        $v = DB::select($sql);
+            
+        return Datatables::of($v)
+            ->addColumn('action', function($data){
+                        $button = '<button type="button" name="edit" id="'.$data->id_wp.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button type="button" name="delete" id="'.$data->id_wp.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+
     public function getTemplateByUnit(Request $request, $idunit)
     {   
         $listTemplate = $this->wpModel->getTemplate($idunit)->pluck("nama_template", "id_template");
@@ -181,6 +221,9 @@ class WpController extends BaseController
         $unit = Session::get('sel_unit');
         $id_template = Session::get('sel_template');
         $status = Session::get('sel_status');
+        $group_id = Auth::user()->group_id;
+        
+        
         $data = [
             'getManager'  => $this->UserModel->getUser($unit, 4),
             'getVendor'   => $this->wpModel->getVendor(Auth::user()->comp_code),
@@ -193,6 +236,7 @@ class WpController extends BaseController
             'tbl_hirarc'  => $this->wpModel->getHirarcTemplate($id_template),
             'tbl_jsa'     => $this->wpModel->getJsaTemplate($id_template),
             'peralatan'   => collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray(),
+            'getDetVendor'=> $this->Master->getVendorDet(Auth::user()->pers_no),
         ];
         
         return view('wp/create', $data);
@@ -225,8 +269,12 @@ class WpController extends BaseController
         $new_id = $this->wpModel->generateWpId($unit . $year);
 
         $bpjs       = $request->file('bpjs');
+        if (!empty($bpjs)){
         $new_bpjs   = 'BPJS_' . $new_id . '.' . $bpjs->getClientOriginalExtension();
         $bpjs->move(public_path('files/working_permit/'. date('Y')), $new_bpjs);
+        } else {
+            $new_bpjs =  '';
+        }
 
         $sertifikasi      = $request->file('sertifikat_kompetensi');
         $new_sertifikat   = 'SERTIFIKAT_' . $new_id . '.' . $sertifikasi->getClientOriginalExtension();
@@ -237,8 +285,12 @@ class WpController extends BaseController
         $ak3->move(public_path('files/working_permit/'. date('Y')), $new_ak3);
 
         $singeline       = $request->file('single_line_diagram');
+        if (!empty($singeline)){
         $new_singline   = 'SINGLINE_' . $new_id . '.' . $singeline->getClientOriginalExtension();
         $singeline->move(public_path('files/working_permit/'. date('Y')), $new_singline);
+        } else {
+            $new_singline =  '';
+        }
 
         $skp       = $request->file('surat_penunjukan');
         $new_skp   = 'SKP_' . $new_id . '.' . $skp->getClientOriginalExtension();
@@ -249,9 +301,12 @@ class WpController extends BaseController
         $l_peralatan->move(public_path('files/working_permit/'. date('Y')), $new_peralatan);
 
         $foto       = $request->file('foto_lokasi_kerja');
+        if (!empty($foto)){
         $new_foto   = 'FOTO_' . $new_id . '.' . $foto->getClientOriginalExtension();
         $foto->move(public_path('files/working_permit/'. date('Y')), $new_foto);
-        
+        } else {
+            $new_foto =  '';
+        }
         /*
         $rules = array(
             'cname'         =>  'required',

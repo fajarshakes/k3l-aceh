@@ -385,6 +385,13 @@
                               <label for="eventName2">Nama Pekerjaan <span style="color:red">*</span></label>
                               <input type="text" class="form-control" name="nama_pekerjaan" value="{{$detail ? $detail->nama_template : ''}}">
                             </div>
+                            @if(Auth::user()->group_id == 7)
+                            <div class="form-group">
+                              <label for="eventName2">Pelaksana / Perusahaan <span style="color:red">*</span></label>
+                              <input type="text" class="form-control" name="pelaksana" value="{{ Auth::user()->name ? Auth::user()->name : ''}}" readonly>
+                              <input type="hidden" name="vendor_id" value="{{ Auth::user()->pers_no ? Auth::user()->pers_no : ''}}" readonly>
+                            </div>
+                            @else
                             <div class="form-group">
                               <label for="eventName2">Pelaksana / Perusahaan<span style="color:red">*</span></label>
                               <select id="vendor_id" name="vendor_id" class="form-control">
@@ -393,10 +400,12 @@
                                   <option value="{{ $vendor->ID }}">{{ $vendor->VENDOR_NAME }}</option>
                                 @endforeach
                               </select>
+                              <input type="hidden" id="vendor" name="pelaksana" readonly>
                             </div>
+                            @endif
                             <div class="form-group">
                               <label for="eventName2">Alamat</label>
-                              <textarea class="form-control" id="alamat" name="alamat"></textarea>
+                              <textarea class="form-control" id="alamat" name="alamat">{{ $getDetVendor ? $getDetVendor->ADDRESS : '' }}</textarea>
                             </div>
                             
                             <div class="form-group">
@@ -426,16 +435,15 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Nama Penanggung Jawab <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pic_name" name="nama_pj" readonly>
+                              <input type="text" class="form-control" id="pic_name" name="nama_pj" value="{{ $getDetVendor ? $getDetVendor->PIC_NAME : '' }}" readonly>
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Jabatan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pic_position" name="jabatan" readonly>
+                              <input type="text" class="form-control" id="pic_position" name="jabatan" value="{{ $getDetVendor ? $getDetVendor->PIC_POSITION : '' }}" readonly>
                             </div>
                             <div class="form-group">
                               <label for="eventName2">No Telepon / HP <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pic_contact" name="no_telepon" readonly>
-                              <input type="hidden" id="vendor" name="pelaksana" readonly>
+                              <input type="text" class="form-control" id="pic_contact" name="no_telepon" value="{{ $getDetVendor ? $getDetVendor->PIC_PHONE : '' }}" readonly>
                             </div>
 
                             
