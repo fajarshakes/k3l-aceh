@@ -329,7 +329,7 @@
                         <hr>
                         <div class="form-group">
                             <label>Tampilkan Prosedur Kerja</label>
-                            <a target="_blank" href="{{ URL::to('/') }}/files/prosedur_kerja/{{ $detail->file_sop }}" }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Prosedur Kerja</a>
+                            <a target="_blank" href="{{ URL::to('/') }}/files/prosedur_kerja/{{ $detail->file_sop }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Prosedur Kerja</a>
                         </div>
                       
                         <div class="form-group">

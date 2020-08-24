@@ -130,11 +130,11 @@
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                                <input name="photo" type='file' class="form-control" />
+                                <input name="photo" type='file' class="form-control" accept="image/*"/>
                                 <small class="text-muted">Photo</small>
                             </div>
                             <div class="col-md-6">
-                                <input name="presentasi" type='file' class="form-control">
+                                <input name="presentasi" type='file' class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
                                 <small class="text-muted">Presentasi</small>
                             </div>
                           </div>

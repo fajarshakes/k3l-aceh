@@ -118,18 +118,13 @@ class SosialisasiController extends BaseController
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        $destinationPath = 'files/sosialisasi';
-        $photo = $request->file('photo');
-        $nama_photo = "EVIDENCE_".time().$photo->getClientOriginalExtension();
-        $photo->move($destinationPath,$nama_photo);
-
-        $photo = $destinationPath."/".$nama_photo;
+        $photo       = $request->file('photo');
+        $nama_photo   = 'EVIDENCE_' . time() . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path('files/sosialisasi/'), $nama_photo);
 
         $presentasi = $request->file('presentasi');
-        $nama_presentasi = "PRESENTASI_".time().$presentasi->getClientOriginalExtension();
-        $presentasi->move($destinationPath,$nama_presentasi);
-
-        $presentasi = $destinationPath."/".$nama_presentasi;
+        $nama_presentasi = "PRESENTASI_" . time() . '.' . $presentasi->getClientOriginalExtension();
+        $presentasi->move(public_path('files/sosialisasi/'), $nama_presentasi);
    
         $store = DB::table('peta_sosialisasi')->insert([
             'unit'          => Auth::user()->unit,
