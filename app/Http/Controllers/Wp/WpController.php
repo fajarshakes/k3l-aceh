@@ -142,7 +142,6 @@ class WpController extends BaseController
             ->make(true);
     }
 
-<<<<<<< HEAD
     public function list_pengerjaan(Request $request)
     {
         if (Auth::user()->unit == 6101) {
@@ -224,8 +223,6 @@ class WpController extends BaseController
     }
 
 
-=======
->>>>>>> ba1f616d6f4998ebdda6a8269617fef95c230355
     public function getTemplateByUnit(Request $request, $idunit)
     {   
         $listTemplate = $this->wpModel->getTemplate($idunit)->pluck("nama_template", "id_template");
@@ -265,7 +262,6 @@ class WpController extends BaseController
         $unit = Session::get('sel_unit');
         $id_template = Session::get('sel_template');
         $status = Session::get('sel_status');
-<<<<<<< HEAD
         $group_id = Auth::user()->group_id;
 
         if ($group_id == 7){
@@ -274,8 +270,6 @@ class WpController extends BaseController
             $redirect_to = '/wp/list-permit';
         }
         
-=======
->>>>>>> ba1f616d6f4998ebdda6a8269617fef95c230355
         $data = [
             'getManager'  => $this->UserModel->getUser($unit, 4),
             'getVendor'   => $this->wpModel->getVendor(Auth::user()->comp_code),
@@ -288,11 +282,8 @@ class WpController extends BaseController
             'tbl_hirarc'  => $this->wpModel->getHirarcTemplate($id_template),
             'tbl_jsa'     => $this->wpModel->getJsaTemplate($id_template),
             'peralatan'   => collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray(),
-<<<<<<< HEAD
             'getDetVendor'=> $this->Master->getVendorDet(Auth::user()->pers_no),
             'redirect_to'    => $redirect_to,
-=======
->>>>>>> ba1f616d6f4998ebdda6a8269617fef95c230355
         ];
         
         return view('wp/create', $data);
