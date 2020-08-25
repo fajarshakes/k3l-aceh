@@ -42,6 +42,9 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
     Route::get('list_permohonan', 'Wp\WpController@list_permohonan')->name('list_permohonan');
+    Route::get('list_pengerjaan', 'Wp\WpController@list_pengerjaan')->name('list_pengerjaan');
+    Route::get('list_selesai', 'Wp\WpController@list_selesai')->name('list_selesai');
+    Route::get('list_permohonan_vendor', 'Wp\WpController@list_permohonan_vendor')->name('list_permohonan_vendor');
     Route::get('list_template', 'Wp\TemplateController@list_template')->name('list_template');
     Route::get('get_detail_wp', 'Wp\WpController@get_detail_wp')->name('get_detail_wp');;
     Route::get('get_detail_template', 'Wp\TemplateController@get_detail_template')->name('get_detail_template');

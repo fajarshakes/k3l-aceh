@@ -93,16 +93,34 @@
                       </table>
                       </div>
                       <div class="tab-pane" id="tabIcon22" aria-labelledby="baseIcon-tab22">
-                        <p>Sugar plum tootsie roll biscuit caramels. Liquorice brownie
-                          pastry cotton candy oat cake fruitcake jelly chupa chups.
-                          Pudding caramels pastry powder cake soufflé wafer caramels.
-                          Jelly-o pie cupcake.</p>
+                      <table id="table-pengerjaan" class="table display nowrap table-striped table-bordered zero-configuration">
+                          <thead>
+                            <tr>
+                              <th class="text-center">#</th>
+                              <th class="text-center">TANGGAL</th>
+                              <th class="text-center">NAMA PEKERJAAN</th>
+                              <th class="text-center">UNIT</th>
+                              <th class="text-center">INSTANSI / PERUSAHAAN</th>
+                              <th class="text-center">STATUS</th>
+                              <th class="text-center">ACTION</th>
+                            </tr>
+                          </thead>
+                      </table> 
                       </div>
                       <div class="tab-pane" id="tabIcon23" aria-labelledby="baseIcon-tab23">
-                        <p>Biscuit ice cream halvah candy canes bear claw ice cream
-                          cake chocolate bar donut. Toffee cotton candy liquorice.
-                          Oat cake lemon drops gingerbread dessert caramels. Sweet
-                          dessert jujubes powder sweet sesame snaps.</p>
+                      <table id="table-selesai" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                          <thead>
+                            <tr>
+                              <th class="text-center">#</th>
+                              <th class="text-center">TANGGAL</th>
+                              <th class="text-center">NAMA PEKERJAAN</th>
+                              <th class="text-center">UNIT</th>
+                              <th class="text-center">INSTANSI / PERUSAHAAN</th>
+                              <th class="text-center">STATUS</th>
+                              <th class="text-center">ACTION</th>
+                            </tr>
+                          </thead>
+                      </table>
                       </div>
                     </div>
                   </div>
@@ -156,8 +174,8 @@
                   <label for="companyName">PILIH JENIS PEMELIHARAAN</label>
                     <select name="status" class="form-control" id="eventStatus2" name="eventStatus">
                       <option value="" selected disabled>PILIH JENIS PEMELIHARAAN</option>
-                      <option value="NORMAL">NORMAL</option>
-                      <option value="EMERGENCY">EMERGENCY</option>
+                      <option value="NORMAL">TERENCANA</option>
+                      <option value="EMERGENCY">TIDAK TERENCANA / EMERGENCY</option>
                     </select>
                 </div>
               
@@ -463,8 +481,149 @@ var vtable = $('#table-permohonan').DataTable({
     vtable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
       cell.innerHTML = i + 1;
       });
-    }).draw();
- });
+  }).draw();
+
+  var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
+   processing: true,
+   serverSide: true,
+   scrollX: true,
+   paging: true,
+   fixedColumns: true,
+   order: [[ 2, 'asc' ]],
+   ajax:{
+    url: "{{ route('list_pengerjaan') }}",
+   },
+   columns:[
+     { data: null, searchable:false, orderable:false, className: "text-center"},
+     {
+       data: 'tgl_pengajuan',
+     },
+     {
+     data: 'nama_pekerjaan',
+     className: "text-left"
+     },
+     {
+     data: 'UNIT_NAME',
+     className: "text-center"
+     },
+     {
+     data: 'pelaksana',
+     className: "text-left"
+     },
+     {
+     data: 'status',
+     className: "text-left"
+     },
+     /*
+     { className: "text-center",
+        //"data": null,
+        "orderable": false,
+        "render": function ( data, type, row ) {
+        var html = ""
+          if ( row.status === 'NEW') {
+            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
+          } else if ( row.status === 'APPROVE_2') {
+            html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
+          } else if  ( row.status === 'APPROVE_1') {
+            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
+          } else {
+            html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
+          }
+          return html; 
+        }
+      },
+      */
+      {
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
+        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
+        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
+        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        }
+      },
+   ]
+  });
+  vtable1.on('draw.dt', function () {
+    vtable1.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+      cell.innerHTML = i + 1;
+      });
+  }).draw();
+
+  var vtable2 = $('#table-selesai').DataTable({
+   processing: true,
+   serverSide: true,
+   scrollX: true,
+   paging: true,
+   order: [[ 2, 'asc' ]],
+   ajax:{
+    url: "{{ route('list_selesai') }}",
+   },
+   columns:[
+     { data: null, searchable:false, orderable:false, className: "text-center"},
+     {
+     data: 'tgl_pengajuan',
+     },
+     {
+     data: 'nama_pekerjaan',
+     className: "text-left"
+     },
+     {
+     data: 'UNIT_NAME',
+     className: "text-center"
+     },
+     {
+     data: 'pelaksana',
+     className: "text-left"
+     },
+     {
+     data: 'status',
+     className: "text-left"
+     },
+     /*
+     { className: "text-center",
+        //"data": null,
+        "orderable": false,
+        "render": function ( data, type, row ) {
+        var html = ""
+          if ( row.status === 'NEW') {
+            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
+          } else if ( row.status === 'APPROVE_2') {
+            html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
+          } else if  ( row.status === 'APPROVE_1') {
+            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
+          } else {
+            html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
+          }
+          return html; 
+        }
+      },
+      */
+      {
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
+        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
+        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
+        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        }
+      },
+   ]
+  });
+
+  vtable2.on('draw.dt', function () {
+    vtable2.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+      cell.innerHTML = i + 1;
+      });
+  }).draw();
+ 
+  });
 
 
 $('#open_modal').click(function(){

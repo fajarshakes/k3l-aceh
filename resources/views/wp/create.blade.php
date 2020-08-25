@@ -26,7 +26,7 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button onclick="location.href='/wp/list-permit'" class="dropdown-item"><i class="la la-arrow-circle-left"></i> Kembali</button>
+              <a href="javascript:history.back()" class="dropdown-item"><i class="la la-chevron-circle-left"></i> Kembali</a>
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
@@ -949,7 +949,7 @@ $('#form_menu').on('submit', function(event){
               type_toast = 'success';
               $('#form_menu')[0].reset();
               setTimeout(function() {
-                window.location.href = '/wp/list-permit/';
+                window.location.href = '{{ $redirect_to }}';
               }, 1000);
             }
             //$('#form_result').html(html);

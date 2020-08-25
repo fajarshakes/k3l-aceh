@@ -139,7 +139,63 @@ class WpController extends BaseController
                     working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
                 WHERE
                     wp.unit like '$unit_view%' AND
-                    wp.status != 'TRASH'";
+                    wp.status NOT IN ('APPROVED','CLOSED','TRASH')";
+        $v = DB::select($sql);
+            
+        return Datatables::of($v)
+            ->addColumn('action', function($data){
+                        $button = '<button type="button" name="edit" id="'.$data->id_wp.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button type="button" name="delete" id="'.$data->id_wp.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function list_pengerjaan(Request $request)
+    {
+        if (Auth::user()->unit == 6101) {
+            $unit_view = 61;
+        } else {
+            $unit_view = Auth::user()->unit;
+        }
+
+        $sql = "SELECT
+                    wp.*, mu.UNIT_NAME
+                FROM
+                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
+                WHERE
+                    wp.unit like '$unit_view%' AND
+                    wp.status = 'APPROVED'";
+        $v = DB::select($sql);
+            
+        return Datatables::of($v)
+            ->addColumn('action', function($data){
+                        $button = '<button type="button" name="edit" id="'.$data->id_wp.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button type="button" name="delete" id="'.$data->id_wp.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function list_selesai(Request $request)
+    {
+        if (Auth::user()->unit == 6101) {
+            $unit_view = 61;
+        } else {
+            $unit_view = Auth::user()->unit;
+        }
+
+        $sql = "SELECT
+                    wp.*, mu.UNIT_NAME
+                FROM
+                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
+                WHERE
+                    wp.unit like '$unit_view%' AND
+                    wp.status = 'CLOSED'";
         $v = DB::select($sql);
             
         return Datatables::of($v)
@@ -155,18 +211,14 @@ class WpController extends BaseController
 
     public function list_permohonan_vendor(Request $request)
     {
-        if (Auth::user()->unit == 6101) {
-            $unit_view = 61;
-        } else {
-            $unit_view = Auth::user()->unit;
-        }
+        $vendorId = Auth::user()->pers_no;
 
         $sql = "SELECT
                     wp.*, mu.UNIT_NAME
                 FROM
                     working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
                 WHERE
-                    wp.unit like '$unit_view%' AND
+                    wp.id_pelaksana = '$vendorId%' AND
                     wp.status != 'TRASH'";
         $v = DB::select($sql);
             
@@ -222,7 +274,12 @@ class WpController extends BaseController
         $id_template = Session::get('sel_template');
         $status = Session::get('sel_status');
         $group_id = Auth::user()->group_id;
-        
+
+        if ($group_id == 7){
+            $redirect_to = '/wp/vendor-permit';
+        } else {
+            $redirect_to = '/wp/list-permit';
+        }
         
         $data = [
             'getManager'  => $this->UserModel->getUser($unit, 4),
@@ -237,6 +294,7 @@ class WpController extends BaseController
             'tbl_jsa'     => $this->wpModel->getJsaTemplate($id_template),
             'peralatan'   => collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray(),
             'getDetVendor'=> $this->Master->getVendorDet(Auth::user()->pers_no),
+            'redirect_to'    => $redirect_to,
         ];
         
         return view('wp/create', $data);

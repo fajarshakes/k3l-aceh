@@ -5,15 +5,15 @@
 <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
-          <h3 class="content-header-title mb-0 d-inline-block">Report per Unit </h3>
+          <h3 class="content-header-title mb-0 d-inline-block">Dashboard </h3>
           <div class="row breadcrumbs-top d-inline-block">
             <div class="breadcrumb-wrapper col-12">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Report</a>
+                <li class="breadcrumb-item"><a href="#">Working Permit</a>
                 </li>
-                <li class="breadcrumb-item active"> Laporan Per Unit
+                <li class="breadcrumb-item active"> Dashboard
                 </li>
               </ol>
             </div>
@@ -36,7 +36,80 @@
       <div class="content-body">
         <!-- Zero configuration table -->
         <section id="configuration">
-          <div class="row">
+        <div class="row">
+          <div class="col-xl-3 col-lg-6 col-12">
+              <div class="card bg-gradient-directional-warning">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i class="icon-pointer text-white font-large-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-white text-right">
+                        <h3 class="text-white">423</h3>
+                        <span>Dalam Permohonan</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-6 col-12">
+              <div class="card bg-gradient-directional-info">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i class="icon-pencil text-white font-large-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-white text-right">
+                        <h3 class="text-white">278</h3>
+                        <span>Dalam Pengerjaan</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-12">
+              <div class="card bg-gradient-directional-success">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i class="icon-speech text-white font-large-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-white text-right">
+                        <h3 class="text-white">156</h3>
+                        <span>Pekerjaan Selesai</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-12">
+              <div class="card bg-gradient-directional-danger">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                        <i class="icon-graph text-white font-large-2 float-left"></i>
+                      </div>
+                      <div class="media-body text-white text-right">
+                        <h3 class="text-white">64.89 %</h3>
+                        <span>Total</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+        <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">

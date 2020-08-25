@@ -25,7 +25,7 @@
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
               <!--button onclick="location.href='create'" class="dropdown-item"><i class="la la-check-circle-o"></i> Submit Permit</button!-->
-              <button class="dropdown-item" name="open_modal" id="open_modal"><i class="la la-check-circle-o"></i> Submit Permit</button>
+              <button class="dropdown-item" name="open_modal" id="open_modal"><i class="la la-check-circle-o"></i> Submit Permit </button>
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
@@ -121,8 +121,8 @@
                   <label for="companyName">PILIH JENIS PEMELIHARAAN</label>
                     <select name="status" class="form-control" id="eventStatus2" name="eventStatus">
                       <option value="" selected disabled>PILIH JENIS PEMELIHARAAN</option>
-                      <option value="NORMAL">NORMAL</option>
-                      <option value="EMERGENCY">EMERGENCY</option>
+                      <option value="NORMAL">TERENCANA</option>
+                      <option value="EMERGENCY">TIDAK TERENCANA / EMERGENCY</option>
                     </select>
                 </div>
               
@@ -138,71 +138,7 @@
           </div>
         </div>
 
-        <div class="modal fade text-left" id="approve_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header bg-success white">
-                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              
-              <form id="form_edit" method="post" enctype="multipart/form-data">
-
-              @csrf
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="companyName">ID WP</label>
-                      <input type="text" class="form-control" name="id_wp" id="id_wp" readonly>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="companyName">KETERANGAN PEKERJAAN</label>
-                      <input type="text" class="form-control" id="wp_desc" name="wp_desc" readonly>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="companyName">NAMA PEKERJAAN</label>
-                    <textarea id="nama" class="form-control" readonly></textarea>
-                </div>
-              
-                <div class="form-group">
-                  <label for="companyName">PERUSAHAAN PELAKSANA</label>
-                  <input type="text" id="pelaksana" class="form-control" readonly/>
-                </div>
-              
-                @if(Auth::user()->group_id != '5')      
-                <div class="form-group">
-                  <label for="projectinput5">STATUS APPROVE </label>
-                  <select id="projectinput5" name="ket_approve" class="form-control">
-                    <option value="none" disabled="">[PILIH STATUS APPROVE]</option>
-                    <option value="APPROVE" selected>APPROVE</option>
-                    <option value="REJECT">REJECT</option>
-                  </select>
-                </div>
-                @else
-                <input type="hidden" name="ket_approve" value="APPROVE">
-                @endif
-
-                <input type="hidden" name="group_id" value="{{ Auth::user()->group_id }}">
-                <input type="hidden" name="user_proses" value="{{ Auth::user()->username }}">
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
+        
 
         <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
@@ -368,7 +304,7 @@ var vtable = $('#table-permohonan').DataTable({
    paging: true,
    order: [[ 2, 'asc' ]],
    ajax:{
-    url: "{{ route('list_permohonan') }}",
+    url: "{{ route('list_permohonan_vendor') }}",
    },
    columns:[
      { data: null, searchable:false, orderable:false, className: "text-center"},
@@ -416,10 +352,7 @@ var vtable = $('#table-permohonan').DataTable({
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
-        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> DETAIL</button>`;
         }
       },
    ]
@@ -492,136 +425,6 @@ $('#form_menu').on('submit', function(event){
         })
       }
 
-    });
-
-    $('#form_edit').on('submit', function(event){
-      event.preventDefault();
-
-      $.ajax({
-          url: "{{ url('wp/approve_form') }}",
-          method:"POST",
-          data: new FormData(this),
-          contentType: false,
-          cache:false,
-          processData: false,
-          dataType:"json",
-          success:function(data)
-          {
-            var html = '';
-            if(data.errors)
-            {
-              html = '<div>';
-              for(var count = 0; count < data.errors.length; count++)
-              {
-                html += '<li>' + data.errors[count] + '</li>';
-              }
-              html += '</div>';
-              type_toast = 'error';
-            }
-            if(data.success)
-            {
-              html = data.success;
-              $('#form_edit')[0].reset();
-              $('#approve_form').modal('hide');
-              $('#table-permohonan').DataTable().ajax.reload();
-              type_toast = 'success';
-            }
-            //$('#form_result').html(html);
-            if(type_toast == 'error'){
-              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
-            } else if (type_toast == 'success') {
-              //toastr.options.onShown = function() { console.log('hello')};
-              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
-            }
-          }
-        })
-
-    });
-
-    $('#form_delete').on('submit', function(event){
-      event.preventDefault();
-
-      $.ajax({
-          url: "{{ url('wp/delete_form') }}",
-          method:"POST",
-          data: new FormData(this),
-          contentType: false,
-          cache:false,
-          processData: false,
-          dataType:"json",
-          success:function(data)
-          {
-            var html = '';
-            if(data.errors)
-            {
-              html = '<div>';
-              for(var count = 0; count < data.errors.length; count++)
-              {
-                html += '<li>' + data.errors[count] + '</li>';
-              }
-              html += '</div>';
-              type_toast = 'error';
-            }
-            if(data.success)
-            {
-              html = data.success;
-              $('#form_delete')[0].reset();
-              $('#del_modal').modal('hide');
-              $('#table-permohonan').DataTable().ajax.reload();
-              type_toast = 'success';
-            }
-            //$('#form_result').html(html);
-            if(type_toast == 'error'){
-              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
-            } else if (type_toast == 'success') {
-              //toastr.options.onShown = function() { console.log('hello')};
-              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
-            }
-          }
-        })
-
-    });
-
-    $(document).on('click', '.edit', function(){
-      var id = $(this).attr('id');
-      $('#form_result').html('');
-      $.ajax({
-        type : "GET",
-        url: "{{ url('wp/get_detail_wp/') }}",
-        dataType:"json",
-        data:{id:id},
-        success: function(html) {
-          $('#nama').val(html.data[0].nama_pekerjaan);
-          $('#pelaksana').val(html.data[0].pelaksana);
-          $('#id_wp').val(html.data[0].id_wp);
-          $('#wp_desc').val(html.data[0].wp_desc);
-          $('.modal-title').text("FORM APPROVAL");
-          $('#action_button').val("Edit");
-          $('#action').val("Edit");
-          $('#approve_form').modal('show');
-        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
-					$('p').append('Error: ' + errorMessage);
-				}
-      })
-    });
-
-    $(document).on('click', '.delete', function(){
-      var id = $(this).attr('id');
-      $('#form_result').html('');
-      $.ajax({
-        type : "GET",
-        url: "{{ url('wp/get_detail_wp/') }}",
-        dataType:"json",
-        data:{id:id},
-        success: function(html) {
-          $('#nama_pekerjaan').val(html.data[0].detail_pekerjaan);
-          $('#idwp').val(html.data[0].id_wp);
-          $('.modal-title').text("DELETION CONFIRMATION");
-          $('#del_modal').modal('show');
-        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
-					$('p').append('Error: ' + errorMessage);
-				}
-      })
     });
 </script>
 @endsection
