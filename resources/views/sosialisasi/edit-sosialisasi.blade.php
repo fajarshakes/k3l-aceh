@@ -132,8 +132,8 @@
                           <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                  <label>Tampilkan File Photo</label>
-                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialiassi/{{ $sosialisasi->photo }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Photo</a>
+                                  <label>Tampilkan File Photo </label>
+                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->photo }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Photo</a>
                                 </div>
                                 <input name="photo" type='file' class="form-control"  accept="image/*"/>
                                 <small class="text-muted">Photo</small>
@@ -141,7 +141,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Tampilkan File Presentasi</label>
-                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialiassi/{{ $sosialisasi->presentasi }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Presentasi</a>
+                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->presentasi }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Presentasi</a>
                                 </div>
                                 <input name="presentasi" type='file' class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
                                 <small class="text-muted">Presentasi</small>

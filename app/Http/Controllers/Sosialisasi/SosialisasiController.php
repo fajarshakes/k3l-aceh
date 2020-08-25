@@ -117,7 +117,7 @@ class SosialisasiController extends BaseController
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }
-
+        
         $photo       = $request->file('photo');
         $nama_photo   = 'EVIDENCE_' . time() . '.' . $photo->getClientOriginalExtension();
         $photo->move(public_path('files/sosialisasi/'), $nama_photo);
@@ -138,8 +138,8 @@ class SosialisasiController extends BaseController
             'jam_selesai'   => $request->jam_selesai,
             'latitude'      => $request->latitude,
             'longitude'     => $request->longitude,
-            'photo'         => $request->photo,
-            'presentasi'    => $request->presentasi,
+            'photo'         => $nama_photo,
+            'presentasi'    => $nama_presentasi,
             'user_input'    => Auth::user()->username,
             'tgl_input'     => date('Y-m-d'),
         ]);

@@ -496,6 +496,7 @@
                                 // )
                                 .addTo(self.map);
                             console.log(response.markers[i].longitude);
+                            console.log(response.markers[i].longitude);
                         }
                     });
                 });

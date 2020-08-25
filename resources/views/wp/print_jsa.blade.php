@@ -1,42 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <HTML><HEAD>
 <TITLE>PRINT JSA</TITLE>
-<div id="divCetak">
-	<table width=100% bgcolor=#800000>
-		<tr>
-			<td>
-				dsdsds
-			</td>
-			<td align=right><button onclick="window.print()">Cetak Halaman Ini</button></td>
-		</tr>
-	</table>
-</div>
-
-<table class=tbl1_n cellpadding=2 cellspacing=2 border=0>
-	<thead>
-		<tr>
-			<td rowspan="3" class="text-center" width="20%">
-				<img width="60" src="../../../images/app_images/logo_pln.png" />
-			</td>
-			<td rowspan="3" class="text-left" width="20%">
-				<h4>PT PLN (Persero) UNIT INDUK WILAYAH ACEH</h4>
-				<h4>UP3 XXXXXX</h4>
-				<p>JALAN XXXXX</p>
-			</td>
-			<td rowspan="3" class="text-center" width="20%"><h3>PROSEDUR SMK3</h3></td>
-			<td rowspan="2" class="text-center" width="20%">NO DOKUMEN :</td>
-			<td class="text-center" width="20%">HAL :</td>
-      </tr>
-	  <tr>
-	  	<td class="text-center">FR.R.R.X.0.0 </td>
-	  </tr>
-	  <tr>
-	  	<td class="text-center">TGL :</td>
-	  	<td class="text-center">ED/REV : 00/00 </td>
-	  </tr>
-	</thead>
-</table>
-
 <style>
 	/* ==== HANYA TAMPIL DI LAYAR TIDAK SAAT DICETAK ==== */
 	@media screen
@@ -81,23 +45,65 @@
 </style>
 </HEAD>
 <!--body onload="window.print(); window.close();"-->
-
 <body>
+<div id="divCetak">
+	<table width=100% bgcolor=#800000>
+		<tr>
+			<td>
+				dsdsds
+			</td>
+			<td align=right><button onclick="window.print()">Cetak Halaman Ini</button></td>
+		</tr>
+	</table>
+</div>
+
+<table class=tbl1_n cellpadding=2 cellspacing=2 border=0>
+	<thead>
+		<tr>
+			<td rowspan="3" class="text-center" width="20%">
+				<img width="60" src="../../../images/app_images/logo_pln.png" />
+			</td>
+			<td rowspan="3" class="text-left" width="20%">
+				<h4>PT PLN (Persero) UNIT INDUK WILAYAH ACEH</h4>
+				<h4>UP3 XXXXXX</h4>
+				<p>JALAN XXXXX</p>
+			</td>
+			<td rowspan="3" class="text-center" width="20%"><h3>PROSEDUR SMK3</h3></td>
+			<td rowspan="2" class="text-center" width="20%">NO DOKUMEN :</td>
+			<td class="text-center" width="20%">HAL :</td>
+      </tr>
+	  <tr>
+	  	<td class="text-center">FR.R.R.X.0.0 </td>
+	  </tr>
+	  <tr>
+	  	<td class="text-center">TGL :</td>
+	  	<td class="text-center">ED/REV : 00/00 </td>
+	  </tr>
+	</thead>
+</table>
 </br>
 <table class=tbl1 cellpadding=3 cellspacing=0 border=1 style="width: 100%">
-<div class="col-md-12" style="text-align:center;">
-    <h3 style="padding:25px 0 15px 0;">
-      <b>JOB SAFETY ANALYSIS (JSA)</b>
-      </br>
-      <small class="text-muted">ANALISIS KESELAMATAN KERJA</small>
-    </h3>
-</div>
+	<!-- <tr>
+		<th colspan="12" style="text-align: center;">
+		<h3>
+			<b>JOB SAFETY ANALYSIS (JSA)</b>
+		</h3>
+		ANALISIS KESELAMATAN KERJA
+		</th>
+	</tr> -->
+	<div class="col-md-12" style="text-align:center;">
+                      <h3 style="padding:25px 0 15px 0;">
+                        <b>JOB SAFETY ANALYSIS (JSA)</b>
+                        </br>
+                        <small class="text-muted">ANALISIS KESELAMATAN KERJA</small>
+                      </h3>
+                    </div>
 
-<div class="col-md-12">
-    <h5 style="padding-bottom:5px;">
-      <b>A. INFORMASI PEKERJAAN</b>
-    </h5>
-</div>
+                    <div class="col-md-12">
+                      <h5 style="padding-bottom:5px;">
+                        <b>A. INFORMASI PEKERJAAN</b>
+                      </h5>
+                    </div>
 
                     <div class="col-xl-12 col-lg-12">
                       <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
@@ -363,90 +369,6 @@
                       </table>
                     </div>
                     
-                    <div class="col-md-12">
-                      <h5 style="padding-bottom:5px;">
-                        <b>C. ANALISA KESELAMATAN KERJA</b>
-                      </h5>
-                    </div>
-                    <div class="col-xl-12 col-lg-12">
-                    <table class=print cellpadding=3 cellspacing=0 border=1 style="width: 100%">
-                        <thead>
-                          <tr>
-                            <th>NO</th>
-                            <th>LANGKAH PEKERJAAN</th>
-                            <th>POTENSI BAHAYA</th>
-                            <th>RESIKO</th>
-                            <th>TINDAKAN PENGENDALIAN</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @php $no = 1; @endphp
-                        @foreach($tbl_jsa as $row_jsa)
-                          <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $row_jsa->langkah_pekerjaan }}</td>
-                            <td>{{ $row_jsa->potensi_bahaya }}</td>
-                            <td>{{ $row_jsa->resiko }}</td>
-                            <td>{{ $row_jsa->tindakan }}</td>
-                          </tr>
-                        @endforeach
-                        </tbody>
-                      
-                      </table>
-                    
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br></br>
-
-        <table class="tbl_sign" cellpadding=2 cellspacing=2 border=0>
-	<thead>
-		<tr>
-			<td class="text-center" width="20%">
-				<strong>DISETUJUI OLEH :</strong>
-			</td>
-			<td class="text-center" width="20%">
-				<strong>DIPERIKSA OLEH :</strong>
-			</td>
-			<td class="text-center" width="20%">
-				<strong>DIPERIKSA OLEH :</strong>
-			</td>
-			<td class="text-center" width="20%">
-				<strong>DISUSUN OLEH :</strong>
-			</td>
-      </tr>
-	  <tr>
-	  	<td>
-			{!! QrCode::size(60)->generate('Manager :' . strtoupper($detailWp->manager) . '; Date :' . $detailWp->tgl_approval1 ) !!}
-		</td>
-		<td>
-			{!! QrCode::size(60)->generate('Pejabat K3L :' . strtoupper($detailWp->pejabat_k3l) . '; Date :' . $detailWp->tgl_approval2 ) !!}
-		</td>
-		<td>
-			{!! QrCode::size(60)->generate('Supervisor :' . strtoupper($detailWp->supervisor) . '; Date :' . $detailWp->tgl_approval3 ) !!}
-		</td>
-		<td>
-			{!! QrCode::size(60)->generate('Pengawas :' . strtoupper($detailWp->pengawas_pekerjaan) . '; Date :' . $detailWp->tgl_pengajuan ) !!}
-		</td>
-	  </tr>
-	  <tr>
-	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->manager) }} )</strong></td>
-	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->pejabat_k3l) }} )</strong></td>
-	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->supervisor) }} )</strong></td>
-	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->pengawas_pekerjaan) }} )</strong></td>
-	  </tr>
-	  <tr>
-	  	<td class="text-center"><small>MANAGER BAGIAN</small></td>
-	  	<td class="text-center"><small>PEJABAT K3</small></td>
-	  	<td class="text-center"><small>SUPERVISOR</small></td>
-	  	<td class="text-center"><small>PENGAWAS PEKERJAAN</small></td>
-	  </tr>
-	</thead>
-</table>
 
 <div id="footer">
 	Tanggal cetak: <b><?php echo date("d F Y h:i:s"); ?></b> | 
