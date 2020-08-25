@@ -117,7 +117,6 @@ class SosialisasiController extends BaseController
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }
-
         
         $photo       = $request->file('photo');
         $nama_photo   = 'EVIDENCE_' . time() . '.' . $photo->getClientOriginalExtension();
