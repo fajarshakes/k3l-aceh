@@ -135,7 +135,8 @@
                                   <label>Tampilkan File Photo </label>
                                   <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->photo }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Photo</a>
                                 </div>
-                                <input name="photo" type='file' class="form-control"  accept="image/*"/>
+                                <input name="photo" type='file' class="form-control" accept="image/*"/>
+                                <input name="old_photo" type='hidden' value="{{$sosialisasi ? $sosialisasi->photo : ''}}" class="form-control" accept="image/*"/>
                                 <small class="text-muted">Photo</small>
                             </div>
                             <div class="col-md-6">
@@ -144,6 +145,7 @@
                                   <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->presentasi }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Presentasi</a>
                                 </div>
                                 <input name="presentasi" type='file' class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
+                                <input name="old_presentasi" type='hidden' value="{{$sosialisasi ? $sosialisasi->presentasi : ''}}" class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
                                 <small class="text-muted">Presentasi</small>
                             </div>
                           </div>

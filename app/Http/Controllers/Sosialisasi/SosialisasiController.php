@@ -185,19 +185,39 @@ class SosialisasiController extends BaseController
 
     public function update_sosialisasi(Request $request)
     {
+        $photo = $request->file('photo');
+        if (!empty($photo)) {
+            $nama_photo = 'EVIDENCE_' . time() . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('files/sosialisasi'), $nama_photo);
+            // $update_photo = "`file_sop`= $new_photo";
+        } else {
+            $nama_photo = $request->old_photo;
+        }
+
+        $presentasi = $request->file('presentasi');
+        if (!empty($presentasi)) {
+            $nama_presentasi = "PRESENTASI_" . time() . '.' . $presentasi->getClientOriginalExtension();
+            $presentasi->move(public_path('files/sosialisasi'), $nama_presentasi);
+            // $update_presentasi = "`file_sop`= $new_presentasi";
+        } else {
+            $nama_presentasi = $request->old_presentasi;
+        }
+
         $store = DB::table('peta_sosialisasi')
         ->where('id', $request->update_id)
         ->update([
-            'lokasi'        => $request->lokasi,
-            'judul'         => $request->judul,
-            'deskripsi'     => $request->deskripsi,
-            'jml_peserta'   => $request->jml_peserta,
+            'lokasi'            => $request->lokasi,
+            'judul'             => $request->judul,
+            'deskripsi'         => $request->deskripsi,
+            'jml_peserta'       => $request->jml_peserta,
             'pic_sosialisasi'   => $request->pic_sosialisasi,
-            'tanggal'       => $request->tanggal,
-            'jam_mulai'     => $request->jam_mulai,
-            'jam_selesai'   => $request->jam_selesai,
-            'latitude'      => $request->latitude,
-            'longitude'     => $request->longitude,
+            'tanggal'           => $request->tanggal,
+            'jam_mulai'         => $request->jam_mulai,
+            'jam_selesai'       => $request->jam_selesai,
+            'latitude'          => $request->latitude,
+            'longitude'         => $request->longitude,
+            'photo'             => $nama_photo,
+            'presentasi'        => $nama_presentasi,
         ]);
         return response()->json(['success' => 'Data Added successfully.']);
     }
