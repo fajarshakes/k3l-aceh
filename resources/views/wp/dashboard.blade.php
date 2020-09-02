@@ -46,7 +46,7 @@
                         <i class="icon-pointer text-white font-large-2 float-left"></i>
                       </div>
                       <div class="media-body text-white text-right">
-                        <h3 class="text-white">423</h3>
+                        <h3 class="text-white">{{ $countPermohonan }}</h3>
                         <span>Dalam Permohonan</span>
                       </div>
                     </div>
@@ -64,7 +64,7 @@
                         <i class="icon-pencil text-white font-large-2 float-left"></i>
                       </div>
                       <div class="media-body text-white text-right">
-                        <h3 class="text-white">278</h3>
+                        <h3 class="text-white">{{ $countPengerjaan }}</h3>
                         <span>Dalam Pengerjaan</span>
                       </div>
                     </div>
@@ -81,7 +81,7 @@
                         <i class="icon-speech text-white font-large-2 float-left"></i>
                       </div>
                       <div class="media-body text-white text-right">
-                        <h3 class="text-white">156</h3>
+                        <h3 class="text-white">{{ $countSelesai }}</h3>
                         <span>Pekerjaan Selesai</span>
                       </div>
                     </div>
@@ -98,7 +98,7 @@
                         <i class="icon-graph text-white font-large-2 float-left"></i>
                       </div>
                       <div class="media-body text-white text-right">
-                        <h3 class="text-white">64.89 %</h3>
+                        <h3 class="text-white">{{ $total = $countPermohonan + $countPengerjaan + $countSelesai }}</h3>
                         <span>Total</span>
                       </div>
                     </div>
@@ -109,7 +109,36 @@
             
           </div>
 
-        <div class="row">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Chart Progress </h4>
+                  <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                  <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                      <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                      <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                      <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                      <li><a data-action="close"><i class="ft-x"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-xl-12 col-lg-12">
+
+                <div class="card-content collapse show">
+                  <div class="card-body">
+                  <div id="basic-pie" class="height-400 echart-container"></div>
+                  </div>
+                </div>
+                
+
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
@@ -156,78 +185,27 @@
                   </div>
                 </div>
                 <div class="col-xl-12 col-lg-12">
-                <table id="table1" class="table display nowrap table-striped table-bordered zero-configuration">
+                <table width="100%" id="table1" class="table display nowrap table-striped table-bordered zero-configuration">
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Unit Kerja</th>
-                          <th>Tahun Anggaran</th>
-                          <th>Total Pagu</th>
-                          <th>Total Realisasi</th>
-                          <th>Sisa</th>
-                          <th>%</th>
-                          <th>Detail</th>
+                          <th>B.AREA</th>
+                          <th>NAMA UNIT</th>
+                          <th>PENGAJUAN</th>
+                          <th>PENGERJAAN</th>
+                          <th>SELESAI</th>
+                          <th>TOTAL</th>
                         </tr>
                       </thead>
-                      <tbody>
-                       
-                       
-                        <tr>
-                          <td>1</td>
-                          <td>T. SIPIL</td>
-                          <td>2020</td>
-                          <td align="right">500.000.000</td>
-                          <td align="right">340.000.000</td>
-                          <td align="right">160.000.000</td>
-                          <td align="center">
-                          <button type="button" class="btn btn-sm btn-outline-success round">68.00 %</button>
-                           </td>
-                          <td align="center">
-                            <button type="button" data-toggle="tooltip" data-original-title="Detail Data" class="btn btn-icon btn-info btn-xs"><i class="la la-info-circle"></i></button>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td>2</td>
-                          <td>T. ELEKTRO</td>
-                          <td>2020</td>
-                          <td align="right">550.000.000</td>
-                          <td align="right">300.000.000</td>
-                          <td align="right">250.000.000</td>
-                          <td align="center">
-                          <button type="button" class="btn btn-sm btn-outline-warning round">55.00 %</button>
-                           </td>
-                          <td align="center">
-                            <button type="button" data-toggle="tooltip" data-original-title="Detail Data" class="btn btn-icon btn-info btn-xs"><i class="la la-info-circle"></i></button>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td>3</td>
-                          <td>T. KIMIA</td>
-                          <td>2020</td>
-                          <td align="right">550.000.000</td>
-                          <td align="right">50.000.000</td>
-                          <td align="right">500.000.000</td>
-                          <td align="center">
-                          <button type="button" class="btn btn-sm btn-outline-danger round">9.00 %</button>
-                           </td>
-                          <td align="center">
-                            <button type="button" data-toggle="tooltip" data-original-title="Detail Data" class="btn btn-icon btn-info btn-xs"><i class="la la-info-circle"></i></button>
-                          </td>
-                        </tr>
-                        
-                      </tbody>
                       <tfoot>
                         <tr>
                           <th>#</th>
-                          <th>Unit Kerja</th>
-                          <th>Tahun Anggaran</th>
-                          <th>Total Pagu</th>
-                          <th>Total Realisasi</th>
-                          <th>Sisa</th>
-                          <th>%</th>
-                          <th>Detail</th>
+                          <th>B.AREA</th>
+                          <th>NAMA UNIT</th>
+                          <th>PENGAJUAN</th>
+                          <th>PENGERJAAN</th>
+                          <th>SELESAI</th>
+                          <th>TOTAL</th>
                         </tr>
                       </tfoot>
                     </table>
@@ -536,13 +514,215 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#table1').DataTable( {
-        //"scrollX": true,
-        "searching" : false,
-        "info" : false,
-        "paging" : false
-    } );
-} );
 
+var vtable = $('#table1').DataTable({
+   processing: true,
+   serverSide: true,
+   scrollX: true,
+   paging: true,
+   order: [[ 2, 'asc' ]],
+   ajax:{
+    url: "{{ route('list_dashboard') }}",
+   },
+   columns:[
+     { data: null, searchable:false, orderable:false, className: "text-center"},
+     {
+     data: 'BUSS_AREA',
+     },
+     {
+     data: 'UNIT_NAME',
+     className: "text-left"
+     },
+     {
+     data: 'PERMOHONAN',
+     className: "text-center"
+     },
+     {
+     data: 'PENGERJAAN',
+     className: "text-center"
+     },
+     {
+     data: 'SELESAI',
+     className: "text-center"
+     },
+     {
+     data: 'SELESAI',
+     className: "text-center"
+     },
+   ]
+  });
+  vtable.on('draw.dt', function () {
+    vtable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+      cell.innerHTML = i + 1;
+      });
+  }).draw();
+});
+
+$(document).ready(function() {
+/*=========================================================================================
+    File Name: basic-pie.js
+    Description: echarts basic pie chart
+    ----------------------------------------------------------------------------------------
+    Item Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
+    Version: 1.0
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+// Basic pie chart
+// ------------------------------
+
+$(window).on("load", function(){
+
+// Set paths
+// ------------------------------
+
+require.config({
+    paths: {
+        echarts: '{{ url('app-assets/vendors/js/charts/echarts') }}'
+    }
+});
+
+
+// Configuration
+// ------------------------------
+
+require(
+    [
+        'echarts',
+        'echarts/chart/pie',
+        'echarts/chart/funnel'
+    ],
+
+
+    // Charts setup
+    function (ec) {
+        // Initialize chart
+        // ------------------------------
+        var myChart = ec.init(document.getElementById('basic-pie'));
+
+        // Chart Options
+        // ------------------------------
+        chartOptions = {
+
+            // Add title
+            title: {
+                text: 'Browser popularity',
+                subtext: 'Open source information',
+                x: 'center'
+            },
+
+            // Add tooltip
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+
+            // Add legend
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data: ['IE', 'Opera', 'Safari', 'Firefox', 'Chrome']
+            },
+
+            // Add custom colors
+            color: ['#00A5A8', '#626E82', '#FF7D4D','#FF4558', '#28D094'],
+
+            // Display toolbox
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                feature: {
+                    mark: {
+                        show: true,
+                        title: {
+                            mark: 'Markline switch',
+                            markUndo: 'Undo markline',
+                            markClear: 'Clear markline'
+                        }
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false,
+                        title: 'View data',
+                        lang: ['View chart data', 'Close', 'Update']
+                    },
+                    magicType: {
+                        show: true,
+                        title: {
+                            pie: 'Switch to pies',
+                            funnel: 'Switch to funnel',
+                        },
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                y: '20%',
+                                width: '50%',
+                                height: '70%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore: {
+                        show: true,
+                        title: 'Restore'
+                    },
+                    saveAsImage: {
+                        show: true,
+                        title: 'Same as image',
+                        lang: ['Save']
+                    }
+                }
+            },
+
+            // Enable drag recalculate
+            calculable: true,
+
+            // Add series
+            series: [{
+                name: 'Browsers',
+                type: 'pie',
+                radius: '70%',
+                center: ['50%', '57.5%'],
+                data: [
+                    {value: 335, name: 'IE'},
+                    {value: 310, name: 'Opera'},
+                    {value: 234, name: 'Safari'},
+                    {value: 135, name: 'Firefox'},
+                    {value: 1548, name: 'Chrome'}
+                ]
+            }]
+        };
+
+        // Apply options
+        // ------------------------------
+
+        myChart.setOption(chartOptions);
+
+
+        // Resize chart
+        // ------------------------------
+
+        $(function () {
+
+            // Resize chart on menu width change and window resize
+            $(window).on('resize', resize);
+            $(".menu-toggle").on('click', resize);
+
+            // Resize function
+            function resize() {
+                setTimeout(function() {
+
+                    // Resize chart
+                    myChart.resize();
+                }, 200);
+            }
+        });
+    }
+);
+});
+});
 </script>
 @endsection

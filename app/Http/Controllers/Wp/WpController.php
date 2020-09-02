@@ -33,17 +33,52 @@ class WpController extends BaseController
     
     public function dashboard(Request $request)
     {
-        return view('wp/dashboard');
+        if (Auth::user()->unit == '6101'){
+            $unit = '61';
+        } else {
+            $unit = Auth::user()->unit;
+        }
+    
+        $data = [
+            'countPermohonan'   => $this->wpModel->countPermohonan($unit),            
+            'countPengerjaan'   => $this->wpModel->countPengerjaan($unit),            
+            'countSelesai'      => $this->wpModel->countSelesai($unit),            
+         ];
+         
+         return view('wp/dashboard', $data);
+    }
+
+    public function list_dashboard(Request $request)
+    {
+        $sql = "SELECT
+                    mu.BUSS_AREA, mu.UNIT_NAME,
+                    ( SELECT COUNT( id_wp ) FROM working_permit wp WHERE wp.unit = mu.BUSS_AREA AND wp.STATUS NOT IN ( 'APPROVED', 'TRASH' ) ) AS PERMOHONAN,
+                    ( SELECT COUNT( id_wp ) FROM working_permit wp WHERE wp.unit = mu.BUSS_AREA AND wp.STATUS = 'APPROVED' ) AS PENGERJAAN,
+                    ( SELECT COUNT( id_wp ) FROM working_permit wp WHERE wp.unit = mu.BUSS_AREA AND wp.STATUS = 'CLOSED' ) AS SELESAI 
+                FROM
+                    master_unit mu";
+        $v = DB::select($sql);
+        return Datatables::of($v)
+        //->rawColumns(['action'])
+        ->make(true);
     }
 
     public function list(Request $request)
     {
-        $unitData  = $this->wpModel->getUnitType();
-        $unitList  = $this->wpModel->getUnit();
-        return view('wp/list',
-        ['unitType' => $unitData],
-        ['unitList' => $unitList],
-        );
+        if (Auth::user()->unit == '6101'){
+            $unit = '61';
+        } else {
+            $unit = Auth::user()->unit;
+        }
+        
+        $data = [
+            'countPermohonan'   => $this->wpModel->countPermohonan($unit),            
+            'countPengerjaan'   => $this->wpModel->countPengerjaan($unit),            
+            'countSelesai'      => $this->wpModel->countSelesai($unit),            
+            'unitType'          => $this->wpModel->getUnitType(),
+            'unitList'          => $this->wpModel->getUnit(),        
+        ];
+        return view('wp/list', $data);
         
     }
 

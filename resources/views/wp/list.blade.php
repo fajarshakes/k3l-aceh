@@ -26,7 +26,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
               <!--button onclick="location.href='create'" class="dropdown-item"><i class="la la-check-circle-o"></i> Submit Permit</button!-->
               <button class="dropdown-item" name="open_modal" id="open_modal"><i class="la la-check-circle-o"></i> Submit Permit</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
+              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
@@ -60,19 +60,19 @@
                         <a class="nav-link active" id="baseIcon-tab21" data-toggle="tab" aria-controls="tabIcon21"
                         href="#tabIcon21" aria-expanded="true">
                         <i class="la la-clock-o"></i> Dalam Permohonan
-                        <span class="badge badge-pill badge-glow badge-default badge-warning">3</span></a>
+                        <span class="badge badge-pill badge-glow badge-default badge-warning">{{ $countPermohonan }}</span></a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="baseIcon-tab22" data-toggle="tab" aria-controls="tabIcon22"
                         href="#tabIcon22" aria-expanded="false">
                         <i class="la la-dashboard"></i> Dalam Pengerjaan
-                        <span class="badge badge-pill badge-glow badge-default badge-info">3</span></a>
+                        <span class="badge badge-pill badge-glow badge-default badge-info">{{ $countPengerjaan }}</span></a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="baseIcon-tab23" data-toggle="tab" aria-controls="tabIcon23"
                         href="#tabIcon23" aria-expanded="false">
                         <i class="la la-check-circle"></i> Pekerjaan Selesai
-                        <span class="badge badge-pill badge-glow badge-default badge-success">3</span></a>
+                        <span class="badge badge-pill badge-glow badge-default badge-success">{{ $countSelesai }}</span></a>
                       </li>
                     </ul>
                     <div class="tab-content px-1 pt-1">
@@ -93,7 +93,7 @@
                       </table>
                       </div>
                       <div class="tab-pane" id="tabIcon22" aria-labelledby="baseIcon-tab22">
-                      <table id="table-pengerjaan" class="table display nowrap table-striped table-bordered zero-configuration">
+                      <table id="table-pengerjaan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
@@ -277,10 +277,12 @@
                       <label for="projectinput5">Tahun Anggaran</label>
                       <select id="projectinput5" name="group_id" class="form-control">
                         <option value="none" selected="" disabled="">Select Year</option>
-                        <option value="9">2020</option>
-                        <option value="10">2021</option>
-                        <option value="11">2022</option>
-                        <option value="12">2023</option>
+                        {{ $last= date('Y')-5 }}
+                        {{ $now = date('Y') }}
+                        
+                        @for ($i = $now; $i >= $last; $i--)
+                        <option value='{{ $i }}'>{{ $i }}</option>
+                        @endfor
                       </select>
                     </div>
                   </div>
@@ -483,7 +485,8 @@ var vtable = $('#table-permohonan').DataTable({
       });
   }).draw();
 
-  var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
+  var vtable1 = $('#table-pengerjaan').DataTable({
+  //var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
    processing: true,
    serverSide: true,
    scrollX: true,

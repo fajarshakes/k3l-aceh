@@ -40,6 +40,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('getTemplateByUnit/{id}', 'Wp\WpController@getTemplateByUnit')->name('getTemplateByUnit');;
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
+    Route::get('list_dashboard', 'Wp\WpController@list_dashboard')->name('list_dashboard');
     Route::get('list_permohonan', 'Wp\WpController@list_permohonan')->name('list_permohonan');
     Route::get('list_pengerjaan', 'Wp\WpController@list_pengerjaan')->name('list_pengerjaan');
     Route::get('list_selesai', 'Wp\WpController@list_selesai')->name('list_selesai');
