@@ -52,8 +52,8 @@ data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
                   <div class="card-title text-center">
                     <!--img src="../../../app-assets/images/logo/logo-dark.png" alt="branding logo"-->
                     <a class="navbar-brand" href="#">
-                      <img class="brand-logo" alt="modern admin logo" width="80" src="../../../app-assets/images/logo/logo_.png">
-                      <h3 class="brand-text">K3L UIW ACEH</h3>
+                      <img class="brand-logo" alt="modern admin logo" width="230" src="../../../app-assets/images/logo/saman_logo_cl.png">
+                      <!--h3 class="brand-text">K3L UIW ACEH</h3-->
                     </a>
                   </div>
                   
