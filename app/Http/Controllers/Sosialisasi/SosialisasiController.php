@@ -31,8 +31,11 @@ class SosialisasiController extends BaseController
     }
     
     public function index(Request $request)
-    {   $data = [
+    {   
+        $data = [
             'markers'         => collect($this->wpModel->getMarkers())->toArray(),
+            'list'            => $this->wpModel->getUnit(),
+            // 'tahun'           => $this->wpModel->getTahunSosialisasi(),
          ];
          
          return view('sosialisasi/index', $data);     
@@ -187,7 +190,7 @@ class SosialisasiController extends BaseController
     {
         $photo = $request->file('photo');
         if (!empty($photo)) {
-            $nama_photo = 'EVIDENCE_' . time() . '.' . $photo->getClientOriginalExtension();
+            $nama_photo =  $request->old_photo;
             $photo->move(public_path('files/sosialisasi'), $nama_photo);
             // $update_photo = "`file_sop`= $new_photo";
         } else {
@@ -196,7 +199,7 @@ class SosialisasiController extends BaseController
 
         $presentasi = $request->file('presentasi');
         if (!empty($presentasi)) {
-            $nama_presentasi = "PRESENTASI_" . time() . '.' . $presentasi->getClientOriginalExtension();
+            $nama_presentasi =  $request->old_presentasi;
             $presentasi->move(public_path('files/sosialisasi'), $nama_presentasi);
             // $update_presentasi = "`file_sop`= $new_presentasi";
         } else {
