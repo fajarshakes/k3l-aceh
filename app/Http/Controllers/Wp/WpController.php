@@ -28,7 +28,7 @@ class WpController extends BaseController
     {
         $this->middleware('auth');
         $this->wpModel     = new WpModel();
-        $this->UserModel     = new User();
+        $this->UserModel   = new User();
     }
     
     public function dashboard(Request $request)
@@ -45,7 +45,7 @@ class WpController extends BaseController
             'countSelesai'      => $this->wpModel->countSelesai($unit),            
          ];
          
-         return view('wp/dashboard', $data);
+        return view('wp/dashboard', $data);
     }
 
     public function list_dashboard(Request $request)
@@ -327,20 +327,15 @@ class WpController extends BaseController
 
     public function test(Request $request)
     {   
-        //$unit = Session::get('sel_unit');
-        $cd_unit = '6116';
-        $year = date('y');
-        $id_wp = '6116200031';
-        //$new_id = $this->wpModel->generateWpId($unit . $year);
-        //$unit = $this->wpModel->getUnitName($cd_unit)->UNIT_NAME;
-        $unit = $this->wpModel->getDetailWp($id_wp);
-        $idwp = '6116200031';
-        // $peralatan = $this->wpModel->getPeralatan($id_wp);
-        $klasifikasi = $this->wpModel->getKlasifikasi($id_wp);
-        //PeralatanKeselamatan::where('id_wp', $idwp)->get();
+        if (Auth::user()->unit == '6101'){
+            $unit = '61';
+        } else {
+            $unit = Auth::user()->unit;
+        }
+
+        $getList = $this->wpModel->getListOnWork($unit);
         
-        //return response()->json([$unit->UNIT_NAME]);
-        return response()->json([$klasifikasi]);
+        return $getList;
     }
     
     public function wp_store(Request $request)

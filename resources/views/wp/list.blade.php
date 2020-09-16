@@ -63,7 +63,7 @@
                         <span class="badge badge-pill badge-glow badge-default badge-warning">{{ $countPermohonan }}</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="baseIcon-tab22" data-toggle="tab" aria-controls="tabIcon22"
+                        <a class="nav-link" id="baseIcon-tab22" data-toggle="tab" aria-controls="tabIcon22" onclick="runTab2('3')"
                         href="#tabIcon22" aria-expanded="false">
                         <i class="la la-dashboard"></i> Dalam Pengerjaan
                         <span class="badge badge-pill badge-glow badge-default badge-info">{{ $countPengerjaan }}</span></a>
@@ -78,7 +78,7 @@
                     <div class="tab-content px-1 pt-1">
                       <div role="tabpanel" class="tab-pane active" id="tabIcon21" aria-expanded="true"
                       aria-labelledby="baseIcon-tab21">
-                      <table id="table-permohonan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                      <table id="table-permohonan" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
@@ -93,7 +93,7 @@
                       </table>
                       </div>
                       <div class="tab-pane" id="tabIcon22" aria-labelledby="baseIcon-tab22">
-                      <table id="table-pengerjaan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                      <table id="table-pengerjaan" cellspacing="0" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
@@ -374,7 +374,6 @@
       </div>
 </div>
 
-
 <script type="text/javascript">
   $(document).ready(function() {
     $('select[name="unit"]').on('change', function(){
@@ -415,7 +414,6 @@
   });
 
 $(document).ready(function() {
-
 var vtable = $('#table-permohonan').DataTable({
    processing: true,
    serverSide: true,
@@ -484,14 +482,15 @@ var vtable = $('#table-permohonan').DataTable({
       cell.innerHTML = i + 1;
       });
   }).draw();
+});
 
-  var vtable1 = $('#table-pengerjaan').DataTable({
-  //var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
+$(document).ready(function() {
+var vtable1 =  $('#table-pengerjaan').DataTable({
+//var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
    processing: true,
    serverSide: true,
    scrollX: true,
    paging: true,
-   fixedColumns: true,
    order: [[ 2, 'asc' ]],
    ajax:{
     url: "{{ route('list_pengerjaan') }}",
@@ -517,44 +516,30 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'status',
      className: "text-left"
      },
-     /*
-     { className: "text-center",
-        //"data": null,
-        "orderable": false,
-        "render": function ( data, type, row ) {
-        var html = ""
-          if ( row.status === 'NEW') {
-            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
-          } else if ( row.status === 'APPROVE_2') {
-            html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
-          } else if  ( row.status === 'APPROVE_1') {
-            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
-          } else {
-            html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
-          }
-          return html; 
-        }
-      },
-      */
-      {
+     {
       "data": null,
       "searchable": false,
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
         return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
-        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>`;
         }
-      },
-   ]
+     },
+  ]
   });
   vtable1.on('draw.dt', function () {
     vtable1.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
       cell.innerHTML = i + 1;
       });
   }).draw();
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+      $($.fn.dataTable.tables(true)).DataTable()
+         .columns.adjust();
+   }); 
+
+});
 
   var vtable2 = $('#table-selesai').DataTable({
    processing: true,
@@ -586,26 +571,7 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'status',
      className: "text-left"
      },
-     /*
-     { className: "text-center",
-        //"data": null,
-        "orderable": false,
-        "render": function ( data, type, row ) {
-        var html = ""
-          if ( row.status === 'NEW') {
-            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
-          } else if ( row.status === 'APPROVE_2') {
-            html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
-          } else if  ( row.status === 'APPROVE_1') {
-            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
-          } else {
-            html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
-          }
-          return html; 
-        }
-      },
-      */
-      {
+     {
       "data": null,
       "searchable": false,
       "orderable": false,
@@ -625,8 +591,6 @@ var vtable = $('#table-permohonan').DataTable({
       cell.innerHTML = i + 1;
       });
   }).draw();
- 
-  });
 
 
 $('#open_modal').click(function(){

@@ -310,6 +310,19 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getListOnWork(string $unit){
+    
+    $value=DB::table('working_permit')
+    ->join('master_unit', 'working_permit.unit', '=', 'master_unit.BUSS_AREA')
+    ->select('working_permit.*', 'master_unit.UNIT_NAME')
+    ->where('working_permit.unit', 'LIKE', '%' . $unit . '%')
+    ->where('working_permit.status', '=', 'APPROVED')
+    ->take(5)
+    ->get();
+  
+    return $value;
+  }
+
 }
 
 

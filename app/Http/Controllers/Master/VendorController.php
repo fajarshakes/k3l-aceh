@@ -150,22 +150,7 @@ class VendorController extends BaseController
         }
 
         $username = explode("@", $request->email);
-        $store1 = DB::table('users')->insert([
-            'comp_code'         => Auth::user()->comp_code,
-            'unit'              => Auth::user()->unit,
-            'username'          => $username[0],
-            'name'              => $request->nama_perusahaan,
-            'pers_no'           => '',
-            'email'             => $request->email,
-            'group_id'          => 7,
-            'position_desc'     => 'ADMIN PERUSAHAAN',
-            'password'          => Hash::make('Vendor@4321'),
-            'created_at'        => date('Y-m-d'),
-            'created_by'        => Auth::user()->username,
-            'status'            => 'ACTIVE',
-        ]);
-
-        $store2 = DB::table('master_vendor')->insert([
+        $store1 = DB::table('master_vendor')->insert([
             'COMP_CODE'      => Auth::user()->comp_code,
             'SAP_NO'         => $request->nosap,
             'VENDOR_NAME'    => $request->nama_perusahaan,
@@ -178,6 +163,25 @@ class VendorController extends BaseController
             'CREATED_AT'     => date('Y-m-d'),
             'CREATED_BY'     => Auth::user()->username,
             ]);
+
+        $lastid = DB::getPdo()->lastInsertId();
+            
+        $store2 = DB::table('users')->insert([
+            'comp_code'         => Auth::user()->comp_code,
+            'unit'              => Auth::user()->unit,
+            'username'          => $username[0],
+            'name'              => $request->nama_perusahaan,
+            'pers_no'           => $lastid,
+            'email'             => $request->email,
+            'group_id'          => 7,
+            'position_desc'     => 'ADMIN PERUSAHAAN',
+            'password'          => Hash::make('Vendor@4321'),
+            'created_at'        => date('Y-m-d'),
+            'created_by'        => Auth::user()->username,
+            'status'            => 'ACTIVE',
+        ]);
+
+        
 
         //AjaxCrud::create($form_data);
         return response()->json(['success' => 'Data Added successfully.']);
