@@ -59,6 +59,17 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getUnitDetail(string $buss_area){
+
+    $value=DB::table('master_unit')
+    ->select('*')
+    ->where('BUSS_AREA', '=', $buss_area)
+    ->where('STATUS', '=', '1')
+    ->first(); 
+
+    return $value;
+  }
+
   public function getUnitType(){
 
     $value=DB::table('master_unit_type')
@@ -282,7 +293,8 @@ class WpModel extends Model
     $value=DB::table('working_permit')
     
     ->where('unit', 'LIKE', '%' . $unit . '%')
-    ->whereNotIn('status', ['APPROVED', 'TRASH'])
+    ->whereIn('status', ['NEW','APPROVAL_1','APPROVAL_2','APPROVAL_INDUK'])
+    //->whereNotIn('status', ['APPROVED', 'TRASH'])
     ->count();
 
     return $value;

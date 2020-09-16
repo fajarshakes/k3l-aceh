@@ -49,6 +49,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('get_detail_wp', 'Wp\WpController@get_detail_wp')->name('get_detail_wp');;
     Route::get('get_detail_template', 'Wp\TemplateController@get_detail_template')->name('get_detail_template');
     Route::post('approve_form', 'Wp\WpController@approve_form')->name('approve_form');
+    Route::post('closing_form', 'Wp\WpController@closing_form')->name('closing_form');
     Route::post('delete_form', 'Wp\WpController@delete_form')->name('delete_form');
     Route::get('print_jsa/{id}', 'Wp\WpController@print_jsa')->name('print_jsa');
     Route::get('print_hirarc/{id}', 'Wp\WpController@print_hirarc')->name('print_hirarc');

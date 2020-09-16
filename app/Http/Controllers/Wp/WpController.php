@@ -301,8 +301,10 @@ class WpController extends BaseController
 
         if ($group_id == 7){
             $redirect_to = '/wp/vendor-permit';
+            $detVendor   = $this->Master->getVendorDet(Auth::user()->pers_no);
         } else {
             $redirect_to = '/wp/list-permit';
+            $detVendor   = '';
         }
         
         $data = [
@@ -317,7 +319,7 @@ class WpController extends BaseController
             'tbl_hirarc'  => $this->wpModel->getHirarcTemplate($id_template),
             'tbl_jsa'     => $this->wpModel->getJsaTemplate($id_template),
             'peralatan'   => collect($this->wpModel->getPeralatanTemplate($id_template)->pluck('description'))->toArray(),
-            'getDetVendor'=> $this->Master->getVendorDet(Auth::user()->pers_no),
+            'getDetVendor'=> $detVendor,
             'redirect_to'    => $redirect_to,
         ];
         
@@ -332,10 +334,12 @@ class WpController extends BaseController
         } else {
             $unit = Auth::user()->unit;
         }
-
-        $getList = $this->wpModel->getListOnWork($unit);
+        $id = '6112200001';
+        $unit = $this->wpModel->getDetailWp($id)->unit;
+        //$getList = $this->wpModel->getListOnWork($unit);
         
-        return $getList;
+        return response()->json($unit);
+        //return $unit;
     }
     
     public function wp_store(Request $request)
@@ -432,6 +436,104 @@ class WpController extends BaseController
         ]);
 
         for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
+
+            //formula tingkat resiko
+            if ($request['penilaian_kemungkinan'][$i] == 'A' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'B' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 2 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'C' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 2 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 || 4 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'D' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'E' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_1 = 'H';
+                }
+            }
+
+            if ($request['pengendalian_kemungkinan'][$i] == 'A' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'B' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 2 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'C' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 2 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 || 4 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'D' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'E' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_2 = 'H';
+                }
+            }
+
             $store = DB::table('tbl_hirarc')->insert([
             'id_wp'         => $new_id,
             'kegiatan'      => $request['kegiatan_hirarc'][$i],
@@ -439,14 +541,17 @@ class WpController extends BaseController
             'resiko'        => $request['resiko_hirarc'][$i],
             'penilaian_konsekuensi'   => $request['penilaian_konsekuensi'][$i],
             'penilaian_kemungkinan'   => $request['penilaian_kemungkinan'][$i],
+            'penilaian_tingkat_resiko'   => $resiko_1,
             'pengendalian_resiko'       => $request['potensi_bahaya'][$i],
             'pengendalian_konsekuensi'  => $request['pengendalian_konsekuensi'][$i],
             'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
+            'pengendalian_tingkat_resiko'  => $resiko_2,
             'status_pengendalian'       => $request['status_pengendalian'][$i],
             'penanggung_jawab'          => $request['penanggung_jawab'][$i],
             ]);
         }
 
+        /*
         for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
             $store = DB::table('tbl_hirarc')->insert([
             'id_wp'         => $new_id,
@@ -462,6 +567,7 @@ class WpController extends BaseController
             'penanggung_jawab'          => $request['penanggung_jawab'][$i],
             ]);
         }
+        */
 
         for($i = 0; $i < count($request['langkah_pekerjaan']); $i++){
             $store = DB::table('tbl_jsa')->insert([
@@ -558,6 +664,21 @@ class WpController extends BaseController
         return response()->json(['success' => 'Data Update successfully.']);
     }
 
+    public function closing_form(Request $request)
+    {
+        $id_wp = $request->id_wp;
+       
+        $update = DB::table('working_permit')
+        ->where('id_wp', $id_wp)
+        ->update([
+            'status'        => 'CLOSED',
+            'tgl_closing'   => $request->closing_date,
+            'jam_closing'   => $request->closing_time,
+        ]);
+
+        return response()->json(['success' => 'Data Update successfully.']);
+    }
+
     public function delete_form(Request $request)
     {
         $id_wp = $request->id_wp;
@@ -575,51 +696,19 @@ class WpController extends BaseController
 
     public function print_jsa(Request $request, $id_wp)
     {
-        $masterPeralatan = ['Sarung Tangan Katun', 'Sarung Tangan Karet', 'Radio Telekomunikasi', 
-                            'Sepatu Keselamatan', 'Pelampung / Life Vest', 'Tabung pernafasan',
-                            'Kacamata', 'Sarung tangan karet', 'Earplug', 'Sarung tangan 20kV',
-                            'Lain - lain'];
-        
-        $masterKeselamatan = ['Kotak P3K', 'Rambu Keselamatan', 'LOTO (lock out tag out)', 
-                            'Radio Telekomunikasi', 'Lain - lain'];
-
-        $masterKeselamatan = ['Kotak P3K', 'Rambu Keselamatan', 'LOTO (lock out tag out)', 
-                            'Radio Telekomunikasi', 'Lain - lain'];
-
-        $Klasifikasi = ['Pemasangan LBS/Recloser/FDI', 'Pemasangan kubikel 20KV', 'Pemeliharaan Kubikel', 
-                        'Pengujian Relay Proteksi', 'Penggantian Relay Proteksi', 
-                        'Pemasangan Power Meter', 'Pemasangan KWH Meter', 'Pemeliharaan RTU GH/GI', 
-                        'Pemasangan Catu Daya', 'Pemasangan Radio Komunikasi', 'Pemeliharaan Radio Komunikasi', 'Sipil'];
-
-        $Prosedur   =  ['Pemasangan dan Penggantian Cubicle 20 KV', 'Pemeliharaan Cubicle Gardu Hubung 20 KV', 'Pemasangan LBS dan RECLOSER', 
-                        'Pemeliharaan RTU dan Peripheral', 'Pengujian Control Scada', 'Pemeliharaan Repeater Komunikasi',
-                        'Perluasan Gardu Hubung 20 KV', 'Pengujian Alat', 'Pemasangan Proteksi'];
-
+        $unit = $this->wpModel->getDetailWp($id_wp)->unit;
         $data = [
             'detailWp'          => $this->wpModel->getDetailWp($id_wp),
             'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_wp),
-            'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
             'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
             'peralatan'         => collect($this->wpModel->getPeralatan($id_wp)->pluck('description'))->toArray(),
             'peralatan1'        => array($this->wpModel->getPeralatan($id_wp)),
             'klasifikasi'       => collect($this->wpModel->getKlasifikasi($id_wp)->pluck('description'))->toArray(),
             'klasifikasi1'      => array($this->wpModel->getKlasifikasi($id_wp)),
-            // 'klasifikasi'       => $this->wpModel->getKlasifikasi($id_wp),
-            // 'prosedur'          => $this->wpModel->getProsedur($id_wp),
             'prosedur'          => collect($this->wpModel->getProsedur($id_wp)->pluck('description'))->toArray(),
             'prosedur1'         => array($this->wpModel->getProsedur($id_wp)),
-            'mperalatan'        => $masterPeralatan,
-            'mkesalamatan'      => $masterKeselamatan,
-            'mklasifikasi'      => $Klasifikasi,
-            'mprosedur'         => $Prosedur,
-            'arraylist'         => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi", "Pelampung / Life Vest","Tabung Pernafasan", 
-                                        "Pemadam Api (APAR dll)", "LOTO (lock out tag out)",
-                                        "Pemasangan LBS/Recloser/FDI","on","Pemasangan kubikel 20KV","Pemeliharaan Kubikel","Pengujian Relay Proteksi","Pemasangan Power Meter","Pemasangan KWH Meter", "Pemeliharaan RTU GH/GI","Pemasangan Catu Daya", 
-                                        "Pemasangan Radio Komunikasi", "Pemeliharaan Radio Komunikasi","Sipil","Penggantian Relay Proteksi",
-                                        "Pemasangan dan Penggantian Cubicle 20 KV", "Pemeliharaan Cubicle Gardu Hub", "Pemasangan LBS dan Recloser", "Pemeliharaan RTU dan Peripheral",
-                                        "Pengujian Control Scada", "Pemeliharaan Repeater Komunikasi", "Perluasan Gardu Hubung 20 KV","Pengujian Alat","Pemasangan Proteksi"),
-            //'tempStatus'      => $sales->CheckTempId($temp_id),
-            //'group'           => $v,
+            'unit_detail'       => $this->wpModel->getUnitDetail($unit),
+
          ];
          
          return view('wp/print_jsa', $data,);
@@ -628,12 +717,13 @@ class WpController extends BaseController
 
     public function print_hirarc(Request $request, $id_wp)
     {
+        $unit = $this->wpModel->getDetailWp($id_wp)->unit;
         $data = [
             'detailWp'          => $this->wpModel->getDetailWp($id_wp),
             'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_wp),
             'tbl_hirarc'        => $this->wpModel->getHirarc($id_wp),
             'tbl_jsa'           => $this->wpModel->getJsa($id_wp),
-            //'tempStatus'      => $sales->CheckTempId($temp_id),
+            'unit_detail'       => $this->wpModel->getUnitDetail($unit),
             //'group'           => $v,
             
          ];
@@ -643,6 +733,7 @@ class WpController extends BaseController
 
     public function print_wp(Request $request, $id_wp)
     {
+        $unit = $this->wpModel->getDetailWp($id_wp)->unit;
         $data = [
             'detailWp'          => $this->wpModel->getDetailWp($id_wp),
             'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_wp),
@@ -652,14 +743,8 @@ class WpController extends BaseController
             'klasifikasi1'      => array($this->wpModel->getKlasifikasi($id_wp)),
             'prosedur'          => collect($this->wpModel->getProsedur($id_wp)->pluck('description'))->toArray(),
             'prosedur1'         => array($this->wpModel->getProsedur($id_wp)),
-            'arraylist'         => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi", "Pelampung / Life Vest","Tabung Pernafasan", 
-                                        "Pemadam Api (APAR dll)", "LOTO (lock out tag out)",
-                                        "Pemasangan LBS/Recloser/FDI","on","Pemasangan kubikel 20KV","Pemeliharaan Kubikel","Pengujian Relay Proteksi","Pemasangan Power Meter","Pemasangan KWH Meter", "Pemeliharaan RTU GH/GI","Pemasangan Catu Daya", 
-                                        "Pemasangan Radio Komunikasi", "Pemeliharaan Radio Komunikasi","Sipil","Penggantian Relay Proteksi",
-                                        "Pemasangan dan Penggantian Cubicle 20 KV", "Pemeliharaan Cubicle Gardu Hub", "Pemasangan LBS dan Recloser", "Pemeliharaan RTU dan Peripheral",
-                                        "Pengujian Control Scada", "Pemeliharaan Repeater Komunikasi", "Perluasan Gardu Hubung 20 KV","Pengujian Alat","Pemasangan Proteksi"),
-            //'tempStatus'      => $sales->CheckTempId($temp_id),
-            //'group'           => $v,
+            'unit_detail'       => $this->wpModel->getUnitDetail($unit),
+
          ];
          
          return view('wp/print_wp', $data,);

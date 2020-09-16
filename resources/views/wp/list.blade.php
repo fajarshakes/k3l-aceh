@@ -78,7 +78,7 @@
                     <div class="tab-content px-1 pt-1">
                       <div role="tabpanel" class="tab-pane active" id="tabIcon21" aria-expanded="true"
                       aria-labelledby="baseIcon-tab21">
-                      <table id="table-permohonan" class="table display nowrap table-striped table-bordered zero-configuration">
+                      <table id="table-permohonan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
@@ -244,6 +244,74 @@
                 <input type="hidden" name="ket_approve" value="APPROVE">
                 @endif
 
+                <input type="hidden" name="group_id" value="{{ Auth::user()->group_id }}">
+                <input type="hidden" name="user_proses" value="{{ Auth::user()->username }}">
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade text-left" id="closing_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-success white">
+                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_closing" method="post" enctype="multipart/form-data">
+
+              @csrf
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">ID WP</label>
+                      <input type="text" class="form-control" name="id_wp" id="id_wp1" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">KETERANGAN PEKERJAAN</label>
+                      <input type="text" class="form-control" id="wp_desc1" name="wp_desc" readonly>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="companyName">NAMA PEKERJAAN</label>
+                    <textarea id="nama1" class="form-control" readonly></textarea>
+                </div>
+              
+                <div class="form-group">
+                  <label for="companyName">PERUSAHAAN PELAKSANA</label>
+                  <input type="text" id="pelaksana1" class="form-control" readonly/>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">TANGGAL CLOSING</label>
+                      <input type="text" class="form-control" name="closing_date" value="{{ date('y-m-d') }}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">JAM CLOSING</label>
+                      <input type="text" class="form-control" id="closing_time" name="closing_time" value="{{ date('H-i') }}" readonly>
+                    </div>
+                  </div>
+                </div>
+              
                 <input type="hidden" name="group_id" value="{{ Auth::user()->group_id }}">
                 <input type="hidden" name="user_proses" value="{{ Auth::user()->username }}">
               </div>
@@ -462,6 +530,9 @@ var vtable = $('#table-permohonan').DataTable({
           return html; 
         }
       },
+      //button edit
+      <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
+        
       */
       {
       "data": null,
@@ -469,9 +540,7 @@ var vtable = $('#table-permohonan').DataTable({
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
+        return `<button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
         <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
         }
       },
@@ -523,7 +592,7 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
       className: "text-center",
       "render": function (data, type, full, meta) {
         return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>`;
+        <button name="closed_modal" id="${full.id_wp}" class="closed btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Closed Pekerjaan" > <i class="la la-check-circle"></i></button>`;
         }
      },
   ]
@@ -541,7 +610,9 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
 
 });
 
-  var vtable2 = $('#table-selesai').DataTable({
+$(document).ready(function() {
+var vtable2 =  $('#table-selesai').DataTable({
+//var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
    processing: true,
    serverSide: true,
    scrollX: true,
@@ -553,7 +624,7 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
    columns:[
      { data: null, searchable:false, orderable:false, className: "text-center"},
      {
-     data: 'tgl_pengajuan',
+       data: 'tgl_pengajuan',
      },
      {
      data: 'nama_pekerjaan',
@@ -577,20 +648,23 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
-        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>`;
         }
-      },
-   ]
+     },
+  ]
   });
-
   vtable2.on('draw.dt', function () {
     vtable2.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
       cell.innerHTML = i + 1;
       });
   }).draw();
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+      $($.fn.dataTable.tables(true)).DataTable()
+         .columns.adjust();
+   }); 
+
+});
 
 
 $('#open_modal').click(function(){
@@ -685,6 +759,52 @@ $('#form_menu').on('submit', function(event){
               $('#form_edit')[0].reset();
               $('#approve_form').modal('hide');
               $('#table-permohonan').DataTable().ajax.reload();
+              $('#table-pengerjaan').DataTable().ajax.reload();
+              type_toast = 'success';
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              //toastr.options.onShown = function() { console.log('hello')};
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
+            }
+          }
+        })
+
+    });
+
+    $('#form_closing').on('submit', function(event){
+      event.preventDefault();
+
+      $.ajax({
+          url: "{{ url('wp/closing_form') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              $('#form_closing')[0].reset();
+              $('#closing_modal').modal('hide');
+              $('#table-pengerjaan').DataTable().ajax.reload();
+              $('#table-selesai').DataTable().ajax.reload();
               type_toast = 'success';
             }
             //$('#form_result').html(html);
@@ -760,6 +880,29 @@ $('#form_menu').on('submit', function(event){
           $('#action_button').val("Edit");
           $('#action').val("Edit");
           $('#approve_form').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
+    });
+
+    $(document).on('click', '.closed', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('wp/get_detail_wp/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#nama1').val(html.data[0].nama_pekerjaan);
+          $('#pelaksana1').val(html.data[0].pelaksana);
+          $('#id_wp1').val(html.data[0].id_wp);
+          $('#wp_desc1').val(html.data[0].wp_desc);
+          $('.modal-title').text("CLOSING PEKERJAAN");
+          $('#action_button').val("Edit");
+          $('#action').val("Edit");
+          $('#closing_modal').modal('show');
         },error: function (jqXhr, textStatus, errorMessage) { // error callback 
 					$('p').append('Error: ' + errorMessage);
 				}

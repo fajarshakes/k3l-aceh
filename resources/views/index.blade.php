@@ -281,9 +281,6 @@
                   <div class="col-md-9 col-12">
                     <div id="geoloc5"></div>
                     <div id="fixedMapCont" class="height-450"></div>
-                    <input id="geolat" type="text" value="" size="20"  class="form-control"/>
-                    <br>
-                    <input id="geolng" type="text" value="" size="20"  class="form-control"/>
                   </div>
                   <div class="col-md-3 col-12">
                     <div class="card-body text-center">

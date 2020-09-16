@@ -98,13 +98,13 @@
                           <td>{{ $row_data->kegiatan }}</td>
                           <td>{{ $row_data->potensi_bahaya }}</td>
                           <td>{{ $row_data->resiko }}</td>
-                          <td>{{ $row_data->penilaian_konsekuensi }}</td>
-                          <td>{{ $row_data->penilaian_kemungkinan }}</td>
-                          <td></td>
+                          <td class="text-center">{{ $row_data->penilaian_konsekuensi }}</td>
+                          <td class="text-center">{{ $row_data->penilaian_kemungkinan }}</td>
+                          <td class="text-center">{{ $row_data->penilaian_tingkat_resiko }}</td>
                           <td>{{ $row_data->pengendalian_resiko }}</td>
-                          <td>{{ $row_data->pengendalian_konsekuensi }}</td>
-                          <td>{{ $row_data->pengendalian_kemungkinan }}</td>
-                          <td></td>
+                          <td class="text-center">{{ $row_data->pengendalian_konsekuensi }}</td>
+                          <td class="text-center">{{ $row_data->pengendalian_kemungkinan }}</td>
+                          <td class="text-center">{{ $row_data->pengendalian_tingkat_resiko }}</td>
                           <td>{{ $row_data->status_pengendalian }}</td>
                           <td>{{ $row_data->penanggung_jawab }}</td>
 
@@ -159,7 +159,7 @@
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td width="2%">1</td>
                         <td>Tanggal</td>
@@ -216,40 +216,11 @@
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td colspan="3" class="text-left">1. ALAT PELINDUNG DIRI</td>
                       </tr>
-                      {{--
-                      <!-- <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                      @foreach($mperalatan as $mper)
-                      @php
-                        $i = 'true';
-                      @endphp
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                          @foreach($peralatan as $per)
-                          @if($mper == $per->description)
-                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mper }}" checked>
-                            {{ $mper }} 
-                            @php
-                              $i = 'false';
-                            @endphp
-                          @endif
-                          @endforeach
-
-                          @if($i == 'true')
-                          <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mper }}">
-                          {{ $mper }} 
-                          @endif
-                          </div>
-                          </div>
-                        </td>
-                      </tr>
-                      @endforeach -->
-                        --}}
-                      
+                       
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
@@ -329,36 +300,7 @@
                       <tr>
                         <td colspan="3" class="text-left">2. PERLENGKAPAN KESELAMATAN & DARURAT</td>
                       </tr>
-                      {{--
-                      <!--
-                      @foreach($mkesalamatan as $mkes)
-                      @php
-                        $i = 'true';
-                      @endphp
-                      <tr>
-                        <td>
-                          <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                          @foreach($peralatan as $per)
-                          @if($mkes == $per->description)
-                            <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mkes }}" checked>
-                            {{ $mkes }} 
-                            @php
-                              $i = 'false';
-                            @endphp
-                          @endif
-                          @endforeach
-
-                          @if($i == 'true')
-                          <input type="checkbox" id="item25" name="peralatan[]" class="custom-control-label" value = "{{ $mkes }}">
-                          {{ $mkes }} 
-                          @endif
-                          </div>
-                        </td>
-                      </tr>
-                      @endforeach
-                      -->
-                      --}}
-
+                      
                       <tr>
                         <td>
                           <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
@@ -400,8 +342,6 @@
                         </td>
                         </tr>
 
-                        
-                      
                       </table>
                     </div>
 
@@ -425,7 +365,7 @@
                         @php $no = 1; @endphp
                         @foreach($tbl_jsa as $row_jsa)
                           <tr>
-                            <td>{{ $no++ }}</td>
+                            <td class="text-center">{{ $no++ }}</td>
                             <td>{{ $row_jsa->langkah_pekerjaan }}</td>
                             <td>{{ $row_jsa->potensi_bahaya }}</td>
                             <td>{{ $row_jsa->resiko }}</td>
@@ -476,7 +416,7 @@
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td colspan="4" class="text-left"><strong>A. INFORMASI PEKERJAAN</strong></td>
                       </tr>
@@ -511,35 +451,29 @@
                       <tr>
                         <td>8. Pengawas Pekerjaan</td>
                         <td>: {{ $detailWp->pengawas_pekerjaan }}</td>
-                        <td>No Telp</td>
-                        <td>{{ $detailWp->no_pengawas_pekerjaan }}</td>
+                        <td colspan="2" class="text-center" class="text-right">No Telp. ({{ $detailWp->no_pengawas_pekerjaan }})</td>
                       </tr>
                       <tr>
                         <td>9. Pengawas K3L</td>
                         <td>: {{ $detailWp->pengawas_k3l }}</td>
-                        <td>No Telp</td>
-                        <td>{{ $detailWp->no_pengawas_k3 }}</td>
+                        <td colspan="2" class="text-center">No Telp. ({{ $detailWp->no_pengawas_k3 }})</td>
                       </tr>
                       </table>
                     </div>
 
                     <div class="col-xl-12 col-lg-12">
-                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 80%">
+                      <table id="tbl_hazard" class="table table-striped table-bordered" style="width: 100%">
                       <tr>
                         <td colspan="5" class="text-left"><strong>B. DURASI PEKERJAAN</strong></td>
                       </tr>
                       <tr>
                         <td rowspan="2">Durasi Kerja</td>
-                        <td>Tanggal Mulai : </td>
-                        <td>{{ $detailWp->tgl_mulai }}</td>
-                        <td>Jam Mulai : </td>
-                        <td>{{ $detailWp->jam_mulai }}</td>
+                        <td colspan="2" class="text-center">Tanggal Mulai : {{ $detailWp->tgl_mulai }}</td>
+                        <td colspan="2" class="text-center">Jam Mulai : {{ $detailWp->jam_mulai }}</td>
                       </tr>
                       <tr>
-                        <td>Tanggal Selesai : </td>
-                        <td>{{ $detailWp->tgl_selesai }}</td>
-                        <td>Jam Selesai : </td>
-                        <td>{{ $detailWp->jam_selesai }}</td>
+                        <td colspan="2" class="text-center">Tanggal Selesai : {{ $detailWp->tgl_selesai }}</td>
+                        <td colspan="2" class="text-center">Jam Selesai : {{ $detailWp->jam_selesai }}</td>
                       </tr>
                       </table>
                     </div>
