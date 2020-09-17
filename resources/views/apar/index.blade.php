@@ -28,7 +28,8 @@
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
+              <button onclick="location.href='/apar/export_excel'" class="dropdown-item"><i class="la la-check-circle-o"></i> Export Excel (.xlsx)</button>
+              <!-- <a href "export_excel' class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</a> -->
             </div>
           </div>
         </div>

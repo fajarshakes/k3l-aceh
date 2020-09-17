@@ -18,6 +18,9 @@ use Response;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\AparExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 
 class AparController extends BaseController
@@ -401,5 +404,10 @@ class AparController extends BaseController
 
         return response()->json(['success' => 'Data Update successfully.']);
     }
-   
+
+    public function export(Request $request)
+    {
+        return Excel::download(new AparExport, 'apar.xlsx');
+    }
+
 }

@@ -96,6 +96,7 @@ Route::prefix('apar')->group(function() {
     Route::get('update/{id}', 'Apar\AparController@update')->name('update');
     Route::post('update_apar', 'Apar\AparController@update_apar')->name('update_apar');
     Route::post('delete_apar', 'Apar\AparController@delete_apar')->name('delete_apar');
+    Route::get('export_excel', 'Apar\AparController@export')->name('export_excel');
 
 });
 
