@@ -271,12 +271,14 @@ class AparController extends BaseController
 
     public function list_master_gedung(Request $request)
     {
+        $unit = Auth::user()->unit;
         $sql = "SELECT
                     mg.*, mu.UNIT_NAME
                 FROM
                     master_gedung mg LEFT JOIN master_unit mu ON mg.BUSS_AREA = mu.BUSS_AREA
                 WHERE
-                    mg.STATUS = 1";
+                    mg.STATUS = 1
+                    AND mg.BUSS_AREA = '$unit' ";
         $v = DB::select($sql);
             
         return Datatables::of($v)
@@ -292,6 +294,7 @@ class AparController extends BaseController
 
     public function list_master_lantai(Request $request)
     {
+        $unit = Auth::user()->unit;
         $sql = "SELECT
                     mgd.*, mg.NAMA_GEDUNG, mu.UNIT_NAME
                 FROM
@@ -299,7 +302,8 @@ class AparController extends BaseController
                     LEFT JOIN master_gedung mg ON mg.ID_GEDUNG = mgd.ID_GEDUNG
                     LEFT JOIN master_unit mu ON mg.BUSS_AREA = mu.BUSS_AREA
                 WHERE
-                    mg.STATUS = 1";
+                    mg.STATUS = 1
+                    AND mg.BUSS_AREA = '$unit'";
         $v = DB::select($sql);
             
         return Datatables::of($v)

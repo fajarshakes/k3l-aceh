@@ -79,9 +79,10 @@
 				<img width="60" src="../../../images/app_images/logo_pln.png" />
 			</td>
 			<td style="border-left: 1px solid #fff !important;" rowspan="3" class="text-center" width="20%">
-				<h4>PT PLN (Persero) UNIT INDUK WILAYAH ACEH</h4>
-				<h4>UP3 XXXXXX</h4>
-				<p>JALAN XXXXX</p>
+			<p></p>
+			<span style="font-size: 12px;"><b>PT PLN (PERSERO) UIW ACEH</b><br>{{ $unit_detail->UNIT_NAME }} <br></span>
+			<span style="font-size: 10px;">{{ $unit_detail->ADDRESS }}<br>{{ $unit_detail->CITY }}</span>
+				
 			</td>
 			<td rowspan="3" width="40%">
 				<p></p>
@@ -97,7 +98,7 @@
 	  	<td class="text-center">FR.R.R.X.0.0 </td>
 	  </tr>
 	  <tr>
-	  	<td class="text-center">TGL :</td>
+	  	<td class="text-center">TGL : {{ date('d-m-Y', strtotime($detailWp->tgl_pengajuan)) }}</td>
 	  	<td class="text-center">ED/REV : 00/00 </td>
 	  </tr>
 	</thead>
@@ -139,12 +140,12 @@
 			<td>{{ $row_data->potensi_bahaya }}</td>
 			<td>{{ $row_data->resiko }}</td>
 			<td align="center">{{ $row_data->penilaian_konsekuensi }}</td>
-			<td>{{ $row_data->penilaian_kemungkinan }}</td>
-			<td></td>
+			<td align="center">{{ $row_data->penilaian_kemungkinan }}</td>
+			<td align="center">{{ $row_data->penilaian_tingkat_resiko }}</td>
 			<td>{{ $row_data->pengendalian_resiko }}</td>
-			<td>{{ $row_data->pengendalian_konsekuensi }}</td>
-			<td>{{ $row_data->pengendalian_kemungkinan }}</td>
-			<td></td>
+			<td align="center">{{ $row_data->pengendalian_konsekuensi }}</td>
+			<td align="center">{{ $row_data->pengendalian_kemungkinan }}</td>
+			<td align="center">{{ $row_data->pengendalian_tingkat_resiko }}</td>
 			<td>{{ $row_data->status_pengendalian }}</td>
 			<td>{{ $row_data->penanggung_jawab }}</td>
 

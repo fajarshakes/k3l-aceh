@@ -11,7 +11,7 @@
           <div class="col-xl-6 col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Contoh Chart 1 - Realisasi Anggaran (dalam ribuan rupiah)</h4>
+                <h4 class="card-title">.</h4>
                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                 <div class="heading-elements">
                   <ul class="list-inline mb-0">
@@ -21,25 +21,48 @@
               </div>
               <div class="card-content collapse show">
                 <div class="card-body pt-0">
-                  <div class="row mb-1">
-                    <div class="col-6 col-md-4">
-                      <h5>Minggu Ini</h5>
-                      <h2 class="danger">Rp 82,124</h2>
-                    </div>
-                    <div class="col-6 col-md-4">
-                      <h5>Minggu Lalu</h5>
-                      <h2 class="text-muted">Rp 52,502</h2>
-                    </div>
-                  </div>
-                  <div class="chartjs">
-                    <canvas id="thisYearRevenue" width="400" style="position: absolute;"></canvas>
-                    <canvas id="lastYearRevenue" width="400"></canvas>
-                  </div>
+                  <iframe width="490" height="390" src="https://www.youtube.com/embed/hf6zoUOQq2w?list=PLrWpVAgJjrg2YInviHI133lburxsy6BtV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-xl-6 col-12">
+          <div class="row">
+              <div class="col-lg-6 col-12">
+                <div class="card pull-up">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h6 class="text-muted">Dalam Permohonan </h6>
+                          <h3>{{ $countPermohonan }}</h3>
+                        </div>
+                        <div class="align-self-center">
+                          <i class="icon-fire info font-large-2 float-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-12">
+                <div class="card pull-up">
+                  <div class="card-content">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <h6 class="text-muted">Dalam Pengerjaan </h6>
+                          <h3>{{ $countPengerjaan }}</h3>
+                        </div>
+                        <div class="align-self-center">
+                          <i class="icon-rocket success font-large-2 float-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-lg-6 col-12">
                 <div class="card pull-up">
@@ -82,47 +105,12 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-6 col-12">
-                <div class="card pull-up">
-                  <div class="card-content">
-                    <div class="card-body">
-                      <div class="media d-flex">
-                        <div class="media-body text-left">
-                          <h6 class="text-muted">Order Value </h6>
-                          <h3>$ 88,568</h3>
-                        </div>
-                        <div class="align-self-center">
-                          <i class="icon-trophy success font-large-2 float-right"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-12">
-                <div class="card pull-up">
-                  <div class="card-content">
-                    <div class="card-body">
-                      <div class="media d-flex">
-                        <div class="media-body text-left">
-                          <h6 class="text-muted">Calls</h6>
-                          <h3>3,568</h3>
-                        </div>
-                        <div class="align-self-center">
-                          <i class="icon-call-in danger font-large-2 float-right"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
         <!--/ Revenue, Hit Rate & Deals -->
         <!-- Emails Products & Avg Deals -->
-        <div class="row">
+        <!--div class="row">
           <div class="col-12 col-md-3">
             <div class="card">
               <div class="card-header">
@@ -213,7 +201,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div!-->
         <!--/ Emails Products & Avg Deals -->
         <!-- Total earning & Recent Sales  -->
         <div class="row">
@@ -237,12 +225,12 @@
           <div id="recent-sales" class="col-12 col-md-8">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Transaksi Terbaru</h4>
+                <h4 class="card-title">Working Permit dalam Pengerjaan</h4>
                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                 <div class="heading-elements">
                   <ul class="list-inline mb-0">
                     <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right"
-                      href="invoice-summary.html" target="_blank">View all</a></li>
+                      href="wp/list-permit" target="_blank">View all</a></li>
                   </ul>
                 </div>
               </div>
@@ -252,167 +240,30 @@
                     <thead>
                       <tr>
                         <th class="border-top-0">Unit</th>
-                        <th class="border-top-0">Kegiatan</th>
-                        <th class="border-top-0">Indikator</th>
+                        <th class="border-top-0">Nama Pekerjaan</th>
+                        <th class="border-top-0">Tanggal Mulai</th>
                         <th class="border-top-0">Progress</th>
-                        <th class="border-top-0">Nilai</th>
                       </tr>
                     </thead>
                     <tbody>
+                    @foreach($getList as $list)
                       <tr>
-                        <td class="text-truncate">T.SIPIL</td>
-                        <td class="text-truncate p-1">
-                          <ul class="list-unstyled users-list m-0">
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 1"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-4.png"
-                              alt="Avatar">
-                            </li>
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 2"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-5.png"
-                              alt="Avatar">
-                            </li>
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 3"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-6.png"
-                              alt="Avatar">
-                            </li>
-                            <li class="avatar avatar-sm">
-                              <span class="badge badge-info">+8 more</span>
-                            </li>
-                          </ul>
-                        </td>
+                        <td class="text-truncate">{{ $list->UNIT_NAME }}</td>
+                        <td class="text-truncate">{{ $list->nama_pekerjaan }}</td>
+                        
                         <td>
-                          <button type="button" class="btn btn-sm btn-outline-danger round">IKU</button>
+                          <button type="button" class="btn btn-sm btn-outline-danger round">{{ $list->tgl_mulai }}</button>
                         </td>
+
                         <td>
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%"
+                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 50%"
                             aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </td>
-                        <td class="text-truncate">Rp. 1200.00</td>
                       </tr>
-                      <tr>
-                        <td class="text-truncate">T. ELEKTRO</td>
-                        <td class="text-truncate p-1">
-                          <ul class="list-unstyled users-list m-0">
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 1"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-7.png"
-                              alt="Avatar">
-                            </li>
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 2"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-8.png"
-                              alt="Avatar">
-                            </li>
-                            <li class="avatar avatar-sm">
-                              <span class="badge badge-info">+5 more</span>
-                            </li>
-                          </ul>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-sm btn-outline-success round">IKK</button>
-                        </td>
-                        <td>
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%"
-                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td class="text-truncate">Rp. 1190.00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">T. KIMIA</td>
-                        <td class="text-truncate p-1">
-                          <ul class="list-unstyled users-list m-0">
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 1"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-1.png"
-                              alt="Avatar">
-                            </li>
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 2"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-2.png"
-                              alt="Avatar">
-                            </li>
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 3"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-3.png"
-                              alt="Avatar">
-                            </li>
-                            <li class="avatar avatar-sm">
-                              <span class="badge badge-info">+3 more</span>
-                            </li>
-                          </ul>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-sm btn-outline-danger round">IKK</button>
-                        </td>
-                        <td>
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 70%"
-                            aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td class="text-truncate">Rp. 999.00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">SATKER ULP</td>
-                        <td class="text-truncate p-1">
-                          <ul class="list-unstyled users-list m-0">
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 1"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-11.png"
-                              alt="Avatar">
-                            </li>
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 2"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-12.png"
-                              alt="Avatar">
-                            </li>
-                          </ul>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-sm btn-outline-success round">IKT</button>
-                        </td>
-                        <td>
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 65%"
-                            aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td class="text-truncate">Rp. 1150.00</td>
-                      </tr>
-                      <tr>
-                        <td class="text-truncate">UPT BAHASA</td>
-                        <td class="text-truncate p-1">
-                          <ul class="list-unstyled users-list m-0">
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 1"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-6.png"
-                              alt="Avatar">
-                            </li>
-                            <li data-toggle="tooltip" data-popup="tooltip-custom" data-original-title="Kegiatan 2"
-                            class="avatar avatar-sm pull-up">
-                              <img class="media-object rounded-circle" src="../../../app-assets/images/portrait/small/avatar-s-4.png"
-                              alt="Avatar">
-                            </li>
-                          </ul>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-sm btn-outline-danger round">IKK</button>
-                        </td>
-                        <td>
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 45%"
-                            aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </td>
-                        <td class="text-truncate">Rp. 1180.00</td>
-                      </tr>
+                      @endforeach
+
                     </tbody>
                   </table>
                 </div>
@@ -430,9 +281,6 @@
                   <div class="col-md-9 col-12">
                     <div id="geoloc5"></div>
                     <div id="fixedMapCont" class="height-450"></div>
-                    <input id="geolat" type="text" value="" size="20"  class="form-control"/>
-                    <br>
-                    <input id="geolng" type="text" value="" size="20"  class="form-control"/>
                   </div>
                   <div class="col-md-3 col-12">
                     <div class="card-body text-center">
@@ -543,7 +391,7 @@ console.log(e.location);
 
 <script type="text/javascript">
     $(window).on('load',function(){
-        $('#filter_modal').modal('show');
+        $('#filter_modal').modal('sshow');
     });
 </script>
     

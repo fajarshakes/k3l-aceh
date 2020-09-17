@@ -59,6 +59,17 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getUnitDetail(string $buss_area){
+
+    $value=DB::table('master_unit')
+    ->select('*')
+    ->where('BUSS_AREA', '=', $buss_area)
+    ->where('STATUS', '=', '1')
+    ->first(); 
+
+    return $value;
+  }
+
   public function getUnitType(){
 
     $value=DB::table('master_unit_type')
@@ -275,6 +286,52 @@ class WpModel extends Model
     ->where('master_unit.BUSS_AREA', '=', $idunit)
     ->get();
     
+    return $value;
+  }
+
+  public static function countPermohonan(string $unit){
+    $value=DB::table('working_permit')
+    
+    ->where('unit', 'LIKE', '%' . $unit . '%')
+    ->whereIn('status', ['NEW','APPROVAL_1','APPROVAL_2','APPROVAL_INDUK'])
+    //->whereNotIn('status', ['APPROVED', 'TRASH'])
+    ->count();
+
+    return $value;
+  }
+
+  public static function countPengerjaan(string $unit){
+
+    $value=DB::table('working_permit')
+    
+    ->where('unit', 'LIKE', '%' . $unit . '%')
+    ->whereIn('status', ['APPROVED'])
+    ->count();
+
+    return $value;
+  }
+
+  public static function countSelesai(string $unit){
+
+    $value=DB::table('working_permit')
+    
+    ->where('unit', 'LIKE', '%' . $unit . '%')
+    ->whereIn('status', ['CLOSED'])
+    ->count();
+
+    return $value;
+  }
+
+  public function getListOnWork(string $unit){
+    
+    $value=DB::table('working_permit')
+    ->join('master_unit', 'working_permit.unit', '=', 'master_unit.BUSS_AREA')
+    ->select('working_permit.*', 'master_unit.UNIT_NAME')
+    ->where('working_permit.unit', 'LIKE', '%' . $unit . '%')
+    ->where('working_permit.status', '=', 'APPROVED')
+    ->take(5)
+    ->get();
+  
     return $value;
   }
 

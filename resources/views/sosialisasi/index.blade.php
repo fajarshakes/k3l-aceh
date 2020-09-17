@@ -98,37 +98,37 @@
                 </button>
               </div>
               
-              <form id="form_menu" method="post" enctype="multipart/form-data">
+              <form action="#" id="">
 
               @csrf
               <div class="modal-body">
               <div class="form-group">
                   <label for="companyName">PILIH TYPE UNIT</label>
                   <select name="type" class="custom-select form-control" name="jenis_template">
-                    
+                    <option value="" selected disabled>PILIH UNIT</option>
+                    @foreach($list as $list1)
+                    <option value="{{ $list1->UNIT_NAME }}">{{ $list1->BUSS_AREA .' - '. $list1->UNIT_NAME }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="companyName">PILIH TEMPLATE PEKERJAAN</label>
+                  <label for="companyName">PILIH TAHUN</label>
                     <select name="template" class="form-control" id="eventStatus2" name="eventStatus">
-                      <option value="Planning">Planning</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Finished">Finished</option>
+                      <option value="none" selected="" disabled="">PILIH TAHUN</option>
+                      {{ $last= date('Y')-5 }}
+                      {{ $now = date('Y') }}
+                        
+                      @for ($i = $now; $i >= $last; $i--)
+                      <option value='{{ $i }}'>{{ $i }}</option>
+                      @endfor
                     </select>
                 </div>
-                <div class="form-group">
-                  <label for="companyName">PILIH UP3</label>
-                    <select name="unit" class="form-control" id="eventStatus2" name="eventStatus">
-                    
-                    </select>
-                </div>
-                
                 <input type="hidden" name="action" id="action" />
               </div>
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+                <button type="submit" class="btn btn-success btn-icon"><i class="la la-filter"></i> Filter</button>
               </div>
               </form>
             </div>

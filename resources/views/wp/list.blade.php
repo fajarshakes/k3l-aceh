@@ -26,7 +26,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
               <!--button onclick="location.href='create'" class="dropdown-item"><i class="la la-check-circle-o"></i> Submit Permit</button!-->
               <button class="dropdown-item" name="open_modal" id="open_modal"><i class="la la-check-circle-o"></i> Submit Permit</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
+              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
               <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
@@ -60,19 +60,19 @@
                         <a class="nav-link active" id="baseIcon-tab21" data-toggle="tab" aria-controls="tabIcon21"
                         href="#tabIcon21" aria-expanded="true">
                         <i class="la la-clock-o"></i> Dalam Permohonan
-                        <span class="badge badge-pill badge-glow badge-default badge-warning">3</span></a>
+                        <span class="badge badge-pill badge-glow badge-default badge-warning">{{ $countPermohonan }}</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="baseIcon-tab22" data-toggle="tab" aria-controls="tabIcon22"
+                        <a class="nav-link" id="baseIcon-tab22" data-toggle="tab" aria-controls="tabIcon22" onclick="runTab2('3')"
                         href="#tabIcon22" aria-expanded="false">
                         <i class="la la-dashboard"></i> Dalam Pengerjaan
-                        <span class="badge badge-pill badge-glow badge-default badge-info">3</span></a>
+                        <span class="badge badge-pill badge-glow badge-default badge-info">{{ $countPengerjaan }}</span></a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="baseIcon-tab23" data-toggle="tab" aria-controls="tabIcon23"
                         href="#tabIcon23" aria-expanded="false">
                         <i class="la la-check-circle"></i> Pekerjaan Selesai
-                        <span class="badge badge-pill badge-glow badge-default badge-success">3</span></a>
+                        <span class="badge badge-pill badge-glow badge-default badge-success">{{ $countSelesai }}</span></a>
                       </li>
                     </ul>
                     <div class="tab-content px-1 pt-1">
@@ -93,7 +93,7 @@
                       </table>
                       </div>
                       <div class="tab-pane" id="tabIcon22" aria-labelledby="baseIcon-tab22">
-                      <table id="table-pengerjaan" class="table display nowrap table-striped table-bordered zero-configuration">
+                      <table id="table-pengerjaan" cellspacing="0" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
@@ -257,6 +257,74 @@
           </div>
         </div>
 
+        <div class="modal fade text-left" id="closing_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-success white">
+                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_closing" method="post" enctype="multipart/form-data">
+
+              @csrf
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">ID WP</label>
+                      <input type="text" class="form-control" name="id_wp" id="id_wp1" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">KETERANGAN PEKERJAAN</label>
+                      <input type="text" class="form-control" id="wp_desc1" name="wp_desc" readonly>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="companyName">NAMA PEKERJAAN</label>
+                    <textarea id="nama1" class="form-control" readonly></textarea>
+                </div>
+              
+                <div class="form-group">
+                  <label for="companyName">PERUSAHAAN PELAKSANA</label>
+                  <input type="text" id="pelaksana1" class="form-control" readonly/>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">TANGGAL CLOSING</label>
+                      <input type="text" class="form-control" name="closing_date" value="{{ date('y-m-d') }}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">JAM CLOSING</label>
+                      <input type="text" class="form-control" id="closing_time" name="closing_time" value="{{ date('H-i') }}" readonly>
+                    </div>
+                  </div>
+                </div>
+              
+                <input type="hidden" name="group_id" value="{{ Auth::user()->group_id }}">
+                <input type="hidden" name="user_proses" value="{{ Auth::user()->username }}">
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
@@ -277,10 +345,12 @@
                       <label for="projectinput5">Tahun Anggaran</label>
                       <select id="projectinput5" name="group_id" class="form-control">
                         <option value="none" selected="" disabled="">Select Year</option>
-                        <option value="9">2020</option>
-                        <option value="10">2021</option>
-                        <option value="11">2022</option>
-                        <option value="12">2023</option>
+                        {{ $last= date('Y')-5 }}
+                        {{ $now = date('Y') }}
+                        
+                        @for ($i = $now; $i >= $last; $i--)
+                        <option value='{{ $i }}'>{{ $i }}</option>
+                        @endfor
                       </select>
                     </div>
                   </div>
@@ -372,7 +442,6 @@
       </div>
 </div>
 
-
 <script type="text/javascript">
   $(document).ready(function() {
     $('select[name="unit"]').on('change', function(){
@@ -413,7 +482,6 @@
   });
 
 $(document).ready(function() {
-
 var vtable = $('#table-permohonan').DataTable({
    processing: true,
    serverSide: true,
@@ -462,6 +530,9 @@ var vtable = $('#table-permohonan').DataTable({
           return html; 
         }
       },
+      //button edit
+      <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
+        
       */
       {
       "data": null,
@@ -469,9 +540,7 @@ var vtable = $('#table-permohonan').DataTable({
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
+        return `<button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
         <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
         }
       },
@@ -482,13 +551,15 @@ var vtable = $('#table-permohonan').DataTable({
       cell.innerHTML = i + 1;
       });
   }).draw();
+});
 
-  var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
+$(document).ready(function() {
+var vtable1 =  $('#table-pengerjaan').DataTable({
+//var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
    processing: true,
    serverSide: true,
    scrollX: true,
    paging: true,
-   fixedColumns: true,
    order: [[ 2, 'asc' ]],
    ajax:{
     url: "{{ route('list_pengerjaan') }}",
@@ -514,38 +585,17 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'status',
      className: "text-left"
      },
-     /*
-     { className: "text-center",
-        //"data": null,
-        "orderable": false,
-        "render": function ( data, type, row ) {
-        var html = ""
-          if ( row.status === 'NEW') {
-            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
-          } else if ( row.status === 'APPROVE_2') {
-            html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
-          } else if  ( row.status === 'APPROVE_1') {
-            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
-          } else {
-            html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
-          }
-          return html; 
-        }
-      },
-      */
-      {
+     {
       "data": null,
       "searchable": false,
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
         return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
-        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        <button name="closed_modal" id="${full.id_wp}" class="closed btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Closed Pekerjaan" > <i class="la la-check-circle"></i></button>`;
         }
-      },
-   ]
+     },
+  ]
   });
   vtable1.on('draw.dt', function () {
     vtable1.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -553,7 +603,16 @@ var vtable = $('#table-permohonan').DataTable({
       });
   }).draw();
 
-  var vtable2 = $('#table-selesai').DataTable({
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+      $($.fn.dataTable.tables(true)).DataTable()
+         .columns.adjust();
+   }); 
+
+});
+
+$(document).ready(function() {
+var vtable2 =  $('#table-selesai').DataTable({
+//var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
    processing: true,
    serverSide: true,
    scrollX: true,
@@ -565,7 +624,7 @@ var vtable = $('#table-permohonan').DataTable({
    columns:[
      { data: null, searchable:false, orderable:false, className: "text-center"},
      {
-     data: 'tgl_pengajuan',
+       data: 'tgl_pengajuan',
      },
      {
      data: 'nama_pekerjaan',
@@ -583,47 +642,29 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'status',
      className: "text-left"
      },
-     /*
-     { className: "text-center",
-        //"data": null,
-        "orderable": false,
-        "render": function ( data, type, row ) {
-        var html = ""
-          if ( row.status === 'NEW') {
-            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
-          } else if ( row.status === 'APPROVE_2') {
-            html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
-          } else if  ( row.status === 'APPROVE_1') {
-            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
-          } else {
-            html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
-          }
-          return html; 
-        }
-      },
-      */
-      {
+     {
       "data": null,
       "searchable": false,
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
-        <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
-        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>`;
         }
-      },
-   ]
+     },
+  ]
   });
-
   vtable2.on('draw.dt', function () {
     vtable2.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
       cell.innerHTML = i + 1;
       });
   }).draw();
- 
-  });
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+      $($.fn.dataTable.tables(true)).DataTable()
+         .columns.adjust();
+   }); 
+
+});
 
 
 $('#open_modal').click(function(){
@@ -718,6 +759,52 @@ $('#form_menu').on('submit', function(event){
               $('#form_edit')[0].reset();
               $('#approve_form').modal('hide');
               $('#table-permohonan').DataTable().ajax.reload();
+              $('#table-pengerjaan').DataTable().ajax.reload();
+              type_toast = 'success';
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              //toastr.options.onShown = function() { console.log('hello')};
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
+            }
+          }
+        })
+
+    });
+
+    $('#form_closing').on('submit', function(event){
+      event.preventDefault();
+
+      $.ajax({
+          url: "{{ url('wp/closing_form') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              $('#form_closing')[0].reset();
+              $('#closing_modal').modal('hide');
+              $('#table-pengerjaan').DataTable().ajax.reload();
+              $('#table-selesai').DataTable().ajax.reload();
               type_toast = 'success';
             }
             //$('#form_result').html(html);
@@ -793,6 +880,29 @@ $('#form_menu').on('submit', function(event){
           $('#action_button').val("Edit");
           $('#action').val("Edit");
           $('#approve_form').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
+    });
+
+    $(document).on('click', '.closed', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('wp/get_detail_wp/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#nama1').val(html.data[0].nama_pekerjaan);
+          $('#pelaksana1').val(html.data[0].pelaksana);
+          $('#id_wp1').val(html.data[0].id_wp);
+          $('#wp_desc1').val(html.data[0].wp_desc);
+          $('.modal-title').text("CLOSING PEKERJAAN");
+          $('#action_button').val("Edit");
+          $('#action').val("Edit");
+          $('#closing_modal').modal('show');
         },error: function (jqXhr, textStatus, errorMessage) { // error callback 
 					$('p').append('Error: ' + errorMessage);
 				}

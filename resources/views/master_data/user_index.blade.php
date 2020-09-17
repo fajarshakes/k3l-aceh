@@ -52,7 +52,7 @@
                 <div class="card-content">
                     
                     <div class="tab-content px-1 pt-1">
-                    <table id="datamenu" class="table table-striped table-bordered">
+                    <table id="datamenu" class="table nowrap table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>#</th>
@@ -241,6 +241,7 @@ $(document).ready(function() {
     processing: true,
     serverSide: true,
     paging: true,
+    scrollX: true,
     order: [[ 2, 'asc' ]],
     ajax:{
      url: "{{ route('user_datatables') }}",
