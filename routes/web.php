@@ -40,7 +40,6 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('getTemplateByUnit/{id}', 'Wp\WpController@getTemplateByUnit')->name('getTemplateByUnit');;
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');
-    Route::get('list_dashboard', 'Wp\WpController@list_dashboard')->name('list_dashboard');
     Route::get('list_permohonan', 'Wp\WpController@list_permohonan')->name('list_permohonan');
     Route::get('list_pengerjaan', 'Wp\WpController@list_pengerjaan')->name('list_pengerjaan');
     Route::get('list_selesai', 'Wp\WpController@list_selesai')->name('list_selesai');
@@ -49,7 +48,6 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::get('get_detail_wp', 'Wp\WpController@get_detail_wp')->name('get_detail_wp');;
     Route::get('get_detail_template', 'Wp\TemplateController@get_detail_template')->name('get_detail_template');
     Route::post('approve_form', 'Wp\WpController@approve_form')->name('approve_form');
-    Route::post('closing_form', 'Wp\WpController@closing_form')->name('closing_form');
     Route::post('delete_form', 'Wp\WpController@delete_form')->name('delete_form');
     Route::get('print_jsa/{id}', 'Wp\WpController@print_jsa')->name('print_jsa');
     Route::get('print_hirarc/{id}', 'Wp\WpController@print_hirarc')->name('print_hirarc');
@@ -134,7 +132,6 @@ Route::prefix('master')->group(function() {
     Route::post('menu_destroy', 'Master\UserController@menu_destroy')->name('menu_destroy');;
     Route::post('c_menu_destroy', 'Master\UserController@c_menu_destroy')->name('c_menu_destroy');
     Route::get('test', 'Master\UserController@test')->name('test');
-
     Route::get('get_group/{id}', 'Master\UserController@getGroupUser')->name('get_group');;
 
 
