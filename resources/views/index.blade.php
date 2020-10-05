@@ -19,11 +19,54 @@
                   </ul>
                 </div>
               </div>
-              <div class="card-content collapse show">
+              <div id="slider">
+              <div class="carousel slide" id="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active"><img src="https://placeimg.com/800/250/nature"/>
+                    <div class="carousel-caption">
+                      <h5>Slide #1</h5>
+                      <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
+                    </div>
+                  </div>
+                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=2"/>
+                    <div class="carousel-caption">
+                      <h5>Slide #2</h5>
+                      <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
+                    </div>
+                  </div>
+                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=3"/>
+                    <div class="carousel-caption">
+                      <h5>Slide #3</h5>
+                      <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
+                    </div>
+                  </div>
+                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=4"/>
+                    <div class="carousel-caption">
+                      <h5>Slide #4</h5>
+                      <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
+                    </div>
+                  </div>
+                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=5"/>
+                    <div class="carousel-caption">
+                      <h5>Slide #5</h5>
+                      <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
+                    </div>
+                  </div>
+                </div>
+                <ol class="carousel-indicators">
+                  <li data-slide-to="0"></li>
+                  <li data-slide-to="1"></li>
+                  <li data-slide-to="2"></li>
+                  <li data-slide-to="3"></li>
+                  <li data-slide-to="4"></li>
+                </ol><a class="carousel-control-prev" href="#" role="button"><span class="carousel-control-prev-icon" aria-hidden="true"><span class="sr-only">Previous</span></span></a><a class="carousel-control-next" href="#" role="button"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>
+              </div>
+              </div>
+              <!-- <div class="card-content collapse show">
                 <div class="card-body pt-0">
                   <iframe width="490" height="390" src="https://www.youtube.com/embed/hf6zoUOQq2w?list=PLrWpVAgJjrg2YInviHI133lburxsy6BtV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-xl-6 col-12">
