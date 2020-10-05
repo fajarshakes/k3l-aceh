@@ -49,6 +49,17 @@ class User extends Model
 
     return $value;
   }
+
+  public function getUser_byap(string $unitap, $group){
+
+    $value=DB::table('users')
+    ->orderBy('name', 'asc')
+    ->where('unitap', '=', $unitap)
+    ->where('group_id', '=', $group)
+    ->get(); 
+
+    return $value;
+  }
     
 }
 

@@ -8,6 +8,16 @@
       <div class="content-body">
         <!-- Revenue, Hit Rate & Deals -->
         <div class="row">
+          <div class="col-12 col-md-12">
+            <div class="card">
+              <div class="card-content">
+              <img align="center" width="500px" alt="SAMAN LOGO" src="{{ url('images/app_images/logo_saman_big.png') }}">
+              <img align="center" height="129px" alt="SAMAN LOGO" src="{{ url('images/app_images/biet_bereh.png') }}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-xl-6 col-12">
             <div class="card">
               <div class="card-header">
@@ -22,31 +32,31 @@
               <div id="slider">
               <div class="carousel slide" id="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item active"><img src="https://placeimg.com/800/250/nature"/>
+                  <div class="carousel-item active"><img src="#https://placeimg.com/800/250/nature"/>
                     <div class="carousel-caption">
                       <h5>Slide #1</h5>
                       <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
                     </div>
                   </div>
-                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=2"/>
+                  <div class="carousel-item"><img src="#https://placeimg.com/800/250/nature?t=2"/>
                     <div class="carousel-caption">
                       <h5>Slide #2</h5>
                       <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
                     </div>
                   </div>
-                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=3"/>
+                  <div class="carousel-item"><img src="#https://placeimg.com/800/250/nature?t=3"/>
                     <div class="carousel-caption">
                       <h5>Slide #3</h5>
                       <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
                     </div>
                   </div>
-                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=4"/>
+                  <div class="carousel-item"><img src="#https://placeimg.com/800/250/nature?t=4"/>
                     <div class="carousel-caption">
                       <h5>Slide #4</h5>
                       <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>
                     </div>
                   </div>
-                  <div class="carousel-item"><img src="https://placeimg.com/800/250/nature?t=5"/>
+                  <div class="carousel-item"><img src="#https://placeimg.com/800/250/nature?t=5"/>
                     <div class="carousel-caption">
                       <h5>Slide #5</h5>
                       <p>Image Credit <a href="https://placeimg.com" target="_blank">placeimg.com</a></p>

@@ -60,7 +60,7 @@ class Config extends Model
     return $value;
   }
 
-  public function getMenu(string $group_id){
+  public function getMenu($group_id){
 
     $value=DB::table('menu_app')
     ->join('menu_akses', 'menu_app.id', '=', 'menu_akses.menu_id')
@@ -73,7 +73,7 @@ class Config extends Model
     return $value;
   }
 
-  public function getMenu_l2(string $group_id){
+  public function getMenu_l2($group_id){
 
     $value=DB::table('menu_app')
     ->join('menu_akses', 'menu_app.id', '=', 'menu_akses.menu_id')

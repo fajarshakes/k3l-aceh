@@ -15,7 +15,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">List Permit</a>
                 </li>
-                <li class="breadcrumb-item active"> Submit Permit
+                <li class="breadcrumb-item active"> Edit Permit
                 </li>
               </ol>
             </div>
@@ -39,7 +39,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Tambah Working Permit</h4>
+                  <h4 class="card-title">Edit Working Permit</h4>
                   <a class="heading-elements-toggle"><i class="la la-ellipsis-h font-medium-3"></i></a>
                   <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -63,9 +63,8 @@
                             <div class="form-group">
                               <label for="location2">LOKASI PEKERJAAN :</label>
                               <select class="jui-select-default form-control required" id="unit_id" name="unit_id">
-                                <option value=""> - PILIH LOKASI PEKERJAAN -</option>
                                 @foreach($unit_l3 as $list_l3)
-                                  <option value="{{ $list_l3->UL_CODE }}">{{ $list_l3->UL_CODE .' - '. $list_l3->UNIT_NAME }}</option>
+                                  <option value="{{$list_l3->UL_CODE}}" {{ $detail->ul_code == $list_l3->UL_CODE ? 'selected' : '' }} >{{ $list_l3->UL_CODE .' - '. $list_l3->UNIT_NAME }}</option>
                                 @endforeach
                               </select>
                             </div>
@@ -73,21 +72,27 @@
                             <div class="form-group">
                               <label for="location2">SUPERVISOR UP / UL :</label>
                               <select class="form-control" id="supervisor" name="supervisor">
-                                <option value=""> - PILIH SPV PENGAWAS -</option>
+                              @if (!empty($detail))
+                                <option value="{{ $detail->supervisor }}">{{ $detail->supervisor }}</option>
+                              @endif
                               </select>
                             </div>
 
                             <div class="form-group">
                               <label for="location2">PEJABAT PELAKSANA K3L :</label>
                               <select class="form-control" id="pejabat" name="pejabat">
-                                <option value=""> - PILIH PELAKSANA K3 -</option>
+                              @if (!empty($detail))
+                                <option value="{{ $detail->pejabat_k3l }}">{{ $detail->pejabat_k3l }}</option>
+                              @endif
                               </select>
                             </div>
                             
                             <div class="form-group">
                               <label for="location2">MANAGER BAGIAN / UL :</label>
                               <select class="form-control" id="manager" name="manager">
-                                <option value=""> - PILIH MANAGER -</option>
+                              @if (!empty($detail))
+                                <option value="{{ $detail->manager }}">{{ $detail->manager }}</option>
+                              @endif
                               </select>
                             </div>
                          
@@ -201,12 +206,14 @@
                               </tr>
                             </thead>
                             <tbody id="konten-pelaksana">
+                            @foreach($pelaksana_kerja as $pelaksana)
                               <tr>
-                                <td><input type="text" name="nama_pelaksana[]" class="form-control"></td>
-                                <td><input type="text" name="nip_pelaksana[]" class="form-control"></td>
-                                <td><input type="text" name="jabatan_pelaksana[]" class="form-control"></td>
+                                <td><input type="text" name="nama_pelaksana[]" class="form-control" value="{{$pelaksana ? $pelaksana->nama_pelaksana : ''}}"></td>
+                                <td><input type="text" name="nip_pelaksana[]" class="form-control" value="{{$pelaksana ? $pelaksana->personal_no : ''}}"></td>
+                                <td><input type="text" name="jabatan_pelaksana[]" class="form-control" value="{{$pelaksana ? $pelaksana->jabatan_pelaksana : ''}}"></td>
                                 <td class="text-center" style="vertical-align:middle;"></td>
                               </tr>
+                            @endforeach
                             </tbody>
                           </table>
                           </div>
@@ -385,29 +392,18 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Nama Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="nama_pekerjaan" value="{{$detail ? $detail->nama_template : ''}}">
+                              <input type="text" class="form-control" name="nama_pekerjaan" value="{{$detail ? $detail->nama_pekerjaan : ''}}">
                             </div>
-                            @if(Auth::user()->group_id == 7)
+
                             <div class="form-group">
                               <label for="eventName2">Pelaksana / Perusahaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="pelaksana" value="{{ Auth::user()->name ? Auth::user()->name : ''}}" readonly>
-                              <input type="hidden" name="vendor_id" value="{{ Auth::user()->pers_no ? Auth::user()->pers_no : ''}}" readonly>
+                              <input type="text" class="form-control" name="pelaksana" value="{{ $detail ? $detail->pelaksana : '' }}" readonly>
+                              <input type="hidden" name="vendor_id" value="{{ $detail ? $detail->id_pelaksana : '' }}" readonly>
                             </div>
-                            @else
-                            <div class="form-group">
-                              <label for="eventName2">Pelaksana / Perusahaan<span style="color:red">*</span></label>
-                              <select id="vendor_id" name="vendor_id" class="form-control">
-                                <option value="none" selected="" disabled="">Select Vendor</option>
-                                @foreach($getVendor as $vendor)
-                                  <option value="{{ $vendor->ID }}">{{ $vendor->VENDOR_NAME }}</option>
-                                @endforeach
-                              </select>
-                              <input type="hidden" id="vendor" name="pelaksana" readonly>
-                            </div>
-                            @endif
+
                             <div class="form-group">
                               <label for="eventName2">Alamat</label>
-                              <textarea class="form-control required" id="alamat" name="alamat">{{ $getDetVendor ? $getDetVendor->ADDRESS : '' }}</textarea>
+                              <textarea class="form-control required" id="alamat" name="alamat">{{ $detail ? $detail->alamat : '' }}</textarea>
                             </div>
                             
                             <div class="form-group">
@@ -415,13 +411,13 @@
                                 <div class="row">
                                   <div class="col-md-6">
                                     <div class="d-inline-block custom-control custom-radio">
-                                      <input type="radio" name="status_pegawai" value="eksternal" class="custom-control-input" id="staffing2">
+                                      <input type="radio" name="status_pegawai" value="eksternal" class="custom-control-input" id="staffing2" {{ $detail->status_pegawai == 'eksternal' ? 'checked' : '' }}>
                                       <label class="custom-control-label" for="staffing2">Eksternal</label>
                                     </div>
                                   </div>
                                   <div class="col-md-6">
                                     <div class="d-inline-block custom-control custom-radio">
-                                      <input type="radio" name="status_pegawai" value="internal" class="custom-control-input" id="catering2">
+                                      <input type="radio" name="status_pegawai" value="internal" class="custom-control-input" id="catering2" {{ $detail->status_pegawai == 'eksternal' ? 'internal' : '' }}>
                                       <label class="custom-control-label" for="catering2">Internal</label>
                                     </div>
                                   </div>
@@ -437,15 +433,15 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Nama Penanggung Jawab <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pic_name" name="nama_pj" readonly value="{{ $getDetVendor ? $getDetVendor->PIC_NAME : '' }}">
+                              <input type="text" class="form-control" id="pic_name" name="nama_pj" readonly value="{{ $detail ? $detail->nama_pj : '' }}">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Jabatan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pic_position" name="jabatan" readonly value="{{ $getDetVendor ? $getDetVendor->PIC_POSITION : '' }}">
+                              <input type="text" class="form-control" id="pic_position" name="jabatan" readonly value="{{ $detail ? $detail->jabatan : '' }}">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">No Telepon / HP <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" id="pic_contact" name="no_telepon" readonly value="{{ $getDetVendor ? $getDetVendor->PIC_PHONE : '' }}">
+                              <input type="text" class="form-control" id="pic_contact" name="no_telepon" readonly value="{{ $detail ? $detail->no_telepon : '' }}">
                             </div>
 
                             
@@ -465,7 +461,7 @@
                             <div class="form-group">
                               <label>Tanggal pengajuan <span style="color:red">*</span></label>
                               <div class='input-group'>
-                                <input type="date" min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control" name="tgl_pengajuan" />
+                                <input type="date" class="form-control" name="tgl_pengajuan" readonly value="{{ $detail ? $detail->tgl_pengajuan : '' }}"/>
                                 <!-- <span class="input-group-addon">
                                   <span class="ft-calendar"></span>
                                 </span> -->
@@ -479,13 +475,13 @@
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="grounding" value="ya" class="custom-control-input" id="staffing4">
+                                    <input type="radio" name="grounding" value="ya" class="custom-control-input" id="staffing4" {{ $detail->grounding == 'ya' ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="staffing4">Ya</label>
                                   </div>
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="grounding" value="tidak" class="custom-control-input" id="catering4">
+                                    <input type="radio" name="grounding" value="tidak" class="custom-control-input" id="catering4" {{ $detail->grounding == 'tidak' ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="catering4">Tidak</label>
                                   </div>
                                 </div>
@@ -496,13 +492,13 @@
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="pemadaman" value="ya" class="custom-control-input" id="staffing5">
+                                    <input type="radio" name="pemadaman" value="ya" class="custom-control-input" id="staffing5" {{ $detail->pemadaman == 'ya' ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="staffing5">Ya</label>
                                   </div>
                                 </div>
                                 <div class="col-md-3">
                                   <div class="d-inline-block custom-control custom-radio">
-                                    <input type="radio" name="pemadaman" value="tidak" class="custom-control-input" id="catering5">
+                                    <input type="radio" name="pemadaman" value="tidak" class="custom-control-input" id="catering5" {{ $detail->pemadaman == 'tidak' ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="catering5">Tidak</label>
                                   </div>
                                 </div>
@@ -512,17 +508,17 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="eventName2">Detail Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="detail_pekerjaan" value="{{$detail ? $detail->nama_template : ''}}">
+                              <input type="text" class="form-control" name="detail_pekerjaan" value="{{$detail ? $detail->detail_pekerjaan : ''}}">
                             </div>
                             <div class="form-group">
                               <label for="eventName2">Lokasi Pekerjaan <span style="color:red">*</span></label>
-                              <input type="text" class="form-control" name="lokasi_pekerjaan">
+                              <input type="text" class="form-control" name="lokasi_pekerjaan" value="{{$detail ? $detail->lokasi_pekerjaan : ''}}">
                             </div>
                           </div>
                           <div class="col-md-12">
                             <div class="form-group">
                               <label>Peralatan Yang Perlu Dipadamkan <span style="color:red">*</span></label>
-                              <input type='text' class="form-control" name="peralatan_dipadamkan">
+                              <input type='text' class="form-control" name="peralatan_dipadamkan" value="{{$detail ? $detail->peralatan_dipadamkan : ''}}">
                             </div>
                           </div>
                           <div class="col-md-12">
@@ -530,10 +526,10 @@
                               <label>Pengawas Pekerjaan <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control" name="pengawas_pekerjaan">
+                                  <input type='text' class="form-control" name="pengawas_pekerjaan" value="{{$detail ? $detail->pengawas_pekerjaan : ''}}">
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control" name="no_pengawas_pekerjaan" placeholder="No. Telp">
+                                  <input type='text' class="form-control" name="no_pengawas_pekerjaan" placeholder="No. Telp" value="{{$detail ? $detail->no_pengawas_pekerjaan : ''}}">
                                 </div>
                               </div>
                             </div>
@@ -543,10 +539,10 @@
                               <label>Pengawas K3 <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control" name="pengawas_k3l">
+                                  <input type='text' class="form-control" name="pengawas_k3l" value="{{$detail ? $detail->pengawas_k3l : ''}}">
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='text' class="form-control" name="no_pengawas_k3" placeholder="No. Telp">
+                                  <input type='text' class="form-control" name="no_pengawas_k3" placeholder="No. Telp" value="{{$detail ? $detail->no_pengawas_k3 : ''}}">
                                 </div>
                               </div>
                             </div>
@@ -562,10 +558,10 @@
                               <label>Tanggal Mulai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_mulai"/>
+                                  <input type='date' class="form-control datetime" name="tgl_mulai" readonly value="{{ $detail ? $detail->tgl_mulai : '' }}"/>
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='time' class="form-control" name="jam_mulai">
+                                  <input type='time' class="form-control" name="jam_mulai" value="{{ $detail ? $detail->jam_mulai : '' }}">
                                 </div>
                               </div>
                             </div>
@@ -575,10 +571,10 @@
                               <label>Tanggal Selesai <span style="color:red">*</span></label>
                               <div class="row">
                                 <div class="col-md-6">
-                                  <input type='date' min="{{ $status == 'NORMAL' ? date('Y-m-d') : '' }}" class="form-control datetime" name="tgl_selesai"/>
+                                  <input type='date' class="form-control datetime" name="tgl_selesai"  readonly value="{{ $detail ? $detail->tgl_selesai : '' }}"/>
                                 </div>
                                 <div class="col-md-6">
-                                  <input type='time' class="form-control" name="jam_selesai">
+                                  <input type='time' class="form-control" name="jam_selesai" value="{{ $detail ? $detail->jam_selesai : '' }}">
                                 </div>
                               </div>
                             </div>
@@ -591,55 +587,55 @@
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan LBS/Recloser/FDI" class="custom-control-input" id="item51">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan LBS/Recloser/FDI" class="custom-control-input" id="item51" {{ in_array('Pemasangan LBS/Recloser/FDI', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item51">Pemasangan LBS/Recloser/FDI</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Kubikel 20 KV" class="custom-control-input" id="item52">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Kubikel 20 KV" class="custom-control-input" id="item52" {{ in_array('Pemasangan Kubikel 20 KV', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item52">Pemasangan Kubikel 20 KV</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan Kubikel" class="custom-control-input" id="item53">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan Kubikel" class="custom-control-input" id="item53" {{ in_array('Pemeliharaan Kubikel', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item53">Pemeliharaan Kubikel</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pengujian Relay Proteksi" class="custom-control-input" id="item54">
+                              <input type="checkbox" name="klasifikasi[]" value="Pengujian Relay Proteksi" class="custom-control-input" id="item54" {{ in_array('Pengujian Relay Proteksi', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item54">Pengujian Relay Proteksi</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Penggantian Relay Proteksi" class="custom-control-input" id="item61">
+                              <input type="checkbox" name="klasifikasi[]" value="Penggantian Relay Proteksi" class="custom-control-input" id="item61" {{ in_array('Penggantian Relay Proteksi', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item61">Penggantian Relay Proteksi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Power Meter" class="custom-control-input" id="item62">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Power Meter" class="custom-control-input" id="item62" {{ in_array('Pemasangan Power Meter', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item62">Pemasangan Power Meter</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan KWH Meter" class="custom-control-input" id="item63">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan KWH Meter" class="custom-control-input" id="item63" {{ in_array('Pemasangan KWH Meter', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item63">Pemasangan KWH Meter</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan RTU GH/GI" class="custom-control-input" id="item64">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan RTU GH/GI" class="custom-control-input" id="item64" {{ in_array('Pemeliharaan RTU GH/GI', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item64">Pemeliharaan RTU GH/GI</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Catu Daya" class="custom-control-input" id="item71">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Catu Daya" class="custom-control-input" id="item71" {{ in_array('Pemasangan Catu Daya', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item71">Pemasangan Catu Daya</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Radio Komunikasi" class="custom-control-input" id="item72">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemasangan Radio Komunikasi" class="custom-control-input" id="item72" {{ in_array('Pemasangan Radio Komunikasi', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item72">Pemasangan Radio Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan Radio Komunikasi" class="custom-control-input" id="item73">
+                              <input type="checkbox" name="klasifikasi[]" value="Pemeliharaan Radio Komunikasi" class="custom-control-input" id="item73" {{ in_array('Pemeliharaan Radio Komunikasi', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item73">Pemeliharaan Radio Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="klasifikasi[]" value="Sipil" class="custom-control-input" id="item74">
+                              <input type="checkbox" name="klasifikasi[]" value="Sipil" class="custom-control-input" id="item74" {{ in_array('Sipil', $klasifikasi) ? "checked" : "" }}>
                               <label class="custom-control-label" for="item74">Sipil</label>
                             </div>
                           </div>
@@ -660,43 +656,43 @@
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pemasangan dan Penggantian Cubicle 20 KV" class="custom-control-input" id="itm1">
+                              <input type="checkbox" name="prosedur[]" value="Pemasangan dan Penggantian Cubicle 20 KV" class="custom-control-input" id="itm1" {{ in_array('Pemasangan dan Penggantian Cubicle 20 KV', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm1">Pemasangan dan Penggantian Cubicle 20 KV</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan RTU dan Peripheral" class="custom-control-input" id="itm2">
+                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan RTU dan Peripheral" class="custom-control-input" id="itm2" {{ in_array('Pemeliharaan RTU dan Peripheral', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm2">Pemeliharaan RTU dan Peripheral</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Perluasan Gardu Hubung 20 KV" class="custom-control-input" id="itm3">
+                              <input type="checkbox" name="prosedur[]" value="Perluasan Gardu Hubung 20 KV" class="custom-control-input" id="itm3" {{ in_array('Perluasan Gardu Hubung 20 KV', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm3">Perluasan Gardu Hubung 20 KV</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan Cubicle Gardu Hubung 20 KV" class="custom-control-input" id="itm4">
+                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan Cubicle Gardu Hubung 20 KV" class="custom-control-input" id="itm4" {{ in_array('Pemeliharaan Cubicle Gardu Hubung 20 KV', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm4">Pemeliharaan Cubicle Gardu Hubung 20 KV</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pengujian Control Scada" class="custom-control-input" id="itm5">
+                              <input type="checkbox" name="prosedur[]" value="Pengujian Control Scada" class="custom-control-input" id="itm5" {{ in_array('Pengujian Control Scada', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm5">Pengujian Control Scada</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pengujian Alat" class="custom-control-input" id="itm6">
+                              <input type="checkbox" name="prosedur[]" value="Pengujian Alat" class="custom-control-input" id="itm6" {{ in_array('Pengujian Alat', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm6">Pengujian Alat</label>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pemasangan LBS dan Recloser" class="custom-control-input" id="itm7">
+                              <input type="checkbox" name="prosedur[]" value="Pemasangan LBS dan Recloser" class="custom-control-input" id="itm7" {{ in_array('Pemasangan LBS dan Recloser', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm7">Pemasangan LBS dan Recloser</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan Repeater Komunikasi" class="custom-control-input" id="itm8">
+                              <input type="checkbox" name="prosedur[]" value="Pemeliharaan Repeater Komunikasi" class="custom-control-input" id="itm8" {{ in_array('Pemeliharaan Repeater Komunikasi', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm8">Pemeliharaan Repeater Komunikasi</label>
                             </div>
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
-                              <input type="checkbox" name="prosedur[]" value="Pemasangan Proteksi" class="custom-control-input" id="itm9">
+                              <input type="checkbox" name="prosedur[]" value="Pemasangan Proteksi" class="custom-control-input" id="itm9" {{ in_array('Pemasangan Proteksi', $prosedur) ? "checked" : "" }}>
                               <label class="custom-control-label" for="itm9">Pemasangan Proteksi</label>
                             </div>
                           </div>
@@ -719,32 +715,53 @@
                             <div class="form-group">
                               <label>BPJS Kesehatan dan Tenaga Kerja</label>
                               <input type='file' name="bpjs" class="form-control">
+                              @if (!empty($detail->file_bpjs))
+                                <a target="_blank" href="{{ URL::to('/') }}/files/working_permit/{{ $detail->tahun }}/{{ $detail->file_bpjs }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> File BPJS</a>
+                              @endif
                             </div>
                             <div class="form-group">
                               <label>Sertifikat Kompetensi Pekerja <span style="color:red">*</span></label>
                               <input type='file' name="sertifikat_kompetensi" class="form-control">
+                              @if (!empty($detail->file_sertifikat_kompetensi))
+                                <a target="_blank" href="{{ URL::to('/') }}/files/working_permit/{{ $detail->tahun }}/{{ $detail->file_sertifikat_kompetensi }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> File BPJS</a>
+                              @endif
                             </div>
                             <div class="form-group">
                               <label>Tenaga Ahli K3 <span style="color:red">*</span></label>
                               <input type='file' name="tenaga_ahli_k3" class="form-control">
+                              @if (!empty($detail->file_ak3))
+                                <a target="_blank" href="{{ URL::to('/') }}/files/working_permit/{{ $detail->tahun }}/{{ $detail->file_ak3 }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> File BPJS</a>
+                              @endif
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
                               <label>Single Line Diagram</label>
                               <input type='file' name="single_line_diagram" class="form-control">
+                              @if (!empty($detail->file_singleline))
+                                <a target="_blank" href="{{ URL::to('/') }}/files/working_permit/{{ $detail->tahun }}/{{ $detail->file_singleline }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> File BPJS</a>
+                              @endif
                             </div>
                             <div class="form-group">
                               <label>Surat Penunjukan Pengawas dan Pelaksana Pekerjaan <span style="color:red">*</span></label>
                               <input type='file' name="surat_penunjukan" class="form-control">
+                              @if (!empty($detail->file_sk_pengawas))
+                                <a target="_blank" href="{{ URL::to('/') }}/files/working_permit/{{ $detail->tahun }}/{{ $detail->file_sk_pengawas }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> File BPJS</a>
+                              @endif
                             </div>
                             <div class="form-group">
                               <label>Daftar Peralatan Kerja dan APD yang Digunakan <span style="color:red">*</span></label>
                               <input type='file' name="daftar_peralatan" class="form-control">
+                              @if (!empty($detail->file_list_peralatan))
+                                <a target="_blank" href="{{ URL::to('/') }}/files/working_permit/{{ $detail->tahun }}/{{ $detail->file_list_peralatan }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> File BPJS</a>
+                              @endif
                             </div>
                             <div class="form-group">
                               <label>Foto Lokasi Kerja</label>
                               <input type='file' name="foto_lokasi_kerja" class="form-control">
+                              @if (!empty($detail->file_foto_kerja))
+                                <a target="_blank" href="{{ URL::to('/') }}/files/working_permit/{{ $detail->tahun }}/{{ $detail->file_foto_kerja }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> File BPJS</a>
+                              @endif
                             </div>
                           </div>  
                         </div>
@@ -757,9 +774,10 @@
                         <div class="col-md-12">
                           <p class="success text-center"><i class="la la-check-circle" style="font-size:60px;"></i></p>
                           <p class="text-center text-success">Jika semua data sudah terisi, silahkan klik tombol Simpan</p>
+                          <input type="hidden" name="idwp" value="{{ $detail->id_wp }}">
                         </div>
                         <div class="col-md-12 text-center">
-                          <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> SUBMIT PERMIT</button>
+                          <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> UPDATE PERMIT</button>
                         </div>
                       </fieldset>
                     </form>
@@ -891,7 +909,7 @@ $('#form_menu').on('submit', function(event){
       event.preventDefault();
       
       $.ajax({
-          url:"{{ route('wp_store') }}",
+          url:"{{ route('wp_update') }}",
           method:"POST",
           data: new FormData(this),
           contentType: false,
@@ -920,12 +938,11 @@ $('#form_menu').on('submit', function(event){
               type_toast = 'success';
               $('#form_menu')[0].reset();
               setTimeout(function() {
-                window.location.href = '{{ $redirect_to }}';
+                window.location.href = '/wp/list-permit';
               }, 1000);
             }
             //$('#form_result').html(html);
             if(type_toast == 'error'){
-              $('#loading').html('');
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
             } else if (type_toast == 'success') {
               toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});

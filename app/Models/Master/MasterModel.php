@@ -26,6 +26,16 @@ class MasterModel extends Model
       return $value;
     }
 
+    public function getRecepient(string $name){
+
+      $value=DB::table('users')
+      ->where('name', '=', $name)
+      ->where('status', '=', 'ACTIVE')
+      ->first(); 
+  
+      return $value;
+    }
+
 }
 
 

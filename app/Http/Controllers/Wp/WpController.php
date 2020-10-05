@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Master;
+use App\Models\Master\MasterModel;
 use App\Models\Wp\WpModel;
 use App\Models\Master\User;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 use App\PeralatanKeselamatan;
-
+use Mail; 
 
 class WpController extends BaseController
 {
@@ -29,6 +30,7 @@ class WpController extends BaseController
         $this->middleware('auth');
         $this->wpModel     = new WpModel();
         $this->UserModel   = new User();
+        $this->ModelMaster = new MasterModel();
     }
     
     public function dashboard(Request $request)
@@ -82,30 +84,20 @@ class WpController extends BaseController
         
     }
 
+    public function vendor(Request $request)
+    {
+        $data = [          
+            'unitType'          => $this->wpModel->getUnitType(),
+            'unitList'          => $this->wpModel->getUnit(),        
+        ];
+        return view('wp/vendor', $data);
+        
+    }
+
     public function detail(Request $request, $id_wp)
     {
         $unitData  = $this->wpModel->getUnitType();
-        $unitList  = $this->wpModel->getUnit();
-        $masterPeralatan = ['Sarung Tangan Katun', 'Sarung Tangan Karet', 'Radio Telekomunikasi', 
-                            'Sepatu Keselamatan', 'Pelampung / Life Vest', 'Tabung pernafasan',
-                            'Kacamata', 'Sarung tangan karet', 'Earplug', 'Sarung tangan 20kV',
-                            'Lain - lain'];
-        
-        $masterKeselamatan = ['Kotak P3K', 'Rambu Keselamatan', 'LOTO (lock out tag out)', 
-                            'Radio Telekomunikasi', 'Lain - lain'];
-
-        $masterKeselamatan = ['Kotak P3K', 'Rambu Keselamatan', 'LOTO (lock out tag out)', 
-                            'Radio Telekomunikasi', 'Lain - lain'];
-
-        $Klasifikasi = ['Pemasangan LBS/Recloser/FDI', 'Pemasangan kubikel 20KV', 'Pemeliharaan Kubikel', 
-                        'Pengujian Relay Proteksi', 'Penggantian Relay Proteksi', 
-                        'Pemasangan Power Meter', 'Pemasangan KWH Meter', 'Pemeliharaan RTU GH/GI', 
-                        'Pemasangan Catu Daya', 'Pemasangan Radio Komunikasi', 'Pemeliharaan Radio Komunikasi', 'Sipil'];
-
-        $Prosedur   =  ['Pemasangan dan Penggantian Cubicle 20 KV', 'Pemeliharaan Cubicle Gardu Hubung 20 KV', 'Pemasangan LBS dan RECLOSER', 
-                        'Pemeliharaan RTU dan Peripheral', 'Pengujian Control Scada', 'Pemeliharaan Repeater Komunikasi',
-                        'Perluasan Gardu Hubung 20 KV', 'Pengujian Alat', 'Pemasangan Proteksi'];                   
-
+        $unitList  = $this->wpModel->getUnit();                 
         $data = [
             'detailWp'          => $this->wpModel->getDetailWp($id_wp),
             'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_wp),
@@ -115,27 +107,11 @@ class WpController extends BaseController
             'peralatan1'        => array($this->wpModel->getPeralatan($id_wp)),
             'klasifikasi'       => collect($this->wpModel->getKlasifikasi($id_wp)->pluck('description'))->toArray(),
             'klasifikasi1'      => array($this->wpModel->getKlasifikasi($id_wp)),
-            // 'klasifikasi'       => $this->wpModel->getKlasifikasi($id_wp),
-            // 'prosedur'          => $this->wpModel->getProsedur($id_wp),
             'prosedur'          => collect($this->wpModel->getProsedur($id_wp)->pluck('description'))->toArray(),
             'prosedur1'         => array($this->wpModel->getProsedur($id_wp)),
-            'mperalatan'        => $masterPeralatan,
-            'mkesalamatan'      => $masterKeselamatan,
-            'mklasifikasi'      => $Klasifikasi,
-            'mprosedur'         => $Prosedur,
-            'arraylist'         => array("Sepatu Keselamatan","on","Helm","Earplug","Sarung Tangan 20KV","Kotak P3K","Radio Telekomunikasi", "Pelampung / Life Vest","Tabung Pernafasan", 
-                                        "Pemadam Api (APAR dll)", "LOTO (lock out tag out)",
-                                        "Pemasangan LBS/Recloser/FDI","on","Pemasangan kubikel 20KV","Pemeliharaan Kubikel","Pengujian Relay Proteksi","Pemasangan Power Meter","Pemasangan KWH Meter", "Pemeliharaan RTU GH/GI","Pemasangan Catu Daya", 
-                                        "Pemasangan Radio Komunikasi", "Pemeliharaan Radio Komunikasi","Sipil","Penggantian Relay Proteksi",
-                                        "Pemasangan dan Penggantian Cubicle 20 KV", "Pemeliharaan Cubicle Gardu Hub", "Pemasangan LBS dan Recloser", "Pemeliharaan RTU dan Peripheral",
-                                        "Pengujian Control Scada", "Pemeliharaan Repeater Komunikasi", "Perluasan Gardu Hubung 20 KV","Pengujian Alat","Pemasangan Proteksi"),
-            //'tempStatus'      => $sales->CheckTempId($temp_id),
-            //'group'           => $v,
          ];
-         
         
         return view('wp/detail', $data);
-        
     }
 
     public function get_detail_wp()
@@ -291,6 +267,31 @@ class WpController extends BaseController
     return response()->json(['success' => 'Unit dipilih : '.$unit.'</br> Template : '.$template.'</br> Status Pekerjaan : '.$status,]);
 
     }
+
+    public function edit_form(Request $request)
+    {
+    
+        $idwp       = $request->id_wp;
+        $unitap_wp  = $request->ul_code;
+        $unitap     = Auth::user()->unitap;
+        $user_group = Auth::user()->group_id;
+        $edit_role  = array('3','6','8');
+
+        if($unitap_wp != $unitap)
+            {
+                return response()->json(['errors' => 'Diluar otoritas unit.!']);
+            }
+        else if (!in_array($user_group, $edit_role))
+            {
+                return response()->json(['errors' => 'Diluar otoritas edit.!']);
+            }
+
+        // For a route with the following URI: profile/{id}
+        //return redirect()->route('edit_wp', ['id'=>$idwp]);
+        //return view('wp/create/', $idwp);
+        return response()->json(['success' => 'ID WP : '.$idwp.'</br> UNIT : '.$unitap_wp,]);
+
+    }
     
     public function create(Request $request)
     {
@@ -298,10 +299,11 @@ class WpController extends BaseController
         $id_template = Session::get('sel_template');
         $status = Session::get('sel_status');
         $group_id = Auth::user()->group_id;
+        $pers_no = Auth::user()->pers_no;
 
         if ($group_id == 7){
             $redirect_to = '/wp/vendor-permit';
-            $detVendor   = $this->Master->getVendorDet(Auth::user()->pers_no);
+            $detVendor   = $this->ModelMaster->getVendorDet($pers_no);
         } else {
             $redirect_to = '/wp/list-permit';
             $detVendor   = '';
@@ -327,6 +329,35 @@ class WpController extends BaseController
         
     }
 
+    public function edit_wp(Request $request, $idwp)
+    {
+        $detail_wp = $this->wpModel->getDetailWp($idwp);
+        
+        $unit = $detail_wp->unit;
+        $group_id = Auth::user()->group_id;
+        $pers_no = Auth::user()->pers_no;
+
+        $data = [
+            'getManager'  => $this->UserModel->getUser($unit, 4),
+            'getVendor'   => $this->wpModel->getVendor(Auth::user()->comp_code),
+            'getSpv'      => $this->UserModel->getUser($unit, 5),
+            'getPj'       => $this->UserModel->getUser($unit, 6),
+            'unit_l3'     => $this->wpModel->getUnit_l3($unit),
+            'up_name'     => $this->wpModel->getUnitName($unit)->UNIT_NAME,
+            'detail'      => $this->wpModel->getDetailWp($idwp),
+            'tbl_hirarc'  => $this->wpModel->getHirarc($idwp),
+            'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($idwp),
+            'tbl_jsa'     => $this->wpModel->getJsa($idwp),
+            'peralatan'   => collect($this->wpModel->getPeralatan($idwp)->pluck('description'))->toArray(),
+            'klasifikasi' => collect($this->wpModel->getKlasifikasi($idwp)->pluck('description'))->toArray(),
+            'prosedur'    => collect($this->wpModel->getProsedur($idwp)->pluck('description'))->toArray(),
+
+        ];
+        
+        return view('wp/edit', $data);
+        
+    }
+
     public function test(Request $request)
     {   
         if (Auth::user()->unit == '6101'){
@@ -335,60 +366,134 @@ class WpController extends BaseController
             $unit = Auth::user()->unit;
         }
         $id = '6112200001';
-        $unit = $this->wpModel->getDetailWp($id)->unit;
+        //$unit = $this->wpModel->getDetailWp($id)->unit;
         //$getList = $this->wpModel->getListOnWork($unit);
         
-        return response()->json($unit);
+        $getwp = $this->wpModel->getDetailWp(6116200001);
+        //$getRecepient  = $this->ModelMaster->getRecepient('ENDRA');
+        
+        //return response()->json($getRecepient->email);
+        return response()->json($getwp);
         //return $unit;
     }
     
     public function wp_store(Request $request)
     {
+        $rules = array(
+            'unit_id' =>  'required',
+            'supervisor' =>  'required',
+            'pejabat' =>  'required',
+            'manager' =>  'required',
+            'status_pegawai' =>  'required',
+            'tgl_pengajuan' =>  'required',
+            'peralatan_dipadamkan' => 'required',
+            'pengawas_pekerjaan' => 'required',
+            'pengawas_k3l' => 'required',
+            'tgl_mulai'   =>  'required',
+            'jam_mulai'   =>  'required',
+            'tgl_selesai'   =>  'required',
+            'jam_selesai'   =>  'required',
+            'klasifikasi'   =>  'required',
+            'prosedur'   =>  'required',
+            'nama_pelaksana' =>  'required',
+
+            //files
+            'sertifikat_kompetensi' => 'required|mimes:pdf|max:10000',
+            'tenaga_ahli_k3' => 'required|mimes:pdf|max:10000',
+            'surat_penunjukan' => 'required|mimes:pdf|max:10000',
+            'daftar_peralatan' => 'required|mimes:pdf|max:10000',
+        );
+        $messages = [
+            'unit_id.required' => 'Unit Harus dipilih.!',
+            'supervisor.required' => 'SPV Harus dipilih.!',
+            'pejabat.required' => 'PJ K3 Harus dipilih.!',
+            'manager.required' => 'Manager Harus dipilih.!',
+            'status_pegawai.required' => 'Status Pelaksana Harus dipilih.!',
+            'tgl_pengajuan.required' => 'Tgl Pengajuan harus diisi.!',
+            'peralatan_dipadamkan.required' => 'Alat Padam harus diisi.!',
+            'pengawas_pekerjaan.required' => 'Pengawas harus diisi.!',
+            'pengawas_k3l.required' => 'Pengawas K3 harus diisi.!',
+            'tgl_mulai.required' => 'Tgl Mulai harus diisi.!',
+            'jam_mulai.required' => 'Jam Mulai harus diisi.!',
+            'tgl_selesai.required' => 'Jam Selesai harus diisi.!',
+            'jam_selesai.required' => 'Jam Selesai harus diisi.!',
+            'klasifikasi.required' => 'Klasifikasi harus dipilih.!',
+            'prosedur.required' => 'Prosedur harus dipilih.!',
+            'nama_pelaksana.required' => 'Pelaksana harus diisi.!',
+
+            'sertifikat_kompetensi.required' => 'File Sertifikat harus diupload.!',
+            'tenaga_ahli_k3.required' => 'File AK3 harus diupload.!',
+            'surat_penunjukan.required' => 'Surat Penunjukan harus diupload.!',
+            'daftar_peralatan.required' => 'File Peralatan harus diupload.!',
+        ];
+        
+        $error = Validator::make($request->all(), $rules, $messages);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        
         $unit = Session::get('sel_unit');
         $status = Session::get('sel_status');
         $year = date('y');
         $new_id = $this->wpModel->generateWpId($unit . $year);
 
         $bpjs       = $request->file('bpjs');
+        if (isset($bpjs)) {
         $new_bpjs   = 'BPJS_' . $new_id . '.' . $bpjs->getClientOriginalExtension();
         $bpjs->move(public_path('files/working_permit/'. date('Y')), $new_bpjs);
+        } else {
+            $new_bpjs= '';
+        }
 
         $sertifikasi      = $request->file('sertifikat_kompetensi');
+        if (isset($sertifikasi)) {
         $new_sertifikat   = 'SERTIFIKAT_' . $new_id . '.' . $sertifikasi->getClientOriginalExtension();
         $sertifikasi->move(public_path('files/working_permit/'. date('Y')), $new_sertifikat);
+        } else {
+            $new_sertifikat= '';
+        }
 
         $ak3       = $request->file('tenaga_ahli_k3');
+        if (isset($ak3)) {
         $new_ak3   = 'AK3_' . $new_id . '.' . $ak3->getClientOriginalExtension();
         $ak3->move(public_path('files/working_permit/'. date('Y')), $new_ak3);
+        } else {
+            $new_ak3= '';
+        }
 
         $singeline       = $request->file('single_line_diagram');
+        if (isset($singeline)) {
         $new_singline   = 'SINGLINE_' . $new_id . '.' . $singeline->getClientOriginalExtension();
         $singeline->move(public_path('files/working_permit/'. date('Y')), $new_singline);
+        } else {
+            $new_singline= '';
+        }
 
         $skp       = $request->file('surat_penunjukan');
+        if (isset($skp)) {
         $new_skp   = 'SKP_' . $new_id . '.' . $skp->getClientOriginalExtension();
         $skp->move(public_path('files/working_permit/'. date('Y')), $new_skp);
+        } else {
+            $new_skp= '';
+        }
 
         $l_peralatan       = $request->file('daftar_peralatan');
+        if (isset($l_peralatan)) {
         $new_peralatan   = 'PERALATAN_' . $new_id . '.' . $l_peralatan->getClientOriginalExtension();
         $l_peralatan->move(public_path('files/working_permit/'. date('Y')), $new_peralatan);
+        } else {
+            $new_peralatan= '';
+        }
 
         $foto       = $request->file('foto_lokasi_kerja');
+        if (isset($foto)) {
         $new_foto   = 'FOTO_' . $new_id . '.' . $foto->getClientOriginalExtension();
         $foto->move(public_path('files/working_permit/'. date('Y')), $new_foto);
-        
-        /*
-        $rules = array(
-            'cname'         =>  'required',
-            'cstatus'       =>  'required',
-        );
-        
-        $error = Validator::make($request->all(), $rules);
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }xw
-        */
+        } else {
+            $new_foto= '';
+        }
 
         $store = DB::table('working_permit')->insert([
             'id_wp'                 => $new_id,
@@ -403,9 +508,8 @@ class WpController extends BaseController
             'no_telepon'            => $request->no_telepon,
             'tanda_tangan'          => $request->tanda_tangan,
             'status_pegawai'        => $request->status_pegawai,
-            'ul_code'               => $request->ulp,
+            'ul_code'               => $request->unit_id,
             'tgl_pengajuan'         => $request->tgl_pengajuan,
-            'jenis_pekerjaan'       => $request->jenis_pekerjaan,
             'grounding'             => $request->grounding,
             'detail_pekerjaan'      => $request->detail_pekerjaan,
             'lokasi_pekerjaan'      => $request->lokasi_pekerjaan,
@@ -551,24 +655,6 @@ class WpController extends BaseController
             ]);
         }
 
-        /*
-        for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
-            $store = DB::table('tbl_hirarc')->insert([
-            'id_wp'         => $new_id,
-            'kegiatan'      => $request['kegiatan_hirarc'][$i],
-            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
-            'resiko'        => $request['resiko_hirarc'][$i],
-            'penilaian_konsekuensi'   => $request['penilaian_konsekuensi'][$i],
-            'penilaian_kemungkinan'   => $request['penilaian_kemungkinan'][$i],
-            'pengendalian_resiko'       => $request['potensi_bahaya'][$i],
-            'pengendalian_konsekuensi'  => $request['pengendalian_konsekuensi'][$i],
-            'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
-            'status_pengendalian'       => $request['status_pengendalian'][$i],
-            'penanggung_jawab'          => $request['penanggung_jawab'][$i],
-            ]);
-        }
-        */
-
         for($i = 0; $i < count($request['langkah_pekerjaan']); $i++){
             $store = DB::table('tbl_jsa')->insert([
             'id_wp'         => $new_id,
@@ -600,7 +686,6 @@ class WpController extends BaseController
             ]);
         }
         
-        // $periode = explode(' ', $request['periode']);
         for($i = 0; $i < count($request['nama_pelaksana']); $i++){
             $store = DB::table('pelaksana_pekerjaan')->insert([
                 'id_wp' => $new_id,
@@ -610,35 +695,385 @@ class WpController extends BaseController
             ]);
         }
         
-        return response()->json(['success' => 'Data Added successfully.']);
+        try{
+            Mail::send('wp/mailbody', [
+                'nama_penerima' => $request->supervisor,
+                'lokasi' => $request->unit_id,
+                'uraian' => $request->nama_pekerjaan,
+                'pelaksana' => $request->pelaksana,
+                'tglmohon' => $request->tgl_pengajuan,
+                'tglkerja' => $request->tgl_mulai,
+            ],
+            function ($message) use ($request)
+            {
+                $getRecepient  = $this->ModelMaster->getRecepient($request->supervisor);
+                $message->subject('PERMOHONAN WORKING PERMIT');
+                $message->from('noreply@plnaceh.id');
+                $message->to($getRecepient->email);
+                //$message->to('FACHRULRAZI.ACH@GMAIL.COM');
+            });
+            return response()->json(['success' => 'Data Added successfully.']);
+        }
+        catch (Exception $e){
+            return response (['status' => false,'errors' => $e->getMessage()]);
+        }
+        
+    }
+
+    public function wp_update(Request $request)
+    {
+        $rules = array(
+            'unit_id' =>  'required',
+            'supervisor' =>  'required',
+            'pejabat' =>  'required',
+            'manager' =>  'required',
+            'status_pegawai' =>  'required',
+            'tgl_pengajuan' =>  'required',
+            'peralatan_dipadamkan' => 'required',
+            'pengawas_pekerjaan' => 'required',
+            'pengawas_k3l' => 'required',
+            'tgl_mulai'   =>  'required',
+            'jam_mulai'   =>  'required',
+            'tgl_selesai'   =>  'required',
+            'jam_selesai'   =>  'required',
+            'klasifikasi'   =>  'required',
+            'prosedur'   =>  'required',
+            'nama_pelaksana' =>  'required',
+        );
+        $messages = [
+            'unit_id.required' => 'Unit Harus dipilih.!',
+            'supervisor.required' => 'SPV Harus dipilih.!',
+            'pejabat.required' => 'PJ K3 Harus dipilih.!',
+            'manager.required' => 'Manager Harus dipilih.!',
+            'status_pegawai.required' => 'Status Pelaksana Harus dipilih.!',
+            'tgl_pengajuan.required' => 'Tgl Pengajuan harus diisi.!',
+            'peralatan_dipadamkan.required' => 'Alat Padam harus diisi.!',
+            'pengawas_pekerjaan.required' => 'Pengawas harus diisi.!',
+            'pengawas_k3l.required' => 'Pengawas K3 harus diisi.!',
+            'tgl_mulai.required' => 'Tgl Mulai harus diisi.!',
+            'jam_mulai.required' => 'Jam Mulai harus diisi.!',
+            'tgl_selesai.required' => 'Jam Selesai harus diisi.!',
+            'jam_selesai.required' => 'Jam Selesai harus diisi.!',
+            'klasifikasi.required' => 'Klasifikasi harus dipilih.!',
+            'prosedur.required' => 'Prosedur harus dipilih.!',
+            'nama_pelaksana.required' => 'Pelaksana harus diisi.!',
+        ];
+        
+        $error = Validator::make($request->all(), $rules, $messages);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        
+        $idwp = $request->idwp;
+
+        $bpjs       = $request->file('bpjs');
+        if (isset($bpjs)) {
+        $new_bpjs   = 'BPJS_' . $new_id . '.' . $bpjs->getClientOriginalExtension();
+        $bpjs->move(public_path('files/working_permit/'. date('Y')), $new_bpjs);
+        $update1 = "`file_bpjs`= $new_bpjs";
+        } else {
+        $update1 = "";
+        }
+
+        $sertifikasi      = $request->file('sertifikat_kompetensi');
+        if (isset($sertifikasi)) {
+        $new_sertifikat   = 'SERTIFIKAT_' . $new_id . '.' . $sertifikasi->getClientOriginalExtension();
+        $sertifikasi->move(public_path('files/working_permit/'. date('Y')), $new_sertifikat);
+        $update2 = "`file_sertifikat_kompetensi`= $new_sertifikat";
+        } else {
+        $update2 = "";
+        }
+
+        $ak3       = $request->file('tenaga_ahli_k3');
+        if (isset($ak3)) {
+        $new_ak3   = 'AK3_' . $new_id . '.' . $ak3->getClientOriginalExtension();
+        $ak3->move(public_path('files/working_permit/'. date('Y')), $new_ak3);
+        $update3 = "`file_ak3`= $new_ak3";
+        } else {
+        $update3= "";
+        }
+
+        $singeline       = $request->file('single_line_diagram');
+        if (isset($singeline)) {
+        $new_singline   = 'SINGLINE_' . $new_id . '.' . $singeline->getClientOriginalExtension();
+        $singeline->move(public_path('files/working_permit/'. date('Y')), $new_singline);
+        $update4 = "`file_singline`= $new_singline";
+        } else {
+        $update4= '';
+        }
+
+        $skp       = $request->file('surat_penunjukan');
+        if (isset($skp)) {
+        $new_skp   = 'SKP_' . $new_id . '.' . $skp->getClientOriginalExtension();
+        $skp->move(public_path('files/working_permit/'. date('Y')), $new_skp);
+        $update5 = "`file_sk_pengawas`= $new_skp";
+        } else {
+        $update5= '';
+        }
+
+        $l_peralatan       = $request->file('daftar_peralatan');
+        if (isset($l_peralatan)) {
+        $new_peralatan   = 'PERALATAN_' . $new_id . '.' . $l_peralatan->getClientOriginalExtension();
+        $l_peralatan->move(public_path('files/working_permit/'. date('Y')), $new_peralatan);
+        $update6 = "`file_list_peralatan`= $new_peralatan";
+        } else {
+        $update6= '';
+        }
+
+        $foto       = $request->file('foto_lokasi_kerja');
+        if (isset($foto)) {
+        $new_foto   = 'FOTO_' . $new_id . '.' . $foto->getClientOriginalExtension();
+        $foto->move(public_path('files/working_permit/'. date('Y')), $new_foto);
+        $update7 = "`file_foto_kerja`= $new_foto";
+        } else {
+        $update7= '';
+        }
+
+        $update = DB::table('working_permit')
+            ->where('id_wp',$idwp)
+            ->update([
+            'nama_pekerjaan'        => $request->nama_pekerjaan,
+            'status_pegawai'        => $request->status_pegawai,
+            'ul_code'               => $request->unit_id,
+            'grounding'             => $request->grounding,
+            'detail_pekerjaan'      => $request->detail_pekerjaan,
+            'lokasi_pekerjaan'      => $request->lokasi_pekerjaan,
+            'pemadaman'             => $request->pemadaman,
+            'peralatan_dipadamkan'  => $request->peralatan_dipadamkan,
+            'pengawas_pekerjaan'    => $request->pengawas_pekerjaan,
+            'no_pengawas_pekerjaan' => $request->no_pengawas_pekerjaan,
+            'pengawas_k3l'          => $request->pengawas_k3l,
+            'no_pengawas_k3'        => $request->no_pengawas_k3,
+            'jam_mulai'             => $request->jam_mulai,
+            'jam_selesai'           => $request->jam_selesai,
+            'manager'               => $request->manager,
+            'supervisor'            => $request->supervisor,
+            'pejabat_k3l'           => $request->pejabat,
+        ]);
+        
+        $delete1 = DB::table('tbl_hirarc')->where('id_wp',$idwp)->delete();
+        $delete2 = DB::table('tbl_jsa')->where('id_wp',$idwp)->delete();
+        $delete3 = DB::table('peralatan_keselamatan')->where('id_wp',$idwp)->delete();
+        $delete4 = DB::table('klasifikasi_pekerjaan')->where('id_wp',$idwp)->delete();
+        $delete5 = DB::table('prosedur_pekerjaan')->where('id_wp',$idwp)->delete();
+        $delete6 = DB::table('pelaksana_pekerjaan')->where('id_wp',$idwp)->delete();
+        
+        for($i = 0; $i < count($request['kegiatan_hirarc']); $i++){
+
+            //formula tingkat resiko
+            if ($request['penilaian_kemungkinan'][$i] == 'A' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'B' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 2 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'C' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 2 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 || 4 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'D' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 ){
+                    $resiko_1 = 'H';
+                } else if ($request['penilaian_konsekuensi'][$i] == 5 ){
+                    $resiko_1 = 'E';
+                }
+            } else if ($request['penilaian_kemungkinan'][$i] == 'E' ){
+                if ($request['penilaian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_1 = 'L';
+                } else if ($request['penilaian_konsekuensi'][$i] == 3 ){
+                    $resiko_1 = 'M';
+                } else if ($request['penilaian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_1 = 'H';
+                }
+            }
+
+            if ($request['pengendalian_kemungkinan'][$i] == 'A' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'B' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 2 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'C' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 2 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 || 4 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'D' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 ){
+                    $resiko_2 = 'H';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 5 ){
+                    $resiko_2 = 'E';
+                }
+            } else if ($request['pengendalian_kemungkinan'][$i] == 'E' ){
+                if ($request['pengendalian_konsekuensi'][$i] == 1 || 2){
+                    $resiko_2 = 'L';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 3 ){
+                    $resiko_2 = 'M';
+                } else if ($request['pengendalian_konsekuensi'][$i] == 4 || 5 ){
+                    $resiko_2 = 'H';
+                }
+            }
+
+        $store = DB::table('tbl_hirarc')->insert([
+            'id_wp'         => $idwp,
+            'kegiatan'      => $request['kegiatan_hirarc'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko_hirarc'][$i],
+            'penilaian_konsekuensi'   => $request['penilaian_konsekuensi'][$i],
+            'penilaian_kemungkinan'   => $request['penilaian_kemungkinan'][$i],
+            'penilaian_tingkat_resiko'   => $resiko_1,
+            'pengendalian_resiko'       => $request['potensi_bahaya'][$i],
+            'pengendalian_konsekuensi'  => $request['pengendalian_konsekuensi'][$i],
+            'pengendalian_kemungkinan'  => $request['pengendalian_kemungkinan'][$i],
+            'pengendalian_tingkat_resiko'  => $resiko_2,
+            'status_pengendalian'       => $request['status_pengendalian'][$i],
+            'penanggung_jawab'          => $request['penanggung_jawab'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['langkah_pekerjaan']); $i++){
+            $store = DB::table('tbl_jsa')->insert([
+            'id_wp'         => $idwp,
+            'langkah_pekerjaan'      => $request['langkah_pekerjaan'][$i],
+            'potensi_bahaya'   => $request['potensi_bahaya'][$i],
+            'resiko'        => $request['resiko'][$i],
+            'tindakan'        => $request['tindakan'][$i],
+            ]);
+        }
+        
+        for($i = 0; $i < count($request['peralatan']); $i++){
+            $store = DB::table('peralatan_keselamatan')->insert([
+            'id_wp'         => $idwp,
+            'description'   => $request['peralatan'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['klasifikasi']); $i++){
+            $store = DB::table('klasifikasi_pekerjaan')->insert([
+            'id_wp'         => $idwp,
+            'description'   => $request['klasifikasi'][$i],
+            ]);
+        }
+
+        for($i = 0; $i < count($request['prosedur']); $i++){
+            $store = DB::table('prosedur_pekerjaan')->insert([
+            'id_wp'         => $idwp,
+            'description'   => $request['prosedur'][$i],
+            ]);
+        }
+        
+        for($i = 0; $i < count($request['nama_pelaksana']); $i++){
+            $store = DB::table('pelaksana_pekerjaan')->insert([
+                'id_wp' => $idwp,
+                'nama_pelaksana' => $request['nama_pelaksana'][$i],
+                'personal_no' => $request['nip_pelaksana'][$i],
+                'jabatan_pelaksana' => $request['jabatan_pelaksana'][$i],
+            ]);
+        }
+    
+    return response()->json(['success' => 'Data Updated successfully.']);
+        
     }
 
     public function approve_form(Request $request)
     {
         $id_wp = $request->id_wp;
         $wp_desc = $request->wp_desc;
+        $unitap_wp = $request->ul_code;
+        $unitap = Auth::user()->unitap;
+        $group_id = Auth::user()->group_id;
+        
+        if ($wp_desc == 'NORMAL' && $unitap_wp != $unitap)
+        {
+            return response()->json(['errors' => 'Diluar otoritas approval unit.!']);
+        } else if  (($wp_desc == 'EMERGENCY' && $group_id != 3))
+        {
+            return response()->json(['errors' => 'Diluar otoritas approval unit.!']);
+        }
+
+        $detail_wp = $this->wpModel->getDetailWp($id_wp);
+
         if ($request->group_id == 5){
             $status = 'APPROVAL_2';
             $field1 = 'user_approval3';
             $field2 = 'tgl_approval3';
+            //$recepient = $detail_wp->pejabat_k3l;
+            $recepient = 'Fachrul Razi';
+            $notif = 'YES';
+
         } else if ($request->group_id == 6){
             $status = 'APPROVAL_1';
             $field1 = 'user_approval2';
             $field2 = 'tgl_approval2';
+            //$recepient = $detail_wp->manager;
+            $recepient = 'Fachrul Razi';
+            $notif = 'YES';
+
         } else if ($request->group_id == 4 && $wp_desc == 'EMERGENCY'){
             $status = 'APPROVAL_INDUK';
             $field1 = 'user_approval3';
             $field2 = 'tgl_approval3'; 
+            //$recepient = 'MULIADI'; //HARD CODE
+            $recepient = 'Fachrul Razi';
+            $notif = 'YES';
+
         } else if ($request->group_id == 3 && $wp_desc == 'EMERGENCY'){
             $status = 'APPROVED';
             $field1 = 'user_approve_induk';
             $field2 = 'tgl_approve_induk'; 
+            $notif = 'NO';
         } else if ($request->group_id == 4 && $wp_desc != 'EMERGENCY'){
             $status = 'APPROVED';
             $field1 = 'user_approval3';
             $field2 = 'tgl_approval3';
+            $notif = 'NO';
         }
-
+        
         if ($request->ket_approve == 'APPROVE'){
 
         $update = DB::table('working_permit')
@@ -648,6 +1083,33 @@ class WpController extends BaseController
             $field1    => Auth::user()->email,
             $field2    => date('Y-m-d'),
         ]);
+
+        if ($notif == 'YES'){
+        try{
+            Mail::send('wp/mailbody', [
+                'nama_penerima' => $recepient,
+                'lokasi' => $detail_wp->ul_code,
+                'uraian' => $detail_wp->nama_pekerjaan,
+                'pelaksana' => $detail_wp->pelaksana,
+                'tglmohon' => $detail_wp->tgl_pengajuan,
+                'tglkerja' => $detail_wp->tgl_mulai,
+            ],
+            function ($message) use ($detail_wp, $recepient)
+            {
+                $getRecepient  = $this->ModelMaster->getRecepient($recepient);
+                $message->subject('APPROVAL WORKING PERMIT - [TEST]');
+                $message->from('noreply@plnaceh.id');
+                $message->to($getRecepient->email);
+                $message->cc('FACHRULRAZI.ACH@GMAIL.COM');
+            });
+            return response()->json(['success' => 'Data Approved successfully.']);
+        }
+        catch (Exception $e){
+            return response (['status' => false,'errors' => $e->getMessage()]);
+        }
+        } else {
+            return response()->json(['success' => 'Data Approved successfully.']);
+        }
 
         } else {
 
@@ -666,8 +1128,22 @@ class WpController extends BaseController
 
     public function closing_form(Request $request)
     {
-        $id_wp = $request->id_wp;
-       
+        $id_wp      = $request->id_wp;
+        $unitap_wp  = $request->ul_code;
+        $unitap     = Auth::user()->unitap;
+        $user_group = Auth::user()->group_id;
+        $edit_role  = array('3','6','8');
+
+        if($unitap_wp != $unitap)
+            {
+                return response()->json(['errors' => 'Diluar otoritas unit.!']);
+            }
+        else if (!in_array($user_group, $edit_role))
+            {
+                return response()->json(['errors' => 'Diluar otoritas edit.!']);
+            }
+
+
         $update = DB::table('working_permit')
         ->where('id_wp', $id_wp)
         ->update([
@@ -748,6 +1224,20 @@ class WpController extends BaseController
          ];
          
          return view('wp/print_wp', $data,);
+    }
+
+    public function mailbody()
+    {
+        $data = [
+            'nama_penerima' => 'NAMA PENERIMA',
+            'lokasi' => 'LOKASI',
+            'uraian' => 'URAIAN',
+            'pelaksana' => 'VENDOR',
+            'tglmohon' => date('d-m-Y'),
+            'tglkerja' => date('d-m-Y'),
+
+         ];
+         return view('wp/mailbody', $data,);
     }
    
 }

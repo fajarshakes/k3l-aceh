@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
+use App\Mail\AppMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Master\User;
+use App\Models\Master\UserCategory;
+use App\Models\Master\MasterModel;
 
 class MasterController extends BaseController
 {
@@ -21,6 +26,9 @@ class MasterController extends BaseController
     public function __construct()
     {
         $this->middleware('auth');
+        $this->UserModel   = new User();
+        $this->menuCat   = new UserCategory();
+        $this->Master   = new MasterModel();
     }
     
     public function profile(Request $request)
@@ -232,9 +240,54 @@ class MasterController extends BaseController
        
     }
     
-    public function account(Request $request)
+    public function email(Request $request)
     {
-        return view('master_data/account_index');
+        return view('master_data/email');
         
+    }
+
+    public function testemail(Request $request){
+        $data1 = $request->email;
+        $data2 = $request->message;
+
+		Mail::to("fachrulrazi.ach@gmail.com")->send(new AppMail($data1, $data2));
+ 
+		return "Email telah dikirim";
+ 
+    }
+    
+    public function sendmanua1l(Request $request){
+        try{
+            Mail::send('master_data/email_template', array('message' => $request->message) , function($pesan) use($request){
+                $pesan->to($request->email,'Verifikasi')->subject('Verifikasi Email');
+                $pesan->from(env('MAIL_USERNAME','noreply@plnaceh.id'),'Verifikasi Akun email anda');
+            });
+        }catch (Exception $e){
+            return response (['status' => false,'errors' => $e->getMessage()]);
+        }
+    }
+
+    public function sendmanual(Request $request)
+    {
+    try{
+        Mail::send('master_data/email_template', ['nama' => $request->nama, 'messages' => $request->message], function ($message) use ($request)
+        {
+            $message->subject('TEST EMAIL');
+            $message->from('noreply@plnaceh.id');
+            $message->to($request->email);
+        });
+        return back()->with('alert-success','Berhasil Kirim Email');
+    }
+    catch (Exception $e){
+        return response (['status' => false,'errors' => $e->getMessage()]);
+    }
+    }
+    
+    public function get_user_by_group(Request $request, $buss_area)
+    {   
+        $group = $request->get('group');
+        $getData  = $this->UserModel->getUser_byap($buss_area, $group);
+        return json_encode($getData);
+
     }
 }

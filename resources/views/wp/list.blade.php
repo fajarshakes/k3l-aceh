@@ -191,6 +191,58 @@
           </div>
         </div>
 
+        <div class="modal fade text-left" id="edit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-primary white">
+                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_edit0" method="post" enctype="multipart/form-data">
+
+              @csrf
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">ID WP</label>
+                      <input type="text" class="form-control" name="id_wp" id="id_wp0" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">KETERANGAN PEKERJAAN</label>
+                      <input type="text" class="form-control" id="wp_desc0" name="wp_desc" readonly>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="companyName">NAMA PEKERJAAN</label>
+                    <textarea id="nama0" class="form-control" readonly></textarea>
+                </div>
+              
+                <div class="form-group">
+                  <label for="companyName">PERUSAHAAN PELAKSANA</label>
+                  <input type="text" id="pelaksana0" class="form-control" readonly/>
+                  <input type="hidden" name="ul_code" id="ul_code0" class="form-control" readonly/>
+                </div>
+              
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary btn-icon"><i class="la la-edit"></i> Proses Edit</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
         <div class="modal fade text-left" id="approve_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -244,6 +296,7 @@
                 <input type="hidden" name="ket_approve" value="APPROVE">
                 @endif
 
+                <input type="hidden" name="ul_code" id="ul_code">
                 <input type="hidden" name="group_id" value="{{ Auth::user()->group_id }}">
                 <input type="hidden" name="user_proses" value="{{ Auth::user()->username }}">
               </div>
@@ -312,6 +365,7 @@
                   </div>
                 </div>
               
+                <input type="hidden" name="ul_code" id="ul_code1" value="{{ Auth::user()->group_id }}">
                 <input type="hidden" name="group_id" value="{{ Auth::user()->group_id }}">
                 <input type="hidden" name="user_proses" value="{{ Auth::user()->username }}">
               </div>
@@ -540,7 +594,9 @@ var vtable = $('#table-permohonan').DataTable({
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        return `<button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
+        
+        return `<button name="edit_modal" id="${full.id_wp}" class="edit0 btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit" > <i class="la la-edit"></i></button>
+       <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
         <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
         }
       },
@@ -729,6 +785,61 @@ $('#form_menu').on('submit', function(event){
 
     });
 
+    $('#form_edit0').on('submit', function(event){
+      event.preventDefault();
+
+      var idwp = document.getElementById('id_wp0').value;
+
+      $.ajax({
+          url: "{{ url('wp/edit_form') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          beforeSend: function(){
+            $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+          },
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              $('#form_edit0')[0].reset();
+              $('#edit_form').modal('hide');
+
+              type_toast = 'success';
+              //window.location.href = 'wp/create/' + data.temp_id + '';
+              setTimeout(function() {
+                window.location.href = '/wp/edit_wp/' + idwp + '';
+              }, 1000);
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              $('#form_edit0')[0].reset();
+              $('#edit_form').modal('hide');
+              $('#loading').html('');
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              //toastr.options.onShown = function() { console.log('hello')};
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
+            }
+          }
+        })
+    });
+
     $('#form_edit').on('submit', function(event){
       event.preventDefault();
 
@@ -863,6 +974,30 @@ $('#form_menu').on('submit', function(event){
 
     });
 
+    $(document).on('click', '.edit0', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('wp/get_detail_wp/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#nama0').val(html.data[0].nama_pekerjaan);
+          $('#pelaksana0').val(html.data[0].pelaksana);
+          $('#id_wp0').val(html.data[0].id_wp);
+          $('#wp_desc0').val(html.data[0].wp_desc);
+          $('#ul_code0').val(html.data[0].ul_code);
+          $('.modal-title').text("EDIT DATA");
+          $('#action_button').val("Edit");
+          $('#action').val("Edit");
+          $('#edit_form').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
+    });
+    
     $(document).on('click', '.edit', function(){
       var id = $(this).attr('id');
       $('#form_result').html('');
@@ -876,6 +1011,7 @@ $('#form_menu').on('submit', function(event){
           $('#pelaksana').val(html.data[0].pelaksana);
           $('#id_wp').val(html.data[0].id_wp);
           $('#wp_desc').val(html.data[0].wp_desc);
+          $('#ul_code').val(html.data[0].ul_code);
           $('.modal-title').text("FORM APPROVAL");
           $('#action_button').val("Edit");
           $('#action').val("Edit");
@@ -899,6 +1035,7 @@ $('#form_menu').on('submit', function(event){
           $('#pelaksana1').val(html.data[0].pelaksana);
           $('#id_wp1').val(html.data[0].id_wp);
           $('#wp_desc1').val(html.data[0].wp_desc);
+          $('#ul_code1').val(html.data[0].ul_code);
           $('.modal-title').text("CLOSING PEKERJAAN");
           $('#action_button').val("Edit");
           $('#action').val("Edit");

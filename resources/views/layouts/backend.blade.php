@@ -116,6 +116,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
         <div class="collapse navbar-collapse" id="navbar-mobile">
           <ul class="nav navbar-nav mr-auto float-left">
             <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
+            <!-- dropdown menu
             <li class="dropdown nav-item mega-dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Dropdown Menu</a>
               <ul class="mega-dropdown-menu dropdown-menu row">
                 <li class="col-md-2">
@@ -237,11 +238,14 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 </li>
               </ul>
             </li>
+            -->
+            <!-- search
             <li class="nav-item nav-search"><a class="nav-link nav-link-search" href="#"><i class="ficon ft-search"></i></a>
               <div class="search-input">
-                <input class="input" type="text" placeholder="Explore Modern...">
+                <input class="input" type="text" placeholder="Explore Saman...">
               </div>
             </li>
+            -->
           </ul>
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item">
@@ -259,6 +263,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 <div class="dropdown-divider"></div><a class="dropdown-item" href="/getlogout"><i class="ft-power"></i> Logout</a>
               </div>
             </li>
+            <!-- menu pilih lang --
             <li class="dropdown dropdown-language nav-item"><a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-gb"></i><span class="selected-language"></span></a>
               <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-gb"></i> English</a>
@@ -267,6 +272,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>
               </div>
             </li>
+            -->
             <li class="dropdown dropdown-notification nav-item">
               <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
                 <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">3</span>
