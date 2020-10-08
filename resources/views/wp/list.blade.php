@@ -2,6 +2,19 @@
 @section('pagetitle', 'CAREER PAGE')
 @section('content')
 
+<style>
+	#scrolly{
+		/*width: 1000px;
+		height: 190px;
+		*/
+		overflow: auto;
+		overflow-y: hidden;
+		margin: 0 auto;
+		white-space: nowrap
+    }
+</style>
+
+
 <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
@@ -78,49 +91,55 @@
                     <div class="tab-content px-1 pt-1">
                       <div role="tabpanel" class="tab-pane active" id="tabIcon21" aria-expanded="true"
                       aria-labelledby="baseIcon-tab21">
+                      <div id="scrolly">
                       <table id="table-permohonan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
-                              <th class="text-center">TANGGAL</th>
-                              <th class="text-center">NAMA PEKERJAAN</th>
+                              <th class="text-center">ACTION</th>
                               <th class="text-center">UNIT</th>
+                              <th class="text-center">TGL PENGAJUAN</th>
+                              <th class="text-center">NAMA PEKERJAAN</th>
                               <th class="text-center">INSTANSI / PERUSAHAAN</th>
                               <th class="text-center">STATUS</th>
-                              <th class="text-center">ACTION</th>
                             </tr>
                           </thead>
                       </table>
+                      </div>
                       </div>
                       <div class="tab-pane" id="tabIcon22" aria-labelledby="baseIcon-tab22">
-                      <table id="table-pengerjaan" cellspacing="0" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                      <div id="scrolly">
+                        <table id="table-pengerjaan" cellspacing="0" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
-                              <th class="text-center">TANGGAL</th>
-                              <th class="text-center">NAMA PEKERJAAN</th>
+                              <th class="text-center">ACTION</th>
                               <th class="text-center">UNIT</th>
+                              <th class="text-center">TGL PENGAJUAN</th>
+                              <th class="text-center">NAMA PEKERJAAN</th>
                               <th class="text-center">INSTANSI / PERUSAHAAN</th>
                               <th class="text-center">STATUS</th>
-                              <th class="text-center">ACTION</th>
                             </tr>
                           </thead>
-                      </table> 
+                        </table> 
+                      </div>
                       </div>
                       <div class="tab-pane" id="tabIcon23" aria-labelledby="baseIcon-tab23">
-                      <table id="table-selesai" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                      <div id="scrolly">
+                        <table id="table-selesai" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
-                              <th class="text-center">TANGGAL</th>
-                              <th class="text-center">NAMA PEKERJAAN</th>
+                              <th class="text-center">ACTION</th>
                               <th class="text-center">UNIT</th>
+                              <th class="text-center">TGL PENGAJUAN</th>
+                              <th class="text-center">NAMA PEKERJAAN</th>
                               <th class="text-center">INSTANSI / PERUSAHAAN</th>
                               <th class="text-center">STATUS</th>
-                              <th class="text-center">ACTION</th>
                             </tr>
                           </thead>
-                      </table>
+                        </table>
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -539,7 +558,8 @@ $(document).ready(function() {
 var vtable = $('#table-permohonan').DataTable({
    processing: true,
    serverSide: true,
-   scrollX: true,
+   //scrollX: true,
+   //height: '1500px',
    paging: true,
    order: [[ 2, 'asc' ]],
    ajax:{
@@ -548,16 +568,42 @@ var vtable = $('#table-permohonan').DataTable({
    columns:[
      { data: null, searchable:false, orderable:false, className: "text-center"},
      {
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        /*
+        return `<button name="edit_modal" id="${full.id_wp}" class="edit0 btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit" > <i class="la la-edit"></i></button>
+       <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
+        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        */
+      
+      return `
+      <span class='dropdown'>
+          <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+          aria-expanded='false' class='btn btn-warning dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+          <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+            <a href='#' name='edit_modal' id='${full.id_wp}' class='edit0 dropdown-item'><i class='ft-edit-2'></i> EDIT DATA</a>
+            <a href='#' name='approve_modal' id='${full.id_wp}'  class='edit dropdown-item'><i class='la la-check-circle'></i> APPROVAL</a>
+            <div class='dropdown-divider'></div>
+            <a href='#' name='del_modal' id='${full.id_wp}' class='delete dropdown-item'><i class='ft-trash'></i> DELETE</a>
+          </span>
+        </span>`;
+      }
+      },
+      {
+     data: 'UNIT_NAME',
+     className: "text-center"
+     },
+    {
      data: 'tgl_pengajuan',
      },
      {
      data: 'nama_pekerjaan',
      className: "text-left"
      },
-     {
-     data: 'UNIT_NAME',
-     className: "text-center"
-     },
+     
      {
      data: 'pelaksana',
      className: "text-left"
@@ -588,18 +634,7 @@ var vtable = $('#table-permohonan').DataTable({
       <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
         
       */
-      {
-      "data": null,
-      "searchable": false,
-      "orderable": false,
-      className: "text-center",
-      "render": function (data, type, full, meta) {
-        
-        return `<button name="edit_modal" id="${full.id_wp}" class="edit0 btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit" > <i class="la la-edit"></i></button>
-       <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
-        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
-        }
-      },
+      
    ]
   });
   vtable.on('draw.dt', function () {
@@ -614,7 +649,7 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
 //var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
    processing: true,
    serverSide: true,
-   scrollX: true,
+   //scrollX: true,
    paging: true,
    order: [[ 2, 'asc' ]],
    ajax:{
@@ -623,15 +658,32 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
    columns:[
      { data: null, searchable:false, orderable:false, className: "text-center"},
      {
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        return `
+        <span class='dropdown'>
+            <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+            aria-expanded='false' class='btn btn-info dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+            <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+              <a href='#' onclick="location.href='/wp/detail/${full.id_wp}'" class='dropdown-item'><i class='ft-eye'></i> DETAIL</a>
+              <a href='#' name='closed_modal' id='${full.id_wp}'  class='closed dropdown-item'><i class='la la-check-circle'></i> CLOSE WP</a>
+            </span>
+          </span>`;
+        }
+     },
+     {
+     data: 'UNIT_NAME',
+     className: "text-center"
+     },
+     {
        data: 'tgl_pengajuan',
      },
      {
      data: 'nama_pekerjaan',
      className: "text-left"
-     },
-     {
-     data: 'UNIT_NAME',
-     className: "text-center"
      },
      {
      data: 'pelaksana',
@@ -640,16 +692,6 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
      {
      data: 'status',
      className: "text-left"
-     },
-     {
-      "data": null,
-      "searchable": false,
-      "orderable": false,
-      className: "text-center",
-      "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>
-        <button name="closed_modal" id="${full.id_wp}" class="closed btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Closed Pekerjaan" > <i class="la la-check-circle"></i></button>`;
-        }
      },
   ]
   });
@@ -671,7 +713,7 @@ var vtable2 =  $('#table-selesai').DataTable({
 //var vtable1 = $('#table-pengerjaan').removeAttr('width').DataTable({
    processing: true,
    serverSide: true,
-   scrollX: true,
+   //scrollX: true,
    paging: true,
    order: [[ 2, 'asc' ]],
    ajax:{
@@ -680,16 +722,26 @@ var vtable2 =  $('#table-selesai').DataTable({
    columns:[
      { data: null, searchable:false, orderable:false, className: "text-center"},
      {
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class=ft-eye></i> </button>`;
+        }
+     },
+     {
+     data: 'UNIT_NAME',
+     className: "text-center"
+     },
+     {
        data: 'tgl_pengajuan',
      },
      {
      data: 'nama_pekerjaan',
      className: "text-left"
      },
-     {
-     data: 'UNIT_NAME',
-     className: "text-center"
-     },
+     
      {
      data: 'pelaksana',
      className: "text-left"
@@ -697,15 +749,6 @@ var vtable2 =  $('#table-selesai').DataTable({
      {
      data: 'status',
      className: "text-left"
-     },
-     {
-      "data": null,
-      "searchable": false,
-      "orderable": false,
-      className: "text-center",
-      "render": function (data, type, full, meta) {
-        return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-blue btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class="la la-external-link"></i> </button>`;
-        }
      },
   ]
   });

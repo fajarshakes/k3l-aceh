@@ -40,6 +40,7 @@ Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallb
     Route::post('template_store', 'Wp\TemplateController@template_store')->name('template_store');
     Route::get('detail/{id}', 'Wp\WpController@detail')->name('detail');
     Route::get('getTemplateByUnit/{id}', 'Wp\WpController@getTemplateByUnit')->name('getTemplateByUnit');;
+    Route::get('getTemplateByVendor/{id}', 'Wp\WpController@getTemplateByVendor')->name('getTemplateByVendor');;
     Route::post('submit_form', 'Wp\WpController@submit_form')->name('submit_form');
     Route::post('edit_form', 'Wp\WpController@edit_form')->name('edit_form');
     Route::post('wp_store', 'Wp\WpController@wp_store')->name('wp_store');

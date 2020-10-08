@@ -3,7 +3,7 @@
         <li class="nav-item active"><a href="/"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Seuramoe</span></a></li>   
         
         <li class=" navigation-header">
-          <span data-i18n="nav.category.layouts">K3L APPS</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
+          <span data-i18n="nav.category.layouts">SAMAN APPS</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
           data-placement="right" data-original-title="Layouts"></i>
         </li>
         
@@ -45,6 +45,13 @@
           </ul>
         </li> 
         --}}
+
+        <li class=" navigation-header">
+          <span data-i18n="nav.category.layouts">DOCUMENTATION</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
+          data-placement="right" data-original-title="Layouts"></i>
+        </li>
+        <li class=" nav-item"><a href="#"><i class="la la-book"></i><span class="menu-title" data-i18n="nav.changelog.main">MANUAL BOOK</span></a></li>
+
 
       </ul>
     </div>

@@ -127,6 +127,7 @@ class TemplateController extends BaseController
             'comp_code'      => $comp_code,
             'tahun'          => $year,
             //'jenis_template' => $request->jenis_template,
+            'qualification'  => $request->qualification,
             'file_sop'       => $new_name,
             'nama_template'  => $request->nama_template,
             'created_at'     => date('Y-m-d'),
@@ -178,7 +179,7 @@ class TemplateController extends BaseController
         if (!empty($document)) {
             $new_name = 'SOP_' . $id_template . '.' . $document->getClientOriginalExtension();
             $document->move(public_path('files/prosedur_kerja'), $new_name);
-            $update = "`file_sop`= $new_name";
+            $update = "`file_sop` = $new_name";
         } else {
             $update = "";
         }
@@ -187,8 +188,10 @@ class TemplateController extends BaseController
             ->where('id_template',$id_template)
             ->update([
             'nama_template'  => $request->nama_template,
-            'status'         => 1,$update,
-        ]);
+            'qualification'  => $request->qualification,
+            'status'         => 1],
+            $update,
+        );
 
         $delete1 = DB::table('peralatan_keselamatan_template')->where('id_wp',$id_template)->delete();
         $delete2 = DB::table('tbl_hirarc_template')->where('id_wp',$id_template)->delete();

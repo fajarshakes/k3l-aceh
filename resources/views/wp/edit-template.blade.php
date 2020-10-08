@@ -62,7 +62,7 @@
                       <h6><i class="step-icon la la-exclamation-triangle"></i> HIRARC </h6>
                       <fieldset>
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-12">
                           {{--
                             <div class="form-group">
                               <label for="location2">JENIS TEMPLATE :</label>
@@ -80,6 +80,23 @@
                               <input type="text" class="form-control" name="nama_template" value="{{$detail ? $detail->nama_template : ''}}">
                               <input type="hidden" name="id_template" value="{{$detail ? $detail->id_template : ''}}">
                             </div>
+                            </div>
+                            <div class="col-md-12">
+                            
+                            <div class="form-group">
+                              <label for="location2">KUALIFIKASI :</label>
+                              <select class="custom-select form-control" name="qualification">
+                                <option value="">-PILIH KUALIFIKASI-</option>
+                                <option value="DPT_BILLMAN" {{ $detail->qualification == 'DPT_BILLMAN' ? 'selected' : '' }}>DPT BILLMAN</option>
+                                <option value="DPT_EBT" {{ $detail->qualification == 'DPT_EBT' ? 'selected' : '' }}>DPT EBT</option>
+                                <option value="DPT_SKTM" {{ $detail->qualification == 'DPT_SKTM' ? 'selected' : '' }}>DPT SKTM</option>
+                                <option value="DPT_SUTM" {{ $detail->qualification == 'DPT_SUTM' ? 'selected' : '' }}>DPT SUTM</option>
+                                <option value="DPT_SUTR" {{ $detail->qualification == 'DPT_SUTR' ? 'selected' : '' }}>DPT SUTR</option>
+                                <option value="DPT_SIPIL" {{ $detail->qualification == 'DPT_SIPIL' ? 'selected' : '' }}>DPT SIPIL</option>
+                                <option value="DPT_SR" {{ $detail->qualification == 'DPT_SR' ? 'selected' : '' }}>DPT SR</option>
+                              </select>
+                            </div>
+                         
                             </div>
                             <div class="col-md-12">
                               <button type="button" class="tambah_hirarc btn btn-primary btn-sm btn-icon">
@@ -336,7 +353,20 @@
                             <label>Upload Prosedur Kerja <span style="color:red">*</span></label>
                             <input type='file' name="prosedur_kerja" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+                      </fieldset>
+
+                      <!-- Step 3 -->
+                      <h6><i class="step-icon la la-check-circle"></i>SIMPAN</h6>
+                      <fieldset>
+                        <div class="row">
+                        <div class="col-md-12">
+                          <p class="success text-center"><i class="la la-check-circle" style="font-size:60px;"></i></p>
+                          <p class="text-center text-success">Jika semua data sudah terisi, silahkan klik tombol Simpan</p>
+                        </div>
+                        <div class="col-md-12 text-center">
+                          <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> UPDATE TEMPLATE</button>
+                        </div>
+                        </div>
                       </fieldset>
      
                     </form>

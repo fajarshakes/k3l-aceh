@@ -265,7 +265,7 @@
         //var countryId = $(this).val();
         if(id_unit_) {
             $.ajax({
-                url: "{{ url('wp/getTemplateByUnit/') }}/"+id_unit_,
+                url: "{{ url('wp/getTemplateByVendor/') }}/"+id_unit_,
                 type:"GET",
                 dataType:"json",
                 data: {idunit: id_unit_, _token: token},

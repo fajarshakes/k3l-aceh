@@ -154,6 +154,7 @@ class VendorController extends BaseController
             'COMP_CODE'      => Auth::user()->comp_code,
             'SAP_NO'         => $request->nosap,
             'VENDOR_NAME'    => $request->nama_perusahaan,
+            'QUALIFICATION'  => $request->qualification,
             'SIPAT_ID'       => $request->nosipat,
             'ADDRESS'        => $request->alamat,
             'PIC_NAME'       => $request->pic_name,

@@ -69,7 +69,18 @@
                           <th class="text-center">EMAIL</th>
                           <th class="text-center">PIC</th>
                           <th class="text-center">CONTACT</th>
-                          <th class="text-center">ACTION</th>
+                          <th class="text-center">ACTION <span class="dropdown">
+                              <button id="btnSearchDrop4" type="button" data-toggle="dropdown" aria-haspopup="true"
+                              aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="la la-cog"></i></button>
+                              <span aria-labelledby="btnSearchDrop4" class="dropdown-menu mt-1 dropdown-menu-right">
+                                <a href="#" class="dropdown-item"><i class="ft-eye"></i> Open Task</a>
+                                <a href="#" class="dropdown-item"><i class="ft-edit-2"></i> Edit Task</a>
+                                <a href="#" class="dropdown-item"><i class="ft-check"></i> Complete Task</a>
+                                <a href="#" class="dropdown-item"><i class="ft-upload"></i> Assign to</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item"><i class="ft-trash"></i> Delete Task</a>
+                              </span>
+                            </span> </th>
                         </tr>
                       </tfoot>
                     </table>
@@ -101,7 +112,7 @@
               @csrf
               <div class="modal-body">
               <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-7">
                     <div class="form-group">
                       <label for="projectinput5">PILIH VENDOR</label>
                       <select id="vendor_id" name="vendor_id" class="form-control">
@@ -109,6 +120,21 @@
                         @foreach($vendor_json as $json)
                           <option value="{{ $json['id'] }}">{{ $json['vendor'] }}</option>
                         @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="projectinput5">KUALIFIKASI</label>
+                      <select name="qualification" class="form-control">
+                        <option value="">-PILIH KUALIFIKASI-</option>
+                        <option value="DPT_BILLMAN">DPT BILLMAN</option>
+                        <option value="DPT_EBT">DPT EBT</option>
+                        <option value="DPT_SKTM">DPT SKTM</option>
+                        <option value="DPT_SUTM">DPT SUTM</option>
+                        <option value="DPT_SUTR">DPT SUTR</option>
+                        <option value="DPT_SIPIL">DPT SIPIL</option>
+                        <option value="DPT_SR">DPT SR</option>
                       </select>
                     </div>
                   </div>

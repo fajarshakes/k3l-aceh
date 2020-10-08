@@ -89,6 +89,16 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getVendor_byDpt($comp_code, $dpt){
+
+    $value=DB::table('master_vendor')
+    ->where('COMP_CODE', '=', $comp_code)
+    ->where('QUALIFICATION', '=', $dpt)
+    ->get(); 
+
+    return $value;
+  }
+
   public function getGroupUnit(string $buss_area){
 
     $value=DB::table('users_group')
@@ -284,6 +294,17 @@ class WpModel extends Model
       })
     ->select('working_permit_template.id_template', 'working_permit_template.nama_template', 'master_unit.UNIT_TYPE')
     ->where('master_unit.BUSS_AREA', '=', $idunit)
+    ->get();
+    
+    return $value;
+  }
+
+  public function getTemplateByDPT($dpt)
+  {
+
+    $value=DB::table('working_permit_template')
+    ->select('id_template', 'nama_template')
+    ->where('qualification', '=', $dpt)
     ->get();
     
     return $value;

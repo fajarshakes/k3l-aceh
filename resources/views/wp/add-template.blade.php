@@ -62,7 +62,7 @@
                       <h6><i class="step-icon la la-exclamation-triangle"></i> HIRARC </h6>
                       <fieldset>
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-12">
                             {{-- <div class="form-group">
                               <label for="location2">JENIS TEMPLATE :</label>
                               <select class="custom-select form-control" name="jenis_template">
@@ -77,6 +77,23 @@
                               <label for="location2">NAMA TEMPLATE :</label>
                               <input type="text" class="form-control" name="nama_template">
                             </div>
+                            </div>
+                            <div class="col-md-12">
+                            
+                            <div class="form-group">
+                              <label for="location2">KUALIFIKASI :</label>
+                              <select class="custom-select form-control" name="qualification">
+                                <option value="">-PILIH KUALIFIKASI-</option>
+                                <option value="DPT_BILLMAN">DPT BILLMAN</option>
+                                <option value="DPT_EBT">DPT EBT</option>
+                                <option value="DPT_SKTM">DPT SKTM</option>
+                                <option value="DPT_SUTM">DPT SUTM</option>
+                                <option value="DPT_SUTR">DPT SUTR</option>
+                                <option value="DPT_SIPIL">DPT SIPIL</option>
+                                <option value="DPT_SR">DPT SR</option>
+                              </select>
+                            </div>
+                         
                             </div>
                             <div class="col-md-12">
                               <button type="button" class="tambah_hirarc btn btn-primary btn-sm btn-icon">
@@ -327,7 +344,20 @@
                             <label>Upload Prosedur Kerja <span style="color:red">*</span></label>
                             <input type='file' name="prosedur_kerja" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+                      </fieldset>
+
+                      <!-- Step 3 -->
+                      <h6><i class="step-icon la la-check-circle"></i>SIMPAN</h6>
+                      <fieldset>
+                        <div class="row">
+                        <div class="col-md-12">
+                          <p class="success text-center"><i class="la la-check-circle" style="font-size:60px;"></i></p>
+                          <p class="text-center text-success">Jika semua data sudah terisi, silahkan klik tombol Simpan</p>
+                        </div>
+                        <div class="col-md-12 text-center">
+                          <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> SUBMIT TEMPLATE</button>
+                        </div>
+                        </div>
                       </fieldset>
      
                     </form>

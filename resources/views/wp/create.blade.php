@@ -757,9 +757,13 @@
                         <div class="col-md-12">
                           <p class="success text-center"><i class="la la-check-circle" style="font-size:60px;"></i></p>
                           <p class="text-center text-success">Jika semua data sudah terisi, silahkan klik tombol Simpan</p>
+
+                          <!-- HIDDEN INPUT -->
+                          <input type="hidden" name="qualification" value="{{$detail ? $detail->qualification : ''}}" readonly>
                         </div>
                         <div class="col-md-12 text-center">
                           <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> SUBMIT PERMIT</button>
+                        </div>
                         </div>
                       </fieldset>
                     </form>
@@ -774,6 +778,7 @@
         <div id="loading"></div>
         <!-- Modal -->   
 
+  </div>
 </div>
 
 <script type="text/javascript">

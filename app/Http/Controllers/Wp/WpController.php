@@ -239,6 +239,14 @@ class WpController extends BaseController
         $listTemplate = $this->wpModel->getTemplate($idunit)->pluck("nama_template", "id_template");
         return json_encode($listTemplate);
     }
+
+    public function getTemplateByVendor(Request $request)
+    {   
+        $pers_no = Auth::user()->pers_no;
+        $myDPT = $this->ModelMaster->getVendorDet($pers_no)->QUALIFICATION;
+        $listTemplate = $this->wpModel->getTemplateByDPT($myDPT)->pluck("nama_template", "id_template");
+        return json_encode($listTemplate);
+    }
     
     public function submit_form(Request $request)
     {
@@ -300,6 +308,7 @@ class WpController extends BaseController
         $status = Session::get('sel_status');
         $group_id = Auth::user()->group_id;
         $pers_no = Auth::user()->pers_no;
+        $getDPT = $this->wpModel->getDetailTemplate($id_template)->qualification;
 
         if ($group_id == 7){
             $redirect_to = '/wp/vendor-permit';
@@ -311,7 +320,7 @@ class WpController extends BaseController
         
         $data = [
             'getManager'  => $this->UserModel->getUser($unit, 4),
-            'getVendor'   => $this->wpModel->getVendor(Auth::user()->comp_code),
+            'getVendor'   => $this->wpModel->getVendor_byDpt(Auth::user()->comp_code, $getDPT),
             'getSpv'      => $this->UserModel->getUser($unit, 5),
             'getPj'       => $this->UserModel->getUser($unit, 6),
             'unit_l3'     => $this->wpModel->getUnit_l3($unit),
@@ -501,6 +510,7 @@ class WpController extends BaseController
             'status'                => 'NEW',
             'nama_pekerjaan'        => $request->nama_pekerjaan,
             'pelaksana'             => $request->pelaksana,
+            'qualification'         => $request->qualification,
             'id_pelaksana'          => $request->vendor_id,
             'alamat'                => $request->alamat,
             'nama_pj'               => $request->nama_pj,
