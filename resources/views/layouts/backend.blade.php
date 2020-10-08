@@ -473,7 +473,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
   <script src="{{ url('app-assets/js/scripts/forms/input-groups.js') }}" type="text/javascript"></script>
   <script src="{{ url('app-assets/js/scripts/forms/checkbox-radio.js') }}" type="text/javascript"></script>
   <script src="{{ url('app-assets/js/scripts/forms/switch.js') }}" type="text/javascript"></script>
-  
+  <script src="{{ url('app-assets/js/scripts/extensions/block-ui.js') }}" type="text/javascript"></script>
   
   <script src="{{ url('app-assets/vendors/js/forms/icheck/icheck.min.js') }}" type="text/javascript"></script>
 

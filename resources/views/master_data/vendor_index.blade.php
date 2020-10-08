@@ -55,32 +55,19 @@
                       <thead>
                         <tr>
                           <th class="text-center">#</th>
+                          <th class="text-center">DPT</th>
                           <th class="text-center">VENDOR</th>
                           <th class="text-center">EMAIL</th>
-                          <th class="text-center">PIC</th>
-                          <th class="text-center">CONTACT</th>
                           <th class="text-center">ACTION</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
                           <th class="text-center">#</th>
+                          <th class="text-center">DPT</th>
                           <th class="text-center">VENDOR</th>
                           <th class="text-center">EMAIL</th>
-                          <th class="text-center">PIC</th>
-                          <th class="text-center">CONTACT</th>
-                          <th class="text-center">ACTION <span class="dropdown">
-                              <button id="btnSearchDrop4" type="button" data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false" class="btn btn-info dropdown-toggle"><i class="la la-cog"></i></button>
-                              <span aria-labelledby="btnSearchDrop4" class="dropdown-menu mt-1 dropdown-menu-right">
-                                <a href="#" class="dropdown-item"><i class="ft-eye"></i> Open Task</a>
-                                <a href="#" class="dropdown-item"><i class="ft-edit-2"></i> Edit Task</a>
-                                <a href="#" class="dropdown-item"><i class="ft-check"></i> Complete Task</a>
-                                <a href="#" class="dropdown-item"><i class="ft-upload"></i> Assign to</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item"><i class="ft-trash"></i> Delete Task</a>
-                              </span>
-                            </span> </th>
+                          <th class="text-center">ACTION</th>
                         </tr>
                       </tfoot>
                     </table>
@@ -267,6 +254,10 @@ $(document).ready(function() {
     columns:[
       { data: null, searchable:false, orderable:false, className: "text-center"},
       {
+      data: 'QUALIFICATION',
+      name: 'QUALIFICATION'
+      },
+      {
       data: 'VENDOR_NAME',
       name: 'VENDOR_NAME'
       },
@@ -275,19 +266,37 @@ $(document).ready(function() {
       className: "text-left"
       },
       {
-      data: 'PIC_NAME',
-      className: "text-left"
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+        /*
+        return `<button name="edit_modal" id="${full.id_wp}" class="edit0 btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit" > <i class="la la-edit"></i></button>
+       <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
+        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
+        */
+      
+      return `
+      <span class='dropdown'>
+          <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+          aria-expanded='false' class='btn btn-blue dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+          <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+            <a href='#' name='edit' id='${full.ID}' class='edit dropdown-item'><i class='ft-edit-2'></i> EDIT DATA</a>
+            <div class='dropdown-divider'></div>
+            <a href='#' name='delete' id='${full.ID}' class='delete dropdown-item'><i class='ft-trash'></i> DELETE</a>
+          </span>
+        </span>`;
+      }
       },
-      {
-      data: 'PIC_PHONE',
-      className: "text-left"
-      },
+      /*
       {
       data: 'action',
       className: "text-center",
       //name: 'action',
       orderable: false
       }
+      */
     ]
    });
    vtable.on('draw.dt', function () {
