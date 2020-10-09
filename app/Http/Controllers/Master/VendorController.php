@@ -60,6 +60,14 @@ class VendorController extends BaseController
         
     }
 
+    public function get_vendor_detail_2(Request $request)
+    {   
+        $id = $_GET['id'];
+        $data  = $this->Master->getVendorDet($id);
+        return json_encode($data);
+        
+    }
+
     
     public function test(Request $request)
     {   
@@ -188,7 +196,36 @@ class VendorController extends BaseController
         return response()->json(['success' => 'Data Added successfully.']);
     }
 
-   
+    public function vendor_update(Request $request)
+    {
+        $rules = array(
+            'email'          =>  'required|email',
+            'alamat'         =>  'required',
+            'pic_name'       =>  'required',
+            'pic_position'   =>  'required',
+            'pic_contact'    =>  'required',
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $store1 = DB::table('master_vendor')
+        ->where('ID', $request->id_perusahaan)
+        ->update([
+            'QUALIFICATION'  => $request->qualification,
+            'ADDRESS'        => $request->alamat,
+            'PIC_NAME'       => $request->pic_name,
+            'PIC_POSITION'   => $request->pic_position,
+            'PIC_PHONE'      => $request->pic_contact,
+        ]);        
+
+        //AjaxCrud::create($form_data);
+        return response()->json(['success' => 'Data Added successfully.']);
+    }
 
     public function user_update(Request $request)
     {

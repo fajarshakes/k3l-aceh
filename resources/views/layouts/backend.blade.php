@@ -49,6 +49,7 @@
   <link rel="stylesheet" type="text/css" href="{{ url('app-assets/css/pages/email-application.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url('app-assets/css/pages/chat-application.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url('app-assets/css/core/colors/palette-switch.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url('app-assets/css/pages/users.css') }}">
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>  
@@ -256,10 +257,10 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 <span class="avatar avatar-online">
                   <img src="../../../app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span>
               </a>
-              <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a>
+              <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="/profile"><i class="ft-user"></i> Edit Profile</a>
                 <a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a>
-                <a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a>
-                <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
+                {{--<a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a>
+                <a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>--}}
                 <div class="dropdown-divider"></div><a class="dropdown-item" href="/getlogout"><i class="ft-power"></i> Logout</a>
               </div>
             </li>
@@ -275,17 +276,17 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
             -->
             <li class="dropdown dropdown-notification nav-item">
               <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
-                <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">3</span>
+                {{-- <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">3</span> --}}
               </a>
               <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                 <li class="dropdown-menu-header">
                   <h6 class="dropdown-header m-0">
                     <span class="grey darken-2">Notifications</span>
                   </h6>
-                  <span class="notification-tag badge badge-default badge-danger float-right m-0">3 New</span>
+                  {{--<span class="notification-tag badge badge-default badge-danger float-right m-0">3 New</span>--}}
                 </li>
                 <li class="scrollable-container media-list w-100">
-                  
+                  {{--
                   <a href="javascript:void(0)">
                     <div class="media">
                       <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
@@ -321,6 +322,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                       </div>
                     </div>
                   </a>
+                  --}}
                 </li>
                 <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
               </ul>

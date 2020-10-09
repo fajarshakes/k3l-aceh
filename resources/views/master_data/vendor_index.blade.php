@@ -183,6 +183,100 @@
           </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade text-left" id="formEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        data-backdrop="static" data-keyboard="false" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-info white">
+                <h4 class="modal-title white" id="myModalLabel11">Add Menu</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_edit" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-7">
+                    <div class="form-group">
+                      <label for="projectinput5">NAMA VENDOR</label>
+                      <input type="text" class="form-control" id="nm_vendor" name="nm_vendor" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="projectinput5">KUALIFIKASI</label>
+                      <select name="qualification" id="qualification" class="form-control">
+                        <option value="">-PILIH KUALIFIKASI-</option>
+                        <option value="DPT_BILLMAN">DPT BILLMAN</option>
+                        <option value="DPT_EBT">DPT EBT</option>
+                        <option value="DPT_SKTM">DPT SKTM</option>
+                        <option value="DPT_SUTM">DPT SUTM</option>
+                        <option value="DPT_SUTR">DPT SUTR</option>
+                        <option value="DPT_SIPIL">DPT SIPIL</option>
+                        <option value="DPT_SR">DPT SR</option>
+                      </select>
+                    </div>
+                  </div>
+              </div>
+                
+              <div class="row">
+                  <div class="col-md-7">
+                    <div class="form-group">
+                      <label for="companyName">NO SAP</label>
+                      <input type="text" class="form-control" placeholder="Full Name" id="nosap0" name="nosap" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="companyName">SIPAT NO</label>
+                      <input type="text" class="form-control" placeholder="Pers Number / NIP" id="nosipat0" name="nosipat" readonly>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="companyName">ALAMAT</label>
+                    <input type="text" class="form-control" placeholder="Alamat Perusahaan" id="alamat0" name="alamat">
+              </div>
+              <div class="form-group">
+                  <label for="companyName">EMAIL PERUSAHAAN</label>
+                    <input type="text" class="form-control" placeholder="Alamat Perusahaan" name="email" id="email0" readonly>
+              </div>
+              <div class="form-group">
+                  <label for="companyName">NAMA PIC</label>
+                    <input type="text" class="form-control" placeholder="Nama PIC" id="pic_name0" name="pic_name" required>
+              </div>
+              <div class="row">
+                  <div class="col-md-7">
+                    <div class="form-group">
+                      <label for="companyName">JABATAN PIC</label>
+                      <input type="text" class="form-control" placeholder="Jabatan PIC" id="pic_position0" name="pic_position" required>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="companyName">CONTACT PIC</label>
+                      <input type="text" class="form-control" placeholder="Contact PIC" id="pic_contact0" name="pic_contact" required>
+                    </div>
+                  </div>
+              </div>
+
+              </div>
+              
+              <input type="hidden" name="id_perusahaan" id="id_perusahaan0" />
+              
+              <div class="modal-footer">
+                <button type="button" name="close" id="close" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" name="action_button" id="action_button0" value="Add" class="btn btn-outline-info">Update</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
 
         <div class="modal fade text-left" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
@@ -359,11 +453,13 @@ $(document).ready(function() {
           }
         })
       }
+    });
       
-      if($('#action').val() == "Edit")
-      {
+    $('#form_edit').on('submit', function(event){
+      event.preventDefault();
+      
         $.ajax({
-          url:"{{ route('menu_update') }}",
+          url:"{{ route('vendor_update') }}",
           method:"POST",
           data:new FormData(this),
           contentType: false,
@@ -387,10 +483,10 @@ $(document).ready(function() {
             {
               html = data.success;
               type_toast = 'success';
-              $('#form_menu')[0].reset();
+              $('#form_edit')[0].reset();
               //$('#formModal').html('');
-              $('#formModal').modal('hide');
-              $('#datamenu').DataTable().ajax.reload();
+              $('#formEdit').modal('hide');
+              $('#list-vendor').DataTable().ajax.reload();
             }
             if(type_toast == 'error'){
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
@@ -399,8 +495,6 @@ $(document).ready(function() {
             }    
           }
         });
-      }
-
     });
 
     $('#confirm_form').on('submit', function(event){
@@ -449,31 +543,34 @@ $(document).ready(function() {
       }
     });
 
-    $(document).on('click', '.add', function(){
+    $(document).on('click', '.edit', function(){
       var id = $(this).attr('id');
       $('#form_result').html('');
       $.ajax({
         type : "GET",
-        url: "{{ url('master/get_userdata/') }}",
+        url: "{{ url('master/get_vendordata/') }}",
         dataType:"json",
         data:{id:id},
         success: function(html) {
-          $('#email').val(html.data[0].email);
-          $('#name').val(html.data[0].name);
-          $('#pers_no').val(html.data[0].pers_no);
+          $('#nm_vendor').val(html.VENDOR_NAME);
+          //$('#qualification').val(html.QUALIFICATION);
+          $('#nosap0').val(html.SAP_NO);
+          $('#nosipat0').val(html.SIPAT_ID);
+          $('#alamat0').val(html.ADDRESS);
+          $('#email0').val(html.EMAIL);
+          $('#pic_name0').val(html.PIC_NAME);
+          $('#pic_position0').val(html.PIC_POSITION);
+          $('#pic_contact0').val(html.PIC_PHONE);
+          $('#id_perusahaan0').val(html.ID);
           //$('#cost_of_sales').val(html.data[0].cost_of_sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "." ));
-          $("#unit_id").val(html.data[0].unit).attr('selected','selected');
-          $('#group_id').val(html.data[0].group_id);
-          $('#jabatan').val(html.data[0].position_desc);
-          $('#group_name').val(html.data[0].GROUP_NAME);
-          $("#user_group").val(html.data[0].group_id).attr('selected','selected');
+          $("#qualification").val(html.QUALIFICATION).attr('selected','selected');
+          //$("#user_group").val(html.data[0].group_id).attr('selected','selected');
           //$('#store_image').html("<img src={{ URL::to('/') }}/images/pic_menu/" + html.data[0].image + " width='70' class='img-thumbnail' />");
           //$('#store_image').append("<input type='hidden' name='hidden_image' value='"+html.data[0].image+"' />");
-          $('#hidden_id').val(html.data[0].id);
-          $('.modal-title').text("Edit Users");
-          $('#action_button').val("Edit");
-          $('#action').val("Edit");
-          $('#formModal').modal('show');
+          $('.modal-title').text("Edit Data Vendor");
+          $('#action_button0').val("Edit");
+          $('#action0').val("Edit");
+          $('#formEdit').modal('show');
         },error: function (jqXhr, textStatus, errorMessage) { // error callback 
 					$('p').append('Error: ' + errorMessage);
 				}
@@ -505,10 +602,6 @@ $(document).ready(function() {
     
 $('[data-dismiss=modal]').on('click', function (e) {
   $('#form_menu')[0].reset();
-})
-
-$('[data-dismiss=modal]').on('click', function (e) {
-  $('#form_menu_2')[0].reset();
 })
 </script>
 @endsection

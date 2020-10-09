@@ -116,11 +116,19 @@ Route::prefix('report')->group(function() {
     Route::get('other', 'Report\ReportController@other')->name('other');
 });
 
+//PROFILE
+Route::prefix('profile')->group(function() {
+    Route::get('', 'Profile\ProfileController@index')->name('index');
+    Route::post('update_company', 'Profile\ProfileController@update_company')->name('update_company');
+
+});
+
 //MASTER DATA
 Route::prefix('master')->group(function() {
     Route::get('user', 'Master\UserController@user')->name('user');
     Route::get('user_datatables', 'Master\UserController@user_datatables')->name('user_datatables');
     Route::get('get_userdata', 'Master\UserController@get_userdata')->name('get_userdata');;
+    Route::get('get_vendordata', 'Master\VendorController@get_vendor_detail_2')->name('get_vendordata');;
     Route::get('unit', 'Master\UnitController@unit')->name('unit');
     Route::get('unit_datatables', 'Master\UnitController@unit_datatables')->name('unit_datatables');
     Route::get('vendor', 'Master\VendorController@vendor')->name('vendor');
@@ -128,6 +136,7 @@ Route::prefix('master')->group(function() {
     Route::get('api_vendor_detail/{id}', 'Master\VendorController@api_vendor_detail')->name('api_vendor_detail');
     Route::get('get_vendor_detail/{id}', 'Master\VendorController@get_vendor_detail')->name('get_vendor_detail');
     Route::post('vendor_store', 'Master\VendorController@vendor_store')->name('vendor_store');
+    Route::post('vendor_update', 'Master\VendorController@vendor_update')->name('vendor_update');
     Route::get('vendor_datatables', 'Master\VendorController@vendor_datatables')->name('vendor_datatables');
     Route::get('email', 'Master\MasterController@email')->name('email');
     Route::post('testemail', 'Master\MasterController@testemail')->name('testemail');

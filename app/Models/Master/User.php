@@ -60,6 +60,18 @@ class User extends Model
 
     return $value;
   }
+
+  public function get_userdata(string $id)
+    {
+        $value = DB::table('users')
+        ->join('master_unit', 'users.unit', '=', 'master_unit.BUSS_AREA')
+        ->join('users_group', 'users.group_id', '=', 'users_group.ID')
+        ->select('users.*', 'users_group.GROUP_NAME', 'master_unit.UNIT_NAME')
+        ->where('users.id','=',$id)
+        ->first();
+        
+        return $value;
+    }
     
 }
 
