@@ -14,8 +14,10 @@ use App\Models\Master\MasterModel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Response;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
+use Mail; 
 
 class ProfileController extends BaseController
 {
@@ -73,16 +75,6 @@ class ProfileController extends BaseController
             return response()->json(['errors' => $error->errors()->all()]);
         }
         
-        /*
-        if ($wp_desc == 'NORMAL' && $unitap_wp != $unitap)
-        {
-            return response()->json(['errors' => 'Diluar otoritas approval unit.!']);
-        } else if  (($wp_desc == 'EMERGENCY' && $group_id != 3))
-        {
-            return response()->json(['errors' => 'Diluar otoritas approval unit.!']);
-        }
-        */
-        
 
         $update = DB::table('master_vendor')
         ->where('ID', $company_id)
@@ -94,6 +86,39 @@ class ProfileController extends BaseController
         ]);
 
         return redirect('/profile') -> with('status', 'Data Berhasil Diupdate .!');
+    }
+
+    public function generate_token(Request $request)
+    {
+        $id = $request->id_user;
+        $userdata   = $this->Model->get_userdata($id);
+        //$token = str_random(60);
+        $token = rand(000000, 9999999);
+
+        $update = DB::table('users')
+        ->where('id', $id)
+        ->update([
+            'token'             => $token,
+            'token_created_at'  => Carbon::now()
+        ]);
+
+        try{
+            Mail::send('mailbody/generate_token', [
+                'nama_penerima' => $userdata->name,
+                'uraian' => $token,
+            ],
+            function ($message) use ($userdata)
+            {
+                $message->subject('PERMINTAAN PERUBAHAN PASSWORD');
+                $message->from('noreply@plnaceh.id');
+                $message->to($userdata->email);
+                $message->cc('FACHRULRAZI.ACH@GMAIL.COM');
+            });
+            return response()->json(['success' => 'Data Approved successfully.']);
+        }
+        catch (Exception $e){
+            return response (['status' => false,'errors' => $e->getMessage()]);
+        }
 
     }
     

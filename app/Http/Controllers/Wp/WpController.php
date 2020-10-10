@@ -722,10 +722,12 @@ class WpController extends BaseController
                 $message->to($getRecepient->email);
                 //$message->to('FACHRULRAZI.ACH@GMAIL.COM');
             });
-            return response()->json(['success' => 'Data Added successfully.']);
+            return response()->json(['success' => 'WP Berhasil diajukan, dan email terkirim.']);
         }
         catch (Exception $e){
-            return response (['status' => false,'errors' => $e->getMessage()]);
+            //return response (['status' => false,'errors' => $e->getMessage()]);
+            return response()->json(['success' => 'WP Berhasil diajukan, dan gagal kirim email.!', 'errors' => $e->getMessage()]);
+
         }
         
     }

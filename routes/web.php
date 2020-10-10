@@ -116,10 +116,16 @@ Route::prefix('report')->group(function() {
     Route::get('other', 'Report\ReportController@other')->name('other');
 });
 
+//MANUALBOOK
+Route::prefix('manualbook')->group(function() {
+    Route::get('', 'Manualbook\ManualbookController@index')->name('index');
+});
+
 //PROFILE
 Route::prefix('profile')->group(function() {
     Route::get('', 'Profile\ProfileController@index')->name('index');
     Route::post('update_company', 'Profile\ProfileController@update_company')->name('update_company');
+    Route::post('generate_token', 'Profile\ProfileController@generate_token')->name('generate_token');
 
 });
 

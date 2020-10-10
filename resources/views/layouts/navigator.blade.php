@@ -50,7 +50,7 @@
           <span data-i18n="nav.category.layouts">DOCUMENTATION</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
           data-placement="right" data-original-title="Layouts"></i>
         </li>
-        <li class=" nav-item"><a href="#"><i class="la la-book"></i><span class="menu-title" data-i18n="nav.changelog.main">MANUAL BOOK</span></a></li>
+        <li class=" nav-item"><a href="/manualbook"><i class="la la-book"></i><span class="menu-title" data-i18n="nav.changelog.main">MANUAL BOOK</span></a></li>
 
 
       </ul>

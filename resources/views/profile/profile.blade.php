@@ -26,7 +26,7 @@
                       <div class="col text-right">
                         {{--<button type="button" class="btn btn-primary d-"><i class="la la-plus"></i> Follow</button>--}}
                         <div class="btn-group d-none d-md-block float-right ml-2" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-success"><i class="la la-dashcube"></i> UBAH PASSWORD</button>
+                          <button name="open_modal" id="open_modal" type="button" class="btn btn-success"><i class="la la-dashcube"></i> UBAH PASSWORD</button>
                           <button type="button" class="btn btn-success"><i class="la la-cog"></i></button>
                         </div>
                       </div>
@@ -315,6 +315,58 @@
       </div>
     </div>
 
+ <!-- Modal -->
+ <div class="modal fade text-left" id="submit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-info white">
+          <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+
+          <div class="form-group">
+            <p class="blue text-center"><i class="la la-check-circle" style="font-size:60px;"></i></p>
+            <p class="text-center text-blue">Untuk perubahan password, anda harus mendapatkan token dari email terdaftar. klik tombol dibawah untuk generate  token</p>
+
+            <div class="col-md-12 text-center">
+              <button onclick="generate_token('{{ $userdata->id }}')" class="btn btn-danger btn-icon"><i class="la la-check-circle-o"></i> GENERATE TOKEN </button>
+            </div>
+
+          </div>
+
+          <form id="form_menu" method="post" enctype="multipart/form-data">
+          @csrf
+          <div class="form-group">
+            <label for="companyName">TOKEN</label>
+            <input type="text" class="form-control" name="action" maxlength="6" placeholder="TOKEN" required /> 
+          </div>
+          
+          <div class="form-group">
+            <label for="companyName">PASSWORD BARU</label>
+            <input type="text" class="form-control" name="action" placeholder="PASSWORD BARU" required /> 
+          </div>
+
+          <div class="form-group">
+            <label for="companyName">ULANGI PASSWORD BARU</label>
+            <input type="text" class="form-control" name="action" placeholder="ULANGI PASSWORD BARU" required /> 
+          </div>
+        
+          <input type="hidden" name="id_user" id="id_user" />
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+        </div>
+        </form>
+      </div>
+    </div>
+</div>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -325,6 +377,59 @@ $(document).ready(function() {
         "paging" : false
     } );
 } );
+
+
+$('#open_modal').click(function(){
+  $('.modal-title').text("RESET PASSWORD");
+  $('#action_button').val("Add");
+  $('#action').val("submit");
+  $('#submit_form').modal('show');
+});
+
+function generate_token(id)
+{
+
+   var token = '{{ csrf_token() }}';
+    $.ajax({
+        url:"{{ route('generate_token') }}",
+        method:"POST",
+        data: {id_user: id, _token: token },
+        //data: new FormData(this),
+        //contentType: false,
+        //cache:false,
+        //processData: false,
+        //dataType:"json",
+        beforeSend: function(){
+          $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+        },
+        success:function(data)
+        {
+          var html = '';
+          if(data.errors)
+          {
+            html = '<div>';
+            for(var count = 0; count < data.errors.length; count++)
+            {
+              html += '<li>' + data.errors[count] + '</li>';
+            }
+            html += '</div>';
+            type_toast = 'error';
+          }
+          if(data.success)
+          {
+            html = data.success;
+              type_toast = 'success';
+          }
+          //$('#form_result').html(html);
+          if(type_toast == 'error'){
+            $('#loading').html('');
+            toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+          } else if (type_toast == 'success') {
+            toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+          }
+        }
+  });
+}
 
 </script>
 @endsection

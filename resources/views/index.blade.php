@@ -18,7 +18,72 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-xl-6 col-12">
+        <div class="col-lg-6 col-12">
+          <div class="card pull-up">
+            <div class="card-content">
+              <div class="card-body">
+                <div class="media d-flex">
+                  <div class="media-body text-left">
+                  <video width="500" controls>
+                    <source src="{{ url('images/app_images/videoplayback.mp4') }}" type="video/mp4">
+                  Your browser does not support the video tag.
+                  </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+         
+          <div id="recent-sales">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">WP ON PROGRESS</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                  <ul class="list-inline mb-0">
+                    <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right"
+                      href="wp/list-permit" target="_blank">View all</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-content mt-1">
+                <div class="table-responsive bg-hexagons">
+                  <table id="recent-orders" class="table table-hover table-xl mb-0">
+                    <thead>
+                      <tr>
+                        <th class="border-top-0">Unit</th>
+                        <th class="border-top-0">Tanggal Mulai</th>
+                        <th class="border-top-0">Progress</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($getList as $list)
+                      <tr>
+                        <td class="text-truncate">{{ $list->UNIT_NAME }}</td>
+                        
+                        <td>
+                          <button type="button" class="btn btn-sm btn-outline-danger round">{{ $list->tgl_mulai }}</button>
+                        </td>
+
+                        <td>
+                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 50%"
+                            aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                      </tr>
+                      @endforeach
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+          {{--<div class="col-xl-6 col-12">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">.</h4>
@@ -78,8 +143,10 @@
                 </div>
               </div> -->
             </div>
-          </div>
+          </div>--}}
+          
           <div class="col-xl-6 col-12">
+          
           <div class="row">
               <div class="col-lg-6 col-12">
                 <div class="card pull-up">
@@ -115,9 +182,32 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 col-12">
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 col-12">
+              <div class="card pull-up">
+                <div class="card-header bg-hexagons">
+                  <h4 class="card-title">PETA SOSIALISASI K3
+                    <span class="danger">0</span>
+                  </h4>
+                  <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                  <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                      <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div id="geoloc5"></div>
+                <div id="fixedMapCont" class="height-450"></div>
+                
+              </div>
+            </div>  
+          </div>  
+
+            {{--
+            <div class="col-lg-6 col-12">
                 <div class="card pull-up">
                   <div class="card-header bg-hexagons">
                     <h4 class="card-title">Hit Rate
@@ -157,10 +247,11 @@
                   </div>
                 </div>
               </div>
-            </div>
-            
-          </div>
+              --}}
         </div>
+            
+        </div>
+      </div>
         <!--/ Revenue, Hit Rate & Deals -->
         <!-- Emails Products & Avg Deals -->
         <!--div class="row">
@@ -257,6 +348,7 @@
         </div!-->
         <!--/ Emails Products & Avg Deals -->
         <!-- Total earning & Recent Sales  -->
+        {{--
         <div class="row">
           <div class="col-12 col-md-4">
             <div class="card">
@@ -373,10 +465,9 @@
             </div>
           </div>
         </div>
+        --}}
         <!-- Analytics map based session -->
-      </div>
-    </div>
-
+</div>
 
     <!-- Modal Popup Login-->
     <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
@@ -426,7 +517,7 @@
               </form>
             </div>
           </div>
-        </div>
+    </div>
 
 <script>
 

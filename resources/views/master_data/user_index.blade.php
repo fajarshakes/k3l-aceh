@@ -57,7 +57,6 @@
                         <tr>
                           <th>#</th>
                           <th>BUSS AREA</th>
-                          <th>PERS NO</th>
                           <th>EMAIL</th>
                           <th>FULLNAME</th>
                           <th>GROUP</th>
@@ -68,7 +67,6 @@
                         <tr>
                           <th>#</th>
                           <th>BUSS AREA</th>
-                          <th>PERS NO</th>
                           <th>EMAIL</th>
                           <th>FULLNAME</th>
                           <th>GROUP</th>
@@ -251,10 +249,6 @@ $(document).ready(function() {
       {
       data: 'UNIT_NAME',
       name: 'UNIT_NAME'
-      },
-      {
-      data: 'pers_no',
-      className: "text-left"
       },
       {
       data: 'email',
