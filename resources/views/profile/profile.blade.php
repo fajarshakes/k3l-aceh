@@ -335,7 +335,7 @@
                 <p class="text-center text-blue">Untuk perubahan password, anda harus mendapatkan token dari email terdaftar. klik tombol dibawah untuk generate  token</p>
 
                 <div class="col-md-12 text-center">
-                  <button onclick="generate_token('{{ $userdata->id }}')" class="btn btn-danger btn-icon"><i class="la la-check-circle-o"></i> GENERATE TOKEN </button>
+                  <button id="generateBtn" onclick="generate_token('{{ $userdata->id }}')" class="btn btn-danger btn-icon"><i class="la la-check-circle-o"></i> GENERATE TOKEN </button>
                 </div>
 
               </div>
@@ -372,7 +372,7 @@
             
             <div class="modal-footer">
               <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+              <button type="submit" id="chPassword" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
             </div>
             </form>
           </div>
@@ -416,6 +416,7 @@ function generate_token(id)
         //dataType:"json",
         beforeSend: function(){
           $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+          $('#generateBtn').attr('disabled', true);
         },
         success:function(data)
         {
@@ -433,11 +434,13 @@ function generate_token(id)
           if(data.success)
           {
             html = data.success;
-              type_toast = 'success';
+            type_toast = 'success';
+            $('#generateBtn').attr('disabled', false);              
           }
           //$('#form_result').html(html);
           if(type_toast == 'error'){
             $('#loading').html('');
+            $('#generateBtn').attr('disabled', false);              
             toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
           } else if (type_toast == 'success') {
             toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
@@ -457,6 +460,10 @@ $('#form_password').on('submit', function(event){
           cache:false,
           processData: false,
           dataType:"json",
+          beforeSend: function(){
+          $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+          $('#chPassword').attr('disabled', true);
+          },
           success:function(data)
           {
             var html = '';
@@ -475,13 +482,14 @@ $('#form_password').on('submit', function(event){
               html = data.success;
               $('#form_password')[0].reset();
               $('#submit_form').modal('hide');
-              $('#loading').html('');
+              $('#loading').html('');           
               type_toast = 'success';
             }
             //$('#form_result').html(html);
-            if(type_toast == 'error'){
+            if(type_toast == 'error'){     
+              $('#chPassword').attr('disabled', false);
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
-            } else if (type_toast == 'success') {
+            } else if (type_toast == 'success') {           
               //toastr.options.onShown = function() { console.log('hello')};
               toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
             }

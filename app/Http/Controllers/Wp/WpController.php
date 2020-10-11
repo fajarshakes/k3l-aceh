@@ -1045,11 +1045,14 @@ class WpController extends BaseController
         if ($wp_desc == 'NORMAL' && $unitap_wp != $unitap)
         {
             return response()->json(['errors' => ["Diluar otoritas approval unit.!"],]);
-        } else if  (($wp_desc == 'EMERGENCY' && $group_id != 3))
+        } 
+        
+        /*else if  (($wp_desc == 'EMERGENCY' && $group_id != 3))
         {
             return response()->json(['errors' => ["Diluar otoritas approval unit.!"],]);
         }
-
+        */
+        
         $detail_wp = $this->wpModel->getDetailWp($id_wp);
 
         if ($request->group_id == 5){

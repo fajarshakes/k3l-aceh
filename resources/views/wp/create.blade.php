@@ -762,7 +762,7 @@
                           <input type="hidden" name="qualification" value="{{$detail ? $detail->qualification : ''}}" readonly>
                         </div>
                         <div class="col-md-12 text-center">
-                          <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> SUBMIT PERMIT</button>
+                          <button type="submit" id="btnSubmit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> SUBMIT PERMIT</button>
                         </div>
                         </div>
                       </fieldset>
@@ -905,6 +905,7 @@ $('#form_menu').on('submit', function(event){
           dataType:"json",
           beforeSend: function(){
             $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+            $('#btnSubmit').attr('disabled', true);
           },
           success:function(data)
           {
@@ -931,6 +932,7 @@ $('#form_menu').on('submit', function(event){
             //$('#form_result').html(html);
             if(type_toast == 'error'){
               $('#loading').html('');
+              $('#btnSubmit').attr('disabled', false);
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
             } else if (type_toast == 'success') {
               toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});

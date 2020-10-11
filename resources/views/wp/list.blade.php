@@ -322,7 +322,7 @@
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+                <button type="submit" id="approveBtn" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
               </div>
               </form>
             </div>
@@ -894,6 +894,9 @@ $('#form_menu').on('submit', function(event){
           cache:false,
           processData: false,
           dataType:"json",
+          beforeSend: function(){
+            $('#approveBtn').attr('disabled', true);
+          },
           success:function(data)
           {
             var html = '';
@@ -918,6 +921,7 @@ $('#form_menu').on('submit', function(event){
             }
             //$('#form_result').html(html);
             if(type_toast == 'error'){
+              $('#approveBtn').attr('disabled', false);
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
             } else if (type_toast == 'success') {
               //toastr.options.onShown = function() { console.log('hello')};
