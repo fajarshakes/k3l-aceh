@@ -5,16 +5,18 @@
 <div class="content-wrapper">
   <div class="content-header row">
   </div>
-      <div class="content-body">
+    <div class="content-body">
+    <section id="striped-row-form-layouts">  
         <div id="user-profile">
           <div class="row">
             <div class="col-12">
               <div class="card profile-with-cover">
-                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('../../../app-assets/images/carousel/22.jpg') 50%;"></div>
+                {{--<div class="card-img-top img-fluid bg-cover height-300" style="background: url('../../../app-assets/images/carousel/22.jpg') 50%;"></div>--}}
+                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('../../../images/app_images/1078x300.jpg');"></div>
                 <div class="media profil-cover-details w-100">
                   <div class="media-left pl-2 pt-2">
                     <a href="#" class="profile-image">
-                      <img src="../../../app-assets/images/portrait/small/avatar-s-8.png" class="rounded-circle img-border height-100"
+                      <img src="{{ url('images/app_images/biet_bereh.jpg') }}" {{-- src="../../../app-assets/images/portrait/small/avatar-s-8.png"--}} class="rounded-circle img-border height-100"
                       alt="Card image">
                     </a>
                   </div>
@@ -26,8 +28,8 @@
                       <div class="col text-right">
                         {{--<button type="button" class="btn btn-primary d-"><i class="la la-plus"></i> Follow</button>--}}
                         <div class="btn-group d-none d-md-block float-right ml-2" role="group" aria-label="Basic example">
-                          <button name="open_modal" id="open_modal" type="button" class="btn btn-success"><i class="la la-dashcube"></i> UBAH PASSWORD</button>
-                          <button type="button" class="btn btn-success"><i class="la la-cog"></i></button>
+                          <button name="open_modal" id="open_modal" type="button" class="btn btn-blue"><i class="la la-dashcube"></i> UBAH PASSWORD</button>
+                          <button type="button" class="btn btn-blue"><i class="la la-cog"></i></button>
                         </div>
                       </div>
                     </div>
@@ -311,60 +313,73 @@
             @endif
 
         </div>
+        <div id="loading"></div>
+    </section>
+    
+    <!-- Modal -->
+    <div class="modal fade text-left" id="submit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+            aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-info white">
+              <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            
+            <div class="modal-body">
 
-      </div>
+              <div class="form-group">
+                <p class="blue text-center"><i class="la la-check-circle" style="font-size:60px;"></i></p>
+                <p class="text-center text-blue">Untuk perubahan password, anda harus mendapatkan token dari email terdaftar. klik tombol dibawah untuk generate  token</p>
+
+                <div class="col-md-12 text-center">
+                  <button onclick="generate_token('{{ $userdata->id }}')" class="btn btn-danger btn-icon"><i class="la la-check-circle-o"></i> GENERATE TOKEN </button>
+                </div>
+
+              </div>
+
+              <form id="form_password" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="form-group">
+                <label for="companyName">TOKEN</label>
+                <input type="text" class="form-control" name="token" maxlength="6" placeholder="TOKEN" /> 
+              </div>
+              
+              <div class="form-group">
+                <label for="companyName">PASSWORD BARU</label>
+                <input type="password" class="form-control" name="password" placeholder="PASSWORD BARU" /> 
+                <small>Minimal 6 karakter</small>
+              </div>
+
+              <div class="form-group">
+                <label for="companyName">VERIFIKASI PASSWORD BARU</label>
+                <input type="password" class="form-control" name="password_confirmation" placeholder="VERIFIKASI PASSWORD BARU" /> 
+              </div>
+
+              <div class="bs-callout-primary callout-border-left p-1">
+                <strong>Format Password.!</strong>
+                  <p class="small">
+                    1. Password harus memiliki huruf besar dan huruf kecil<br/>
+                    2. Password harus memiliki angka<br/>
+                    3. Password harus memiliki karakter spesial berupa <strong>@$!%*#?&_</strong><br/>
+                  </p>
+              </div>
+            
+              <input type="hidden" name="id_user" value="{{ $userdata->id }}" />
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+            </div>
+            </form>
+          </div>
+        </div>
     </div>
 
- <!-- Modal -->
- <div class="modal fade text-left" id="submit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
-        aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-info white">
-          <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        
-        <div class="modal-body">
-
-          <div class="form-group">
-            <p class="blue text-center"><i class="la la-check-circle" style="font-size:60px;"></i></p>
-            <p class="text-center text-blue">Untuk perubahan password, anda harus mendapatkan token dari email terdaftar. klik tombol dibawah untuk generate  token</p>
-
-            <div class="col-md-12 text-center">
-              <button onclick="generate_token('{{ $userdata->id }}')" class="btn btn-danger btn-icon"><i class="la la-check-circle-o"></i> GENERATE TOKEN </button>
-            </div>
-
-          </div>
-
-          <form id="form_menu" method="post" enctype="multipart/form-data">
-          @csrf
-          <div class="form-group">
-            <label for="companyName">TOKEN</label>
-            <input type="text" class="form-control" name="action" maxlength="6" placeholder="TOKEN" required /> 
-          </div>
-          
-          <div class="form-group">
-            <label for="companyName">PASSWORD BARU</label>
-            <input type="text" class="form-control" name="action" placeholder="PASSWORD BARU" required /> 
-          </div>
-
-          <div class="form-group">
-            <label for="companyName">ULANGI PASSWORD BARU</label>
-            <input type="text" class="form-control" name="action" placeholder="ULANGI PASSWORD BARU" required /> 
-          </div>
-        
-          <input type="hidden" name="id_user" id="id_user" />
-        </div>
-        
-        <div class="modal-footer">
-          <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-info btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
-        </div>
-        </form>
-      </div>
+    
     </div>
 </div>
 
@@ -430,6 +445,50 @@ function generate_token(id)
         }
   });
 }
+
+$('#form_password').on('submit', function(event){
+      event.preventDefault();
+
+      $.ajax({
+          url: "{{ url('profile/change_password') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              $('#form_password')[0].reset();
+              $('#submit_form').modal('hide');
+              $('#loading').html('');
+              type_toast = 'success';
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              //toastr.options.onShown = function() { console.log('hello')};
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000, preventDuplicates: true});
+            }
+          }
+        })
+
+    });
 
 </script>
 @endsection

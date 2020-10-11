@@ -61,7 +61,7 @@
                           <td>2</td>
                           <td>MANUALBOOK PETA SOSIALISASI</td>
                           <td align="center">
-                            <a type="button" target="_blank" href="{{ url('app_files/manualbook/MANUAL_WP_V1.pdf') }}" data-toggle="tooltip" data-original-title="Download File" class="btn text-white btn-icon btn-info btn-xs"><i class="la la-cloud-download"></i> DOWNLOAD</a>
+                            <a type="button" target="_blank" href="{{ url('app_files/manualbook/MANUAL_SOSIALISASI_V1.pdf') }}" data-toggle="tooltip" data-original-title="Download File" class="btn text-white btn-icon btn-info btn-xs"><i class="la la-cloud-download"></i> DOWNLOAD</a>
                           </td>
                         </tr>
 
@@ -69,7 +69,7 @@
                           <td>3</td>
                           <td>MANUALBOOK PETA APAR</td>
                           <td align="center">
-                            <a type="button" target="_blank" href="{{ url('app_files/manualbook/MANUAL_WP_V1.pdf') }}" data-toggle="tooltip" data-original-title="Download File" class="btn text-white btn-icon btn-info btn-xs"><i class="la la-cloud-download"></i> DOWNLOAD</a>
+                            <a type="button" target="_blank" href="{{ url('app_files/manualbook/MANUAL_APAR_V1.pdf') }}" data-toggle="tooltip" data-original-title="Download File" class="btn text-white btn-icon btn-info btn-xs"><i class="la la-cloud-download"></i> DOWNLOAD</a>
                           </td>
                         </tr>
                         

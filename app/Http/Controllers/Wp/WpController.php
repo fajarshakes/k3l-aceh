@@ -21,6 +21,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
 use App\PeralatanKeselamatan;
 use Mail; 
+use Illuminate\Contracts\Auth\Access\Gate;
 
 class WpController extends BaseController
 {
@@ -67,6 +68,7 @@ class WpController extends BaseController
 
     public function list(Request $request)
     {
+        $this->authorize('isPln');
         if (Auth::user()->unit == '6101'){
             $unit = '61';
         } else {

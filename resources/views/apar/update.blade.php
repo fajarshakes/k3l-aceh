@@ -13,7 +13,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">list Apar</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="#">Input Pemeliharaan</a>
+                <li class="breadcrumb-item active"><a href="#">Update Info Apar</a>
                 </li>
               </ol>
             </div>
@@ -24,11 +24,7 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button onclick="location.href='/sosialisasi/add'" class="dropdown-item"><i class="la la-check-circle-o"></i> Tambah Lokasi</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
-
-              <div class="dropdown-divider"></div>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
+              <button onclick="location.href='/apar'" class="dropdown-item"><i class="la la-chevron-circle-left"></i> Kembali</button>
             </div>
           </div>
         </div>
@@ -41,7 +37,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">DETAIL APAR</h4>
+                  <h4 class="card-title">UPDATE DATA APAR</h4>
                   <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                   <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -162,8 +158,7 @@
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                            <h5>JADWAL PEMLIHARAAN
-                            </br>
+                            <h5>JADWAL HAR
                               <small class="text-muted">RUTIN TRIWULANAN</small>
                             </h5>
                               <input name="har_date" type="date" class="form-control datetime" required value="{{$detail ? $detail->JADWAL_HAR : ''}}"/>
@@ -175,7 +170,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <button class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</button>
+                      <a href="javascript:history.back()" class="btn btn-info btn-icon text-white"><i class="la la-arrow-circle-left"></i> Back</a>
                       <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
                       </form>
                       <a class="delete btn btn-danger btn-icon white"><i class="la la-trash-o white"></i> Delete</a>
@@ -221,7 +216,7 @@
               </form>
             </div>
           </div>
-        </div>
+  </div>
 
 <script type="text/javascript">
 $(document).ready(function() {

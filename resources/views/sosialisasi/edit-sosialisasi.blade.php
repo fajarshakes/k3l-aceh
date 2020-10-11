@@ -22,12 +22,8 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button onclick="location.href='/sosialisasi/add'" class="dropdown-item"><i class="la la-check-circle-o"></i> Tambah Lokasi</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
-
-              <div class="dropdown-divider"></div>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
-            </div>
+              <button onclick="location.href='/sosialisasi'" class="dropdown-item"><i class="la la-chevron-circle-left"></i> Kembali</button>
+             </div>
           </div>
         </div>
       </div>
@@ -39,7 +35,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">EDIT LOKASI</h4>
+                  <h4 class="card-title">EDIT LOKASI SOSIALISASI</h4>
                   <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                   <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -50,24 +46,64 @@
                     </ul>
                   </div>
                 </div>
-                <div class="card-content">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-xl-12">
-                        <div id="geoloc5"></div>
-                        <div id="fixedMapCont" class="height-450"></div>
-                        <input id="geolat" type="hidden" value="" size="20"  class="form-control"/>
-                        <input id="geolng" type="hidden" value="" size="20"  class="form-control"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
                 <div class="card-content collapse show">
-                <form id="form_menu" method="post" enctype="multipart/form-data" class="icons-tab-steps-1 wizard-circle">
+                <form id="form_menu" method="post" enctype="multipart/form-data">
                 @csrf  
                   <input type="hidden" name="update_id" value="{{$sosialisasi ? $sosialisasi->id : ''}}" id="update_id" />
                   <div class="card-body">
                     <div class="row">
+                    <div class="col-xl-6">
+                        <fieldset>
+                          <div id="geoloc5"></div>
+                          <div id="fixedMapCont" class="height-450"></div>
+                          <input id="geolat" type="hidden" value="" size="20"  class="form-control"/>
+                          <input id="geolng" type="hidden" value="" size="20"  class="form-control"/>
+                        </fieldset>
+
+                        <fieldset>
+                          <h5>LAT / LONG</h5>
+                          <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <input id="new-geolat" name="latitude" value="{{$sosialisasi ? $sosialisasi->latitude : ''}}" type="text" class="form-control" readonly />
+                                <small class="text-muted">Latitude</small>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="new-geolng" name="longitude" value="{{$sosialisasi ? $sosialisasi->longitude : ''}}" type="text" class="form-control" readonly />
+                                <small class="text-muted">Longitude</small>
+                            </div>
+                          </div>
+                          </div>
+                        </fieldset>
+                        <fieldset>
+                          <h5>EVIDENCE</h5>
+                          <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Tampilkan File Photo </label>
+                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->photo }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Photo</a>
+                                </div>
+                                <input name="photo" type='file' class="form-control" accept="image/*"/>
+                                <input name="old_photo" type='hidden' value="{{$sosialisasi ? $sosialisasi->photo : ''}}" class="form-control" accept="image/*"/>
+                                <small class="text-muted">Photo</small>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Tampilkan File Presentasi</label>
+                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->presentasi }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Presentasi</a>
+                                </div>
+                                <input name="presentasi" type='file' class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
+                                <input name="old_presentasi" type='hidden' value="{{$sosialisasi ? $sosialisasi->presentasi : ''}}" class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
+                                <small class="text-muted">Presentasi</small>
+                            </div>
+                          </div>
+                          </div>
+                        </fieldset>
+                        
+                      </div>
+                      
                       <div class="col-xl-6">
                         <fieldset>
                           <h5>LOKASI SOSIALISASI
@@ -126,71 +162,14 @@
                           </div>
                           </div>
                         </fieldset>
-                        <fieldset>
-                          <h5>EVIDENCE</h5>
-                          <div class="form-group">
-                          <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                  <label>Tampilkan File Photo </label>
-                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->photo }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Photo</a>
-                                </div>
-                                <input name="photo" type='file' class="form-control" accept="image/*"/>
-                                <input name="old_photo" type='hidden' value="{{$sosialisasi ? $sosialisasi->photo : ''}}" class="form-control" accept="image/*"/>
-                                <small class="text-muted">Photo</small>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                  <label>Tampilkan File Presentasi</label>
-                                  <a target="_blank" href="{{ URL::to('/') }}/files/sosialisasi/{{ $sosialisasi->presentasi }}" class="btn btn-info btn-sm btn-icon btn-block"><i class="la la-external-link"></i> Presentasi</a>
-                                </div>
-                                <input name="presentasi" type='file' class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
-                                <input name="old_presentasi" type='hidden' value="{{$sosialisasi ? $sosialisasi->presentasi : ''}}" class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
-                                <small class="text-muted">Presentasi</small>
-                            </div>
-                          </div>
-                          </div>
-                        </fieldset>
+                        
                       </div>
 
-                      <div class="col-xl-6 col-lg-12">
-                        <fieldset>
-                        <form method="post" id="geocoding_form">
-                          <label for="address">CARI LOKASI :</label>
-                            <div class="input-group mb-1">
-                              <input type="text" class="form-control" id="address" name="address" />
-                              <div class="input-group-append">
-                                <input type="submit" class="btn btn-primary" value="Search" />
-                              </div>
-                            </div>
-                        </form>
-                        </fieldset>
-
-                        <!-- <fieldset style="padding-bottom: 15px;">
-                          <h5 id="geoloc5">MAPS</h5>
-                          <div id="fixedMapCont" style="border: 1px solid #cacfe7; border-radius: 0.25rem; height: 423px"></div>
-                        </fieldset> -->
-                        <fieldset>
-                          <h5>LAT / LONG</h5>
-                          <div class="form-group">
-                          <div class="row">
-                            <div class="col-md-6">
-                                <input id="new-geolat" name="latitude" value="{{$sosialisasi ? $sosialisasi->latitude : ''}}" type="text" class="form-control" />
-                                <small class="text-muted">Latitude</small>
-                            </div>
-                            <div class="col-md-6">
-                                <input id="new-geolng" name="longitude" value="{{$sosialisasi ? $sosialisasi->longitude : ''}}" type="text" class="form-control">
-                                <small class="text-muted">Longitude</small>
-                            </div>
-                          </div>
-                          </div>
-                        </fieldset>
-                      </div>
                     </div>
 
                     <div class="form-group">
-                      <button class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</button>
-                      <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+                      <a href="javascript:history.back()" class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</a>
+                      <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Update</button>
                     </div>
                   </div>
               </form>

@@ -24,11 +24,7 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button onclick="location.href='/sosialisasi/add'" class="dropdown-item"><i class="la la-check-circle-o"></i> Tambah Lokasi</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
-
-              <div class="dropdown-divider"></div>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
+              <button onclick="location.href='/apar'" class="dropdown-item"><i class="la la-chevron-circle-left"></i> Kembali</button>
             </div>
           </div>
         </div>
@@ -184,26 +180,25 @@
                           <thead>
                             <tr>
                               <th class="text-center">#</th>
-                              <th class="text-center">JADWAL HAR</th>
                               <th class="text-center">TANGGAL HAR</th>
+                              <th class="text-center">NEXT HAR</th>
                               <th class="text-center">PETUGAS HAR</th>
                               <th class="text-center">STATUS KESELURUHAN</th>
                               <th class="text-center">ACTION</th>
                             </tr>
                           </thead>
                       </table>
-                      <p></p>
                     
                     </div>
-                    </div>
+                    <p></p>
 
                     <div class="form-group">
-                      <button class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</button>
-                      <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
+                      <button onclick="location.href='/apar'" class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</button>
                     </div>
                   </div>
                 </form>
                 </div>
+
               </div>
             </div>
           </div>
@@ -573,11 +568,11 @@ var vtable = $('#table-history').DataTable({
     columns:[
       { data: null, searchable:false, orderable:false, className: "text-center"},
       {
-      data: 'CHECK_DEADLINE',
+      data: 'CHECK_AT',
       className: "text-center"
       },
       {
-      data: 'CHECK_AT',
+      data: 'CHECK_DEADLINE',
       className: "text-center"
       },
       {

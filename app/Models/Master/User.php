@@ -72,6 +72,16 @@ class User extends Model
         
         return $value;
     }
+  
+    public function check_token(string $id)
+    {
+        $value = DB::table('users')
+        ->select('token', 'token_created_at', 'token_expired_at')
+        ->where('id','=',$id)
+        ->first();
+        
+        return $value;
+    }
     
 }
 

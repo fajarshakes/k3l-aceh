@@ -138,27 +138,31 @@ class AparController extends BaseController
     
     public function add_store(Request $request)
     {
-        /*
         $rules = array(
+            'idgedung'      =>  'required',
+            'idlantai'      =>  'required',
             'lokasi'        =>  'required',
-            'judul'         =>  'required',
-            'deskripsi'     =>  'required',
-            'jml_peserta'   =>  'required',
-            'pic_sosialisasi'   =>  'required',
-            'tanggal'       =>  'required',
-            'jam_mulai'     =>  'required',
-            'jam_selesai'   =>  'required',
-            'latitude'      =>  'required',
-            'longitude'     =>  'required',
+            'merk'          =>  'required',
+            'type'          =>  'required',
+            'kapasitas'     =>  'required',
+            'exp_date'      =>  'required',
+            'refill_date'   =>  'required',
+            'har_date'      =>  'required',
         );
+
+        $messages = [
+            'idgedung.required' => 'Gedung Harus dipilih.!',
+            'idlantai.required' => 'Gedung Harus dipilih.!',
+
+        ];
         
-        $error = Validator::make($request->all(), $rules);
+        $error = Validator::make($request->all(), $rules, $messages);
 
         if($error->fails())
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }
-        */
+    
         $mix_code = 'APR' . Auth::user()->unit;
         $new_id = $this->AparModel->generateIdApar($mix_code);
         $store = DB::table('peta_apar')->insert([
@@ -180,8 +184,8 @@ class AparController extends BaseController
             'USER_INPUT'    => Auth::user()->username,
         ]);
 
-        return view('apar/index');
-        //return response()->json(['success' => 'Data Added successfully.']);
+        //return view('apar/index');
+        return response()->json(['success' => 'Data Added successfully.']);
     }
     
     public function update_apar(Request $request)

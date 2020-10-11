@@ -72,7 +72,6 @@
                               <th class="text-center">UNIT</th>
                               <th class="text-center">LOKASI</th>
                               <th class="text-center">JUDUL SOSIALISASI</th>
-                              <th class="text-center">PIC</th>
                               <th class="text-center">ACTION</th>
                             </tr>
                           </thead>
@@ -294,10 +293,6 @@ var vtable = $('#table-sosialisasi').DataTable({
      },
      {
      data: 'judul',
-     className: "text-left"
-     },
-     {
-     data: 'pic_sosialisasi',
      className: "text-left"
      },
      {

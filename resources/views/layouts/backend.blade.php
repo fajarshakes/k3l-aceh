@@ -255,7 +255,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                   <span class="user-name text-bold-700">{{ Auth::user()->username }}</span>
                 </span>
                 <span class="avatar avatar-online">
-                  <img src="../../../app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span>
+                  <img src="{{ url('images/app_images/biet_bereh.jpg') }}" alt="avatar"><i></i></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="/profile"><i class="ft-user"></i> Edit Profile</a>
                 <a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a>

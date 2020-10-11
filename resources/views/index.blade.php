@@ -12,7 +12,7 @@
             <div class="card">
               <div class="card-content">
               <img align="center" width="500px" alt="SAMAN LOGO" src="{{ url('images/app_images/logo_saman_big.png') }}">
-              <img align="center" height="129px" alt="SAMAN LOGO" src="{{ url('images/app_images/biet_bereh.png') }}">
+              <img align="center" height="129px" alt="SAMAN LOGO" src="{{ url('images/app_images/biet_bereh-min.png') }}">
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@
                 <div class="heading-elements">
                   <ul class="list-inline mb-0">
                     <li><a class="btn btn-sm btn-danger box-shadow-2 round btn-min-width pull-right"
-                      href="wp/list-permit" target="_blank">View all</a></li>
+                      href="{{ Auth::user()->group_id == 7 ? 'wp/vendor-permit' : 'wp/list-permit' }}" target="_blank">View all</a></li>
                   </ul>
                 </div>
               </div>

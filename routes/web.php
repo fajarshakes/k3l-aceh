@@ -126,6 +126,7 @@ Route::prefix('profile')->group(function() {
     Route::get('', 'Profile\ProfileController@index')->name('index');
     Route::post('update_company', 'Profile\ProfileController@update_company')->name('update_company');
     Route::post('generate_token', 'Profile\ProfileController@generate_token')->name('generate_token');
+    Route::post('change_password', 'Profile\ProfileController@change_password')->name('change_password');
 
 });
 

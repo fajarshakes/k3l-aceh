@@ -93,7 +93,7 @@ class ProfileController extends BaseController
         $id = $request->id_user;
         $userdata   = $this->Model->get_userdata($id);
         //$token = str_random(60);
-        $token = rand(000000, 9999999);
+        $token = rand(000000, 999999);
 
         $update = DB::table('users')
         ->where('id', $id)
@@ -114,12 +114,58 @@ class ProfileController extends BaseController
                 $message->to($userdata->email);
                 $message->cc('FACHRULRAZI.ACH@GMAIL.COM');
             });
-            return response()->json(['success' => 'Data Approved successfully.']);
+            return response()->json(['success' => 'Token berhasil dikirim ke email.']);
         }
         catch (Exception $e){
             return response (['status' => false,'errors' => $e->getMessage()]);
         }
 
+    }
+
+    public function change_password(Request $request)
+    {
+        $id_user = $request->id_user;
+        $token   = $request->token;
+
+        $rules = array(
+            'token' =>  'required|min:6|numeric',
+            'password' => [
+                'required',
+                'string',
+                'min:6',             // must be at least 6 characters in length
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[@$!%*#?&_]/', // must contain a special character
+            ],
+            'password_confirmation' => 'required_with:password|same:password|min:6'
+
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        
+        $check_token   = $this->Model->check_token($id_user);
+        if ($check_token->token != $token)
+        {
+            return response()->json(['errors' => ["Token tidak sesuai.!"],["$check_token->token"] ]);
+        }
+
+        $update = DB::table('users')
+        ->where('id', $id_user)
+        ->update([
+            'password'      => Hash::make($request->password),
+            'token'         => null,
+            'token_created_at'  => null,
+            'token_expired_at'  => null,
+        ]);
+
+        //return redirect('/profile') -> with('status', 'Data Berhasil Diupdate .!');
+        return response()->json(['success' => 'Perubahan password sukses.']);
     }
     
 }

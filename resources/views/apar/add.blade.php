@@ -24,11 +24,7 @@
             <button class="btn btn-danger dropdown-toggle round btn-glow px-2" id="dropdownBreadcrumbButton"
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
-              <button onclick="location.href='/sosialisasi/add'" class="dropdown-item"><i class="la la-check-circle-o"></i> Tambah Lokasi</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
-
-              <div class="dropdown-divider"></div>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
+              <button onclick="location.href='/apar'" class="dropdown-item"><i class="la la-chevron-circle-left"></i> Kembali</button>
             </div>
           </div>
         </div>
@@ -53,7 +49,7 @@
                   </div>
                 </div>
                 <div class="card-content collapse show">
-                <form id="form_mesnu" action="add_store" method="post" enctype="multipart/form-data">
+                <form id="form_menu" method="post" enctype="multipart/form-data">
                 @csrf  
                   <div class="card-body">
                     <div class="row">
@@ -153,8 +149,7 @@
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                            <h5>JADWAL PEMLIHARAAN
-                            </br>
+                            <h5>JADWAL HAR
                               <small class="text-muted">RUTIN TRIWULANAN</small>
                             </h5>
                               <input name="har_date"  type="date" class="form-control datetime" />
@@ -167,7 +162,7 @@
                     </div>
 
                     <div class="form-group">
-                      <button class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</button>
+                      <a href="javascript:history.back()"  class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</a>
                       <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
                     </div>
                   </div>
@@ -227,7 +222,7 @@ $('#form_menu').on('submit', function(event){
       event.preventDefault();
       
       $.ajax({
-          url:"{{ route('sosialisasi_store') }}",
+          url:"{{ route('add_store') }}",
           method:"POST",
           data: new FormData(this),
           contentType: false,
@@ -256,11 +251,12 @@ $('#form_menu').on('submit', function(event){
               type_toast = 'success';
               $('#form_menu')[0].reset();
               setTimeout(function() {
-                window.location.href = '/sosialisasi/';
+                window.location.href = '/apar/';
               }, 1000);
             }
             //$('#form_result').html(html);
             if(type_toast == 'error'){
+              $('#loading').html('');
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
             } else if (type_toast == 'success') {
               toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});

@@ -50,24 +50,52 @@
                     </ul>
                   </div>
                 </div>
-                <div class="card-content">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-xl-12">
-                        <div id="geoloc5"></div>
-                        <div id="fixedMapCont" class="height-450"></div>
-                        <input id="geolat" type="hidden" value="" size="20"  class="form-control"/>
-                        <input id="geolng" type="hidden" value="" size="20"  class="form-control"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
                 <div class="card-content collapse show">
-                <form id="form_menu" method="post" enctype="multipart/form-data" class="icons-tab-steps-1 wizard-circle">
+                <form id="form_menu" method="post" enctype="multipart/form-data">
                 @csrf  
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-xl-6">
+                    <div class="col-xl-6">
+                        <fieldset>
+                          <div id="geoloc5"></div>
+                            <div id="fixedMapCont" class="height-450"></div>
+                            <input id="geolat" type="hidden" value="" size="20"  class="form-control"/>
+                            <input id="geolng" type="hidden" value="" size="20"  class="form-control"/>
+                        </fieldset>
+                        <fieldset>
+                          <h5>LAT / LONG</h5>
+                          <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <input id="new-geolat" name="latitude" type="text" class="form-control" readonly />
+                                <small class="text-muted">Latitude</small>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="new-geolng" name="longitude" type="text" class="form-control" readonly />
+                                <small class="text-muted">Longitude</small>
+                            </div>
+                          </div>
+                          </div>
+                        </fieldset>
+                        <fieldset>
+                          <h5>EVIDENCE</h5>
+                          <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-6">
+                                <input name="photo" type='file' class="form-control" accept="image/*"/>
+                                <small class="text-muted">Photo</small>
+                            </div>
+                            <div class="col-md-6">
+                                <input name="presentasi" type='file' class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
+                                <small class="text-muted">Presentasi</small>
+                            </div>
+                          </div>
+                          </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-xl-6">
                         <fieldset>
                           <h5>LOKASI SOSIALISASI
                           </h5>
@@ -125,24 +153,11 @@
                           </div>
                           </div>
                         </fieldset>
-                        <fieldset>
-                          <h5>EVIDENCE</h5>
-                          <div class="form-group">
-                          <div class="row">
-                            <div class="col-md-6">
-                                <input name="photo" type='file' class="form-control" accept="image/*"/>
-                                <small class="text-muted">Photo</small>
-                            </div>
-                            <div class="col-md-6">
-                                <input name="presentasi" type='file' class="form-control" accept=".pdf, .ppt, .pptx, .doc, .docx">
-                                <small class="text-muted">Presentasi</small>
-                            </div>
-                          </div>
-                          </div>
-                        </fieldset>
+                        
                       </div>
 
                       <div class="col-xl-6 col-lg-12">
+                        {{--
                         <fieldset>
                         <form method="post" id="geocoding_form">
                           <label for="address">CARI LOKASI :</label>
@@ -154,31 +169,18 @@
                             </div>
                         </form>
                         </fieldset>
+                        --}}
 
                         <!-- <fieldset style="padding-bottom: 15px;">
                           <h5 id="geoloc5">MAPS</h5>
                           <div id="fixedMapCont" style="border: 1px solid #cacfe7; border-radius: 0.25rem; height: 423px"></div>
                         </fieldset> -->
-                        <fieldset>
-                          <h5>LAT / LONG</h5>
-                          <div class="form-group">
-                          <div class="row">
-                            <div class="col-md-6">
-                                <input id="new-geolat" name="latitude" type="text" class="form-control" />
-                                <small class="text-muted">Latitude</small>
-                            </div>
-                            <div class="col-md-6">
-                                <input id="new-geolng" name="longitude" type="text" class="form-control">
-                                <small class="text-muted">Longitude</small>
-                            </div>
-                          </div>
-                          </div>
-                        </fieldset>
+                        
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <button class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</button>
+                      <a href="javascript:history.back()" class="btn btn-info btn-icon"><i class="la la-arrow-circle-left"></i> Back</a>
                       <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> Submit</button>
                     </div>
                   </div>
@@ -286,6 +288,7 @@ $('#form_menu').on('submit', function(event){
             }
             //$('#form_result').html(html);
             if(type_toast == 'error'){
+              $('#loading').html('');
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
             } else if (type_toast == 'success') {
               toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
