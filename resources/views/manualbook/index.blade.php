@@ -72,14 +72,6 @@
                             <a type="button" target="_blank" href="{{ url('app_files/manualbook/MANUAL_APAR_V1.pdf') }}" data-toggle="tooltip" data-original-title="Download File" class="btn text-white btn-icon btn-info btn-xs"><i class="la la-cloud-download"></i> DOWNLOAD</a>
                           </td>
                         </tr>
-
-                        <tr>
-                        <div class="form-group">
-                      <h5>Message Animation</h5>
-                      <p>Message Animation</p>
-                      <button class="btn btn-lg btn-block font-medium-1 btn-outline-danger mb-1 block-msg-animation">Animation</button>
-                    </div>
-                        </tr>
                         
                       </tbody>
                       <tfoot>
