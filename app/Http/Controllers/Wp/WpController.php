@@ -289,11 +289,11 @@ class WpController extends BaseController
 
         if($unitap_wp != $unitap)
             {
-                return response()->json(['errors' => 'Diluar otoritas unit.!']);
+                return response()->json(['errors' => ["Diluar otoritas unit.!"],]);
             }
         else if (!in_array($user_group, $edit_role))
             {
-                return response()->json(['errors' => 'Diluar otoritas edit.!']);
+                return response()->json(['errors' => ["Diluar otoritas edit.!"]]);
             }
 
         // For a route with the following URI: profile/{id}
@@ -1044,10 +1044,10 @@ class WpController extends BaseController
         
         if ($wp_desc == 'NORMAL' && $unitap_wp != $unitap)
         {
-            return response()->json(['errors' => 'Diluar otoritas approval unit.!']);
+            return response()->json(['errors' => ["Diluar otoritas approval unit.!"],]);
         } else if  (($wp_desc == 'EMERGENCY' && $group_id != 3))
         {
-            return response()->json(['errors' => 'Diluar otoritas approval unit.!']);
+            return response()->json(['errors' => ["Diluar otoritas approval unit.!"],]);
         }
 
         $detail_wp = $this->wpModel->getDetailWp($id_wp);
@@ -1150,11 +1150,11 @@ class WpController extends BaseController
 
         if($unitap_wp != $unitap)
             {
-                return response()->json(['errors' => 'Diluar otoritas unit.!']);
+                return response()->json(['errors' => ['Diluar otoritas unit.!']]);
             }
         else if (!in_array($user_group, $edit_role))
             {
-                return response()->json(['errors' => 'Diluar otoritas edit.!']);
+                return response()->json(['errors' => ['Diluar otoritas edit.!']]);
             }
 
 
