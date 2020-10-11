@@ -777,7 +777,7 @@
                           <input type="hidden" name="idwp" value="{{ $detail->id_wp }}">
                         </div>
                         <div class="col-md-12 text-center">
-                          <button type="submit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> UPDATE PERMIT</button>
+                          <button type="submit" id="btnSubmit" class="btn btn-success btn-icon"><i class="la la-check-circle-o"></i> UPDATE PERMIT</button>
                         </div>
                       </fieldset>
                     </form>
@@ -918,6 +918,7 @@ $('#form_menu').on('submit', function(event){
           dataType:"json",
           beforeSend: function(){
             $('#loading').html('<div class="loader-container"><div class="line-scale loader-warning"><div></div><div></div><div></div><div></div><div></div></div></div>');
+            $('#btnSubmit').attr('disabled', true);
           },
           success:function(data)
           {
@@ -943,6 +944,8 @@ $('#form_menu').on('submit', function(event){
             }
             //$('#form_result').html(html);
             if(type_toast == 'error'){
+              $('#btnSubmit').attr('disabled', false);
+              $('#loading').html('');
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
             } else if (type_toast == 'success') {
               toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
