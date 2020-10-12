@@ -295,7 +295,7 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <p>Yth Bapak/Ibu {{ $nama_penerima }}</p>
+                                        <p>Yth Bapak/Ibu {{ $nama_penerima }},</p>
                                         <p>Terlampir permohonan working permit yang harus disetujui :</p>
 
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">

@@ -12,7 +12,7 @@
             <div class="col-12">
               <div class="card profile-with-cover">
                 {{--<div class="card-img-top img-fluid bg-cover height-300" style="background: url('../../../app-assets/images/carousel/22.jpg') 50%;"></div>--}}
-                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('../../../images/app_images/1078x300.jpg');"></div>
+                <div class="card-img-top img-fluid bg-cover height-300" style="background: url('../../../images/app_images/1078x300.png');"></div>
                 <div class="media profil-cover-details w-100">
                   <div class="media-left pl-2 pt-2">
                     <a href="#" class="profile-image">
@@ -443,6 +443,8 @@ function generate_token(id)
             $('#generateBtn').attr('disabled', false);              
             toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
           } else if (type_toast == 'success') {
+            $('#generateBtn').attr('disabled', false);
+            $('#loading').html('');
             toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
           }
         }

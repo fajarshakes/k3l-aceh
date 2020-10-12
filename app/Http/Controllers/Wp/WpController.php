@@ -1103,7 +1103,7 @@ class WpController extends BaseController
 
         if ($notif == 'YES'){
         try{
-            Mail::send('wp/mailbody', [
+            Mail::send('mailbody/mailbody', [
                 'nama_penerima' => $recepient,
                 'lokasi' => $detail_wp->ul_code,
                 'uraian' => $detail_wp->nama_pekerjaan,
@@ -1254,7 +1254,7 @@ class WpController extends BaseController
             'tglkerja' => date('d-m-Y'),
 
          ];
-         return view('wp/mailbody', $data,);
+         return view('mailbody/mailbody', $data,);
     }
    
 }

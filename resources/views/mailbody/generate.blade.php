@@ -295,41 +295,30 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <p>Yth Bapak/Ibu {{ $nama_penerima }}</p>
-                                        <p>Terlampir permohonan working permit yang harus disetujui :</p>
+                                        <p>Yth Bapak/Ibu {{ $nama_penerima }},</p>
+                                        <p>Berikut detail permintaan perubahan password akun anda sbb :</p>
 
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tbody> 
                                             <tr class="bordered">
-                                                <td width="35%">Uraian Pekerjaan</td>
+                                                <td width="35%">TOKEN</td>
                                                 <td width="5%" class="text-center">:</td>
-                                                <td width="60%">{{ $uraian }}</td>
+                                                <td width="60%">{{ $token }}</td>
                                             </tr>
                                             <hr>
                                             <tr class="bordered">
-                                                <td>Lokasi Pekerjaan</td>
+                                                <td>EMAIL</td>
                                                 <td class="text-center">:</td>
-                                                <td>{{ $lokasi }}</td>
+                                                <td>{{ $email }}</td>
                                             </tr>
                                             
-                                            <tr>
-                                                <td>Pelaksana Pekerjaan</td>
-                                                <td class="text-center">:</td>
-                                                <td>{{ $pelaksana }}</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Pelaksana Pekerjaan</td>
-                                                <td class="text-center">:</td>
-                                                <td>{{ $pelaksana }}</td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </td>
                                 </tr>
                             </table>
                             <hr>
-                            <p>Permohonan diatas dapat disetujui pada aplikasi SAMAN.<br/>
+                            <p>Permintaan tersebut akan expired dalam 3 menit, mohon untuk tidak memberikan kode tersebut ke orang lain.<br/>
                             Regards.</p>
                         </td>
                     </tr>

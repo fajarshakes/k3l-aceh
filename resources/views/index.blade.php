@@ -7,6 +7,19 @@
       </div>
       <div class="content-body">
         <!-- Revenue, Hit Rate & Deals -->
+        <div id="user-profile">
+          <div class="row">
+            <div class="col-12">
+              <div class="card profile-with-cover">
+                <div class="card-img-top img-fluid bg-cover height-150" style="background: url('../../../images/app_images/logo_saman_front.png');"></div>
+                <div class="media profil-cover-details w-100">
+                </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        
+        {{--
         <div class="row">
           <div class="col-12 col-md-12">
             <div class="card">
@@ -17,11 +30,13 @@
             </div>
           </div>
         </div>
+        --}}
+        
         <div class="row">
         <div class="col-lg-6 col-12">
           <div class="card pull-up">
             <div class="card-content">
-              <div class="card-body">
+              <div class="card-body bg-hexagons">
                 <div class="media d-flex">
                   <div class="media-body text-left">
                   <video width="500" controls>
@@ -151,7 +166,7 @@
               <div class="col-lg-6 col-12">
                 <div class="card pull-up">
                   <div class="card-content">
-                    <div class="card-body">
+                    <div class="card-body bg-hexagons">
                       <div class="media d-flex">
                         <div class="media-body text-left">
                           <h6 class="text-muted">Dalam Permohonan </h6>
@@ -168,7 +183,7 @@
               <div class="col-lg-6 col-12">
                 <div class="card pull-up">
                   <div class="card-content">
-                    <div class="card-body">
+                    <div class="card-body bg-hexagons">
                       <div class="media d-flex">
                         <div class="media-body text-left">
                           <h6 class="text-muted">Dalam Pengerjaan </h6>

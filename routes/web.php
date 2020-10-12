@@ -127,7 +127,6 @@ Route::prefix('profile')->group(function() {
     Route::post('update_company', 'Profile\ProfileController@update_company')->name('update_company');
     Route::post('generate_token', 'Profile\ProfileController@generate_token')->name('generate_token');
     Route::post('change_password', 'Profile\ProfileController@change_password')->name('change_password');
-
 });
 
 //MASTER DATA
@@ -149,7 +148,6 @@ Route::prefix('master')->group(function() {
     Route::post('testemail', 'Master\MasterController@testemail')->name('testemail');
     Route::post('sendmanual', 'Master\MasterController@sendmanual')->name('sendmanual');
 
-
     Route::get('c_menu_datatables', 'Master\UserController@c_menu_datatables')->name('c_menu_datatables');
     Route::post('user_store', 'Master\UserController@user_store')->name('user_store');
     Route::post('c_menu_store', 'Master\UserController@c_menu_store')->name('c_menu_store');
@@ -163,7 +161,6 @@ Route::prefix('master')->group(function() {
     Route::get('test', 'Master\UserController@test')->name('test');
     Route::get('get_group/{id}', 'Master\UserController@getGroupUser')->name('get_group');
     Route::get('get_user_ap/{id}', 'Master\MasterController@get_user_by_group')->name('get_user_ap');
-
 });
 
 Route::get('qrcode', function () {

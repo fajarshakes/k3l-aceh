@@ -103,9 +103,10 @@ class ProfileController extends BaseController
         ]);
 
         try{
-            Mail::send('mailbody/generate_token', [
+            Mail::send('mailbody/generate', [
                 'nama_penerima' => $userdata->name,
-                'uraian' => $token,
+                'token' => $token,
+                'email' => $userdata->email,
             ],
             function ($message) use ($userdata)
             {
