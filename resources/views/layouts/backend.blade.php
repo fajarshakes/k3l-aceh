@@ -50,6 +50,8 @@
   <link rel="stylesheet" type="text/css" href="{{ url('app-assets/css/pages/chat-application.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url('app-assets/css/core/colors/palette-switch.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url('app-assets/css/pages/users.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url('app-assets/vendors/css/cryptocoins/cryptocoins.css') }}">
+
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>  
@@ -478,7 +480,14 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
   <script src="{{ url('app-assets/js/scripts/extensions/block-ui.js') }}" type="text/javascript"></script>
   
   <script src="{{ url('app-assets/vendors/js/forms/icheck/icheck.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url('app-assets/js/scripts/cards/card-statistics.js') }}" type="text/javascript"></script>
+
 
   <!-- END PAGE LEVEL JS-->
+
+  <!-- JS TAMBAHAN -->
+  <script src="{{ url('js/jquery.qrcode.js') }}" type="text/javascript"></script>
+  <script src="{{ url('js/qrcode.js') }}" type="text/javascript"></script>
+
 </body>
 </html>

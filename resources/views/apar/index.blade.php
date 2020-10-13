@@ -136,6 +136,52 @@
           </div>
         </div>
 
+        <div class="modal fade text-left" id="qr_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-success white">
+                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_qr" method="post" enctype="multipart/form-data">
+              <div class="modal-body">
+              <div class="row">
+              
+              <div class="col-xl-12 col-md-12">
+              <div class="card crypto-card-3 bg-success">
+                <div class="card-content">
+                  <div class="card-body cc LTC pb-1">   
+                    <div class="row">
+                      <div class="col-5">
+                      {!! QrCode::size(100)->generate('http://192.168.100.5:8000/apar/view/APR61010001') !!}
+                      </div>
+                      <div class="col-7 text-right">
+                        <h4 class="text-white mb-3"><i class="la la-qrcode" title="LTC"></i> <span id="apar_id"></span></h4>
+                        <h6 class="text-white">Expired Date : <span id="exp_date"></span></h6>
+                        <h6 class="text-white">Location : <span id="location"></span></h6>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              
+              </div>
+              </div>
+              </form>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
@@ -287,6 +333,47 @@ var vtable = $('#table-permohonan').DataTable({
   $('#action_button').val("Add");
   $('#action').val("submit");
   $('#submit_form').modal('show');
+});
+
+$(document).on('click', '.qrcode', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('apar/get_detail/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $("#apar_id").text( id );
+          $("#exp_date").text( html.data.TGL_EXPIRED );
+          $("#location").text( html.data.LOKASI_APAR );
+          $("#link22").attr( html.data.ID_APAR );
+          /*
+          $("#qrcodeTable").qrcode({
+            width	: "100",
+            height	: "100",
+            //render	: "table",
+            text	: "http://saman.plnaceh.id:9000/apar/view/" + id, 
+          });
+          */
+          $('.modal-title').text("QR CODE LABEL");
+          //$('#action_button').val("Edit");
+          //$('#action').val("Edit");
+          $('#qr_form').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
+    });
+
+
+$('#qr_form').on('hidden.bs.modal', function(e){
+    $(this).find('form_qr')[0].reset();           
+});
+
+$('#qr_form').on('hidden.modal', function () {
+    $(this).find('form_qr').trigger('reset');
+    $('#qr_form').remove();
 });
 
 $('#form_menu').on('submit', function(event){

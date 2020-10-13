@@ -119,12 +119,18 @@
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                            <h5>KAPASITAS</h5>
-                                <input name="kapasitas" class="form-control" />
+                            <h5>KAPASITAS (KG)</h5>
+                                <input type="number" name="kapasitas" class="form-control" />
                             </div>
                             <div class="col-md-6">
                             <h5>MEDIA</h5>
-                                <input name="media" class="form-control">
+                                <select name="media" class="form-control">
+                                  <option value="none" selected="" disabled="">PILIH MEDIA</option>
+                                  <option value="A">A</option>
+                                  <option value="B">B</option>
+                                  <option value="C">C</option>
+                                  <option value="ABC">ABC</option>
+                              </select>
                             </div>
                           </div>
                           </div>

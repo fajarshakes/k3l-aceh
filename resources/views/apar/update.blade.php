@@ -128,12 +128,18 @@
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                            <h5>KAPASITAS</h5>
-                                <input name="kapasitas" class="form-control" required value="{{$detail ? $detail->KAPASITAS : ''}}"/>
+                            <h5>KAPASITAS (KG)</h5>
+                                <input type="number" name="kapasitas" class="form-control" required value="{{$detail ? $detail->KAPASITAS : ''}}"/>
                             </div>
                             <div class="col-md-6">
                             <h5>MEDIA</h5>
-                                <input name="media" class="form-control" required value="{{$detail ? $detail->MEDIA : ''}}">
+                              <select name="media" class="form-control">
+                                  <option value="none" selected="" disabled="">PILIH MEDIA</option>
+                                  <option value="A" {{ $detail->MEDIA == 'A' ? 'selected' : '' }}>A</option>
+                                  <option value="B" {{ $detail->MEDIA == 'B' ? 'selected' : '' }}>B</option>
+                                  <option value="C" {{ $detail->MEDIA == 'C' ? 'selected' : '' }}>C</option>
+                                  <option value="ABC" {{ $detail->MEDIA == 'ABC' ? 'selected' : '' }}>ABC</option>
+                              </select>
                             </div>
                           </div>
                           </div>

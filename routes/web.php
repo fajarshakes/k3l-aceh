@@ -102,11 +102,17 @@ Route::prefix('apar')->group(function() {
     Route::post('add_history', 'Apar\AparController@add_history')->name('add_history');
     Route::get('list_history_apar/{id}', 'Apar\AparController@list_history_apar')->name('list_history_apar');
     Route::get('get_detail_history', 'Apar\AparController@get_detail_history')->name('get_detail_history');
+    Route::get('get_detail', 'Apar\AparController@get_detail')->name('get_detail');
     Route::post('delete_history', 'Apar\AparController@delete_history')->name('delete_history');
     Route::get('update/{id}', 'Apar\AparController@update')->name('update');
     Route::post('update_apar', 'Apar\AparController@update_apar')->name('update_apar');
     Route::post('delete_apar', 'Apar\AparController@delete_apar')->name('delete_apar');
     Route::get('export_excel', 'Apar\AparController@export')->name('export_excel');
+
+    Route::get('view/{id}', 'Apar\AparviewController@view')->name('view');
+    Route::get('view_history_apar/{id}', 'Apar\AparviewController@view_history_apar')->name('view_history_apar');
+    Route::get('view_detail_history', 'Apar\AparviewController@view_detail_history')->name('view_detail_history');
+
 
 });
 

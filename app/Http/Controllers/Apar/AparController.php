@@ -89,9 +89,9 @@ class AparController extends BaseController
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->ID_APAR.'" class="button1 btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> ACTION</button>';
-                //$button .= '&nbsp;&nbsp;';
-                //$button .= '<button type="button" name="delete" id="'.$data->ID_APAR.'" class="delete btn btn-danger btn-sm btn-icon"><i class="la la-trash-o"></i> </button>';
+                $button = '<button type="button" name="edit" id="'.$data->ID_APAR.'" class="button1 btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> ACTION</button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button type="button" name="qrcode" id="'.$data->ID_APAR.'" class="qrcode btn btn-success btn-sm btn-icon"><i class="la la-qrcode"></i> </button>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -143,6 +143,7 @@ class AparController extends BaseController
             'idlantai'      =>  'required',
             'lokasi'        =>  'required',
             'merk'          =>  'required',
+            'media'         =>  'required',
             'type'          =>  'required',
             'kapasitas'     =>  'required',
             'exp_date'      =>  'required',
@@ -388,6 +389,17 @@ class AparController extends BaseController
         ->select('apar_history.*')
         ->where('apar_history.ID','=',$id)
         ->get();
+        
+        return response()->json(['data' => $data]);
+    }
+
+    public function get_detail()
+    {
+        $id = $_GET['id'];
+        $data = DB::table('peta_apar')
+        ->select('*')
+        ->where('ID_APAR','=',$id)
+        ->first();
         
         return response()->json(['data' => $data]);
     }
