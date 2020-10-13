@@ -32,7 +32,8 @@ class VendorController extends BaseController
     public function vendor(Request $request)
     {
         $unitData  = $this->menuCat->getUnit();
-        $url = "http://localhost:1000/api/vendor_list.php";
+        //$url = "http://localhost:1000/api/vendor_list.php";
+        $url = "https://sipat.plnaceh.id/new/api/vendor_list.php";
         $json = json_decode(file_get_contents($url), true);
     
 
@@ -46,7 +47,8 @@ class VendorController extends BaseController
     
     public function api_vendor_detail(Request $request, $buss_area)
     {   
-        $url = "http://localhost:1000/api/vendor_detail.php?id=$buss_area";
+        //$url = "http://localhost:1000/api/vendor_detail.php?id=$buss_area";
+        $url = "https://sipat.plnaceh.id/api/vendor_detail.php?id=$buss_area";
         $json = json_decode(file_get_contents($url), true);
 
         return $json;
