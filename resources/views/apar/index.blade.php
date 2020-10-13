@@ -157,7 +157,7 @@
                   <div class="card-body cc LTC pb-1">   
                     <div class="row">
                       <div class="col-5">
-                      {!! QrCode::size(100)->generate('http://192.168.100.5:8000/apar/view/APR61010001') !!}
+                      {!! QrCode::size(100)->generate('http://saman.plnaceh.id:9000/apar/view/APR61010001') !!}
                       </div>
                       <div class="col-7 text-right">
                         <h4 class="text-white mb-3"><i class="la la-qrcode" title="LTC"></i> <span id="apar_id"></span></h4>

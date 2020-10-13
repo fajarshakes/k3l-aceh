@@ -46,65 +46,6 @@ class AparviewController extends BaseController
         return view('apar/view-apar', $data); 
     }
 
-    public function add(Request $request)
-    {
-        $data = [
-            'my_ccode'      => Auth::user()->comp_code,
-            'my_barea'      => Auth::user()->unit,
-            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unit),
-         ];
-        return view('apar/add', $data);
-    }
-
-    public function input_har(Request $request, $id)
-    {
-        $data = [
-            'my_ccode'      => Auth::user()->comp_code,
-            'my_barea'      => Auth::user()->unit,
-            'detail'        => $this->AparModel->getDetailByID($id),
-         ];
-        return view('apar/input-har', $data);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $data = [
-            'my_ccode'      => Auth::user()->comp_code,
-            'my_barea'      => Auth::user()->unit,
-            'detail'        => $this->AparModel->getDetailByID($id),
-            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unit),
-         ];
-        return view('apar/update', $data);
-    }
-
-    public function getLantaiByGedung(Request $request, $idgedung)
-    {   
-        $listLantai  = $this->AparModel->getLantai($idgedung)->pluck("NAMA_LANTAI", "ID_LANTAI");
-        return json_encode($listLantai);
-    }
-
-    public function list_index_apar(Request $request)
-    {
-        $b_area = Auth::user()->unit;
-        $sql = "SELECT
-                    pa.*
-                FROM
-                    peta_apar pa
-                WHERE
-                    pa.BUSS_AREA  = '$b_area' AND
-                    pa.STATUS = 'ACTIVE'";
-        $v = DB::select($sql);
-            
-        return Datatables::of($v)
-            ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->ID_APAR.'" class="button1 btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> ACTION</button>';
-                //$button .= '&nbsp;&nbsp;';
-                //$button .= '<button type="button" name="delete" id="'.$data->ID_APAR.'" class="delete btn btn-danger btn-sm btn-icon"><i class="la la-trash-o"></i> </button>';
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-    }
 
     public function view_history_apar(Request $request, $idapar)
     {
@@ -127,7 +68,6 @@ class AparviewController extends BaseController
             ->make(true);
     }
 
-
     public function view_detail_history()
     {
         $id = $_GET['id'];
@@ -137,32 +77,6 @@ class AparviewController extends BaseController
         ->get();
         
         return response()->json(['data' => $data]);
-    }
-
-    public function delete_apar(Request $request)
-    {
-        $id = $request->ID;
-        $delete = DB::table('peta_apar')
-        ->where('ID_APAR', $id)
-        ->update([
-            'STATUS'     =>  'TRASH',
-            ]);
-
-        return view('apar/index');
-        //return response()->json(['success' => 'Data Update successfully.']);
-    }
-    
-    public function delete_history(Request $request)
-    {
-        $id = $request->ID;
-        $delete = DB::table('apar_history')->where('ID', $id)->delete();
-
-        return response()->json(['success' => 'Data Update successfully.']);
-    }
-
-    public function export(Request $request)
-    {
-        return Excel::download(new AparExport, 'apar.xlsx');
     }
 
 }
