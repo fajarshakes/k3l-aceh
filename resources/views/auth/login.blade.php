@@ -7,7 +7,7 @@
   <meta name="description" content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
   <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
   <meta name="author" content="Fachrul Razi">
-  <title>Login Page - K3L UIW ACEH</title>
+  <title>Login Page - SAMAN UIW ACEH</title>
   <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
   <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
@@ -87,7 +87,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
                             <label for="remember-me"> Remember Me</label>
                           </fieldset>
                         </div>
-                        <div class="col-md-6 col-12 float-sm-left text-center text-sm-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
+                        {{-- <div class="col-md-6 col-12 float-sm-left text-center text-sm-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div> --}}
                       </div>
                       <button type="submit" class="btn btn-outline-info btn-block"><i class="ft-unlock"></i> Login</button>
                     </form>

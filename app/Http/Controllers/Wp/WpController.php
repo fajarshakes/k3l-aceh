@@ -1118,6 +1118,7 @@ class WpController extends BaseController
                 $message->from('noreply@plnaceh.id');
                 $message->to($getRecepient->email);
                 $message->cc('FACHRULRAZI.ACH@GMAIL.COM');
+                $message->cc('khairunnas.sbs@pln.co.id');
             });
             return response()->json(['success' => 'Data Approved successfully.']);
         }
