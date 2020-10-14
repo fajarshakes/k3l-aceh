@@ -1059,24 +1059,24 @@ class WpController extends BaseController
             $status = 'APPROVAL_2';
             $field1 = 'user_approval3';
             $field2 = 'tgl_approval3';
-            //$recepient = $detail_wp->pejabat_k3l;
-            $recepient = 'Fachrul Razi';
+            $recepient = $detail_wp->pejabat_k3l;
+            //$recepient = 'Fachrul Razi';
             $notif = 'YES';
 
         } else if ($request->group_id == 6){
             $status = 'APPROVAL_1';
             $field1 = 'user_approval2';
             $field2 = 'tgl_approval2';
-            //$recepient = $detail_wp->manager;
-            $recepient = 'Fachrul Razi';
+            $recepient = $detail_wp->manager;
+            //$recepient = 'Fachrul Razi';
             $notif = 'YES';
 
         } else if ($request->group_id == 4 && $wp_desc == 'EMERGENCY'){
             $status = 'APPROVAL_INDUK';
             $field1 = 'user_approval3';
             $field2 = 'tgl_approval3'; 
-            //$recepient = 'MULIADI'; //HARD CODE
-            $recepient = 'Fachrul Razi';
+            $recepient = 'MULIADI'; //HARD CODE
+            //$recepient = 'Fachrul Razi';
             $notif = 'YES';
 
         } else if ($request->group_id == 3 && $wp_desc == 'EMERGENCY'){
