@@ -48,6 +48,16 @@ class SosialisasiController extends BaseController
 
     public function list_index(Request $request)
     {
+        $year = date('Y');
+
+        $b_area = Auth::user()->unit;
+
+        if (Auth::user()->unit == '6101'){
+            $add_conditions = '';
+        } else {
+            $add_conditions = 'AND ps.unit = ' . Auth::user()->unit;
+        }
+
         $sql = "SELECT
                     mu.UNIT_NAME AS nama_unit,
                     ps.judul,
@@ -56,19 +66,45 @@ class SosialisasiController extends BaseController
                     ps.pic_sosialisasi,
                     ps.jam_mulai,
                     ps.jam_selesai,
-                    ps.id 
+                    ps.id,
+                    ps.ul_code
                 FROM
                     peta_sosialisasi ps
                     LEFT JOIN master_unit mu ON ps.unit = mu.BUSS_AREA 
                 WHERE
-                    YEAR ( ps.tanggal ) = '2020'";
+                    YEAR ( ps.tanggal ) = '$year'
+                    $add_conditions";
         $v = DB::select($sql);
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm btn-icon"><i class="la la-pencil-square"></i></button>';
+                /*
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm btn-icon"><i class="la la-pencil-square"></i></button>';
                 $button .= '&nbsp;&nbsp;';
                 $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm btn-icon"><i class="la la-trash-o"></i> </button>';
+                */
+                if ($data->ul_code == Auth::user()->unitap) {
+                $button =
+                "<span class='dropdown'>
+                    <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+                    aria-expanded='false' class='btn btn-blue dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+                    <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+                        <a name='approve_modal' id='$data->id'  class='view dropdown-item'><i class='ft-eye'></i> VIEW</a>
+                        <a name='edit_modal' id='$data->id' class='edit dropdown-item'><i class='ft-edit-2'></i> EDIT DATA</a>
+                        <div class='dropdown-divider'></div>
+                        <a id='$data->id' class='delete dropdown-item'><i class='ft-trash'></i> DELETE</a>
+                    </span>
+                </span>";
+                } else {
+                $button =
+                "<span class='dropdown'>
+                    <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+                    aria-expanded='false' class='btn btn-blue dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+                    <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+                        <a name='approve_modal' id='$data->id'  class='view dropdown-item'><i class='ft-eye'></i> VIEW</a>
+                    </span>
+                </span>";
+                }
                 return $button;
             })
             ->rawColumns(['action'])
@@ -131,6 +167,7 @@ class SosialisasiController extends BaseController
    
         $store = DB::table('peta_sosialisasi')->insert([
             'unit'          => Auth::user()->unit,
+            'ul_code'       => Auth::user()->unitap,
             'lokasi'        => $request->lokasi,
             'judul'         => $request->judul,
             'deskripsi'     => $request->deskripsi,
@@ -175,15 +212,18 @@ class SosialisasiController extends BaseController
     {
         $data = [
             'sosialisasi'            => $this->wpModel->getDetailSosialisasi($id),
-            // //'pelaksana_kerja'   => $this->wpModel->getPelaksanaKerja($id_template),
-            // 'tbl_hirarc'        => $this->wpModel->getHirarcTemplate($id_template),
-            // //'tbl_jsa'           => $this->wpModel->getJsa($id_template),
-            // //'peralatan'         => $this->wpModel->getPeralatan($id_template),
-            // 'unitType'          => $this->wpModel->getUnitType(),
-            // 'selectedID'        => $this->wpModel->getDetailTemplate($id_template)->jenis_template,
          ];
 
         return view('sosialisasi/edit-sosialisasi', $data);
+    }
+
+    public function view(Request $request, $id)
+    {
+        $data = [
+            'sosialisasi'            => $this->wpModel->getDetailSosialisasi($id),
+         ];
+
+        return view('sosialisasi/view-sosialisasi', $data);
     }
 
     public function update_sosialisasi(Request $request)

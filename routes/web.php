@@ -77,6 +77,7 @@ Route::prefix('sosialisasi')->group(function() {
     Route::get('list_index', 'Sosialisasi\SosialisasiController@list_index')->name('list_index');
     Route::get('get_detail_sosialisasi', 'Sosialisasi\SosialisasiController@get_detail_sosialisasi')->name('get_detail_sosialisasi');
     Route::get('edit_sosialisasi/{id}', 'Sosialisasi\SosialisasiController@edit_sosialisasi')->name('edit_sosialisasi');
+    Route::get('view/{id}', 'Sosialisasi\SosialisasiController@view')->name('view');
     Route::post('sosialisasi_delete', 'Sosialisasi\SosialisasiController@sosialisasi_delete')->name('sosialisasi_delete');
     Route::post('update_sosialisasi', 'Sosialisasi\SosialisasiController@update_sosialisasi')->name('update_sosialisasi');
     Route::get('get_markers_sosialisasi', 'Sosialisasi\SosialisasiController@get_markers_sosialisasi')->name('get_markers_sosialisasi');

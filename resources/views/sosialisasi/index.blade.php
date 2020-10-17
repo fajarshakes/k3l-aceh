@@ -65,25 +65,23 @@
                 </div>
                 <div class="card-content">
                   <table id="table-sosialisasi" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
-                          <thead>
-                            <tr>
-                              <th class="text-center">#</th>
-                              <th class="text-center">TANGGAL</th>
-                              <th class="text-center">UNIT</th>
-                              <th class="text-center">LOKASI</th>
-                              <th class="text-center">JUDUL SOSIALISASI</th>
-                              <th class="text-center">ACTION</th>
-                            </tr>
-                          </thead>
-                      </table>
+                    <thead>
+                      <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">TANGGAL</th>
+                        <th class="text-center">UNIT</th>
+                        <th class="text-center">LOKASI</th>
+                        <th class="text-center">JUDUL SOSIALISASI</th>
+                        <th class="text-center">ACTION</th>
+                      </tr>
+                    </thead>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
         </section>
         <!--/ Zero configuration table -->
-
-
 
         <!-- Modal -->
         <div class="modal fade text-left" id="submit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
@@ -374,6 +372,11 @@ $('#form_menu').on('submit', function(event){
 
     });
 
+    $(document).on('click', '.view', function(){
+      var id = $(this).attr('id');
+      location.href='/sosialisasi/view/' + id + '';
+    });
+    
     $(document).on('click', '.edit', function(){
       var id = $(this).attr('id');
       location.href='/sosialisasi/edit_sosialisasi/' + id + '';
