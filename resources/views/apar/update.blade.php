@@ -74,9 +74,9 @@
                           </h5>
                           <div class="form-group">
                             <select id="idgedung" name="idgedung" class="form-control">
-                              <option value="none" disabled="">PILIH GEDUNG</option>
+                              <option value="none">PILIH GEDUNG</option>
                               @foreach($list_unit as $list)
-                                <option value="{{ $list->ID_GEDUNG }}"  {{ $detail->ID_GEDUNG == $list->ID_GEDUNG }} ? 'selected' : '' }}>{{ $list->ID_GEDUNG .' - '. $list->NAMA_GEDUNG }}</option>
+                                <option value="{{ $list->ID_GEDUNG }}" {{ $detail->ID_GEDUNG == $list->ID_GEDUNG }} ? 'selected' : '' }}>{{ $list->ID_GEDUNG .' - '. $list->NAMA_GEDUNG }}</option>
                               @endforeach
                             </select>
                           </div>
@@ -99,6 +99,17 @@
                           <div class="form-group">
                             <input name="lokasi" type="text" class="form-control" placeholder="ex : BIDANG KEUANGAN, RUANG ARSIP" required value="{{$detail ? $detail->LOKASI_APAR : ''}}"
                             />
+                          </div>
+                        </fieldset>
+
+                        <fieldset>
+                          <h5>FOTO APAR
+                          </h5>
+                          <div class="form-group">
+                            <img src="{{ url('files/apar') }}/{{ $detail ? $detail->FILE_FOTO : '' }}" alt="Holi" class="rounded img-fluid float-left mr-2 mb-1" width="250" data-action="zoom">
+                            <input name="photo" type='file' class="form-control" accept="image/*"/>
+                            <input name="old_photo" type='hidden' value="{{$detail ? $detail->FILE_FOTO : ''}}" class="form-control" accept="image/*"/>
+                            <small class="text-muted">FOTO APAR</small>
                           </div>
                         </fieldset>
 

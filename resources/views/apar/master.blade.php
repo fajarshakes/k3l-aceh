@@ -153,6 +153,50 @@
           </div>
         </div>
 
+        <div class="modal fade text-left" id="formEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        data-backdrop="static" data-keyboard="false" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-info white">
+                <h4 class="modal-title white" id="myModalLabel11">Add Menu</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_edit" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="companyName">NAMA GEDUNG</label>
+                    <input type="text" class="form-control" placeholder="Nama Gedung" id="namagedung" name="namagedung">
+                </div>
+                
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                    <h5>COMPANY CODE</h5>
+                        <input class="form-control" id="company_cd" readonly/>
+                    </div>
+                    <div class="col-md-6">
+                    <h5>BUSINESS AREA</h5>
+                        <input class="form-control" id="buss_id" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <input type="hidden" name="id_gedung" id="id_gedung" />
+              
+              <div class="modal-footer">
+                <button type="button" name="close" id="close" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-outline-info">Submit</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <div class="modal fade text-left" id="modal_add_lantai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         data-backdrop="static" data-keyboard="false" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -198,6 +242,51 @@
           </div>
         </div>
 
+        <div class="modal fade text-left" id="modal_upd_lantai" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        data-backdrop="static" data-keyboard="false" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-info white">
+                <h4 class="modal-title white" id="myModalLabel11">Add Data</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <form id="form_upd_lantai" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="companyName">NAMA LANTAI</label>
+                    <input type="text" class="form-control" placeholder="Nama Lantai" name="namalantai" id="namalantai">
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="projectinput5">PILIH GEDUNG</label>
+                      <select id="id_gedung0" name="idgedung" class="form-control">
+                        <option value="none">PILIH GEDUNG</option>
+                        @foreach($list_unit as $list)
+                          <option value="{{ $list->ID_GEDUNG }}">{{ $list->ID_GEDUNG .' - '. $list->NAMA_GEDUNG }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <input type="hidden" name="id_lantai" id="id_lantai0" />
+             
+              <div class="modal-footer">
+                <button type="button" name="close" id="close" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" value="Add" class="btn btn-outline-info">Submit</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
 
         <div class="modal fade text-left" id="confirmModal_c" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
@@ -215,12 +304,12 @@
                 <h5 align="center" style="margin:0;">Are you sure you want to remove this data? <p id="catname"></p></h5>
               </div>
               <input type="hidden" name="del_action" id="del_action" />
-              <input type="hidden" name="del_hidden_id" id="del_hidden_id" />
+              <input type="hidden" name="del_id" id="del_id" />
 
               
               <div class="modal-footer">
                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" name="ok_button" id="ok_button" value="Add" class="btn btn-outline-danger">Yes, Remove !</button>
+                <button type="submit" class="btn btn-outline-danger">Yes, Remove !</button>
               </div>
               </form>
             </div>
@@ -255,11 +344,32 @@ $(document).ready(function() {
       className: "text-center"
       },
       {
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+      
+      return `
+      <span class='dropdown'>
+          <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+          aria-expanded='false' class='btn btn-blue dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+          <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+            <a href='#' name='edit_modal' id='${full.ID_GEDUNG}' class='edit dropdown-item'><i class='ft-edit-2'></i> EDIT DATA</a>
+            <div class='dropdown-divider'></div>
+            <a href='#' name='del_modal' id='${full.ID_GEDUNG}' class='delete dropdown-item'><i class='ft-trash'></i> DELETE</a>
+          </span>
+        </span>`;
+      }
+      },
+      /*
+      {
       data: 'action',
       //name: 'action',
       orderable: false,
       className: "text-center"
       }
+      */
     ]
    });
    
@@ -296,11 +406,24 @@ $(document).ready(function() {
       className: "text-center"
       },
       {
-      data: 'action',
-      //name: 'action',
-      orderable: false,
-      className: "text-center"
+      "data": null,
+      "searchable": false,
+      "orderable": false,
+      className: "text-center",
+      "render": function (data, type, full, meta) {
+      
+      return `
+      <span class='dropdown'>
+          <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+          aria-expanded='false' class='btn btn-blue dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+          <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+            <a href='#' name='edit_modal' id='${full.ID_LANTAI}' class='edit1 dropdown-item'><i class='ft-edit-2'></i> EDIT DATA</a>
+            <div class='dropdown-divider'></div>
+            <a href='#' id='${full.ID_LANTAI}' class='delete1 dropdown-item'><i class='ft-trash'></i> DELETE</a>
+          </span>
+        </span>`;
       }
+      },
     ]
    });
    
@@ -491,6 +614,242 @@ $(document).ready(function() {
               //$('#formModal').html('');
               $('#formModal').modal('hide');
               $('#datamenu').DataTable().ajax.reload();
+            }
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            }    
+          }
+        });
+      }
+
+    });
+
+    $('#form_edit').on('submit', function(event){
+      event.preventDefault();
+
+      $.ajax({
+        url:"{{ route('apar_upd_gedung') }}",
+        method:"POST",
+        data: new FormData(this),
+        contentType: false,
+        cache:false,
+        processData: false,
+        dataType:"json",
+        success:function(data)
+        {
+          var html = '';
+          if(data.errors)
+          {
+            html = '<div>';
+            for(var count = 0; count < data.errors.length; count++)
+            {
+              html += '<li>' + data.errors[count] + '</li>';
+            }
+            html += '</div>';
+            type_toast = 'error';
+          }
+          if(data.success)
+          {
+            //html = '<div class="alert alert-success">' + data.success + '</div>';
+            html = data.success;
+            type_toast = 'success';
+            $('#form_edit')[0].reset();
+            $('#formEdit').modal('hide');
+            $('#tbl_master_gedung').DataTable().ajax.reload();
+          }
+          //$('#form_result').html(html);
+          if(type_toast == 'error'){
+            toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+          } else if (type_toast == 'success') {
+            toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+          }
+        }
+      })
+
+    });
+
+    $('#form_upd_lantai').on('submit', function(event){
+      event.preventDefault();
+
+      $.ajax({
+        url:"{{ route('apar_upd_lantai') }}",
+        method:"POST",
+        data: new FormData(this),
+        contentType: false,
+        cache:false,
+        processData: false,
+        dataType:"json",
+        success:function(data)
+        {
+          var html = '';
+          if(data.errors)
+          {
+            html = '<div>';
+            for(var count = 0; count < data.errors.length; count++)
+            {
+              html += '<li>' + data.errors[count] + '</li>';
+            }
+            html += '</div>';
+            type_toast = 'error';
+          }
+          if(data.success)
+          {
+            //html = '<div class="alert alert-success">' + data.success + '</div>';
+            html = data.success;
+            type_toast = 'success';
+            $('#form_upd_lantai')[0].reset();
+            $('#modal_upd_lantai').modal('hide');
+            $('#tbl_master_lantai').DataTable().ajax.reload();
+          }
+          //$('#form_result').html(html);
+          if(type_toast == 'error'){
+            toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+          } else if (type_toast == 'success') {
+            toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+          }
+        }
+      })
+
+    });
+
+    $(document).on('click', '.edit', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('apar/get_detail_gedung/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#namagedung').val(html.data.NAMA_GEDUNG);
+          $('#company_cd').val(html.data.COMP_CODE);
+          $('#buss_id').val(html.data.BUSS_AREA);
+          $('#id_gedung').val(html.data.ID_GEDUNG);
+          $('.modal-title').text("UPDATE DATA GEDUNG");
+          $('#action_button').val("Edit");
+          $('#action').val("Edit");
+          $('#formEdit').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
+    });
+
+    $(document).on('click', '.edit1', function(){
+      var id = $(this).attr('id');
+      $('#form_result').html('');
+      $.ajax({
+        type : "GET",
+        url: "{{ url('apar/get_detail_lantai/') }}",
+        dataType:"json",
+        data:{id:id},
+        success: function(html) {
+          $('#namalantai').val(html.data.NAMA_LANTAI);
+          $('#id_lantai0').val(html.data.ID_LANTAI);
+          $("#id_gedung0").val(html.data.ID_GEDUNG).attr('selected','selected');
+          $('.modal-title').text("UPDATE DATA LANTAI");
+          $('#action_button').val("Edit");
+          $('#action').val("Edit");
+          $('#modal_upd_lantai').modal('show');
+        },error: function (jqXhr, textStatus, errorMessage) { // error callback 
+					$('p').append('Error: ' + errorMessage);
+				}
+      })
+    });
+
+    $(document).on('click', '.delete', function(){
+      var id = $(this).attr('id');
+        $('.modal-title').text("HAPUS DATA GEDUNG");
+        $('#del_action').val("DEL_GEDUNG");
+        $('#del_id').val( id );
+        $('#confirmModal_c').modal('show');
+      });
+    
+    $(document).on('click', '.delete1', function(){
+      var id = $(this).attr('id');
+        $('.modal-title').text("HAPUS DATA LANTAI");
+        $('#del_action').val("DEL_LANTAI");
+        $('#del_id').val( id );
+        $('#confirmModal_c').modal('show');
+      });
+  
+    $('#confirm_form_c').on('submit', function(event){
+      event.preventDefault();
+      
+      if($('#del_action').val() == 'DEL_LANTAI')
+      {
+        $.ajax({
+          url:"{{ route('apar_del_lantai') }}",
+          method:"POST",
+          data: new FormData(this),
+          contentType: false,
+          cache:false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              //html = '<div class="alert alert-success">' + data.success + '</div>';
+              html = data.success;
+              type_toast = 'success';
+              $('#confirm_form_c')[0].reset();
+              $('#confirmModal_c').modal('hide');
+              $('#tbl_master_lantai').DataTable().ajax.reload();
+            }
+            //$('#form_result').html(html);
+            if(type_toast == 'error'){
+              toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            } else if (type_toast == 'success') {
+              toastr.success(html, 'Success !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});
+            }
+          }
+        })
+      }
+      
+      if($('#del_action').val() == "DEL_GEDUNG")
+      {
+        $.ajax({
+          url:"{{ route('apar_del_gedung') }}",
+          method:"POST",
+          data:new FormData(this),
+          contentType: false,
+          cache: false,
+          processData: false,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
+            if(data.errors)
+            {
+              html = '<div>';
+              for(var count = 0; count < data.errors.length; count++)
+              {
+                html += '<li>' + data.errors[count] + '</li>';
+              }
+              html += '</div>';
+              type_toast = 'error';
+            }
+            if(data.success)
+            {
+              html = data.success;
+              type_toast = 'success';
+              $('#confirm_form_c')[0].reset();
+              $('#confirmModal_c').modal('hide');
+              $('#tbl_master_gedung').DataTable().ajax.reload();
             }
             if(type_toast == 'error'){
               toastr.error(html, 'Error !', {"showMethod": "slideDown", "hideMethod": "slideUp", "progressBar": true, timeOut: 2000});

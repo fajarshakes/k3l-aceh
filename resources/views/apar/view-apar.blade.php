@@ -38,6 +38,7 @@
                     </ul>
                   </div>
                 </div>
+
                 <div class="card collapse-icon accordion-icon-rotate">
                 <div id="headingCollapse61" class="card-header border-success">
                   <a data-toggle="collapse" href="#collapse61" aria-expanded="true" aria-controls="collapse61"
@@ -162,7 +163,7 @@
                         <fieldset>
                           <h5>FOTO APAR</h5>
                           <div class="form-group">
-                            <img src="../../../app-assets/images/carousel/01.jpg" alt="Holi" class="rounded img-fluid float-left mr-2 mb-1" width="400" height="300" data-action="zoom">
+                            <img src="{{ url('files/apar') }}/{{ $detail ? $detail->FILE_FOTO : '' }}" alt="Holi" class="rounded img-fluid float-left mr-2 mb-1" width="400" height="300" data-action="zoom">
                           </div>
                         </fieldset>
                       </div>

@@ -43,7 +43,7 @@ class AparController extends BaseController
         $data = [
             'my_ccode'      => Auth::user()->comp_code,
             'my_barea'      => Auth::user()->unit,
-            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unit),
+            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unitap ),
          ];
         return view('apar/add', $data);
     }
@@ -64,7 +64,7 @@ class AparController extends BaseController
             'my_ccode'      => Auth::user()->comp_code,
             'my_barea'      => Auth::user()->unit,
             'detail'        => $this->AparModel->getDetailByID($id),
-            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unit),
+            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unitap),
          ];
         return view('apar/update', $data);
     }
@@ -78,13 +78,21 @@ class AparController extends BaseController
     public function list_index_apar(Request $request)
     {
         $b_area = Auth::user()->unit;
+
+        if (Auth::user()->unit == '6101'){
+            $add_conditions = '';
+        } else {
+            $add_conditions = 'AND pa.UL_CODE = ' . Auth::user()->unitap;
+        }
+
         $sql = "SELECT
                     pa.*
                 FROM
                     peta_apar pa
                 WHERE
                     pa.BUSS_AREA  = '$b_area' AND
-                    pa.STATUS = 'ACTIVE'";
+                    pa.STATUS = 'ACTIVE'
+                    $add_conditions ";
         $v = DB::select($sql);
             
         return Datatables::of($v)
@@ -166,10 +174,16 @@ class AparController extends BaseController
     
         $mix_code = 'APR' . Auth::user()->unit;
         $new_id = $this->AparModel->generateIdApar($mix_code);
+
+        $photo       = $request->file('photo');
+        $nama_photo   = $new_id . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path('files/apar/'), $nama_photo);
+
         $store = DB::table('peta_apar')->insert([
             'ID_APAR'       => $new_id,
             'COMP_CODE'     => Auth::user()->comp_code,
             'BUSS_AREA'     => Auth::user()->unit,
+            'UL_CODE'       => Auth::user()->unitap,
             'ID_GEDUNG'     => $request->idgedung,
             'ID_LANTAI'     => $request->idlantai,
             'LOKASI_APAR'   => $request->lokasi,
@@ -178,6 +192,7 @@ class AparController extends BaseController
             'TYPE'          => $request->type,
             'KAPASITAS'     => $request->kapasitas,
             'MEDIA'         => $request->media,
+            'FILE_FOTO'     => $nama_photo,
             'TGL_EXPIRED'   => $request->exp_date,
             'TGL_REFILL'    => $request->refill_date,
             'JADWAL_HAR'    => $request->har_date,
@@ -213,6 +228,14 @@ class AparController extends BaseController
         }
         */
 
+        $photo       = $request->file('photo');
+        if (isset($photo)) {
+        $nama_photo   = $request->id_apar . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path('files/apar/'), $nama_photo);
+        } else {
+            $nama_photo= $request->old_photo;
+        }
+
         $store = DB::table('peta_apar')
         ->where('ID_APAR', $request->id_apar)
         ->update([
@@ -224,6 +247,7 @@ class AparController extends BaseController
             'TYPE'          => $request->type,
             'KAPASITAS'     => $request->kapasitas,
             'MEDIA'         => $request->media,
+            'FILE_FOTO'     => $nama_photo,
             'TGL_EXPIRED'   => $request->exp_date,
             'TGL_REFILL'    => $request->refill_date,
             'JADWAL_HAR'    => $request->har_date,
@@ -266,10 +290,16 @@ class AparController extends BaseController
 
     public function master(Request $request)
     {
+        if (Auth::user()->unit == '6101'){
+            $list = $this->AparModel->list_gedung_ui(Auth::user()->unit);
+        } else {
+            $list = $this->AparModel->list_gedung_byunit(Auth::user()->unitap);
+        }
+
         $data = [
             'my_ccode'      => Auth::user()->comp_code,
             'my_barea'      => Auth::user()->unit,
-            'list_unit'     => $this->AparModel->list_gedung_byunit(Auth::user()->unit),
+            'list_unit'     => $list,
          ];
         return view('apar/master', $data);     
     }
@@ -277,20 +307,29 @@ class AparController extends BaseController
     public function list_master_gedung(Request $request)
     {
         $unit = Auth::user()->unit;
+
+        if (Auth::user()->unit == '6101'){
+            $add_conditions = '';
+        } else {
+            $add_conditions = 'AND mg.UL_CODE = ' . Auth::user()->unitap;
+        }
+
         $sql = "SELECT
                     mg.*, mu.UNIT_NAME
                 FROM
                     master_gedung mg LEFT JOIN master_unit mu ON mg.BUSS_AREA = mu.BUSS_AREA
                 WHERE
                     mg.STATUS = 1
-                    AND mg.BUSS_AREA = '$unit' ";
+                    AND mg.BUSS_AREA = '$unit'
+                    $add_conditions ";
         $v = DB::select($sql);
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->ID_GEDUNG.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
+                $button = '<button type="button" name="edit" id="'.$data->ID_GEDUNG.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
                 $button .= '&nbsp;&nbsp;';
                 $button .= '<button type="button" name="delete" id="'.$data->ID_GEDUNG.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
+                
                 return $button;
             })
             ->rawColumns(['action'])
@@ -300,6 +339,13 @@ class AparController extends BaseController
     public function list_master_lantai(Request $request)
     {
         $unit = Auth::user()->unit;
+        
+        if (Auth::user()->unit == '6101'){
+            $add_conditions = '';
+        } else {
+            $add_conditions = 'AND mg.UL_CODE = ' . Auth::user()->unitap;
+        }
+
         $sql = "SELECT
                     mgd.*, mg.NAMA_GEDUNG, mu.UNIT_NAME
                 FROM
@@ -307,13 +353,14 @@ class AparController extends BaseController
                     LEFT JOIN master_gedung mg ON mg.ID_GEDUNG = mgd.ID_GEDUNG
                     LEFT JOIN master_unit mu ON mg.BUSS_AREA = mu.BUSS_AREA
                 WHERE
-                    mg.STATUS = 1
-                    AND mg.BUSS_AREA = '$unit'";
+                    mgd.STATUS = 1
+                    AND mg.BUSS_AREA = '$unit'
+                    $add_conditions ";
         $v = DB::select($sql);
             
         return Datatables::of($v)
             ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->ID_LANTAI.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
+                $button = '<button type="button" name="edit" id="'.$data->ID_LANTAI.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i></button>';
                 $button .= '&nbsp;&nbsp;';
                 $button .= '<button type="button" name="delete" id="'.$data->ID_LANTAI.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> </button>';
                 return $button;
@@ -342,6 +389,7 @@ class AparController extends BaseController
             'ID_GEDUNG'     =>  $new_id,
             'COMP_CODE'     => Auth::user()->comp_code,
             'BUSS_AREA'     => Auth::user()->unit,
+            'UL_CODE'       => Auth::user()->unitap,
             'NAMA_GEDUNG'   => $request->namagedung,
             'STATUS'        => '1',
             'CREATED_AT'    => date('Y-m-d'),
@@ -349,6 +397,53 @@ class AparController extends BaseController
         ]);
 
         return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function apar_upd_gedung(Request $request)
+    {
+        $rules = array(
+            'namagedung'        =>  'required',
+        );
+        
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        
+        $store = DB::table('master_gedung')
+        ->where('ID_GEDUNG', $request->id_gedung)
+        ->update([
+            'NAMA_GEDUNG'   => $request->namagedung,
+            'STATUS'        => '1',
+        ]);
+
+        return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function apar_del_gedung(Request $request)
+    {
+        
+        $store = DB::table('master_gedung')
+        ->where('ID_GEDUNG', $request->del_id)
+        ->update([
+            'STATUS'        => '0',
+        ]);
+
+        return response()->json(['success' => 'Data Deleted successfully.']);
+    }
+    
+    public function apar_del_lantai(Request $request)
+    {
+        
+        $store = DB::table('master_gedung_detail')
+        ->where('ID_LANTAI', $request->del_id)
+        ->update([
+            'STATUS'        => '0',
+        ]);
+
+        return response()->json(['success' => 'Data Deleted successfully.']);
     }
 
     public function apar_add_lantai(Request $request)
@@ -373,10 +468,35 @@ class AparController extends BaseController
             'ID_GEDUNG'     =>  $id_gedung,
             'COMP_CODE'     => Auth::user()->comp_code,
             'BUSS_AREA'     => Auth::user()->unit,
+            'UL_CODE'       => Auth::user()->unitap,
             'NAMA_LANTAI'   => $request->namalantai,
             'STATUS'        => '1',
             'CREATED_AT'    => date('Y-m-d'),
             'CREATED_BY'    => Auth::user()->username,
+        ]);
+
+        return response()->json(['success' => 'Data Added successfully.']);
+    }
+
+    public function apar_upd_lantai(Request $request)
+    {
+        $rules = array(
+            'namalantai'        =>  'required',
+            'idgedung'        =>  'required',
+        );
+        
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails())
+        {
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+        
+        $store = DB::table('master_gedung_detail')
+        ->where('ID_LANTAI', $request->id_lantai)
+        ->update([
+            'ID_GEDUNG'     => $request->idgedung,
+            'NAMA_LANTAI'   => $request->namalantai,
         ]);
 
         return response()->json(['success' => 'Data Added successfully.']);
@@ -399,6 +519,28 @@ class AparController extends BaseController
         $data = DB::table('peta_apar')
         ->select('*')
         ->where('ID_APAR','=',$id)
+        ->first();
+        
+        return response()->json(['data' => $data]);
+    }
+
+    public function get_detail_gedung()
+    {
+        $id = $_GET['id'];
+        $data = DB::table('master_gedung')
+        ->select('*')
+        ->where('ID_GEDUNG','=',$id)
+        ->first();
+        
+        return response()->json(['data' => $data]);
+    }
+
+    public function get_detail_lantai()
+    {
+        $id = $_GET['id'];
+        $data = DB::table('master_gedung_detail')
+        ->select('*')
+        ->where('ID_LANTAI','=',$id)
         ->first();
         
         return response()->json(['data' => $data]);

@@ -54,19 +54,19 @@
                   </div>
                 </div>
                 <div class="card-content">
-                  <table id="table-permohonan" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
-                          <thead>
-                            <tr>
-                              <th class="text-center">#</th>
-                              <th class="text-center">NO URUT</th>
-                              <th class="text-center">LOKASI</th>
-                              <th class="text-center">MERK</th>
-                              <th class="text-center">KAPASITAS</th>
-                              <th class="text-center">TGL EXPIRED</th>
-                              <th class="text-center">ACTION</th>
-                            </tr>
-                          </thead>
-                      </table>
+                  <table id="table-apar" class="table display nowrap table-striped table-bordered zero-configuration">
+                    <thead>
+                      <tr>
+                        <th class="text-center">#</th>
+                        <th class="text-center">NO URUT</th>
+                        <th class="text-center">LOKASI</th>
+                        <th class="text-center">MERK</th>
+                        <th class="text-center">KAPASITAS</th>
+                        <th class="text-center">TGL EXPIRED</th>
+                        <th class="text-center">ACTION</th>
+                      </tr>
+                    </thead>
+                  </table>
                 </div>
               </div>
             </div>
@@ -147,7 +147,7 @@
                 </button>
               </div>
               
-              <form id="form_qr" method="post" enctype="multipart/form-data">
+              <form id="form_qr_code" method="post" enctype="multipart/form-data">
               <div class="modal-body">
               <div class="row">
               
@@ -158,6 +158,7 @@
                     <div class="row">
                       <div class="col-5">
                       {!! QrCode::size(100)->generate('http://saman.plnaceh.id:9000/apar/view/APR61010001') !!}
+                      <span id="qrcodeTable"></span>
                       </div>
                       <div class="col-7 text-right">
                         <h4 class="text-white mb-3"><i class="la la-qrcode" title="LTC"></i> <span id="apar_id"></span></h4>
@@ -277,11 +278,11 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-var vtable = $('#table-permohonan').DataTable({
+var vtable = $('#table-apar').DataTable({
    processing: true,
    serverSide: true,
    paging: true,
-   scrollX: true,
+   //scrollX: true,
    order: [[ 2, 'asc' ]],
    ajax:{
     url: "{{ route('list_index_apar') }}",
@@ -337,6 +338,7 @@ var vtable = $('#table-permohonan').DataTable({
 
 $(document).on('click', '.qrcode', function(){
       var id = $(this).attr('id');
+
       $('#form_result').html('');
       $.ajax({
         type : "GET",
@@ -347,7 +349,9 @@ $(document).on('click', '.qrcode', function(){
           $("#apar_id").text( id );
           $("#exp_date").text( html.data.TGL_EXPIRED );
           $("#location").text( html.data.LOKASI_APAR );
-          $("#link22").attr( html.data.ID_APAR );
+          /*
+          $("#qrcodeTable").append( {!! QrCode::size(100)->generate('http://saman.plnaceh.id:9000/apar/view/APR61010001') !!} );
+          */
           /*
           $("#qrcodeTable").qrcode({
             width	: "100",
@@ -366,15 +370,12 @@ $(document).on('click', '.qrcode', function(){
       })
     });
 
-
-$('#qr_form').on('hidden.bs.modal', function(e){
-    $(this).find('form_qr')[0].reset();           
-});
-
-$('#qr_form').on('hidden.modal', function () {
-    $(this).find('form_qr').trigger('reset');
-    $('#qr_form').remove();
-});
+$('#qr_form').on('hide.bs.modal', function (e) {
+  // do something...
+  $(this).removeData('bs.modal');
+  $(".modal-content").empty();
+  
+})
 
 $('#form_menu').on('submit', function(event){
       event.preventDefault();

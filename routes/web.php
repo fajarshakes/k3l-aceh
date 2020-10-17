@@ -95,6 +95,10 @@ Route::prefix('apar')->group(function() {
     Route::get('list_index_apar', 'Apar\AparController@list_index_apar')->name('list_index_apar');
     Route::post('apar_add_gedung', 'Apar\AparController@apar_add_gedung')->name('apar_add_gedung');
     Route::post('apar_add_lantai', 'Apar\AparController@apar_add_lantai')->name('apar_add_lantai');
+    Route::post('apar_upd_gedung', 'Apar\AparController@apar_upd_gedung')->name('apar_upd_gedung');
+    Route::post('apar_upd_lantai', 'Apar\AparController@apar_upd_lantai')->name('apar_upd_lantai');
+    Route::post('apar_del_gedung', 'Apar\AparController@apar_del_gedung')->name('apar_del_gedung');
+    Route::post('apar_del_lantai', 'Apar\AparController@apar_del_lantai')->name('apar_del_lantai');
     Route::get('list_master_gedung', 'Apar\AparController@list_master_gedung')->name('list_master_gedung');
     Route::get('list_master_lantai', 'Apar\AparController@list_master_lantai')->name('list_master_lantai');
     Route::get('getLantaiByGedung/{id}', 'Apar\AparController@getLantaiByGedung')->name('getLantaiByGedung');;
@@ -103,6 +107,8 @@ Route::prefix('apar')->group(function() {
     Route::get('list_history_apar/{id}', 'Apar\AparController@list_history_apar')->name('list_history_apar');
     Route::get('get_detail_history', 'Apar\AparController@get_detail_history')->name('get_detail_history');
     Route::get('get_detail', 'Apar\AparController@get_detail')->name('get_detail');
+    Route::get('get_detail_gedung', 'Apar\AparController@get_detail_gedung')->name('get_detail_gedung');
+    Route::get('get_detail_lantai', 'Apar\AparController@get_detail_lantai')->name('get_detail_lantai');
     Route::post('delete_history', 'Apar\AparController@delete_history')->name('delete_history');
     Route::get('update/{id}', 'Apar\AparController@update')->name('update');
     Route::post('update_apar', 'Apar\AparController@update_apar')->name('update_apar');

@@ -37,12 +37,25 @@ class AparModel extends Model
         return Common::generateId2Digit($prefixJenis, $noUrut);
     }
   
-  public function list_gedung_byunit(string $buss_area)
+    public function list_gedung_ui(string $unit)
     {
       $value=DB::table('master_gedung')
       ->orderBy('ID_GEDUNG', 'asc')
       ->where('STATUS', '=', '1')
-      ->where('BUSS_AREA', '=', $buss_area)
+      ->where('BUSS_AREA', '=', $unit)
+      //->where('UL_CODE', '=', $unitap)
+      ->get(); 
+  
+      return $value;
+    }
+    
+    public function list_gedung_byunit(string $unitap)
+    {
+      $value=DB::table('master_gedung')
+      ->orderBy('ID_GEDUNG', 'asc')
+      ->where('STATUS', '=', '1')
+      //->where('BUSS_AREA', '=', $buss_area)
+      ->where('UL_CODE', '=', $unitap)
       ->get(); 
   
       return $value;

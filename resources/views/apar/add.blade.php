@@ -93,6 +93,14 @@
                           </div>
                         </fieldset>
 
+                        <fieldset>
+                          <h5>FOTO APAR</h5>
+                          <div class="form-group">
+                            <input name="photo" type='file' class="form-control" accept="image/*"/>
+                            <small class="text-muted">FOTO APAR</small>
+                          </div>
+                        </fieldset>
+
                       </div>
 
                       <div class="col-xl-6 col-lg-12">

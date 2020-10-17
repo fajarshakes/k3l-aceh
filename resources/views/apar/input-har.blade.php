@@ -49,9 +49,15 @@
                   </div>
                 </div>
                 <div class="card-content collapse show">
-                <form id="form_mesnu" action="add_store" method="post" enctype="multipart/form-data">
-                @csrf  
-                  <div class="card-body">
+                <div id="headingCollapse61" class="card-header border-success">
+                  <a data-toggle="collapse" href="#collapse61" aria-expanded="true" aria-controls="collapse61"
+                  class="card-title lead success"><i class="la la-fire-extinguisher"></i> INFORMASI APAR</a>
+                </div>
+                <div id="collapse61" role="tabpanel" aria-labelledby="headingCollapse61" class="card-collapse collapse show border-success"
+                aria-expanded="true">
+                  <div class="card-content">
+                    <div class="card-body">
+                      
                     <div class="row">
                       <div class="col-xl-6 col-lg-12">
                         <fieldset>
@@ -121,8 +127,8 @@
                           <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
-                            <h5>KAPASITAS</h5>
-                                <input name="kapasitas" class="form-control" readonly value="{{$detail ? $detail->KAPASITAS : ''}}"/>
+                            <h5>KAPASITAS (KG)</h5>
+                                <input name="kapasitas" class="form-control" readonly value="{{$detail ? $detail->KAPASITAS : ''}} KG"/>
                             </div>
                             <div class="col-md-6">
                             <h5>MEDIA</h5>
@@ -149,8 +155,34 @@
                       
                       </div>
                     </div>
+
+                    </div>
                   </div>
-              </form>
+                </div>
+                <div id="headingCollapse62" class="card-header mt-1 border-danger">
+                  <a data-toggle="collapse" href="#collapse62" aria-expanded="false" aria-controls="collapse62"
+                  class="card-title lead danger collapsed"><i class="la la-qrcode"></i> QR CODE & FOTO </a>
+                </div>
+
+                <div id="collapse62" role="tabpanel" aria-labelledby="headingCollapse62" class="border-danger no-border-top card-collapse collapse"
+                aria-expanded="false">
+                  <div class="card-content">
+                    <div class="card-body">
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-12">
+                        <fieldset>
+                          <h5>FOTO APAR</h5>
+                          <div class="form-group">
+                            <img src="{{ url('files/apar') }}/{{ $detail ? $detail->FILE_FOTO : '' }}" alt="Holi" class="rounded img-fluid float-left mr-2 mb-1" width="400" height="300" data-action="zoom">
+                          </div>
+                        </fieldset>
+                      </div>
+                    </div>
+
+                    </div>
+                  </div>
+                </div>
+
                 </div>
               </div>
             </div>
