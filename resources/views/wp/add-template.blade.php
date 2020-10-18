@@ -123,8 +123,8 @@
                                 </tr>
                               </thead>
                               <tbody id="konten_hirarc">
-                                <tr>
-                                  <td><button class="btn-danger btn-sm disabled"><i class="la la-trash-o"></i></button></td>
+                                <tr class="baris_hirarc">
+                                  <td><button type="button" id="hapus" class="hapus btn btn-danger btn-sm"><i class="la la-trash-o"></i></button></td>
                                   <td><input type="text" class="form-control" name="kegiatan_hirarc[]"></td>
                                   <td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]"></td>
                                   <td><input type="text" class="form-control" name="resiko_hirarc[]"></td>
@@ -321,20 +321,20 @@
                           <table id="tbl-analisa" class="table display nowrap table-striped table-bordered zero-configuration">
                             <thead>
                               <tr>
-                                <th class="text-center">LANGKAH PEKERJAAN</th>
+                                <th class="text-center">ACTION</th>
                                 <th class="text-center">POTENSI BAHAYA</th>
                                 <th class="text-center">RESIKO</th>
                                 <th class="text-center">TINDAKAN PENGENDALIAN</th>
-                                <th class="text-center">ACTION</th>
+                                <th class="text-center">LANGKAH PEKERJAAN</th>
                               </tr>
                             </thead>
                             <tbody id="konten-analisis">
-                              <tr>
+                              <tr class="baris_analisis">
+                                <td><button type="button" class="hapus_analisis btn btn-danger btn-sm"> <i class="la la-trash-o"></i></button></td>
                                 <td><input type="text" class="form-control" name="langkah_pekerjaan[]"></td>
                                 <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
                                 <td><input type="text" class="form-control" name="resiko[]"></td>
                                 <td><input type="text" class="form-control" name="tindakan[]"></td>
-                                <td></td>
                               </tr>
                             </tbody>
                           </table>
@@ -472,7 +472,7 @@ $('#form_menu').on('submit', function(event){
     kendali_kemungkinan_hirarc = '<select class="form-control select2me paket_harga required" id="id_kendali_konsekuensi_hirarc+nomor" name="kendali_kemungkinan[]"><option value="" selected="selected">PILIH</option><option value="A">A : Hampir pasti akan terjadi/almost certain</option><option value="B">B : Cenderung untuk terjadi/likely</option><option value="C">C : Mungkin dapat terjadi / moderate</option><option value="D">D : Kecil kemungkinan terjadi/unlikely</option><option value="E">E : Jarang terjadi/rare</option></select>';   
     $('#konten_hirarc').append(
       '<tr class="baris_hirarc">'
-          +'<td align="center" style="text-align:center;text-align: center;vertical-align: middle;"><button type="button" id="hapus" class="btn hapus_in btn-danger btn-sm"><i class="la la-trash-o"></i></button></td>'
+          +'<td align="center" style="text-align:center;text-align: center;vertical-align: middle;"><button type="button" id="hapus" class="btn hapus btn-danger btn-sm"><i class="la la-trash-o"></i></button></td>'
 					+'<td><input type="input" name="kegiatan_hirarc[]" class="form-control"></td>'
 					+'<td><input type="text" class="form-control" name="potensi_bahaya_hirarc[]" /></td>'
 					+'<td><input type="input" name="resiko_hirarc[]" class="form-control"></td>'
@@ -489,12 +489,13 @@ $('#form_menu').on('submit', function(event){
       $('select.select2me').select2();
     
     });
-    /*
-    $("#hapus").live('click', function () {
-      $(this).parents(".baris_hirarc").hide("fast", function(){ $(this).remove(); });
+
+    $("#konten_hirarc").on('click', '.hapus', function () {
+      $(this).parents(".baris_hirarc").hide("fast", function()
+      { $(this).remove(); });
     });
-    */
-    });
+
+  });
 
 	$(document).ready(function() {
 
@@ -506,22 +507,21 @@ $('#form_menu').on('submit', function(event){
                                                                                                                                                                   
           $('#konten-analisis').append(
           '<tr class="baris_analisis">'
+            +'<td align="center" style="vertical-align:middle;"><button type="button" class="hapus_analisis btn btn-sm btn-danger btn-icon"><i class="la la-trash-o"></i></button></td>'
             +'<td><input type="input" name="langkah_pekerjaan[]" class="form-control"></td>'
             +'<td><input type="input" name="potensi_bahaya[]" class="form-control"></td>'
             +'<td><input type="input" name="resiko[]" class="form-control"></td>'
             +'<td><input type="input" name="tindakan[]" class="form-control"></td>'
-            +'<td align="center" style="vertical-align:middle;"><button type="button" id="hapus" class="btn hapus_in btn-sm btn-danger btn-icon"><i class="la la-trash-o"></i></button></td>'
           +'</tr>'
           );
           
           $('select.select2me').select2();
         });
 
-				/*
-        $("#hapus").live('click', function () {
-			  $(this).parents(".baris_jsa").hide("fast", function(){ $(this).remove(); });
-        });		
-        */
+        $("#konten-analisis").on('click', '.hapus_analisis', function () {
+          $(this).parents(".baris_analisis").hide("fast", function()
+          { $(this).remove(); });
+        });
 
     });
 </script>

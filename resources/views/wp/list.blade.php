@@ -584,6 +584,7 @@ var vtable = $('#table-permohonan').DataTable({
           <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
           aria-expanded='false' class='btn btn-warning dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
           <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+            <a href='#' onclick="location.href='/wp/detail/${full.id_wp}'" class='dropdown-item'><i class='ft-eye'></i> DETAIL</a>
             <a href='#' name='edit_modal' id='${full.id_wp}' class='edit0 dropdown-item'><i class='ft-edit-2'></i> EDIT DATA</a>
             <a href='#' name='approve_modal' id='${full.id_wp}'  class='edit dropdown-item'><i class='la la-check-circle'></i> APPROVAL</a>
             <div class='dropdown-divider'></div>
