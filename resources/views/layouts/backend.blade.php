@@ -449,6 +449,15 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
   <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 
 
+  <script src="{{ url('app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url('app-assets/vendors/js/tables/jszip.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url('app-assets/vendors/js/tables/pdfmake.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url('app-assets/vendors/js/tables/vfs_fonts.js') }}" type="text/javascript"></script>
+  <script src="{{ url('app-assets/vendors/js/tables/buttons.html5.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url('app-assets/vendors/js/tables/buttons.print.min.js') }}" type="text/javascript"></script>
+  <script src="{{ url('app-assets/vendors/js/tables/buttons.colVis.min.js') }}" type="text/javascript"></script>
+
+
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN MODERN JS-->
   <script src="{{ url('app-assets/js/core/app-menu.js') }}" type="text/javascript"></script>
@@ -481,8 +490,8 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
   
   <script src="{{ url('app-assets/vendors/js/forms/icheck/icheck.min.js') }}" type="text/javascript"></script>
   <script src="{{ url('app-assets/js/scripts/cards/card-statistics.js') }}" type="text/javascript"></script>
-
-
+  <script src="{{ url('app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-html5.js') }}" type="text/javascript"></script>
+  
   <!-- END PAGE LEVEL JS-->
 
   <!-- JS TAMBAHAN -->

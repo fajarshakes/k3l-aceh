@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Master;
 use App\Models\Apar\AparModel;
 use App\Models\Master\User;
+use App\Models\Wp\WpModel;
 use Illuminate\Support\Facades\Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
@@ -31,11 +32,25 @@ class AparController extends BaseController
         $this->middleware('auth');
         $this->AparModel     = new AparModel();
         $this->UserModel     = new User();
+        $this->wpModel       = new WpModel();
+
     }
     
     public function index(Request $request)
     {
-        return view('apar/index');     
+        //$this->authorize('isPln');
+        $myunit = Auth::user()->unit;
+        if (Auth::user()->unit == '6101'){
+            $unit = $this->wpModel->getUnit();
+        } else {
+            $unit = $this->wpModel->getMyUnit($myunit);
+        }
+
+        $data = [
+            'unitList'          => $unit,        
+        ];
+
+        return view('apar/index', $data);     
     }
 
     public function add(Request $request)

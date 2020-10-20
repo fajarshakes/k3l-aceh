@@ -36,6 +36,17 @@ class MasterModel extends Model
       return $value;
     }
 
+    public function get_unit_lv3(string $unitap){
+
+      $value=DB::table('master_unit_l3')
+      ->orderBy('UL_CODE', 'asc')
+      ->where('BUSS_AREA', '=', $unitap)
+      //->where('group_id', '=', $group)
+      ->get(); 
+  
+      return $value;
+    }
+
 }
 
 

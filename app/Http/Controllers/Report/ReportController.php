@@ -10,7 +10,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Master;
+use App\Models\Apar\AparModel;
+use App\Models\Master\User;
+use App\Models\Wp\WpModel;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Response;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
@@ -21,12 +25,58 @@ class ReportController extends BaseController
     public function __construct()
     {
         $this->middleware('auth');
+        $this->AparModel     = new AparModel();
+        $this->UserModel     = new User();
+        $this->wpModel       = new WpModel();
     }
     
-    public function unit(Request $request)
+    public function apar(Request $request)
     {
-        return view('report/unit');
+        //$this->authorize('isPln');
+        $myunit = Auth::user()->unit;
+        if (Auth::user()->unit == '6101'){
+            $unit = $this->wpModel->getUnit();
+        } else {
+            $unit = $this->wpModel->getMyUnit($myunit);
+        }
+
+        $data = [
+            'unitList'          => $unit,        
+        ];
         
+        return view('report/apar', $data);
+        
+    }
+
+    public function list_apar(Request $request)
+    {
+        $b_area = Auth::user()->unit;
+
+        if (Auth::user()->unit == '6101'){
+            $add_conditions = '';
+        } else {
+            $add_conditions = 'AND pa.UL_CODE = ' . Auth::user()->unitap;
+        }
+
+        $sql = "SELECT
+                    pa.*
+                FROM
+                    peta_apar pa
+                WHERE
+                    pa.BUSS_AREA  = '$b_area' AND
+                    pa.STATUS = 'ACTIVE'
+                    $add_conditions ";
+        $v = DB::select($sql);
+            
+        return Datatables::of($v)
+            ->addColumn('action', function($data){
+                $button = '<button type="button" name="edit" id="'.$data->ID_APAR.'" class="button1 btn btn-info btn-sm btn-icon"><i class="la la-external-link"></i> ACTION</button>';
+                $button .= '&nbsp;&nbsp;';
+                $button .= '<button type="button" name="qrcode" id="'.$data->ID_APAR.'" class="qrcode btn btn-success btn-sm btn-icon"><i class="la la-qrcode"></i> </button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     public function other(Request $request)

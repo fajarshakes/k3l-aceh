@@ -26,6 +26,15 @@ class WpModel extends Model
     return $value;
   }
 
+  public function getMyUnit($unit){
+    $value=DB::table('master_unit')
+    ->where('BUSS_AREA', '=', $unit)
+    ->where('STATUS', '=', '1')
+    ->get(); 
+
+    return $value;
+  }
+
   public function getUnit_l3(string $buss_area){
 
     $value=DB::table('master_unit_l3')

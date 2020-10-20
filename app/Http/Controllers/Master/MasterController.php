@@ -288,6 +288,11 @@ class MasterController extends BaseController
         $group = $request->get('group');
         $getData  = $this->UserModel->getUser_byap($buss_area, $group);
         return json_encode($getData);
+    }
 
+    public function get_unit_lv3(Request $request, $buss_area)
+    {   
+        $getData  = $this->Master->get_unit_lv3($buss_area);
+        return json_encode($getData);
     }
 }

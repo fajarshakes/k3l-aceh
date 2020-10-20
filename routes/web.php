@@ -125,7 +125,7 @@ Route::prefix('apar')->group(function() {
 
 //REPORT
 Route::prefix('report')->group(function() {
-    Route::get('unit', 'Report\ReportController@unit')->name('unit');
+    Route::get('apar', 'Report\ReportController@apar')->name('apar');
     Route::get('other', 'Report\ReportController@other')->name('other');
 });
 
@@ -174,6 +174,12 @@ Route::prefix('master')->group(function() {
     Route::get('test', 'Master\UserController@test')->name('test');
     Route::get('get_group/{id}', 'Master\UserController@getGroupUser')->name('get_group');
     Route::get('get_user_ap/{id}', 'Master\MasterController@get_user_by_group')->name('get_user_ap');
+    Route::get('get_unit_lv3/{id}', 'Master\MasterController@get_unit_lv3')->name('get_unit_lv3');
+});
+
+//CONFIG
+Route::prefix('config')->group(function() {
+    Route::get('getLv3List/{id}', 'Config\ConfigController@getLv3List')->name('getLv3List');
 });
 
 Route::get('qrcode', function () {

@@ -64,11 +64,11 @@
                   </div>
                 </div>
                 <div class="card-content">
-                  <table id="table-sosialisasi" width="100%" class="table display nowrap table-striped table-bordered zero-configuration">
+                  <table id="table-sosialisasi" class="table display table-striped table-bordered zero-configuration">
                     <thead>
                       <tr>
                         <th class="text-center">#</th>
-                        <th class="text-center">TANGGAL</th>
+                        <th width="80px" class="text-center">TANGGAL</th>
                         <th class="text-center">UNIT</th>
                         <th class="text-center">LOKASI</th>
                         <th class="text-center">JUDUL SOSIALISASI</th>

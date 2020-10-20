@@ -198,53 +198,25 @@
               @csrf
               <div class="modal-body">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label for="projectinput5">Tahun Anggaran</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Year</option>
-                        <option value="9">2020</option>
-                        <option value="10">2021</option>
-                        <option value="11">2022</option>
-                        <option value="12">2023</option>
+                      <label for="projectinput5">PILIH UP (LV2)</label>
+                      <select class="form-control" name="id_unit">
+                        <option value="" selected disabled>PILIH UNIT</option>
+                        @foreach($unitList as $list)
+                          <option value="{{ $list->BUSS_AREA }}">{{ $list->BUSS_AREA .' - '. $list->UNIT_NAME }}</option>
+                        @endforeach
+                        @if (Auth::user()->unit == '6101')
+                          <option value="6100">6100 - SEMUA UNIT</option>
+                        @endif
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label for="projectinput5">Unit Kerja</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Unit</option>
-                        <option value="9">SEMUA UNIT</option>
-                        <option value="9">T. SIPIL</option>
-                        <option value="10">SATKER ULP</option>
-                        <option value="11">UPT PERPUS</option>
-                        <option value="12">..dst</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="projectinput5">Indikator</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Indikator</option>
-                        <option value="9">SEMUA INDIKATOR</option>
-                        <option value="10">IKU ULP</option>
-                        <option value="11">IKK</option>
-                        <option value="12">IKT</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="projectinput5">Pos Anggaran</label>
-                      <select id="projectinput5" name="group_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Pos Anggaran</option>
-                        <option value="9">SEMUA POS</option>
-                        <option value="10">PERALATAN</option>
-                        <option value="11">KEGIATAN</option>
-                        <option value="12">PELATIHAN</option>
+                      <label for="projectinput5">PILIH AP (LV3)</label>
+                      <select name="id_ulp" class="form-control">
+                        <option value="none" selected="" disabled="">PILIH UNIT</option>
                       </select>
                     </div>
                   </div>
@@ -275,6 +247,45 @@ $(document).ready(function() {
         "scrollX": true
     } );
 } );
+
+
+$(document).ready(function() {
+    $('select[name="id_unit"]').on('change', function(){
+      var id_up_ =   $(this).val();
+      var token = '{{ csrf_token() }}';
+   
+        //var countryId = $(this).val();
+        if(id_up_) {
+            $.ajax({
+                url: "{{ url('config/getLv3List/') }}/"+id_up_,
+                type:"GET",
+                dataType:"json",
+                data: {id_up: id_up_, _token: token},
+
+                //beforeSend: function(){
+                    //$('#loader').css("visibility", "visible");
+                //},
+
+                success:function(data) {
+
+                    $('select[name="id_ulp"]').empty();
+
+                    $.each(data, function(key, value){
+
+                        $('select[name="id_ulp"]').append('<option value="'+ value.UL_CODE +'">' + value.UL_CODE + ' - ' + value.UNIT_NAME + '</option>');
+
+                    });
+                },
+                //complete: function(){
+                    //$('#loader').css("visibility", "hidden");
+                //}
+            });
+        } else {
+            $('select[name="id_ulp"]').empty();
+        }
+
+    });
+});
 
 $(document).ready(function() {
 

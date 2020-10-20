@@ -74,11 +74,7 @@
                           </h5>
                           <div class="form-group">
                             <select id="idgedung" name="idgedung" class="form-control">
-<<<<<<< HEAD
-                              <option value="">PILIH GEDUNG</option>
-=======
                               <option value="none">PILIH GEDUNG </option>
->>>>>>> eb30f1b71b2523d1c487a8a6770bc3e037c17add
                               @foreach($list_unit as $list)
                                 <option value="{{ $list->ID_GEDUNG }}" {{ $detail->ID_GEDUNG == $list->ID_GEDUNG ? 'selected' : '' }}>{{ $list->ID_GEDUNG .' - '. $list->NAMA_GEDUNG }}</option>
                               @endforeach

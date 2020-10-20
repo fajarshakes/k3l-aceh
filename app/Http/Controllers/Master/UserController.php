@@ -69,9 +69,20 @@ class UserController extends BaseController
             //return datatables()->of(($v)->get())
             //return datatables()->of(Master::latest()->get())
                     ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i> Edit</button>';
-                        $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> Delete</button>';
+                        //$button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i> Edit</button>';
+                        //$button .= '&nbsp;&nbsp;';
+                        //$button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> Delete</button>';
+                        $button =
+                        "<span class='dropdown'>
+                            <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
+                            aria-expanded='false' class='btn btn-blue dropdown-toggle btn-sm'><i class='la la-check-circle'></i></button>
+                            <span aria-labelledby='btnSearchDrop4' class='dropdown-menu mt-1 dropdown-menu-right'>
+                                <a name='edit_modal' id='$data->id' class='edit dropdown-item'><i class='ft-edit-2'></i> EDIT DATA</a>
+                                <div class='dropdown-divider'></div>
+                                <a id='$data->id' class='delete dropdown-item'><i class='ft-trash'></i> DELETE</a>
+                            </span>
+                        </span>";
+
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -113,6 +124,7 @@ class UserController extends BaseController
             'name'          =>  'required',
             'pers_no'       =>  'required',
             'unit_id'       =>  'required',
+            'unit_level'    =>  'required',
             'user_group'    =>  'required',
             'jabatan'    =>  'required',
         );
@@ -128,7 +140,9 @@ class UserController extends BaseController
         $store = DB::table('users')->insert([
         //$form_data = array(
             //'unit'              => Auth::user()->unit,
+            'comp_code'         => Auth::user()->comp_code,
             'unit'              => $request->unit_id,
+            'unitap'            => $request->unit_level,
             'username'          => $username[0],
             'name'              => $request->fullname,
             'pers_no'           => $request->pers_no,
@@ -238,7 +252,7 @@ class UserController extends BaseController
         $data = DB::table('users')
         ->join('master_unit', 'users.unit', '=', 'master_unit.BUSS_AREA')
         ->join('users_group', 'users.group_id', '=', 'users_group.ID')
-        ->select('users.unit', 'users.email', 'users.name', 'users.pers_no', 'users.position_desc', 'users.group_id', 'users_group.GROUP_NAME')
+        ->select('users.unit', 'users.email', 'users.name', 'users.pers_no', 'users.position_desc', 'users.group_id', 'users.unitap', 'users_group.GROUP_NAME')
         ->where('users.id','=',$id)
         ->get();
         

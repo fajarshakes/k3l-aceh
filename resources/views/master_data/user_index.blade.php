@@ -52,14 +52,13 @@
                 <div class="card-content">
                     
                     <div class="tab-content px-1 pt-1">
-                    <table id="datamenu" class="table nowrap table-striped table-bordered">
+                    <table id="datamenu" width="100%" class="table nowrap table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>#</th>
                           <th>BUSS AREA</th>
                           <th>EMAIL</th>
                           <th>FULLNAME</th>
-                          <th>GROUP</th>
                           <th>ACTION</th>
                         </tr>
                       </thead>
@@ -69,7 +68,6 @@
                           <th>BUSS AREA</th>
                           <th>EMAIL</th>
                           <th>FULLNAME</th>
-                          <th>GROUP</th>
                           <th>ACTION</th>
                         </tr>
                       </tfoot>
@@ -128,13 +126,25 @@
                     <div class="form-group">
                       <label for="projectinput5">Unit</label>
                       <select id="unit_id" name="unit_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Category</option>
+                        <option value="none" selected="" disabled="">Select Unit</option>
                         @foreach($unitData as $unit)
                           <option value="{{ $unit->BUSS_AREA }}">{{ $unit->UNIT_NAME }}</option>
                         @endforeach
                       </select>
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="projectinput5">Unit Level 3</label>
+                      <select id="unit_level_1" name="unit_level" class="form-control">
+                      @if (!empty($group_id))
+                          <option value="{{ $group_id }}">{{ $group_name }}</option>
+                      @endif
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="projectinput5">User Group</label>
@@ -159,7 +169,6 @@
             </div>
           </div>
         </div>
-
 
         <div class="modal fade text-left" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
@@ -200,7 +209,6 @@
       var b_area =   $(this).val();
       var token = '{{ csrf_token() }}';
    
-        //var countryId = $(this).val();
         if(b_area) {
             $.ajax({
                 url: "{{ url('master/get_group/') }}/"+b_area,
@@ -208,26 +216,29 @@
                 dataType:"json",
                 data: {buss_area: b_area, _token: token},
 
-                //beforeSend: function(){
-                    //$('#loader').css("visibility", "visible");
-                //},
-
                 success:function(data) {
-
                     $('select[name="user_group"]').empty();
-
                     $.each(data, function(key, value){
-
                         $('select[name="user_group"]').append('<option value="'+ key +'">' + value + '</option>');
-
                     });
                 },
-                //complete: function(){
-                    //$('#loader').css("visibility", "hidden");
-                //}
+            });
+            $.ajax({
+                url: "{{ url('master/get_unit_lv3/') }}/"+b_area,
+                type:"GET",
+                dataType:"json",
+                data: {buss_area: b_area, _token: token},
+
+                success:function(data) {
+                    $('select[name="unit_level"]').empty();
+                    $.each(data, function(key, value){
+                        $('select[name="unit_level"]').append('<option value="'+ value.UL_CODE +'">' + value.UL_CODE + ' - ' + value.UNIT_NAME + '</option>');
+                    });
+                },
             });
         } else {
             $('select[name="user_group"]').empty();
+            $('select[name="unit_level"]').empty();
         }
 
     });
@@ -239,7 +250,7 @@ $(document).ready(function() {
     processing: true,
     serverSide: true,
     paging: true,
-    scrollX: true,
+    //scrollX: true,
     order: [[ 2, 'asc' ]],
     ajax:{
      url: "{{ route('user_datatables') }}",
@@ -252,15 +263,11 @@ $(document).ready(function() {
       },
       {
       data: 'email',
-      className: "text-center"
+      className: "text-left"
       },
       {
       data: 'name',
       className: "text-left"
-      },
-      {
-      data: 'GROUP_NAME',
-      className: "text-center"
       },
       {
       data: 'action',
@@ -431,10 +438,17 @@ $(document).ready(function() {
         data:{id:id},
         success: function(html) {
           $('#email').val(html.data[0].email);
+          $('#email').prop('readonly',true);
           $('#name').val(html.data[0].name);
           $('#pers_no').val(html.data[0].pers_no);
+          $('#pers_no').prop('readonly',true);
           //$('#cost_of_sales').val(html.data[0].cost_of_sales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "." ));
           $("#unit_id").val(html.data[0].unit).attr('selected','selected');
+          //$("#unit_level_1").val(html.data[0].unit).attr('selected','selected');
+          //$("#unit_level option:selected").val( html.data[0].unitap );
+          //$("#unit_level").val(html.data[0].unitap).attr('selected','selected');
+          //$('select[name=unit_level] option').filter(':selected').val('c');
+          $('#unit_level_1').val('cc').change();
           $('#group_id').val(html.data[0].group_id);
           $('#jabatan').val(html.data[0].position_desc);
           $('#group_name').val(html.data[0].GROUP_NAME);
