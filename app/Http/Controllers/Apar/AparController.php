@@ -153,6 +153,7 @@ class AparController extends BaseController
             'merk'          =>  'required',
             'media'         =>  'required',
             'type'          =>  'required',
+            'photo'         =>  'required',
             'kapasitas'     =>  'required',
             'exp_date'      =>  'required',
             'refill_date'   =>  'required',
@@ -206,19 +207,16 @@ class AparController extends BaseController
     
     public function update_apar(Request $request)
     {
-        /*
+        
         $rules = array(
-            'lokasi'        =>  'required',
-            'judul'         =>  'required',
-            'deskripsi'     =>  'required',
-            'jml_peserta'   =>  'required',
-            'pic_sosialisasi'   =>  'required',
-            'tanggal'       =>  'required',
-            'jam_mulai'     =>  'required',
-            'jam_selesai'   =>  'required',
-            'latitude'      =>  'required',
-            'longitude'     =>  'required',
+            'idgedung'        =>  'required',
         );
+
+        $messages = [
+            'idgedung.required' => 'Gedung Harus dipilih.!',
+            'idlantai.required' => 'Gedung Harus dipilih.!',
+
+        ];
         
         $error = Validator::make($request->all(), $rules);
 
@@ -226,7 +224,7 @@ class AparController extends BaseController
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }
-        */
+        
 
         $photo       = $request->file('photo');
         if (isset($photo)) {
