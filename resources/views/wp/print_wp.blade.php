@@ -93,7 +93,7 @@
           <p></p>
           <p></p>
           <h2 vertical-align="middle">PROSEDUR SMK3</h2></td>
-        <td rowspan="2" class="text-center" width="15%">NO DOKUMEN :</td>
+        <td rowspan="2" class="text-center" width="15%">NO DOKUMEN : {{$detailWp->id_wp}}-{{$detailWp->unit}}-WP-2020</td>
         <td class="text-center" width="15%">HAL :</td>
         </tr>
       <tr>

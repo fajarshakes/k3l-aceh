@@ -331,10 +331,10 @@
                             <tbody id="konten-analisis">
                               <tr class="baris_analisis">
                                 <td><button type="button" class="hapus_analisis btn btn-danger btn-sm"> <i class="la la-trash-o"></i></button></td>
-                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]"></td>
                                 <td><input type="text" class="form-control" name="potensi_bahaya[]"></td>
                                 <td><input type="text" class="form-control" name="resiko[]"></td>
                                 <td><input type="text" class="form-control" name="tindakan[]"></td>
+                                <td><input type="text" class="form-control" name="langkah_pekerjaan[]"></td>
                               </tr>
                             </tbody>
                           </table>

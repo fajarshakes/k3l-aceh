@@ -100,7 +100,7 @@
           <p></p>
           <p></p>
           <h2 vertical-align="middle">PROSEDUR SMK3</h2></td>
-        <td rowspan="2" class="text-center" width="15%">NO DOKUMEN :</td>
+        <td rowspan="2" class="text-center" width="15%">NO DOKUMEN : {{$detailWp->id_wp}}-{{$detailWp->unit}}-JSA-2020</td>
         <td class="text-center" width="15%">HAL :</td>
         </tr>
       <tr>
@@ -335,20 +335,20 @@
         <table class=print1 cellpadding=3 cellspacing=0 border=1 style="width: 100%">
         <tr>
           <th width="4%" style="text-align: center; vertical-align: middle;">NO</th>
-          <th width="30%"  style="text-align: center; vertical-align: middle;">LANGKAH PEKERJAAN</th>
           <th width="20%"  style="text-align: center; vertical-align: middle;">POTENSI BAHAYA</th>
           <th width="16%"  style="text-align: center; vertical-align: middle;">RESIKO</th>
           <th width="30%"  style="text-align: center; vertical-align: middle;">TINDAKAN PENGENDALIAN</th>
+          <th width="30%"  style="text-align: center; vertical-align: middle;">LANGKAH PEKERJAAN</th>
         </tr>
         <tbody>
         @php $i=1 @endphp
         @foreach($tbl_jsa as $row_data)
           <tr class="kecil2">
             <td align="center">{{ $i }}</td>
-            <td>{{ $row_data->langkah_pekerjaan }}</td>
             <td>{{ $row_data->potensi_bahaya }}</td>
             <td>{{ $row_data->resiko }}</td>
             <td>{{ $row_data->tindakan }}</td>
+            <td>{{ $row_data->langkah_pekerjaan }}</td>
           </tr>
         @php $i++ @endphp
         @endforeach
