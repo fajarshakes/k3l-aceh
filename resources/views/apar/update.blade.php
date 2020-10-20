@@ -74,9 +74,9 @@
                           </h5>
                           <div class="form-group">
                             <select id="idgedung" name="idgedung" class="form-control">
-                              <option value="none">PILIH GEDUNG</option>
+                              <option value="none">PILIH GEDUNG </option>
                               @foreach($list_unit as $list)
-                                <option value="{{ $list->ID_GEDUNG }}" {{ $detail->ID_GEDUNG == $list->ID_GEDUNG }} ? 'selected' : '' }}>{{ $list->ID_GEDUNG .' - '. $list->NAMA_GEDUNG }}</option>
+                                <option value="{{ $list->ID_GEDUNG }}" {{ $detail->ID_GEDUNG == $list->ID_GEDUNG ? 'selected' : '' }}>{{ $list->ID_GEDUNG .' - '. $list->NAMA_GEDUNG }}</option>
                               @endforeach
                             </select>
                           </div>
