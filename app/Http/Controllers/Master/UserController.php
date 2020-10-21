@@ -159,60 +159,26 @@ class UserController extends BaseController
         return response()->json(['success' => 'Data Added successfully.']);
     }
 
-    public function c_menu_store(Request $request)
-    {
-        $catId         = $this->menuCat->generateCatId(Auth::user()->unit);
-        $rules = array(
-            'cname'         =>  'required',
-            'cstatus'       =>  'required',
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-
-        $store = DB::table('menu_category')->insert([
-            'cat_unit'         => Auth::user()->unit,
-            'cat_cd'           => $catId,
-            'cat_text'         => $request->cname,
-            'cat_status'       => $request->cstatus,
-            'update_date'      => date('Y-m-d'),
-            'update_by'        => Auth::user()->email,
-        ]);
-        return response()->json(['success' => 'Data Added successfully.']);
-    }
-
     public function user_update(Request $request)
     {
-        $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if($image != '')
         {
             $rules = array(
                 'name'          =>  'required',
-                'catcd'         =>  'required',
-                'image'         =>  'required|image|max:2048'
-            );
-            $error = Validator::make($request->all(), $rules);
-            if($error->fails())
-            {
-                return response()->json(['errors' => $error->errors()->all()]);
-            }
-
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/pic_menu'), $image_name);
-        }
-        else
-        {
-            $rules = array(
-                'name'          =>  'required',
-                'catcd'         =>  'required',
+                'pers_no'       =>  'required',
+                'unit_id'       =>  'required',
+                'unit_level'    =>  'required',
+                'user_group'      =>  'required',
+                'jabatan' =>  'required',
             );
 
-            $error = Validator::make($request->all(), $rules);
+            $messages = [
+                'pers_no.required' => 'NIP Harus diisi.!',
+                'unit_id.required' => 'Unit Harus dipilih.!',
+                'unit_level.required' => 'Unit LV3 Harus dipilih.!',
+                'user_group.required' => 'Group Harus dipilih.!',
+            ];
+
+            $error = Validator::make($request->all(), $rules, $messages);
 
             if($error->fails())
             {
@@ -220,16 +186,14 @@ class UserController extends BaseController
             }
         }
 
-        $update = DB::table('menu')
+        $update = DB::table('users')
         ->where('id', $request->hidden_id)
         ->update([
-        //$form_data = array(
-            'menu_price'        => str_replace(".", "", $request->price),
-            'update_date'       => date('Y-m-d'),
-            'update_by'         => Auth::user()->email,
-            'image'             => $image_name,
-            'menu_name'         => $request->name,
-            'cat_cd'            => $request->catcd,
+            'unit'              => $request->unit_id,
+            'unitap'            => $request->unit_level,
+            'name'              => $request->name,
+            'group_id'          => $request->user_group,
+            'position_desc'     => $request->jabatan,
         ]);
         
         //AjaxCrud::whereId($request->hidden_id)->update($form_data);
@@ -252,7 +216,7 @@ class UserController extends BaseController
         $data = DB::table('users')
         ->join('master_unit', 'users.unit', '=', 'master_unit.BUSS_AREA')
         ->join('users_group', 'users.group_id', '=', 'users_group.ID')
-        ->select('users.unit', 'users.email', 'users.name', 'users.pers_no', 'users.position_desc', 'users.group_id', 'users.unitap', 'users_group.GROUP_NAME')
+        ->select('users.id','users.unit', 'users.email', 'users.name', 'users.pers_no', 'users.position_desc', 'users.group_id', 'users.unitap', 'users_group.GROUP_NAME')
         ->where('users.id','=',$id)
         ->get();
         

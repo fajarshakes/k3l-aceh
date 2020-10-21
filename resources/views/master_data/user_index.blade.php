@@ -342,7 +342,7 @@ $(document).ready(function() {
       if($('#action').val() == "Edit")
       {
         $.ajax({
-          url:"{{ route('menu_update') }}",
+          url:"{{ route('user_update') }}",
           method:"POST",
           data:new FormData(this),
           contentType: false,

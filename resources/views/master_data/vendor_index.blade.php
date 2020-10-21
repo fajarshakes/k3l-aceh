@@ -84,7 +84,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade text-left" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        <div class="modal fade text-left" id="formModal" role="dialog" aria-labelledby="myModalLabel11"
         data-backdrop="static" data-keyboard="false" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -102,12 +102,14 @@
                   <div class="col-md-7">
                     <div class="form-group">
                       <label for="projectinput5">PILIH VENDOR</label>
-                      <select id="vendor_id" name="vendor_id" class="form-control">
-                        <option value="none" selected="" disabled="">Select Category</option>
+                      <div class="form-group"> 
+                        <select id="vendor_id" name="vendor_id" class="select2 form-control" style="width: 100%">
+                        <option value="none" selected="">PILIH VENDOR</option>
                         @foreach($vendor_json as $json)
                           <option value="{{ $json['id'] }}">{{ $json['vendor'] }}</option>
                         @endforeach
                       </select>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-5">
@@ -148,7 +150,7 @@
               </div>
               <div class="form-group">
                   <label for="companyName">EMAIL PERUSAHAAN</label>
-                    <input type="text" class="form-control" placeholder="Alamat Perusahaan" name="email">
+                    <input type="text" class="form-control" placeholder="Email Perusahaan" name="email">
               </div>
               <div class="form-group">
                   <label for="companyName">NAMA PIC</label>

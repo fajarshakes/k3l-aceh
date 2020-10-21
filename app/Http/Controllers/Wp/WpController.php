@@ -407,6 +407,7 @@ class WpController extends BaseController
             'klasifikasi'   =>  'required',
             'prosedur'   =>  'required',
             'nama_pelaksana' =>  'required',
+            'vendor_id' =>  'required',
 
             //files
             'sertifikat_kompetensi' => 'required|mimes:pdf|max:10000',
@@ -419,7 +420,7 @@ class WpController extends BaseController
             'supervisor.required' => 'SPV Harus dipilih.!',
             'pejabat.required' => 'PJ K3 Harus dipilih.!',
             'manager.required' => 'Manager Harus dipilih.!',
-            'status_pegawai.required' => 'Status Pelaksana Harus dipilih.!',
+            'status_pegawai.required' => 'Status Pelaksana (in/ex) Harus dipilih.!',
             'tgl_pengajuan.required' => 'Tgl Pengajuan harus diisi.!',
             'peralatan_dipadamkan.required' => 'Alat Padam harus diisi.!',
             'pengawas_pekerjaan.required' => 'Pengawas harus diisi.!',
@@ -431,6 +432,7 @@ class WpController extends BaseController
             'klasifikasi.required' => 'Klasifikasi harus dipilih.!',
             'prosedur.required' => 'Prosedur harus dipilih.!',
             'nama_pelaksana.required' => 'Pelaksana harus diisi.!',
+            'vendor_id.required' => 'VENDOR Wajib diisi / pilih.!',
 
             'sertifikat_kompetensi.required' => 'File Sertifikat harus diupload.!',
             'tenaga_ahli_k3.required' => 'File AK3 harus diupload.!',

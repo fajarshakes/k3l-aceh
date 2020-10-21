@@ -163,6 +163,7 @@ Route::prefix('master')->group(function() {
 
     Route::get('c_menu_datatables', 'Master\UserController@c_menu_datatables')->name('c_menu_datatables');
     Route::post('user_store', 'Master\UserController@user_store')->name('user_store');
+    Route::post('user_update', 'Master\UserController@user_update')->name('user_update');
     Route::post('c_menu_store', 'Master\UserController@c_menu_store')->name('c_menu_store');
     Route::post('menu_update', 'Master\UserController@menu_update')->name('menu_update');
     Route::post('c_menu_update', 'Master\UserController@c_menu_update')->name('c_menu_update');
