@@ -89,14 +89,14 @@
                 </button>
               </div>
               
-              <form action="#">
+              <form id="form-filter">
               @csrf
               <div class="modal-body">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="projectinput5">PILIH UP (LV2)</label>
-                      <select class="form-control" name="id_unit">
+                      <select class="form-control" id="id_unit" name="id_unit">
                         <option value="" selected disabled>PILIH UNIT</option>
                         @foreach($unitList as $list)
                           <option value="{{ $list->BUSS_AREA }}">{{ $list->BUSS_AREA .' - '. $list->UNIT_NAME }}</option>
@@ -110,7 +110,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="projectinput5">PILIH AP (LV3)</label>
-                      <select name="id_ulp" class="form-control">
+                      <select id="id_ulp" name="id_ulp" class="form-control">
                         <option value="none" selected="" disabled="">PILIH UNIT</option>
                       </select>
                     </div>
@@ -410,7 +410,7 @@ var vtable = $('#list-apar').DataTable({
             'pdfHtml5'
     ],
    ajax:{
-    url: "{{ route('list_index_apar') }}",
+    url: "{{ route('list_apar') }}",
    },
    columns:[
      //{ data: null, searchable:false, orderable:false, className: "text-center"},
@@ -449,9 +449,11 @@ var vtable = $('#list-apar').DataTable({
 
 $('#form-filter').submit(function (e){
       e.preventDefault();
-      var url = "ajax_files/inbox_payment.php?unit=" + $('#unit').val() +  "&jnsangg=" + $('#jnsangg').val() +  "&jnstag=" + $('#jnstag').val();
-      tabel.ajax.url(url).load();
-      $('#modal-3').modal('toggle');
+      //var url = "ajax_files/inbox_payment.php?unit=" + $('#unit').val() +  "&jnsangg=" + $('#jnsangg').val() +  "&jnstag=" + $('#jnstag').val();
+      var url = "{{ route('list_apar') }}?unit=" + $('#id_unit').val() +  "&ulp=" + $('#id_ulp').val();
+      vtable.ajax.url(url).load();
+      //$('#list-apar').DataTable().ajax.url(url).reload();
+      $('#filter_modal').modal('toggle');
       $('#filtertahun').html($('#tahun').val());
       return false;
     });

@@ -126,7 +126,7 @@ Route::prefix('apar')->group(function() {
 //REPORT
 Route::prefix('report')->group(function() {
     Route::get('apar', 'Report\ReportController@apar')->name('apar');
-    Route::get('other', 'Report\ReportController@other')->name('other');
+    Route::get('list_apar', 'Report\ReportController@list_apar')->name('list_apar');
 });
 
 //MANUALBOOK
