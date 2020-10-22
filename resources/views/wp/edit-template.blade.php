@@ -324,10 +324,10 @@
                             <thead>
                               <tr>
                                 <th class="text-center">ACTION</th>
+                                <th class="text-center">LANGKAH PEKERJAAN</th>
                                 <th class="text-center">POTENSI BAHAYA</th>
                                 <th class="text-center">RESIKO</th>
                                 <th class="text-center">TINDAKAN PENGENDALIAN</th>
-                                <th class="text-center">LANGKAH PEKERJAAN</th>
                               </tr>
                             </thead>
                             <tbody id="konten-analisis">
