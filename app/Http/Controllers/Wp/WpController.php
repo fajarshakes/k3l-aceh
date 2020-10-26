@@ -728,10 +728,9 @@ class WpController extends BaseController
             });
             return response()->json(['success' => 'WP Berhasil diajukan, dan email terkirim.']);
         }
-        catch (Exception $e){
+        catch (\Exception $e){
             //return response (['status' => false,'errors' => $e->getMessage()]);
-            return response()->json(['success' => 'WP Berhasil diajukan, dan gagal kirim email.!', 'errors' => $e->getMessage()]);
-
+            return response()->json(['success' => ['WP Berhasil diajukan, email tidak terkirim.!'],[$e->getMessage()],]);
         }
         
     }
@@ -1124,8 +1123,9 @@ class WpController extends BaseController
             });
             return response()->json(['success' => 'Data Approved successfully.']);
         }
-        catch (Exception $e){
-            return response (['status' => false,'errors' => $e->getMessage()]);
+        catch (\Exception $e){
+            //return response (['status' => false,'errors' => $e->getMessage()]);
+            return response()->json(['success' => ['Data  Berhasil diapprove, email tidak terkirim.!'],[$e->getMessage()],]);
         }
         } else {
             return response()->json(['success' => 'Data Approved successfully.']);

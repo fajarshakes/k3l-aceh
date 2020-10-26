@@ -53,7 +53,7 @@
                 </div>
                 <div class="card-content collapse show">
                 <div class="col-md-12">
-                      <button onclick="ShowPopup('/wp/print_hirarc/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print HIRARC" > <i class="la la-print"></i> PRINT</button>
+                      <button onclick="ShowPopup('/wp/print_hirarc/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print HIRARC" {{ $detailWp->status == 'APPROVED' || $detailWp->status == 'CLOSED' ? '' : 'disabled'  }} > <i class="la la-print"></i> PRINT</button>
                   </div>
                 <form id="form_menu" method="post" enctype="multipart/form-data">
                 @csrf  
@@ -138,7 +138,7 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="col-md-12">
-                  <button onclick="ShowPopup('/wp/print_jsa/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" > <i class="la la-print"></i> PRINT</button>
+                  <button onclick="ShowPopup('/wp/print_jsa/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print JSA" {{ $detailWp->status == 'APPROVED' || $detailWp->status == 'CLOSED' ? '' : 'disabled'  }} > <i class="la la-print"></i> PRINT</button>
                   </div>
 
                   <div class="card-body">
@@ -402,7 +402,7 @@
                 </div>
 
                 <div class="col-md-12">
-                      <button onclick="ShowPopup('/wp/print_wp/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print HIRARC" > <i class="la la-print"></i> PRINT</button>
+                      <button onclick="ShowPopup('/wp/print_wp/{{ $detailWp->id_wp }}')" name="approve_modal" class="edit btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Print Working Permit" {{ $detailWp->status == 'APPROVED' || $detailWp->status == 'CLOSED' ? '' : 'disabled'  }}> <i class="la la-print"></i> PRINT</button>
                 </div>
 
                 <div class="card-content collapse show">

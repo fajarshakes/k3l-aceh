@@ -181,7 +181,7 @@
 
                 <div class="form-group">
                   <label for="companyName">PILIH TEMPLATE (JENIS PEKERJAAN)</label>
-                    <select name="template" class="form-control" id="id_template">
+                    <select name="template" class="select2 form-control" style="width: 100%" id="id_template">
                     <option value="" selected>PILIH TEMPLATE</option>
                     @if (!empty($group_id))
                       <option value="{{ $group_id }}">{{ $group_name }}</option>

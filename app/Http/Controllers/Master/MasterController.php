@@ -276,10 +276,13 @@ class MasterController extends BaseController
             $message->from('noreply@plnaceh.id');
             $message->to($request->email);
         });
-        return back()->with('alert-success','Berhasil Kirim Email');
+        return response()->json(['success' => 'WP Berhasil diajukan, dan email terkirim.']);
+        //return back()->with('alert-success','Berhasil Kirim Email');
     }
-    catch (Exception $e){
-        return response (['status' => false,'errors' => $e->getMessage()]);
+    catch (\Exception $e){
+        //return response (['status' => false,'errors' => $e->getMessage()]);
+        //return response()->json(['errors' => [$e->getMessage()],]);
+        return response()->json(['errors' => [$e->getMessage()],]);
     }
     }
     

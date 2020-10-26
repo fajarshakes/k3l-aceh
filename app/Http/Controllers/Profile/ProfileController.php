@@ -117,8 +117,9 @@ class ProfileController extends BaseController
             });
             return response()->json(['success' => 'Token berhasil dikirim ke email.']);
         }
-        catch (Exception $e){
-            return response (['status' => false,'errors' => $e->getMessage()]);
+        catch (\Exception $e){
+            //return response (['status' => false,'errors' => $e->getMessage()]);
+            return response()->json(['errors' => [$e->getMessage()],]);   
         }
 
     }

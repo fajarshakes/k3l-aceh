@@ -396,7 +396,7 @@
                             @else
                             <div class="form-group">
                               <label for="eventName2">Pelaksana / Perusahaan<span style="color:red">*</span></label>
-                              <select id="vendor_id" name="vendor_id" class="form-control">
+                              <select id="vendor_id" name="vendor_id" class="select2 form-control" style="width: 100%">
                                 <option value="none" selected="" disabled="">Select Vendor</option>
                                 @foreach($getVendor as $vendor)
                                   <option value="{{ $vendor->ID }}">{{ $vendor->VENDOR_NAME }}</option>
