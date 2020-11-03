@@ -153,7 +153,7 @@
 
 
         <!-- Modal -->
-        <div class="modal fade text-left" id="submit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        <div class="modal fade text-left" id="submit_form" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
