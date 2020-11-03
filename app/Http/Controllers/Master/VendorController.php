@@ -116,32 +116,6 @@ class VendorController extends BaseController
             ->make(true);
     }
 
-    public function c_menu_datatables(Request $request)
-    {
-        if(request()->ajax())
-        {
-            $unit = Auth::user()->unit;
-            $sql = "SELECT * FROM menu_category
-                    WHERE cat_unit = '$unit'
-                    AND cat_status != '0'";
-            $v = DB::select($sql);
-            
-            return Datatables::of($v)
-
-            //return datatables()->of(($v)->get())
-            //return datatables()->of(Master::latest()->get())
-                    ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="c_edit btn btn-primary btn-sm"><i class="la la-pencil-square"></i> Edit</button>';
-                        $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" name="delete" id="'.$data->id.'" class="c_delete btn btn-danger btn-sm"><i class="la la-trash-o"></i> Delete</button>';
-                        return $button;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-    }
-
     public function vendor_store(Request $request)
     {
         $rules = array(
@@ -157,6 +131,12 @@ class VendorController extends BaseController
         if($error->fails())
         {
             return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $check  = $this->Master->getVendorEmail($request->email);
+
+        if ($check) {
+            return response()->json(['errors' => ['Vendor sudah terdaftar, data tidak tersimpan.!'],]);
         }
 
         $username = explode("@", $request->email);
@@ -191,8 +171,6 @@ class VendorController extends BaseController
             'created_by'        => Auth::user()->username,
             'status'            => 'ACTIVE',
         ]);
-
-        
 
         //AjaxCrud::create($form_data);
         return response()->json(['success' => 'Data Added successfully.']);

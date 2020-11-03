@@ -26,6 +26,16 @@ class MasterModel extends Model
       return $value;
     }
 
+    public function getVendorEmail(string $email){
+
+      $value=DB::table('users')
+      ->select('*')
+      ->where('email', '=', $email)
+      ->first();
+      
+      return $value;
+    }
+
     public function getRecepient(string $name){
 
       $value=DB::table('users')
