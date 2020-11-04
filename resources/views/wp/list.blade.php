@@ -97,6 +97,7 @@
                             <tr>
                               <th class="text-center">#</th>
                               <th class="text-center">ACTION</th>
+                              <th class="text-center">B.AREA</th>
                               <th class="text-center">UNIT</th>
                               <th class="text-center">TGL PENGAJUAN</th>
                               <th class="text-center">NAMA PEKERJAAN</th>
@@ -114,6 +115,7 @@
                             <tr>
                               <th class="text-center">#</th>
                               <th class="text-center">ACTION</th>
+                              <th class="text-center">B.AREA</th>
                               <th class="text-center">UNIT</th>
                               <th class="text-center">TGL PENGAJUAN</th>
                               <th class="text-center">NAMA PEKERJAAN</th>
@@ -131,6 +133,7 @@
                             <tr>
                               <th class="text-center">#</th>
                               <th class="text-center">ACTION</th>
+                              <th class="text-center">B.AREA</th>
                               <th class="text-center">UNIT</th>
                               <th class="text-center">TGL PENGAJUAN</th>
                               <th class="text-center">NAMA PEKERJAAN</th>
@@ -594,6 +597,10 @@ var vtable = $('#table-permohonan').DataTable({
       }
       },
       {
+     data: 'unit',
+     className: "text-center"
+     },
+     {
      data: 'UNIT_NAME',
      className: "text-center"
      },
@@ -676,6 +683,10 @@ var vtable1 =  $('#table-pengerjaan').DataTable({
         }
      },
      {
+     data: 'unit',
+     className: "text-center"
+     },
+     {
      data: 'UNIT_NAME',
      className: "text-center"
      },
@@ -730,6 +741,10 @@ var vtable2 =  $('#table-selesai').DataTable({
       "render": function (data, type, full, meta) {
         return `<button onclick="location.href='/wp/detail/${full.id_wp}'" class="some-class btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Detail"> <i class=ft-eye></i> </button>`;
         }
+     },
+     {
+     data: 'unit',
+     className: "text-center"
      },
      {
      data: 'UNIT_NAME',

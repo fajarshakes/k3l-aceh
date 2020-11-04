@@ -138,7 +138,7 @@ class WpController extends BaseController
         $sql = "SELECT
                     wp.*, mu.UNIT_NAME
                 FROM
-                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
+                    working_permit wp LEFT JOIN master_unit_l3 mu ON wp.ul_code = mu.UL_CODE
                 WHERE
                     wp.unit like '$unit_view%' AND
                     wp.status NOT IN ('APPROVED','CLOSED','TRASH')";
@@ -166,7 +166,7 @@ class WpController extends BaseController
         $sql = "SELECT
                     wp.*, mu.UNIT_NAME
                 FROM
-                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
+                    working_permit wp LEFT JOIN master_unit_l3 mu ON wp.ul_code = mu.UL_CODE
                 WHERE
                     wp.unit like '$unit_view%' AND
                     wp.status = 'APPROVED'";
@@ -194,7 +194,7 @@ class WpController extends BaseController
         $sql = "SELECT
                     wp.*, mu.UNIT_NAME
                 FROM
-                    working_permit wp LEFT JOIN master_unit mu ON wp.unit = mu.BUSS_AREA
+                    working_permit wp LEFT JOIN master_unit_l3 mu ON wp.ul_code = mu.UL_CODE
                 WHERE
                     wp.unit like '$unit_view%' AND
                     wp.status = 'CLOSED'";
