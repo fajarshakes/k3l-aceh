@@ -91,6 +91,7 @@
                                 <option value="DPT_SUTR">DPT SUTR</option>
                                 <option value="DPT_SIPIL">DPT SIPIL</option>
                                 <option value="DPT_SR">DPT SR</option>
+                                <option value="DPT_PEMBANGKIT">DPT PEMBANGKIT</option>
                               </select>
                             </div>
                          

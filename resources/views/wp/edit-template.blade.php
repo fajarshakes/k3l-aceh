@@ -94,6 +94,7 @@
                                 <option value="DPT_SUTR" {{ $detail->qualification == 'DPT_SUTR' ? 'selected' : '' }}>DPT SUTR</option>
                                 <option value="DPT_SIPIL" {{ $detail->qualification == 'DPT_SIPIL' ? 'selected' : '' }}>DPT SIPIL</option>
                                 <option value="DPT_SR" {{ $detail->qualification == 'DPT_SR' ? 'selected' : '' }}>DPT SR</option>
+                                <option value="DPT_PEMBANGKIT" {{ $detail->qualification == 'DPT_PEMBANGKIT' ? 'selected' : '' }}>DPT PEMBANGKIT</option>
                               </select>
                             </div>
                          
