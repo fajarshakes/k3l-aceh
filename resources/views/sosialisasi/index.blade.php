@@ -23,10 +23,10 @@
             type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
             <div class="dropdown-menu" aria-labelledby="dropdownBreadcrumbButton">
               <button onclick="location.href='/sosialisasi/add'" class="dropdown-item"><i class="la la-check-circle-o"></i> Tambah Lokasi</button>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#submit_form"><i class="la la-filter"></i> Filter Data</button>
+              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#filter_modal"><i class="la la-filter"></i> Filter Data</button>
 
               <div class="dropdown-divider"></div>
-              <button class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
+              <button onclick="location.href='/sosialisasi/export_excel'" class="dropdown-item" data-toggle="modal" data-backdrop="false" data-target="#"><i class="la la-file-text"></i> Export Excel (.xlsx)</button>  
             </div>
           </div>
         </div>
@@ -34,9 +34,6 @@
 
       <div class="content-body">
         <!-- Zero configuration table -->
-        <!-- @foreach($markers as $pin)
-        {{ $pin->longitude }}
-        @endforeach -->
         <section id="configuration">
           <div class="row">
             <div class="col-12">
@@ -67,7 +64,7 @@
                   <table id="table-sosialisasi" class="table display table-striped table-bordered zero-configuration">
                     <thead>
                       <tr>
-                        <th class="text-center">#</th>
+                        <!-- <th class="text-center">#</th> -->
                         <th width="80px" class="text-center">TANGGAL</th>
                         <th class="text-center">UNIT</th>
                         <th class="text-center">LOKASI</th>
@@ -84,43 +81,52 @@
         <!--/ Zero configuration table -->
 
         <!-- Modal -->
-        <div class="modal fade text-left" id="submit_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header bg-info white">
-                <h4 class="modal-title white" id="myModalLabel11">SUBMIT FORM</h4>
+                <h4 class="modal-title white" id="myModalLabel11">Filter Data</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               
-              <form action="#" id="">
+              <form id="form-filter">
 
               @csrf
               <div class="modal-body">
-              <div class="form-group">
-                  <label for="companyName">PILIH TYPE UNIT</label>
-                  <select name="type" class="custom-select form-control" name="jenis_template">
-                    <option value="" selected disabled>PILIH UNIT</option>
-                    @foreach($list as $list1)
-                    <option value="{{ $list1->UNIT_NAME }}">{{ $list1->BUSS_AREA .' - '. $list1->UNIT_NAME }}</option>
-                    @endforeach
-                  </select>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">PILIH TYPE UNIT</label>
+                      <select name="type" class="form-control" id="id_unit" name="id_unit">
+                        <option value="" selected disabled>PILIH UNIT</option>
+                        @foreach($list as $list1)
+                          <option value="{{ $list1->BUSS_AREA }}">{{ $list1->BUSS_AREA .' - '. $list1->UNIT_NAME }}</option>
+                        @endforeach
+                        @if (Auth::user()->unit == '6101')
+                          <option value="6100">6100 - SEMUA UNIT</option>
+                        @endif
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="companyName">PILIH TAHUN</label>
+                        <select name="template" class="form-control" id="tahun_unit" name="tahun_unit">
+                          <option value="" selected="" disabled="">PILIH TAHUN</option>
+                          {{ $last= date('Y')-5 }}
+                          {{ $now = date('Y') }}
+                            
+                          @for ($i = $now; $i >= $last; $i--)
+                          <option value="{{ $i }}">{{ $i }}</option>
+                          @endfor
+                        </select>
+                    </div>
+                  </div>
+                  <input type="hidden" name="action" id="action" />
                 </div>
-                <div class="form-group">
-                  <label for="companyName">PILIH TAHUN</label>
-                    <select name="template" class="form-control" id="eventStatus2" name="eventStatus">
-                      <option value="none" selected="" disabled="">PILIH TAHUN</option>
-                      {{ $last= date('Y')-5 }}
-                      {{ $now = date('Y') }}
-                        
-                      @for ($i = $now; $i >= $last; $i--)
-                      <option value='{{ $i }}'>{{ $i }}</option>
-                      @endfor
-                    </select>
-                </div>
-                <input type="hidden" name="action" id="action" />
               </div>
               
               <div class="modal-footer">
@@ -132,7 +138,7 @@
           </div>
         </div>
 
-        <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
+        <!-- <div class="modal fade text-left" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -209,7 +215,7 @@
               </form>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="modal fade text-left" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel11"
         aria-hidden="true">
@@ -266,18 +272,25 @@ $(document).ready(function() {
     } );
 } );
 
+$('#open_modal').click(function(){
+  $('.modal-title').text("SUBMIT FORM");
+  $('#action_button').val("Add");
+  $('#action').val("submit");
+  $('#submit_form').modal('show');
+});
+
 $(document).ready(function() {
 
 var vtable = $('#table-sosialisasi').DataTable({
    processing: true,
    serverSide: true,
    paging: true,
-   order: [[ 2, 'asc' ]],
+   order: [[ 0, 'dsc' ]],
    ajax:{
-    url: "{{ route('list_index') }}",
+    url: "{{ route('list_index') }}?unit=6100&tahun=2020",
    },
    columns:[
-     { data: null, searchable:false, orderable:false, className: "text-center"},
+    //  { data: null, searchable:false, orderable:false, className: "text-center"},
      {
      data: 'tanggal',
      },
@@ -298,24 +311,27 @@ var vtable = $('#table-sosialisasi').DataTable({
       className: "text-center",
       //name: 'action',
       orderable: false
-      }
-     
+    },
    ]
   });
-  vtable.on('draw.dt', function () {
-    vtable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-      cell.innerHTML = i + 1;
-      });
-      }).draw();
+//   vtable.on('draw.dt', function () {
+//     vtable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+//       cell.innerHTML = i + 1;
+//       });
+//       }).draw();
+
+    $('#form-filter').submit(function (e){
+      e.preventDefault();
+      //var url = "ajax_files/inbox_payment.php?unit=" + $('#unit').val() +  "&jnsangg=" + $('#jnsangg').val() +  "&jnstag=" + $('#jnstag').val();
+      var url = "{{ route('list_index') }}?unit=" + $('#id_unit').val() +  "&tahun=" + $('#tahun_unit').val();
+      vtable.ajax.url(url).load();
+      //$('#list-apar').DataTable().ajax.url(url).reload();
+      $('#filter_modal').modal('toggle');
+      $('#filtertahun').html($('#tahun').val());
+      return false;
+    });
+ 
  });
-
-
-$('#open_modal').click(function(){
-  $('.modal-title').text("SUBMIT FORM");
-  $('#action_button').val("Add");
-  $('#action').val("submit");
-  $('#submit_form').modal('show');
-});
 
 $('#form_menu').on('submit', function(event){
       event.preventDefault();

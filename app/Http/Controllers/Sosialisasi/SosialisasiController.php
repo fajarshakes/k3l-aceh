@@ -18,6 +18,9 @@ use Response;
 use Illuminate\Support\Facades\Input;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\SosialisasiExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 
 class SosialisasiController extends BaseController
@@ -52,10 +55,27 @@ class SosialisasiController extends BaseController
 
         $b_area = Auth::user()->unit;
 
-        if (Auth::user()->unit == '6101'){
-            $add_conditions = '';
+        // if (Auth::user()->unit == '6101'){
+        //     $add_conditions = '';
+        // } else {
+        //     $getunit = $_GET['unit'];
+        //     $gettahun = $_GET['tahun'];
+        //     $add_conditions = 'AND ps.unit = ' . Auth::user()->unit;
+        // }
+
+        if (!isset($_GET['unit'])){
+            $unit = Auth::user()->unit;
         } else {
-            $add_conditions = 'AND ps.unit = ' . Auth::user()->unit;
+            $getunit = $_GET['unit'];
+            $gettahun = $_GET['tahun'];
+            
+            if ($getunit == 6100){
+                $unit = '61';
+                $add_conditions = '';
+            } else {
+                $unit = $getunit;
+                $add_conditions = 'AND YEAR ( ps.tanggal ) = ' . $gettahun;
+            }
         }
 
         $sql = "SELECT
@@ -72,7 +92,8 @@ class SosialisasiController extends BaseController
                     peta_sosialisasi ps
                     LEFT JOIN master_unit mu ON ps.unit = mu.BUSS_AREA 
                 WHERE
-                    YEAR ( ps.tanggal ) = '$year'
+                    -- YEAR ( ps.tanggal ) = '$year'
+                    mu.BUSS_AREA  like '%$unit%'
                     $add_conditions";
         $v = DB::select($sql);
             
@@ -286,5 +307,10 @@ class SosialisasiController extends BaseController
          ];
 
         return view('sosialisasi/index', $data);
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new SosialisasiExport, 'sosialisasi.xlsx');
     }
 }
