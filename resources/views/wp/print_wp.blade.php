@@ -398,14 +398,14 @@
 			{!! QrCode::size(60)->generate('Supervisor :' . strtoupper($detailWp->supervisor) . '; Date :' . $detailWp->tgl_approval3 ) !!}
 		</td>
 		<td>
-			{!! QrCode::size(60)->generate('Pengawas :' . strtoupper($detailWp->pengawas_pekerjaan) . '; Date :' . $detailWp->tgl_pengajuan ) !!}
+			{!! QrCode::size(60)->generate('Pengawas :' . strtoupper($detailWp->pengawas_k3l) . '; Date :' . $detailWp->tgl_pengajuan ) !!}
 		</td>
 	  </tr>
 	  <tr>
 	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->manager) }} )</strong></td>
 	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->pejabat_k3l) }} )</strong></td>
 	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->supervisor) }} )</strong></td>
-	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->pengawas_pekerjaan) }} )</strong></td>
+	  	<td class="text-center"><strong>( {{ strtoupper($detailWp->pengawas_k3l) }} )</strong></td>
 	  </tr>
 	  <tr>
 	  	<td class="text-center"><small>MANAGER BAGIAN</small></td>
