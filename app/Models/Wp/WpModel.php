@@ -168,7 +168,7 @@ class WpModel extends Model
   public static function getMarkers(){
 
     $value=DB::table('peta_sosialisasi')
-    ->select('unit', 'lokasi', 'deskripsi', 'longitude', 'latitude')
+    ->select('unit', 'tanggal', 'lokasi', 'deskripsi', 'longitude', 'latitude')
     // ->where('id_wp', '=', $id_wp)
     ->get();
 
