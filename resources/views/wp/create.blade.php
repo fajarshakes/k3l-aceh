@@ -643,7 +643,6 @@
                               <label class="custom-control-label" for="item74">Sipil</label>
                             </div>
                           </div>
-                          {{--
                           <div class="col-md-12">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                               <input type="checkbox" name="klasifikasi[]" class="custom-control-input" id="item5">
@@ -651,7 +650,6 @@
                               <textarea name="participants" id="participants3" rows="1" class="form-control"></textarea>
                             </div>
                           </div>
-                          --}}
                           <!-- Form Prosedur Pekerjaan Yang Telah Dijelaskan Kepada Pekerja -->
                           <div class="col-md-12" style="text-align:center;">
                             <h4 style="padding:25px 0 15px 0;">
@@ -700,7 +698,6 @@
                               <label class="custom-control-label" for="itm9">Pemasangan Proteksi</label>
                             </div>
                           </div>
-                          {{--
                           <div class="col-md-12">
                             <div class="custom-control custom-checkbox" style="padding-bottom: 15px;">
                               <input type="checkbox" name="prosedur[]" class="custom-control-input" id="itm10">
@@ -708,7 +705,6 @@
                               <textarea name="participants" id="participants4" rows="1" class="form-control"></textarea>
                             </div>
                           </div>
-                          --}}
                           <!-- Form Lampiran Izin Kerja -->
                           <div class="col-md-12" style="text-align:center;">
                             <h4 style="padding:25px 0 15px 0;">
