@@ -576,12 +576,15 @@ var vtable = $('#table-permohonan').DataTable({
       "orderable": false,
       className: "text-center",
       "render": function (data, type, full, meta) {
-        /*
-        return `<button name="edit_modal" id="${full.id_wp}" class="edit0 btn btn-sm btn-primary btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit" > <i class="la la-edit"></i></button>
-       <button name="approve_modal" id="${full.id_wp}" class="edit btn btn-sm btn-success btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Approve" > <i class="la la-check-circle"></i></button>
-        <button name="del_modal" id="${full.id_wp}" class="delete btn btn-sm btn-danger btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Reject"> <i class="la la-close"></i></button>`;
-        */
-      
+          var status = full.status;
+          //var datastatus = full.status;
+          var datakolom = data;
+          //var datajenis = full.jenis_dana;
+          //var url='';
+          var btn='';
+          var label='';
+          if(status == 'NEW') btn = "badge-warning"; label = "SPV TERKAIT";
+
       return `
       <span class='dropdown'>
           <button id='btnSearchDrop1' type='button' data-toggle='dropdown' aria-haspopup='true'
@@ -616,28 +619,49 @@ var vtable = $('#table-permohonan').DataTable({
      data: 'pelaksana',
      className: "text-left"
      },
-     {
+     /*{
      data: 'status',
      className: "text-left"
-     },
-     /*
+     },*/
+     /*{
+      "data": "status",
+      "sortable": true,
+      "render": function ( data, type, full, meta ) {
+          var status = full.status;
+          //var datastatus = full.status;
+          var datakolom = data;
+          //var datajenis = full.jenis_dana;
+          //var url='';
+          var btn='';
+          var label='';
+          if(status == 'NEW') btn = "badge-warning"; label = "SPV TERKAIT";
+          if(status == 'APPROVAL_2') btn = "badge-info"; label = "PEJABAT K3";
+          if(status == 'APPROVAL_1') btn = "badge-success"; label = "MANAGER UL/BAG";
+          //return "<a href='{{ url("pengadaan") }}"+"/"+url+"?dt0="+btoa(dataid)+"' class='btn btn-table btn-sm btn-raised "+btn+" btn-icon icon-left' title='"+datakolom+"'><i class='{{ config('view.theme') ? 'fa fa' : 'entypo' }}-search'></i>&nbsp"+datakolom+"</a>";
+          return "<badge class='badge badge-pill "+btn+"'> "+label+" </badge>";
+      }
+  },*/
+     
      { className: "text-center",
         //"data": null,
         "orderable": false,
         "render": function ( data, type, row ) {
         var html = ""
           if ( row.status === 'NEW') {
-            html = `<badge class="badge badge-pill badge-warning"> NEW WP </badge>`
-          } else if ( row.status === 'APPROVE_2') {
+            html = `<badge class="badge badge-pill badge-warning"> SPV TERKAIT </badge>`
+          } else if ( row.status === 'APPROVAL_2') {
             html = `<badge class="badge badge-pill badge-primary"> PEJABAT K3 </badge>`
-          } else if  ( row.status === 'APPROVE_1') {
-            html = `<badge class="badge badge-pill badge-info"> MANAGER </badge>`
+          } else if  ( row.status === 'APPROVAL_1') {
+            html = `<badge class="badge badge-pill badge-info"> MANAGER UL/BAG </badge>`
+          } else if  ( row.status === 'APPROVAL_INDUK') {
+            html = `<badge class="badge badge-pill badge-success"> APPROVAL UIW </badge>`
           } else {
             html = `<badge class="badge badge-pill badge-success"> APPROVED </badge>`
           }
           return html; 
         }
       },
+      /*
       //button edit
       <button id="${full.NOREG}" class="btn btn-sm btn-warning btn-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="Edit"> <i class="la la-edit"></i></button>
         
